@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div data-drupal-messages-fallback class="hidden"></div><div id="block-electoralcommission-mainpagecontent">
+
+    <div about="/i-am-a/voter/your-election-information" typeof="schema:WebPage">
+
+
+        <div>
+
+            <div>
+                <div>
+
+                    <section class="c-polling-station-slice slice--view-mode--default slice-w-padding slice-location-polling-search" aria-labelledby="paragraph-14945-title">
+                        <div class="container">
+                            <h2 id="paragraph-14945-title" class="slice__title">
+                                <span>Enter your postcode</span>
+
+                            </h2>
+
+                            <div class="l-grid l-grid--align-start l-grid--2-col l-grid--w-h-gutter">
+                                <div class="l-grid__item ">
+
+                                    <div><p>Enter your postcode to find contact details for the electoral services team at your local council and polling station details</p>
+                                    </div>
+
+                                </div>
+                                <div class="l-grid__item l-grid__item--wrap">
+                                    <form id="polling_station_postcode_search-14945" class="postcode-search | js-postcode-lookup-form">
+                                        <label for="postcode-search-14945" class="visually-hidden">Enter a postcode</label>
+                                        <input id="postcode-search-14945" type="text" class="postcode-search__input" name="postcode-search" placeholder="Postcode" class="postcode-search__input" data-parsley-postcode data-parsley-errors-container=".js-errors-container-14945" required>
+
+                                        <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="/polling-stations">
+                                            <span class="visually-hidden">Submit Postcode</span>
+                                            <svg class="o-icon">
+                                                <use xlink:href="#icon-search"></use>
+                                            </svg>
+                                        </button>
+                                    </form>
+
+                                    <div class="postcode-search__error | js-errors-container-14945"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer >
+            <div class="c-review" role="status" aria-live="polite">
+                <div class="c-review__item">
+                    <strong>Last updated:</strong> 6 May 2022
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+
+{% endblock %}

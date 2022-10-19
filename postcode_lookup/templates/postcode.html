@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Postcode
+{% endblock %}
+
+{% block content %}
+
+
+    {{ registration == electoral_services }}
+    {% if registration != electoral_services %}
+        <h2>Register to vote with {{ registration.name }}</h2>
+        <p>{{ registration.phone }}</p>
+    {% endif %}
+
+    {% if electoral_services %}
+        <h2>For everything else, talk to {{ electoral_services.name }}</h2>
+        <p>{{ electoral_services.phone }}</p>
+    {% endif %}
+
+{% endblock %}
