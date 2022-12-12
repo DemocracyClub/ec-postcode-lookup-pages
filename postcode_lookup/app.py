@@ -1,52 +1,50 @@
 from pathlib import Path
 
+from mangum import Mangum
 from starlette.applications import Starlette
+from starlette.middleware import Middleware
 from starlette.routing import Route, Mount
-from starlette.templating import Jinja2Templates
+
 from starlette.staticfiles import StaticFiles
 
-import sys
-sys.path.append(str(Path(__file__).parent.absolute()))
-
-from models import ElectoralServices, Registration
-
-from dc_api_client import DCAPI
-
-root = Path(__file__).parent
-
-templates = Jinja2Templates(directory=root / "templates")
-
-
-def results_contest(api_response):
-    return {
-        "electoral_services": ElectoralServices.from_api(api_response.json()),
-        "registration": Registration.from_api(api_response.json())
-    }
-
-
-async def index(request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-
-async def postcode(request):
-    postcode = request.path_params["postcode"]
-    api_response = DCAPI(api_key="foo").get_postcode(postcode)
-    context = results_contest(api_response)
-    context["request"] = request
-    return templates.TemplateResponse(
-        "postcode.html", context
-    )
-
-
-async def uprn(request):
-    return templates.TemplateResponse("uprn.html", {"request": request})
-
+from endpoints import postcode_form, live_postcode_view, uprn, redirect_root_to_postcode_form, sandbox_postcode_view
+from utils import i18nMiddleware, ForwardedForMiddleware
 
 routes = [
-    Route("/", endpoint=index),
-    Route("/{postcode}/", endpoint=postcode),
-    Route("/{uprn}/", endpoint=uprn),
-    Mount("/static", StaticFiles(directory=root / "static"), name="static"),
+    Route("/", endpoint=redirect_root_to_postcode_form),
+    Route(
+        "/i-am-a/voter/your-election-information",
+        endpoint=postcode_form,
+        name="postcode_form_en",
+    ),
+    Route("/polling-stations/{postcode}/{uprn}", endpoint=uprn),
+    Route("/polling-stations", endpoint=live_postcode_view, name="postcode_en"),
+    Route(
+        "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
+        endpoint=postcode_form,
+        name="postcode_form_cy",
+    ),
+    Route("/cy/polling-stations/{postcode}/{uprn}", endpoint=uprn),
+    Route("/cy/polling-stations", endpoint=live_postcode_view, name="postcode_cy"),
+
+    # Sandbox
+    Route("/sandbox/polling-stations", endpoint=sandbox_postcode_view, name="sandbox_postcode_en"),
+    Route("/cy/sandbox/polling-stations", endpoint=sandbox_postcode_view, name="sandbox_postcode_cy"),
+
+    Mount(
+        "/themes/",
+        app=StaticFiles(directory=Path(__file__).parent / "themes"),
+        name="themes",
+    ),
 ]
 
-app = Starlette(debug=True, routes=routes)
+app = Starlette(
+    debug=True,
+    routes=routes,
+    middleware=[
+        Middleware(i18nMiddleware),
+        Middleware(ForwardedForMiddleware),
+    ],
+)
+
+handler = Mangum(app)

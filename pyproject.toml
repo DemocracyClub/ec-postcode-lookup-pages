@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 80
+
+[tool.ruff]
+line-length = 80
+ignore = ["E501"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if __name__ == .__main__.:",
+    "@abstractmethod"
+]

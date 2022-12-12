@@ -1,0 +1,21 @@
+version = 0.1
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "ec-postcode-lookup-dev"
+s3_bucket = "aws-sam-cli-ec-postcode-lookup-dev-mw1tdi3jmooz"
+s3_prefix = "ec-postcode-lookup-dev"
+region = "eu-west-2"
+capabilities = "CAPABILITY_NAMED_IAM"
+
+confirm_changeset = false
+tags = "dc-product=\"ec-postcode-lookup\" dc-environment=\"development\""
+progressbar = false
+fail_on_empty_changeset = false
+force_upload = true
+
+[dev.logs]
+[dev.logs.parameters]
+stack_name = "ec-postcode-lookup-dev"
+name = "ECPostcodeLookupFunction"
+region = "eu-west-2"

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo page | EC postcode look-up pages</title>
+    <style>
+
+        body {
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+        }
+
+        #container {
+            margin: 0 auto;
+            max-width: 60ch;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .stack > * {
+            margin-block: 0;
+        }
+
+        .stack > * + * {
+            margin-block-start: var(--space, 2rem);
+        }
+
+        .stack > h1 + *, h2 + *, h3 + *, h4 + * {
+            --space: 0.5rem;
+        }
+
+        .stack > h1 + h2, h2 + h3, h3 + h4, h4 + h5 {
+            --space: 2rem;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <header><h1>DEV TOOLS</h1></header>
+    <main class="stack">
+        <h2>Application pages</h2>
+        <h3>Live API</h3>
+        <p>Uses the list API, meaning results will vary depending on actual elections taking place</p>
+        <ul>
+            <li><a href="{{ request.url_for("postcode_form_en") }}">Postcode form (en)</a></li>
+            <li><a href="{{ request.url_for("postcode_form_cy") }}">Postcode form (cy)</a></li>
+            <li><a href="{{ request.url_for("postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a></li>
+            <li><a href="{{ request.url_for("postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a></li>
+        </ul>
+
+        <h3>Sandbox</h3>
+        <p>Uses "pre baked" examples from the <a
+                href="https://developers.democracyclub.org.uk/api/v1/#sandbox-outputs-2">API documentation pages</a>.
+        </p>
+        <dl>
+            {% for postcode, details in sandbox_postcodes.items() %}
+                <dt>
+                    <a href="{{ request.url_for("sandbox_postcode_en") }}?postcode-search={{ postcode }}">{{ postcode }}</a>
+                </dt>
+                <dd>
+                    <pre>{{ details.description }}</pre>
+                </dd>
+            {% endfor %}
+        </dl>
+
+    </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+# Welsh translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-11-29 11:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: cy\n"
+"Language-Team: cy <LL@li.org>\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 1 : n==2 ? 2 : n==3 ? 3 : n==6 ?"
+" 4 : 0);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: postcode_lookup/templates/index.html:17
+msgid "Enter your postcode"
+msgstr "FOO"
+
+#: postcode_lookup/templates/index.html:23
+msgid ""
+"Enter your postcode to find contact details for the electoral services "
+"team at your local council and polling station details"
+msgstr ""
+
+#: postcode_lookup/templates/postcode.html:8
+msgid ""
+"\n"
+"    WELSH\n"
+msgstr ""
+
+#: postcode_lookup/templates/postcode.html:14
+#, python-format
+msgid "Register to vote with %(name)s"
+msgstr "WELSH %(name)s"
+
+#: postcode_lookup/templates/postcode.html:19
+#, python-format
+msgid "For everything else, talk to %(name)s"
+msgstr "WELSH %(name)s"
+
+#~ msgid "Register to vote with "
+#~ msgstr ""
