@@ -25,16 +25,29 @@ routes = [
         name="postcode_form_cy",
     ),
     Route("/cy/polling-stations/{postcode}/{uprn}", endpoint=uprn),
-    Route("/cy/polling-stations", endpoint=live_postcode_view, name="postcode_cy"),
-
+    Route(
+        "/cy/polling-stations", endpoint=live_postcode_view, name="postcode_cy"
+    ),
     # Sandbox
-    Route("/sandbox/polling-stations", endpoint=sandbox_postcode_view, name="sandbox_postcode_en"),
-    Route("/cy/sandbox/polling-stations", endpoint=sandbox_postcode_view, name="sandbox_postcode_cy"),
-
+    Route(
+        "/sandbox/polling-stations",
+        endpoint=sandbox_postcode_view,
+        name="sandbox_postcode_en",
+    ),
+    Route(
+        "/cy/sandbox/polling-stations",
+        endpoint=sandbox_postcode_view,
+        name="sandbox_postcode_cy",
+    ),
     Mount(
         "/themes/",
         app=StaticFiles(directory=Path(__file__).parent / "themes"),
         name="themes",
+    ),
+    Mount(
+        "/static/",
+        app=StaticFiles(directory=Path(__file__).parent / "static"),
+        name="static",
     ),
 ]
 
