@@ -25,6 +25,14 @@ ruff = "*"
 pytest-cov = "*"
 coverage = {extras = ["toml"], version = "*"}
 pytest-asyncio = "*"
+dc-api-response-builder = {path = "./lib/response_builder"}
 
 [requires]
 python_version = "3.8"
+
+[scripts]
+black = "black ."
+black-check = "black --check ."
+pytest = "pytest"
+ruff = "ruff --diff postcode_lookup lib/template_generator"
+build_templates = "python lib/template_generator/generate_base_template.py"
