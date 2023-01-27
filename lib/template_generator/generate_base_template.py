@@ -170,7 +170,6 @@ def download_assets(soup, static_path, souce_url):
 
     for file_type, file_data in assets.items():
         type_dir = static_path / file_type
-        shutil.rmtree(type_dir.absolute(), ignore_errors=True)
         for file_name, files in file_data.items():
             path = type_dir / f"{file_name}.{file_type}"
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -196,13 +195,14 @@ def download_assets(soup, static_path, souce_url):
     return assets
 
 
+project_path = Path() / "postcode_lookup"
+static_path = project_path / "static"
+shutil.rmtree(static_path.absolute(), ignore_errors=True)
+
 for template, config in TEMPLATES.items():
+    template_path = project_path / "templates" / template
     req = httpx.get(config["source_url"])
     soup = BeautifulSoup(req.text, "html.parser")
-
-    project_path = Path() / "postcode_lookup"
-    template_path = project_path / "templates" / template
-    static_path = project_path / "static"
 
     assets = download_assets(soup, static_path, config["source_url"])
     soup = rewrite_urls(soup, config["source_url"])
