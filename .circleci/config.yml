@@ -47,69 +47,59 @@ jobs:
           path: test-reports
           destination: test-reports
 
-#  sam_build:
-#    docker:
-#      - image: amazon/aws-sam-cli-build-image-python3.8:latest
-#    working_directory: ~/repo
-#    steps:
-#      - checkout
-#      - attach_workspace:
-#          at: ~/repo/
-#      - run: pip install --upgrade pip
-#      - run: pip install aws-sam-cli==1.60.0
-#      - run: pip install -r lambda-layers/DependenciesLayer/requirements.txt
-#      - run: make collectstatic
-#      - run: sam build ${DASH_DASH_DEBUG} --template-file sam-template.yaml
-#      - persist_to_workspace:
-#          root: ~/repo/
-#          paths: [ .aws-sam/build/ ]
-#
-#  sam_deploy:
-#    docker:
-#      - image: cimg/python:3.8.12
-#    working_directory: ~/repo/
-#    parameters:
-#      dc-environment:
-#        type: enum
-#        enum: [ development, staging, production ]
-#    environment:
-#      SAM_CONFIG_FILE: samconfig.toml.d/ci-<<parameters.dc-environment>>.toml
-#      SAM_LAMBDA_CONFIG_ENV: <<parameters.dc-environment>>
-#      SAM_PUBLIC_CONFIG_ENV: <<parameters.dc-environment>>-public-access
-#    steps:
-#      - checkout
-#      - attach_workspace:
-#          at: ~/repo/
-#      - restore_cache:
-#          keys:
-#            - v2-dependencies-{{ checksum "Pipfile.lock" }}
-#      - run: *install-pipenv
-#      - run: pip install aws-sam-cli==1.60.0
-#
-#      - run:
-#          name: "pipenv run sam deploy # App: Lambda + API Gateway"
-#          command: |
-#            pipenv run sam deploy ${DASH_DASH_DEBUG} \
-#              --config-file ~/repo/${SAM_CONFIG_FILE} \
-#              --config-env $SAM_LAMBDA_CONFIG_ENV \
-#              --template-file ~/repo/.aws-sam/build/template.yaml \
-#              --parameter-overrides "GitHash='$CIRCLE_SHA1'"
-#      - aws-cli/setup
-#      - run:
-#          name: "Migrate database"
-#          command: |
-#            aws lambda invoke --function-name DCWebsiteManagementFunction --payload '{ "command": "migrate", "args": ["--no-input"] }' --cli-binary-format raw-in-base64-out -
-#      - run:
-#          name: "Invalidate CloudFront cache"
-#          command: |
-#            aws lambda invoke --function-name DCWebsiteManagementFunction --payload '{ "command": "invalidate_cloudfront", "args": ["--paths", "*"] }' --cli-binary-format raw-in-base64-out -
-#      - run:
-#          name: "Publish a new Sentry Release"
-#          command: |
-#            curl -sL https://sentry.io/get-cli/ | bash
-#            sentry-cli releases --org democracy-club-gp new $CIRCLE_SHA1 --project dc-website
-#            sentry-cli releases --org democracy-club-gp set-commits --auto $CIRCLE_SHA1
-#            sentry-cli releases --org democracy-club-gp finalize $CIRCLE_SHA1
+  sam_build:
+    docker:
+      - image: amazon/aws-sam-cli-build-image-python3.8:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo/
+      - run: pip install --upgrade pip
+      - run: pip install aws-sam-cli==1.71.0
+      - run: pip install -r postcode_lookup/requirements.txt
+      - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
+      - persist_to_workspace:
+          root: ~/repo/
+          paths: [ .aws-sam/build/ ]
+
+  sam_deploy:
+    docker:
+      - image: cimg/python:3.8.12
+    working_directory: ~/repo/
+    parameters:
+      dc-environment:
+        type: enum
+        enum: [ development, staging, production ]
+    environment:
+      SAM_CONFIG_FILE: samconfig.toml
+      SAM_LAMBDA_CONFIG_ENV: <<parameters.dc-environment>>
+      SAM_PUBLIC_CONFIG_ENV: <<parameters.dc-environment>>-public-access
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo/
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+      - run: *install-pipenv
+      - run: pip install aws-sam-cli==1.71.0
+
+      - run:
+          name: "pipenv run sam deploy"
+          command: |
+            pipenv run sam deploy ${DASH_DASH_DEBUG} \
+              --config-file ~/repo/${SAM_CONFIG_FILE} \
+              --config-env $SAM_LAMBDA_CONFIG_ENV \
+              --template-file ~/repo/.aws-sam/build/template.yaml \
+              --parameter-overrides "GitHash='$CIRCLE_SHA1'"
+      - run:
+          name: "Publish a new Sentry Release"
+          command: |
+            curl -sL https://sentry.io/get-cli/ | bash
+            sentry-cli releases --org democracy-club-gp new $CIRCLE_SHA1 --project ec-postcode-lookup
+            sentry-cli releases --org democracy-club-gp set-commits --auto $CIRCLE_SHA1
+            sentry-cli releases --org democracy-club-gp finalize $CIRCLE_SHA1
 workflows:
   version: 2
   test_build_deploy:
@@ -118,21 +108,13 @@ workflows:
       - test:
           requires:
             - install_and_update_dependencies
-#      - sam_build:
-#          requires:
-#            - test
-#      - sam_deploy:
-#          name: sam_deploy_staging
-#          dc-environment: staging
-#          requires:
-#            - sam_build
-#          context: [ deployment-staging-dc-website ]
-#          filters: { branches: { only: [ main, master ] } }
-#      - sam_deploy:
-#          name: sam_deploy_production
-#          dc-environment: production
-#          requires:
-#            - sam_deploy_staging
-#          context: [ deployment-production-dc-website ]
-#          filters: { branches: { only: [ main, master ] } }
-#
+      - sam_build:
+          requires:
+            - test
+      - sam_deploy:
+          name: sam_deploy_development
+          dc-environment: development
+          requires:
+            - sam_build
+          context: [ deployment-development-ec-postcode-lookup ]
+          filters: { branches: { only: [ main, master ] } }
