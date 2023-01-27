@@ -121,30 +121,18 @@ Resources:
               - Referer
           ViewerProtocolPolicy: "redirect-to-https"
 
-#        CacheBehaviors:
-#          - AllowedMethods: [ GET, HEAD, OPTIONS ]
-#            PathPattern: static/*
-#            TargetOriginId: Static
-#            Compress: true
-#            ForwardedValues:
-#              QueryString: true
-#              Cookies:
-#                Forward: none
-#              Headers:
-#                - Authorization
-#                - Origin
-#            ViewerProtocolPolicy: "redirect-to-https"
-#            MinTTL: '50'
-#          - AllowedMethods: [ GET, HEAD ]
-#            PathPattern: media/*
-#            ForwardedValues:
-#              QueryString: false
-#              Cookies:
-#                Forward: none
-#            TargetOriginId: Media
-#            Compress: true
-#            ViewerProtocolPolicy: "redirect-to-https"
-#            MinTTL: '50'
+        CacheBehaviors:
+          - AllowedMethods: [ GET, HEAD, OPTIONS ]
+            PathPattern: static/*
+            TargetOriginId: Dynamic
+            Compress: true
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: "redirect-to-https"
+            DefaultTTL: '3153600000'
+
 
   DnsRecord:
     Type: AWS::Route53::RecordSet
