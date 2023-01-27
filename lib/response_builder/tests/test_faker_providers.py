@@ -2,26 +2,29 @@ from unittest import mock
 
 from faker import Faker
 
-from response_builder.v1.factories.faker_providers import make_ward_name, UKCouncilNamesProvider
+from response_builder.v1.factories.faker_providers import (
+    make_ward_name,
+    UKCouncilNamesProvider,
+)
 
 
 def test_make_ward_name():
-    with mock.patch('random.randrange', return_value=1):
+    with mock.patch("random.randrange", return_value=1):
         # We should have two words
         name = make_ward_name()
         assert " " in name
 
-    with mock.patch('random.randrange', return_value=31):
+    with mock.patch("random.randrange", return_value=31):
         # Slash in name
         name = make_ward_name()
         assert "/" in name
 
-    with mock.patch('random.randrange', return_value=36):
+    with mock.patch("random.randrange", return_value=36):
         # Thing-with-other names
         name = make_ward_name()
         assert "-with-" in name
 
-    with mock.patch('random.randrange', return_value=21):
+    with mock.patch("random.randrange", return_value=21):
         # Thing-with-other names
         name = make_ward_name()
         assert " & " in name

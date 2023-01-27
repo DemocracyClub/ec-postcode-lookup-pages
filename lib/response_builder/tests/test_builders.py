@@ -1,24 +1,14 @@
-from datetime import datetime, date
-from typing import List, Union
-
-from pydantic import BaseModel, UUID4
-from pydantic_factories import ModelFactory
-
-from response_builder.v1.builders import BaseBuilder
+from response_builder.v1.builders import RootBuilder, LocalBallotBuilder
+from response_builder.v1.factories.ballots import LocalElectionBallotFactory
+from response_builder.v1.factories.councils import NuneatonElectoralServices
+from response_builder.v1.models.base import Ballot
 
 
 def test_builder():
-    builder = BaseBuilder()
-    print(builder.root_model.schema_json(indent=4))
-
-    class Person(BaseModel):
-        id: UUID4
-        name: str
-        hobbies: List[str]
-        age: Union[float, int]
-        birthday: Union[datetime, date]
-
-    class PersonFactory(ModelFactory):
-        __model__ = Person
-
-    PersonFactory.build()
+    builder = RootBuilder()
+    ballot1 = LocalBallotBuilder()
+    ballot1.with_candidates(3)
+    builder.with_ballot(ballot1.build())
+    # builder.with_ballot(ballot2)
+    builder.with_electoral_services(NuneatonElectoralServices)
+    print(builder.build().json(indent=4))

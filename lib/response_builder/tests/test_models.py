@@ -34,6 +34,7 @@ def test_electoral_services_eq_registration(
 
 def test_root_model():
     model = RootModel()
+
     model.dates = [Date(date="2021-05-04")]
     # print(model.json())
     # print(model.schema_json(indent=4))

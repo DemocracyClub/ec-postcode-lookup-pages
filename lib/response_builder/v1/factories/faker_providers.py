@@ -1,6 +1,8 @@
 import random
 
 from faker.providers.address.en_GB import Provider as GBAddressProvider
+from faker.providers.date_time import Provider as DateTimeProvider
+from uk_election_ids.slugger import slugify
 
 org_prefixes = {
     "Aberdeen",
@@ -831,27 +833,66 @@ def make_org_name():
 
 
 class UKCouncilNamesProvider(GBAddressProvider):
-    _council_name = make_org_name()
+    CACHE = {}
+
+    def _get_cached_value(self, key, value_fn):
+        key = f"{key}__{self.__hash__()}"
+        if key not in self.CACHE:
+            self.CACHE[key] = value_fn()
+        return self.CACHE[key]
 
     def ward_name(self) -> str:
-        return make_ward_name()
+        return self._get_cached_value("ward_name", make_ward_name)
 
     def organisation_name(self) -> str:
-        return self._council_name
+        return self._get_cached_value("organisation_name", make_org_name)
 
     def council_website(self) -> str:
-        return f"https://www.{self._council_name.lower()}.gov.uk"
+        return f"https://www.{self.organisation_name().lower()}.gov.uk"
 
     def council_email(self) -> str:
-        return f"elections@{self._council_name.lower()}.gov.uk"
+        return f"elections@{self.organisation_name().lower()}.gov.uk"
 
     def council_address(self) -> str:
-        return "\n".join([
-            f"{self._council_name} Council",
-            self.secondary_address(),
-            self._council_name
-        ])
+        return "\n".join(
+            [
+                f"{self.organisation_name()} Council",
+                self.secondary_address(),
+                self.organisation_name(),
+            ]
+        )
+
+
+class GenericBallotDataProvider(UKCouncilNamesProvider, DateTimeProvider):
+    def poll_open_date(self):
+        return self.future_date()
+
+    ballot_url_fmt = "https://developers.democracyclub.org.uk/api/v1/%s/"
+    wcivf_url_fmt = "https://whocanivotefor.co.uk/elections/%s/"
+
+
+class LocalBallotDataProvider(GenericBallotDataProvider):
+    def ballot_url(self):
+        return self.ballot_url_fmt % self.local_ballot_paper_id()
+
+    def wcivf_url(self):
+        return self.wcivf_url_fmt % self.local_ballot_paper_id()
+
+    def local_ballot_paper_id(self):
+        return f"local.{slugify(self.organisation_name())}.{slugify(self.ward_name())}.{self.poll_open_date()}"
+
+    def local_election_id(self):
+        return (
+            f"local.{slugify(self.organisation_name())}.{self.poll_open_date()}"
+        )
+
+    def local_ballot_title(self):
+        return f"{self.local_election_name()} {self.ward_name()} ward"
+
+    def local_election_name(self):
+        return f"{self.organisation_name()} local election"
+
 
 if __name__ == "__main__":
     for i in range(20):
-        print(make_org_name(), make_ward_name())
+        print(f"{make_org_name()}:  {make_ward_name()}")

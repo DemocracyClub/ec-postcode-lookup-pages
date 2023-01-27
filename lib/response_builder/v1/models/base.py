@@ -1,8 +1,8 @@
 import datetime
-import json
 from typing import List, Optional
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, Field, HttpUrl, validator, root_validator
+from uk_election_ids.election_ids import IdBuilder
 
 from response_builder.v1.models.polling_stations import (
     PollingStation,
@@ -23,7 +23,9 @@ class Address(BaseModel):
 
 
 class Notification(BaseModel):
-    type: str = Field(default_factory=str, description="The type of notification")
+    type: str = Field(
+        default_factory=str, description="The type of notification"
+    )
     url: str = Field(
         description=(
             "Details about this notification. This value should be shown "
@@ -46,10 +48,15 @@ class Notification(BaseModel):
 
 class Party(BaseModel):
     party_name: str = Field()
+
+
 class Person(BaseModel):
     name: str = Field()
 
-class PreviousParty(BaseModel): ...
+
+class PreviousParty(BaseModel):
+    ...
+
 
 class Candidate(BaseModel):
     list_position: Optional[int] = Field()
@@ -85,11 +92,18 @@ class Ballot(BaseModel):
     seats_contested: int = Field(default=1)
     hustings: Optional[List[Husting]] = Field(default=None)
 
-
+    @validator("ballot_paper_id")
+    def validate_ballot_paper_id(cls, value):
+        election_id = IdBuilder.from_id(value)
+        if not election_id.ballot_id == value:
+            raise ValueError("Not a valid ballot_paper_id")
+        return value
 
 
 class Date(BaseModel):
-    date: str = Field(default_factory=str, description="An ISO formatted date string")
+    date: str = Field(
+        default_factory=str, description="An ISO formatted date string"
+    )
     polling_station: PollingStation = Field(
         default_factory=PollingStation,
         description="Information about the polling station for this date",
@@ -151,6 +165,16 @@ class RootModel(BaseModel):
         nullable=True,
     )
 
+    @root_validator
+    def not_address_picker_and_dates(cls, values):
+        if values.get("address_picker") is True:
+            if values.get("dates"):
+                raise ValueError("Can't add dates when address_picker=True")
+        return values
+
     @classmethod
     def from_api_response(cls, api_response: dict) -> "RootModel":
         return cls.parse_obj(api_response)
+
+    class Config:
+        validate_assignment = True
