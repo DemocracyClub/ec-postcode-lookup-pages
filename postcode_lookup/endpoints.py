@@ -96,3 +96,7 @@ async def redirect_root_to_postcode_form(request: Request):
         "debug_page.html",
         {"request": request, "sandbox_postcodes": SANDBOX_POSTCODES},
     )
+
+
+def failover(request: Request):
+    return Response(status_code=400)

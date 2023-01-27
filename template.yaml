@@ -21,17 +21,6 @@ Parameters:
     Type: AWS::SSM::Parameter::Value<String>
 
 Resources:
-
-#  DependenciesLayer:
-#    Type: AWS::Serverless::LayerVersion
-#    Properties:
-#      ContentUri: ./lambda-layers/DependenciesLayer/
-#      CompatibleRuntimes:
-#        - python3.8
-#    Metadata:
-#      BuildMethod: makefile
-#    RetentionPolicy: Delete
-
   ECDeployerRole:
     Type: AWS::IAM::Role
     Properties:
@@ -79,6 +68,35 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${ECPostcodeLookupFunction}
       RetentionInDays: 60
 
+  FailOver:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${FQDN}-failover"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref FailOver
+                - /*
+      Bucket: !Ref FailOver
+
+
+
   CloudFrontDistribution:
     Type: 'AWS::CloudFront::Distribution'
     Properties:
@@ -98,6 +116,32 @@ Resources:
             OriginShield:
               Enabled: true
               OriginShieldRegion: eu-west-2
+          - Id: Failover
+            DomainName: !Select [1, !Split ["//", !GetAtt FailOver.WebsiteURL]]
+            # Keep the ? to convert the path in to a query param
+            OriginPath: "/index.html?"
+            CustomOriginConfig:
+              OriginProtocolPolicy: "https-only"
+            OriginShield:
+              Enabled: false
+              OriginShieldRegion: eu-west-2
+        OriginGroups:
+          Quantity: 1
+          Items:
+            - Id: Main
+              FailoverCriteria:
+                StatusCodes:
+                  Quantity: 4
+                  Items:
+                  - 400
+                  - 500
+                  - 502
+                  - 503
+              Members:
+                Quantity: 2
+                Items:
+                - OriginId: Dynamic
+                - OriginId: Failover
         Enabled: true
         HttpVersion: 'http2'
         Aliases:
@@ -109,8 +153,9 @@ Resources:
           SslSupportMethod: sni-only
 
         DefaultCacheBehavior:
-          AllowedMethods: [ GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE ]
-          TargetOriginId: Dynamic
+          AllowedMethods: [ GET, HEAD, OPTIONS ]
+          TargetOriginId: Main
+          DefaultTTL: '60'
           ForwardedValues:
             QueryString: true
             Cookies:

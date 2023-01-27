@@ -13,11 +13,13 @@ from endpoints import (
     uprn,
     redirect_root_to_postcode_form,
     sandbox_postcode_view,
+    failover,
 )
 from utils import i18nMiddleware, ForwardedForMiddleware
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),
+    Route("/failover", endpoint=failover),
     Route(
         "/i-am-a/voter/your-election-information",
         endpoint=postcode_form,

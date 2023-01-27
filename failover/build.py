@@ -1,13 +1,21 @@
 from pathlib import Path
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, Undefined
 
 templates_root = (
     Path(__file__).parent.parent.absolute() / "postcode_lookup" / "templates"
 )
 failover_templates_dir = Path(__file__).parent.absolute()
+
+
+class SilentUndefined(Undefined):
+    def _fail_with_undefined_error(self, *args, **kwargs):
+        return ""
+
+
 env = Environment(
-    loader=FileSystemLoader([failover_templates_dir, templates_root])
+    loader=FileSystemLoader([failover_templates_dir, templates_root]),
+    undefined=SilentUndefined,
 )
 
 out_file = Path("failover/dist/index.html")
