@@ -13,4 +13,3 @@ from response_builder.v1.factories.councils import (
 def app_client() -> TestClient:
     with TestClient(app=app) as client:
         yield client
-

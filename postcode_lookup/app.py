@@ -7,7 +7,13 @@ from starlette.routing import Route, Mount
 
 from starlette.staticfiles import StaticFiles
 
-from endpoints import postcode_form, live_postcode_view, uprn, redirect_root_to_postcode_form, sandbox_postcode_view
+from endpoints import (
+    postcode_form,
+    live_postcode_view,
+    uprn,
+    redirect_root_to_postcode_form,
+    sandbox_postcode_view,
+)
 from utils import i18nMiddleware, ForwardedForMiddleware
 
 routes = [

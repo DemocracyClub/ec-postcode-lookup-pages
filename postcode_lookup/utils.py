@@ -34,7 +34,7 @@ class _i18nJinja2Templates(Jinja2Templates):
     locale = None
 
     def _create_env(
-            self, directory: typing.Union[str, PathLike], **env_options: typing.Any
+        self, directory: typing.Union[str, PathLike], **env_options: typing.Any
     ) -> jinja2.Environment:
         env_options["extensions"] = [
             "jinja2.ext.i18n",
@@ -67,8 +67,8 @@ cy_templates = cy_i18nJinja2Templates(directory=root / "templates")
 
 class i18nMiddleware:
     def __init__(
-            self,
-            app,
+        self,
+        app,
     ):
         self.app = app
 
@@ -87,8 +87,8 @@ class i18nMiddleware:
 
 class ForwardedForMiddleware:
     def __init__(
-            self,
-            app,
+        self,
+        app,
     ):
         self.app = app
 

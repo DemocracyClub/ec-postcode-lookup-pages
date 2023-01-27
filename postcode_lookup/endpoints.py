@@ -3,7 +3,11 @@ import functools
 from starlette.requests import Request
 from starlette.responses import RedirectResponse, Response
 
-from dc_api_client import InvalidPostcodeException, SandboxAPIBackend, LiveAPIBackend
+from dc_api_client import (
+    InvalidPostcodeException,
+    SandboxAPIBackend,
+    LiveAPIBackend,
+)
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 
@@ -49,8 +53,12 @@ async def base_postcode_endpoint(request: Request, backend=None):
 
 
 # Use functools.partial to create a view function per backend
-live_postcode_view = functools.partial(base_postcode_endpoint, backend=LiveAPIBackend)
-sandbox_postcode_view = functools.partial(base_postcode_endpoint, backend=SandboxAPIBackend)
+live_postcode_view = functools.partial(
+    base_postcode_endpoint, backend=LiveAPIBackend
+)
+sandbox_postcode_view = functools.partial(
+    base_postcode_endpoint, backend=SandboxAPIBackend
+)
 # TODO: mock_postcode_view = functools.partial(base_postcode_endpoint, backend=MockAPIBackend)
 
 
@@ -85,8 +93,6 @@ async def redirect_root_to_postcode_form(request: Request):
         return Response(status_code=404)
 
     return get_loader(request).TemplateResponse(
-        "debug_page.html", {
-            "request": request,
-            "sandbox_postcodes": SANDBOX_POSTCODES
-        }
+        "debug_page.html",
+        {"request": request, "sandbox_postcodes": SANDBOX_POSTCODES},
     )

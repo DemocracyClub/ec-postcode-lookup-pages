@@ -84,4 +84,3 @@ class SandboxAPIBackend(BaseAPIClient):
 
         response_dict = self._get(endpoint=f"sandbox/postcode/{postcode}/")
         return RootModel.parse_obj(response_dict.json()).dict()
-
