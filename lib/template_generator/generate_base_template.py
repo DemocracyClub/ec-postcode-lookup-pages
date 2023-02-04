@@ -180,7 +180,10 @@ def download_assets(soup, static_path, souce_url):
                     if file_type == "css":
                         asset_text = rewrite_css_urls(asset_text, souce_url)
                     f.write(asset_text)
-                f.write(""".c-social .o-external-link::after {display: none}""")
+                if file_type == "css":
+                    f.write(
+                        """.c-social .o-external-link::after {display: none}"""
+                    )
             with open(path, "r") as final_file:
                 hash = md5 = hashlib.md5(
                     final_file.read().encode("utf8")
