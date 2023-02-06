@@ -27,7 +27,7 @@ def test_get_postcode_form(app_client, endpoint_name):
 @pytest.mark.asyncio
 async def test_postcode_endpoint_without_backend_raises(app_client):
     with pytest.raises(ValueError):
-        endpoint = await base_postcode_endpoint(request=None)
+        await base_postcode_endpoint(request=None)
 
 
 def test_get_url(respx_mock):

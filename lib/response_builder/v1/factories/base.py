@@ -50,7 +50,6 @@ class BaseModelFactory(Generic[T]):
         model_fields = self.__model__.__fields__
         skip = list(kwargs.keys())
         for attr in dir(self):
-
             if attr.startswith("__"):
                 continue
             if attr in kwargs:

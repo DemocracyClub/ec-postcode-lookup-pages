@@ -32,7 +32,6 @@ def rewrite_urls(soup, source_url):
                     found_tag[attr] = url
 
     for a in soup.find_all("a"):
-
         if source_url in a["href"]:
             a["href"] = a["href"].replace(
                 source_url,
