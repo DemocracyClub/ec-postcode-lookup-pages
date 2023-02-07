@@ -1,3 +1,5 @@
+import re
+
 import pytest
 from playwright.sync_api import Page
 
@@ -44,3 +46,15 @@ def test_pages_no_console_output(path, page: Page, uvicorn_server):
 
     page.on("console", console_handler)
     page.goto(url=str(f"{uvicorn_server}{path}"))
+
+
+@pytest.mark.parametrize(
+    "path",
+    URLS_TO_CHECK,
+)
+def test_screenshot_tested_urls(path, page, uvicorn_server):
+    page.goto(url=str(f"{uvicorn_server}{path}"))
+    filename = re.sub(r"[^a-z]", "-", path.lower())
+    page.screenshot(
+        path=f"test-reports/screenshots/{filename}.png", full_page=True
+    )

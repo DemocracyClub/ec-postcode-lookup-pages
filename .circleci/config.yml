@@ -45,12 +45,14 @@ jobs:
       - run: pipenv run black-check
       - run: pipenv run ruff
       - run: pipenv run pytest
-      - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-results/junit.xml
+      - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
-          file: /home/circleci/repo/test-results/junit.xml
+          file: /home/circleci/repo/test-reports/junit.xml
       - store_artifacts:
           path: test-reports
           destination: test-reports
+      - store_test_results:
+          path: test-reports/junit.xml
 
   sam_build:
     docker:
