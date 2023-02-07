@@ -16,6 +16,7 @@ jobs:
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
       - run: pipenv install --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
+
       - save_cache:
           when: on_success
           paths:
@@ -44,7 +45,6 @@ jobs:
       - run: pipenv run playwright install
       - run: pipenv run black-check
       - run: pipenv run ruff
-      - run: pipenv run pytest
       - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
           file: /home/circleci/repo/test-reports/junit.xml
@@ -102,18 +102,50 @@ jobs:
               --parameter-overrides "GitHash='$CIRCLE_SHA1'"
       - aws-cli/setup
       - run:
-          name: "Update failover page"
-          command: |
-            # TODO: take bucket name from SAM
-            python failover/build.py
-            aws s3 cp failover/dist/index.html s3://ec-postcode-lookup.womblelabs.co.uk-failover/index.html
-      - run:
           name: "Publish a new Sentry Release"
           command: |
             curl -sL https://sentry.io/get-cli/ | bash
             sentry-cli releases --org democracy-club-gp new $CIRCLE_SHA1 --project ec-postcode-lookup
             sentry-cli releases --org democracy-club-gp set-commits --auto $CIRCLE_SHA1 --ignore-missing
             sentry-cli releases --org democracy-club-gp finalize $CIRCLE_SHA1
+  static_deploy:
+    docker:
+      - image: cimg/python:3.8.12
+    working_directory: ~/repo/
+    parameters:
+      dc-environment:
+        type: enum
+        enum: [ development, staging, production ]
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - run: *install-pipenv
+      - aws-cli/setup
+      - run:
+          name: "Export parameter store env vars"
+          command: |
+            echo "export FQDN=`aws ssm get-parameter --query Parameter.Value --name 'FQDN' --output text`" >> "$BASH_ENV"
+      - run:
+          name: "Update failover page"
+          command: |
+            pipenv run python failover/build.py
+            aws s3 cp failover/dist/index.html "s3://${FQDN}-failover/index.html" \
+              --cache-control max-age=0 \
+              --content-type text/html
+      - run:
+          name: "Update static pages"
+          command: |
+            pipenv run python lib/static_pages/generate.py
+            aws s3 sync \
+                lib/static_pages/build/ "s3://${FQDN}-static-pages/" \
+                --cache-control max-age=600 \
+                --content-type text/html
+
+      
+
 workflows:
   version: 2
   test_build_deploy:
@@ -130,5 +162,12 @@ workflows:
           dc-environment: development
           requires:
             - sam_build
+          context: [ deployment-development-ec-postcode-lookup ]
+          filters: { branches: { only: [ main, master ] } }
+      - static_deploy:
+          name: static_deploy_development
+          dc-environment: development
+          requires:
+            - sam_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
           filters: { branches: { only: [ main, master ] } }
