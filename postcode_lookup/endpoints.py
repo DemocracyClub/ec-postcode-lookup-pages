@@ -73,7 +73,6 @@ def results_context(api_response):
     if api_json["address_picker"]:
         # TODO
         return {}
-
     return {
         "api_response": RootModel.from_api_response(api_json),
     }

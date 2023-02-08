@@ -1,61 +1,57 @@
 {% extends request.base_template %}
-
-{% block page_title %}
-    {% if api_response.dates %}
-        {% if api_response.dates|length > 1 %}
-            {% trans %}You have upcoming elections{% endtrans %}
-        {% else %}
-            {% trans %}You have an upcoming election{% endtrans %}
-        {% endif %}
-    {% else %}
-        {% trans %}There are no upcoming elections in your area{% endtrans %}
-    {% endif %}
-{% endblock %}
-
+{##}
+{#{% block page_title %}#}
+{#    {% if api_response.dates %}#}
+{#        {% if api_response.dates|length > 1 %}#}
+{#            {% trans %}You have upcoming elections{% endtrans %}#}
+{#        {% else %}#}
+{#            {% trans %}You have an upcoming election{% endtrans %}#}
+{#        {% endif %}#}
+{#    {% else %}#}
+{#        {% trans %}There are no upcoming elections in your area{% endtrans %}#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+{##}
 {% block content %}
-
-    <div class="l-content-w-sidebar">
+    <section class="container" aria-labelledby="polling-station-results">
         <div class="polling-station">
             {% for date in api_response.dates %}
-                <h2>{{ date.date|date_filter }}</h2>
+                <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
                 {% for ballot in date.ballots %}
-                    <h3>{{ ballot.ballot_title }}</h3>
-
-                    {% if ballot.candidates_verified %}
-                        <h4>Candidates</h4>
-                        <ul>
-                            {% for candidate in ballot.candidates %}
-                                <li>{{ candidate.person.name }}: {{ candidate.party.party_name }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
+                    {% include "includes/single_ballot.html" %}
                 {% endfor %}
+            {% else%}
+                <p>You can register to vote at any time.
+                    <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
+                <p>If you need help registering, contact the electoral services team on:</p>
             {% endfor %}
 
+        </div>
+    </section>
 
-            {% if api_response.registration != api_response.electoral_services %}
-                <h2>{% trans name=api_response.registration.name %}Register to vote with {{ name }}{% endtrans %}</h2>
-                <p>{{ api_response.registration.phone }}</p>
-            {% endif %}
-
-            {% if api_response.electoral_services %}
-                <h2>{% trans name=api_response.electoral_services.name %}{{ name }} electoralservices{% endtrans %}</h2>
-                <p>
-                    <a href="tel:{{ api_response.electoral_services.phone }}">{{ api_response.electoral_services.phone }}</a>
-                </p>
-                <p>{{ api_response.electoral_services.email|urlize }}</p>
-                <p>{{ api_response.electoral_services.website|urlize }}</p>
-            {% endif %}
-
+    {% if api_response.registration == api_response.electoral_services %}
+        {% with org = api_response.electoral_services, org_type="registration" %}
+            {%  include "includes/organisation_contact.html" %}
+        {% endwith %}
+    {%  else %}
+        {% with org = api_response.registration, org_type="registration" %}
+            {%  include "includes/organisation_contact.html" %}
+        {% endwith %}
+        {% with org = api_response.electoral_services, org_type="electoral_services" %}
+            {%  include "includes/organisation_contact.html" %}
+        {% endwith %}
+    {% endif %}
 
 
-            <div class="c-wysiwyg">
-                <div class="c-summary-box c-summary-box--grey">
-                    <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>
 
-                </div>
-            </div>
+
+
+
+
+    <div class="c-wysiwyg">
+        <div class="c-summary-box c-summary-box--grey">
+            <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>
+
         </div>
     </div>
-
 {% endblock %}

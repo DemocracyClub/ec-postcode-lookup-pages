@@ -1,0 +1,46 @@
+<div class="polling-station__address">
+    <div class="c-summary-box c-summary-box--grey">
+        {% if org_type == "registration" %}
+
+
+            <h3 id="registration-services" class="o-type-h4">Get help with electoral registration</h3>
+            <p>
+                Send your postal and proxy vote applications to your local electoral registration team.
+                You can also contact them to find out if you’re on the electoral register,
+                and if you already have a postal or proxy vote.
+            </p>
+        {% endif %}
+        {% if org_type == "electoral_services" %}
+            <h3 id="electoral-services" class="o-type-h4">Your local council</h3>
+
+            <p>For questions about your poll card, polling place, or about returning your postal voting ballot, contact your council.</p>
+        {% endif %}
+        <address>
+            <div>
+                {{ org.name }}<br>
+                {{ org.address.replace("\n", "<br>")|safe }}<br>
+                {{ org.postcode }}
+            </div>
+            <ul class="polling-station__services u-list-reset">
+                <li>
+                    <a href="tel:" class="js-skip-external-link-test">
+                        <span class="visually-hidden">Phone: </span>
+                        <span>{{ org.phone }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
+                        <span class="visually-hidden">Email: </span>
+                        <span>{{ org.email }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
+                        <span class="visually-hidden">Website: </span>
+                        <span>{{ org.website }}</span>
+                        <span class="visually-hidden">(Opens in new window)</span></a>
+                </li>
+            </ul>
+        </address>
+    </div>
+</div>

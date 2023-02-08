@@ -71,13 +71,10 @@ def _replace_content(el, content):
 
 def remove_unwanted_content(soup: BeautifulSoup):
     soup.select_one("#block-locationselector").replaceWith("")
-
     _replace_content(
-        soup.select_one(".l-main-content"),
+        soup.main.select_one(".l-main-content").parent,
         """
-        <div class="region region-content">
-            {% block content %}{% endblock content %}
-        </div>
+        {% block content %}{% endblock content %}
         """,
     )
 

@@ -1,0 +1,21 @@
+<div class="l-main-content">
+    <div class="l-content-w-sidebar">
+        <div class="polling-station__ballots">
+            <p>The following elections are happening on this day:</p>
+
+            <ul class="u-list-reset polling-station__list">
+                <li>
+                    <button class="o-button o-button--primary o-button--voting"
+                            data-modal=""
+                            data-modal-content="{% include "includes/ballot_model.html" %}"
+                            data-modal-title="{{ ballot.ballot_title }}">
+                        <span>{{ ballot.ballot_title }}</span>
+                        <svg class="o-icon" focusable="false" role="presentation">
+                            <use xlink:href="#icon-arrow-nav"></use>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

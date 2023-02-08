@@ -1,0 +1,11 @@
+<p>This election takes place on <time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>. <a href=&quot;/i-am-a/voter/types-elections&quot;>Find out more about voting in this election</a></p>
+{% if ballot.candidates_verified %}
+
+
+<ul class=&quot;u-list-reset ballot&quot;>
+    {% for candidate in ballot.candidates %}
+        <li class=&quot;ballot__candidate&quot;>{{ candidate.person.name }}<br>{{ candidate.party.party_name }}</li>
+    {% endfor %}
+</ul>
+<p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/NE62EJ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; class=&quot;o-external-link&quot;>Who Can I Vote For <span class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your candidates</p>
+{% endif %}
