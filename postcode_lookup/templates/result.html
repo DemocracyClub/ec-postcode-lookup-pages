@@ -1,17 +1,17 @@
 {% extends request.base_template %}
-{##}
-{#{% block page_title %}#}
-{#    {% if api_response.dates %}#}
-{#        {% if api_response.dates|length > 1 %}#}
-{#            {% trans %}You have upcoming elections{% endtrans %}#}
-{#        {% else %}#}
-{#            {% trans %}You have an upcoming election{% endtrans %}#}
-{#        {% endif %}#}
-{#    {% else %}#}
-{#        {% trans %}There are no upcoming elections in your area{% endtrans %}#}
-{#    {% endif %}#}
-{#{% endblock %}#}
-{##}
+
+{% block page_title %}
+    {% if api_response.dates %}
+        {% if api_response.dates|length > 1 %}
+            {% trans %}You have upcoming elections{% endtrans %}
+        {% else %}
+            {% trans %}You have an upcoming election{% endtrans %}
+        {% endif %}
+    {% else %}
+        {% trans %}There are no upcoming elections in your area{% endtrans %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <section class="container" aria-labelledby="polling-station-results">
         <div class="polling-station">

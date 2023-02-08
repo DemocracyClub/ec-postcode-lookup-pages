@@ -3,12 +3,17 @@ from abc import ABC, abstractmethod
 from urllib.parse import urljoin
 
 import httpx
+import requests.exceptions
 
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES, SANDBOX_BASE_URL
 
 
 class InvalidPostcodeException(Exception):
+    ...
+
+
+class InvalidUPRNException(Exception):
     ...
 
 
@@ -63,6 +68,10 @@ class BaseAPIClient(ABC):
     def get_postcode(self, postcode: str) -> dict:
         ...
 
+    @abstractmethod
+    def get_uprn(self, uprn: str) -> dict:
+        ...
+
 
 class LiveAPIBackend(BaseAPIClient):
     BASE_URL = "https://developers.democracyclub.org.uk"
@@ -72,6 +81,12 @@ class LiveAPIBackend(BaseAPIClient):
         if valid_postcode(postcode):
             return self._get(endpoint=f"postcode/{postcode}/").json()
         raise InvalidPostcodeException
+
+    def get_uprn(self, uprn: str) -> dict:
+        try:
+            return self._get(endpoint=f"address/{uprn}/").json()
+        except requests.exceptions.RequestException:
+            raise InvalidUPRNException
 
 
 class SandboxAPIBackend(BaseAPIClient):
@@ -83,4 +98,8 @@ class SandboxAPIBackend(BaseAPIClient):
             raise InvalidPostcodeException
 
         response_dict = self._get(endpoint=f"sandbox/postcode/{postcode}/")
+        return RootModel.parse_obj(response_dict.json()).dict()
+
+    def get_uprn(self, uprn: str) -> dict:
+        response_dict = self._get(endpoint=f"sandbox/uprn/{uprn}/")
         return RootModel.parse_obj(response_dict.json()).dict()

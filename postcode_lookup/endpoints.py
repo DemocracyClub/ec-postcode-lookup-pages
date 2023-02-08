@@ -7,6 +7,7 @@ from dc_api_client import (
     InvalidPostcodeException,
     SandboxAPIBackend,
     LiveAPIBackend,
+    InvalidUPRNException,
 )
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
@@ -49,7 +50,11 @@ async def base_postcode_endpoint(request: Request, backend=None):
         )
     context = results_context(api_response)
     context["request"] = request
-    return get_loader(request).TemplateResponse("result.html", context)
+    context["postcode"] = postcode
+    template_name = "result.html"
+    if context["api_response"].address_picker:
+        template_name = "address_picker.html"
+    return get_loader(request).TemplateResponse(template_name, context)
 
 
 # Use functools.partial to create a view function per backend
@@ -62,6 +67,40 @@ sandbox_postcode_view = functools.partial(
 # TODO: mock_postcode_view = functools.partial(base_postcode_endpoint, backend=MockAPIBackend)
 
 
+async def base_uprn_endpoint(request: Request, backend=None):
+    """
+    Endpoint that handles UPRN views.
+
+    Supports "plugable" backends for swapping in the sandbox and mock backends.
+
+    This function should not be used directly, rather pick one of the `functools.partial` functions defined below
+    """
+    if not backend:
+        raise ValueError("Must specify a backend")
+    uprn = request.path_params["uprn"]
+    postcode = request.path_params["postcode"]
+    try:
+        api_response = backend(api_key="foo").get_uprn(uprn)
+    except InvalidUPRNException:
+        return RedirectResponse(
+            request.url_for("postcode_form_en") + "?invalid-uprn=1"
+        )
+    context = results_context(api_response)
+    context["request"] = request
+    context["postcode"] = postcode
+    template_name = "result.html"
+    if context["api_response"].address_picker:
+        template_name = "address_picker.html"
+    return get_loader(request).TemplateResponse(template_name, context)
+
+
+live_uprn_view = functools.partial(base_uprn_endpoint, backend=LiveAPIBackend)
+# TODO
+# sandbox_postcode_view = functools.partial(
+#     base_postcode_endpoint, backend=SandboxAPIBackend
+# )
+
+
 async def uprn(request):
     return get_loader(request).TemplateResponse(
         "uprn.html", {"request": request}
@@ -70,9 +109,6 @@ async def uprn(request):
 
 def results_context(api_response):
     api_json = api_response
-    if api_json["address_picker"]:
-        # TODO
-        return {}
     return {
         "api_response": RootModel.from_api_response(api_json),
     }

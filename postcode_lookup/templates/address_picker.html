@@ -1,0 +1,22 @@
+{% extends request.base_template %}
+
+{% block page_title %}
+    Multiple polling stations / electoral services were found for {{ postcode }}
+{% endblock %}
+
+
+{% block content %}
+    <section class="container" aria-labelledby="polling-station-results">
+        <div class="polling-station">
+            <div class="polling-station__list">
+                <h2>Please select an address from this list:</h2>
+                <ul class="links">
+                    {% for address in api_response.addresses %}
+                        <li><a href="{{ request.url_for("uprn_en", postcode=postcode, uprn=address.slug) }}" class="links__link"><span>{{ address.address }}</span></a></li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

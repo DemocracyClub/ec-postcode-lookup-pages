@@ -18,7 +18,9 @@
         <address>
             <div>
                 {{ org.name }}<br>
-                {{ org.address.replace("\n", "<br>")|safe }}<br>
+                {% if org.address %}
+                    {{ org.address.replace("\n", "<br>")|safe }}<br>
+                {% endif %}
                 {{ org.postcode }}
             </div>
             <ul class="polling-station__services u-list-reset">

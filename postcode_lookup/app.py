@@ -14,6 +14,7 @@ from endpoints import (
     redirect_root_to_postcode_form,
     sandbox_postcode_view,
     failover,
+    live_uprn_view,
 )
 from utils import i18nMiddleware, ForwardedForMiddleware
 
@@ -25,7 +26,11 @@ routes = [
         endpoint=postcode_form,
         name="postcode_form_en",
     ),
-    Route("/polling-stations/{postcode}/{uprn}", endpoint=uprn),
+    Route(
+        "/polling-stations/address/{postcode}/{uprn}",
+        endpoint=live_uprn_view,
+        name="uprn_en",
+    ),
     Route("/polling-stations", endpoint=live_postcode_view, name="postcode_en"),
     Route(
         "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
