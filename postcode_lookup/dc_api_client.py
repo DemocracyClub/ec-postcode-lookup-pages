@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 from urllib.parse import urljoin
 
 import httpx
-import requests.exceptions
 
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES, SANDBOX_BASE_URL
@@ -89,7 +88,7 @@ class LiveAPIBackend(BaseAPIClient):
     def get_uprn(self, uprn: str) -> dict:
         try:
             return self._get(endpoint=f"address/{uprn}/").json()
-        except requests.exceptions.RequestException:
+        except httpx.HTTPError:
             raise InvalidUPRNException
 
 
