@@ -6,13 +6,12 @@
 
 {% block language_picker %}
     {% if request.scope.current_language == "cy" %}
-        <li class="en o-link-animate"><a href="{{ request.url_for("postcode_form_en") }}" class="language-link"><span>English</span></a></li>
-        <li class="cy o-link-animate is-active"><a href="{{ request.url_for("postcode_form_cy") }}" class="language-link is-active"><span>Cymraeg</span></a></li>
+        <li class="en o-link-animate"><a href="{{ request.url_for(url_prefix + "_postcode_form_en") }}" class="language-link"><span>English</span></a></li>
+        <li class="cy o-link-animate is-active"><a href="{{ request.url_for(url_prefix + "_postcode_form_cy") }}" class="language-link is-active"><span>Cymraeg</span></a></li>
     {% else %}
-        <li class="en o-link-animate is-active"><a href="{{ request.url_for("postcode_form_en") }}" class="language-link is-active"><span>English</span></a></li>
-        <li class="cy o-link-animate"><a href="{{ request.url_for("postcode_form_cy") }}" class="language-link"><span>Cymraeg</span></a></li>
+        <li class="en o-link-animate is-active"><a href="{{ request.url_for(url_prefix + "_postcode_form_en") }}" class="language-link is-active"><span>English</span></a></li>
+        <li class="cy o-link-animate"><a href="{{ request.url_for(url_prefix + "_postcode_form_cy") }}" class="language-link"><span>Cymraeg</span></a></li>
     {% endif %}
-
 {% endblock %}
 
 {% block content %}
@@ -38,7 +37,7 @@
                                             <form id="polling_station_postcode_search-14945" class="postcode-search | js-postcode-lookup-form">
                                                 <label for="postcode-search-14945" class="visually-hidden">Enter a postcode</label>
                                                 <input id="postcode-search-14945" type="text" class="postcode-search__input {% if request.query_params["invalid-postcode"] %} parsley-error{% endif %}" name="postcode-search" placeholder="Postcode" class="postcode-search__input" data-parsley-postcode data-parsley-errors-container=".js-errors-container-14945" required>
-                                                <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="{{ form_action }}">
+                                                <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="{{ request.url_for(url_prefix + "_postcode_form_" + request.current_language) }}">
                                                     <span class="visually-hidden">Submit Postcode</span>
                                                     <svg class="o-icon">
                                                         <use xlink:href="#icon-search"></use>

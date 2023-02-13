@@ -8,13 +8,13 @@ from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
 
 from endpoints import (
-    postcode_form,
     live_postcode_view,
-    uprn,
     redirect_root_to_postcode_form,
     sandbox_postcode_view,
     failover,
     live_uprn_view,
+    sandbox_uprn_view,
+    live_postcode_form,
 )
 from utils import i18nMiddleware, ForwardedForMiddleware
 
@@ -23,23 +23,33 @@ routes = [
     Route("/failover", endpoint=failover),
     Route(
         "/i-am-a/voter/your-election-information",
-        endpoint=postcode_form,
-        name="postcode_form_en",
+        endpoint=live_postcode_form,
+        name="live_postcode_form_en",
     ),
     Route(
         "/polling-stations/address/{postcode}/{uprn}",
         endpoint=live_uprn_view,
-        name="uprn_en",
+        name="live_uprn_en",
     ),
-    Route("/polling-stations", endpoint=live_postcode_view, name="postcode_en"),
+    Route(
+        "/polling-stations",
+        endpoint=live_postcode_view,
+        name="live_postcode_en",
+    ),
     Route(
         "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
-        endpoint=postcode_form,
-        name="postcode_form_cy",
+        endpoint=live_postcode_form,
+        name="live_postcode_form_cy",
     ),
-    Route("/cy/polling-stations/{postcode}/{uprn}", endpoint=uprn),
     Route(
-        "/cy/polling-stations", endpoint=live_postcode_view, name="postcode_cy"
+        "/cy/polling-stations/{postcode}/{uprn}",
+        endpoint=live_uprn_view,
+        name="live_uprn_cy",
+    ),
+    Route(
+        "/cy/polling-stations",
+        endpoint=live_postcode_view,
+        name="live_postcode_cy",
     ),
     # Sandbox
     Route(
@@ -51,6 +61,16 @@ routes = [
         "/cy/sandbox/polling-stations",
         endpoint=sandbox_postcode_view,
         name="sandbox_postcode_cy",
+    ),
+    Route(
+        "/sandbox/polling-stations/{postcode}/{uprn}",
+        endpoint=sandbox_uprn_view,
+        name="sandbox_uprn_en",
+    ),
+    Route(
+        "/cy/sandbox/polling-stations/{postcode}/{uprn}",
+        endpoint=sandbox_uprn_view,
+        name="sandbox_uprn_cy",
     ),
     Mount(
         "/themes/",

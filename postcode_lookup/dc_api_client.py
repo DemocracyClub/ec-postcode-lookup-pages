@@ -37,9 +37,12 @@ def valid_postcode(postcode: str):
 
 
 class BaseAPIClient(ABC):
+    URL_PREFIX = None
+
     def __init__(self, api_key: str):
         self.api_key = api_key
         self.api_version = "v1"
+        assert self.URL_PREFIX is not None, "URL_PREFIX must be set on backend"
 
     @property
     def get_base_url(self):
@@ -75,6 +78,7 @@ class BaseAPIClient(ABC):
 
 class LiveAPIBackend(BaseAPIClient):
     BASE_URL = "https://developers.democracyclub.org.uk"
+    URL_PREFIX = "live"
 
     def get_postcode(self, postcode: str) -> dict:
         postcode = postcode[:10].upper().replace(" ", "")
@@ -92,6 +96,7 @@ class LiveAPIBackend(BaseAPIClient):
 class SandboxAPIBackend(BaseAPIClient):
     POSTCODES = SANDBOX_POSTCODES
     BASE_URL = SANDBOX_BASE_URL
+    URL_PREFIX = "sandbox"
 
     def get_postcode(self, postcode: str) -> dict:
         if postcode not in self.POSTCODES:
@@ -101,5 +106,5 @@ class SandboxAPIBackend(BaseAPIClient):
         return RootModel.parse_obj(response_dict.json()).dict()
 
     def get_uprn(self, uprn: str) -> dict:
-        response_dict = self._get(endpoint=f"sandbox/uprn/{uprn}/")
+        response_dict = self._get(endpoint=f"sandbox/address/{uprn}/")
         return RootModel.parse_obj(response_dict.json()).dict()

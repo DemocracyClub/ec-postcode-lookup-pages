@@ -17,6 +17,7 @@
         <div class="polling-station">
             {% for date in api_response.dates %}
                 <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
+                <p>The following elections are happening on this day:</p>
                 {% for ballot in date.ballots %}
                     {% include "includes/single_ballot.html" %}
                 {% endfor %}

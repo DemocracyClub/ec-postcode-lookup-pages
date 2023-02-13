@@ -8,24 +8,32 @@ from dc_api_client import (
     SandboxAPIBackend,
     LiveAPIBackend,
     InvalidUPRNException,
+    BaseAPIClient,
 )
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 
-from utils import is_welsh, get_loader
+from utils import get_loader
 
 
-async def postcode_form(request: Request):
-    form_action = request.url_for("postcode_en")
-    if is_welsh(request.url.path):
-        form_action = request.url_for("postcode_cy")
+async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
     response = get_loader(request).TemplateResponse(
-        "index.html", {"request": request, "form_action": form_action}
+        "index.html", {"request": request, "url_prefix": backend.URL_PREFIX}
     )
     return response
 
 
-async def base_postcode_endpoint(request: Request, backend=None):
+live_postcode_form = functools.partial(
+    base_postcode_form, backend=LiveAPIBackend
+)
+sandbox_postcode_form = functools.partial(
+    base_postcode_form, backend=SandboxAPIBackend
+)
+
+
+async def base_postcode_endpoint(
+    request: Request, backend: BaseAPIClient = None
+):
     """
     Endpoint that handles postcode queries.
 
@@ -46,11 +54,13 @@ async def base_postcode_endpoint(request: Request, backend=None):
         api_response = backend(api_key="foo").get_postcode(postcode)
     except InvalidPostcodeException:
         return RedirectResponse(
-            request.url_for("postcode_form_en") + "?invalid-postcode=1"
+            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
+            + "?invalid-postcode=1"
         )
     context = results_context(api_response)
     context["request"] = request
     context["postcode"] = postcode
+    context["url_prefix"] = backend.URL_PREFIX
     template_name = "result.html"
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
@@ -83,7 +93,8 @@ async def base_uprn_endpoint(request: Request, backend=None):
         api_response = backend(api_key="foo").get_uprn(uprn)
     except InvalidUPRNException:
         return RedirectResponse(
-            request.url_for("postcode_form_en") + "?invalid-uprn=1"
+            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
+            + "?invalid-uprn=1"
         )
     context = results_context(api_response)
     context["request"] = request
@@ -95,16 +106,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
 
 
 live_uprn_view = functools.partial(base_uprn_endpoint, backend=LiveAPIBackend)
-# TODO
-# sandbox_postcode_view = functools.partial(
-#     base_postcode_endpoint, backend=SandboxAPIBackend
-# )
-
-
-async def uprn(request):
-    return get_loader(request).TemplateResponse(
-        "uprn.html", {"request": request}
-    )
+sandbox_uprn_view = functools.partial(
+    base_uprn_endpoint, backend=SandboxAPIBackend
+)
 
 
 def results_context(api_response):

@@ -14,8 +14,8 @@ from utils import date_format
 @pytest.mark.parametrize(
     "endpoint_name",
     [
-        "postcode_form_en",
-        "postcode_form_cy",
+        "live_postcode_form_en",
+        "live_postcode_form_cy",
     ],
 )
 def test_get_postcode_form(app_client, endpoint_name):
@@ -43,7 +43,7 @@ def test_get_postcode_endpoint(respx_mock, app_client):
         "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=foo&utm_source=ec_postcode_lookup"
     ).mock(return_value=httpx.Response(200, json=RootModel().dict()))
     resp = app_client.get(
-        app_client.app.url_path_for("postcode_en"),
+        app_client.app.url_path_for("live_postcode_en"),
         params={"postcode-search": "SE228DJ"},
         follow_redirects=False,
     )
@@ -86,10 +86,10 @@ def test_date_format():
 
 
 def test_x_forward_headers(app_client):
-    resp = app_client.get(app_client.app.url_path_for("postcode_form_en"))
+    resp = app_client.get(app_client.app.url_path_for("live_postcode_form_en"))
     assert "example.com" not in resp.text
     resp = app_client.get(
-        app_client.app.url_path_for("postcode_form_en"),
+        app_client.app.url_path_for("live_postcode_form_en"),
         headers={"X-FORWARDED-HOST": "example.com"},
     )
     assert "example.com" in resp.text
