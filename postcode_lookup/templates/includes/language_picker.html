@@ -1,0 +1,23 @@
+{% if request.scope.current_language == "cy" %}
+    <li class="en o-link-animate">
+        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link">
+            <span>English</span>
+        </a>
+    </li>
+    <li class="cy o-link-animate is-active">
+        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link is-active">
+            <span>Cymraeg</span>
+        </a>
+    </li>
+{% else %}
+    <li class="en o-link-animate is-active">
+        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link is-active">
+            <span>English</span>
+        </a>
+    </li>
+    <li class="cy o-link-animate">
+        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link">
+            <span>Cymraeg</span>
+        </a>
+    </li>
+{% endif %}

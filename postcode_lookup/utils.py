@@ -1,4 +1,5 @@
 import typing
+import urllib
 from os import PathLike
 from pathlib import Path
 
@@ -30,6 +31,14 @@ def date_format(value):
     return babel.dates.format_datetime(date_obj, format)
 
 
+def translated_url(request: Request, name: str, **params: str) -> str:
+    url = request.url_for(name, **request.scope["path_params"])
+    query_string = request.query_params
+    if query_string:
+        url = f"{url}?{urllib.parse.urlencode(query_string)}"
+    return url
+
+
 class _i18nJinja2Templates(Jinja2Templates):
     locale = None
 
@@ -41,6 +50,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         ]
         env = super()._create_env(directory, **env_options)
         env.filters["date_filter"] = date_format
+        env.globals["translated_url"] = translated_url
 
         locale_dir = "postcode_lookup/locale"
         list_of_desired_locales = [self.locale]
