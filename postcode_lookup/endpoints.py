@@ -99,7 +99,8 @@ async def base_uprn_endpoint(request: Request, backend=None):
     context = results_context(api_response)
     context["request"] = request
     context["postcode"] = postcode
-    template_name = "result.html"
+    context["url_prefix"] = backend.URL_PREFIX
+    template_name = "uprn.html"
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
     return get_loader(request).TemplateResponse(template_name, context)

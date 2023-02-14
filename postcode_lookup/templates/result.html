@@ -12,6 +12,12 @@
     {% endif %}
 {% endblock %}
 
+{% block language_picker %}
+    {% with route_name = "postcode" %}
+    {% include "includes/language_picker.html" %}
+    {% endwith %}
+{% endblock %}
+
 {% block content %}
     <section class="container" aria-labelledby="polling-station-results">
         <div class="polling-station">

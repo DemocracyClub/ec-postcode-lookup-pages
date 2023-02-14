@@ -4,6 +4,12 @@
     Multiple polling stations / electoral services were found for {{ postcode }}
 {% endblock %}
 
+{% block language_picker %}
+    {% with route_name = "postcode" %}
+    {% include "includes/language_picker.html" %}
+    {% endwith %}
+{% endblock %}
+
 
 {% block content %}
     <section class="container" aria-labelledby="polling-station-results">

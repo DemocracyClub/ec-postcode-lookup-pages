@@ -1,0 +1,7 @@
+{% extends "result.html" %}
+
+{% block language_picker %}
+    {% with route_name = "uprn" %}
+    {% include "includes/language_picker.html" %}
+    {% endwith %}
+{% endblock %}
