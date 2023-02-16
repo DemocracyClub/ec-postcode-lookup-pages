@@ -82,7 +82,10 @@ class LiveAPIBackend(BaseAPIClient):
     def get_postcode(self, postcode: str) -> dict:
         postcode = postcode[:10].upper().replace(" ", "")
         if valid_postcode(postcode):
-            return self._get(endpoint=f"postcode/{postcode}/").json()
+            try:
+                return self._get(endpoint=f"postcode/{postcode}/").json()
+            except httpx.HTTPError:
+                raise InvalidPostcodeException
         raise InvalidPostcodeException
 
     def get_uprn(self, uprn: str) -> dict:

@@ -20,7 +20,7 @@ from utils import i18nMiddleware, ForwardedForMiddleware
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),
-    Route("/failover", endpoint=failover),
+    Route("/failover", endpoint=failover, name="failover"),
     Route(
         "/i-am-a/voter/your-election-information",
         endpoint=live_postcode_form,

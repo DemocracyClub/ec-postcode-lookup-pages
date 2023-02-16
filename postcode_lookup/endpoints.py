@@ -50,6 +50,9 @@ async def base_postcode_endpoint(
     if not backend:
         raise ValueError("Must specify a backend")
     postcode = request.query_params["postcode-search"]
+    if postcode == "FA1LL":
+        return Response(status_code=400)
+
     try:
         api_response = backend(api_key="foo").get_postcode(postcode)
     except InvalidPostcodeException:
