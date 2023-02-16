@@ -167,13 +167,14 @@ Resources:
             - Id: DynamicPagesFailOverOriginGroup
               FailoverCriteria:
                 StatusCodes:
-                  Quantity: 5
+                  Quantity: 6
                   Items:
                   - 404
                   - 400
                   - 500
                   - 502
                   - 503
+                  - 504
               Members:
                 Quantity: 2
                 Items:
@@ -182,13 +183,14 @@ Resources:
             - Id: StaticPagesOriginGroup
               FailoverCriteria:
                 StatusCodes:
-                  Quantity: 5
+                  Quantity: 6
                   Items:
                   - 404
                   - 400
                   - 500
                   - 502
                   - 503
+                  - 504
               Members:
                 Quantity: 2
                 Items:
