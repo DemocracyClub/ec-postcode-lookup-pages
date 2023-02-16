@@ -137,7 +137,7 @@ Resources:
               OriginProtocolPolicy: "https-only"
             OriginCustomHeaders:
               - HeaderName: X-Forwarded-Host
-                HeaderValue: !Ref FQDN
+                HeaderValue: www.staging-5em2ouy-qicelq4x33qps.eu-2.platformsh.site
               - HeaderName: X-Forwarded-Proto
                 HeaderValue: https
             OriginShield:
