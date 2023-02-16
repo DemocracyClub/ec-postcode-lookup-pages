@@ -85,12 +85,14 @@ class i18nMiddleware:
     async def __call__(self, scope, receive, send):
         if scope["type"] == "lifespan":
             await self.app(scope, receive, send)
-        if is_welsh(scope["path"]):
-            scope["base_template"] = "base_cy.html"
-            scope["current_language"] = "cy"
         else:
-            scope["base_template"] = "base.html"
-            scope["current_language"] = "en"
+            if "path" in scope:
+                if is_welsh(scope["path"]):
+                    scope["base_template"] = "base_cy.html"
+                    scope["current_language"] = "cy"
+                else:
+                    scope["base_template"] = "base.html"
+                    scope["current_language"] = "en"
 
         await self.app(scope, receive, send)
 
