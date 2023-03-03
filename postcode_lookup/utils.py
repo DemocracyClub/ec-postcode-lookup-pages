@@ -50,6 +50,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         ]
         env = super()._create_env(directory, **env_options)
         env.filters["date_filter"] = date_format
+        env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
 
         locale_dir = "postcode_lookup/locale"

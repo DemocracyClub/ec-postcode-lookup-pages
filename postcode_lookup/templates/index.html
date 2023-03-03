@@ -19,23 +19,23 @@
                     <div>
                         <div>
                             <div>
-                                <section data-location-content-countries="GB-ENG AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW GB-SCT GB-WLS" class="c-polling-station-slice slice--view-mode--default slice-w-padding slice-location-polling-search" aria-labelledby="paragraph-14945-title" style="">
+                                <section data-location-content-countries="" class="c-polling-station-slice slice--view-mode--default slice-w-padding slice-location-polling-search" aria-labelledby="paragraph-14945-title" style="">
                                     <div class="container">
                                         <h2 id="paragraph-14945-title" class="slice__title">
-                                            <span>Enter your postcode</span>
+                                            <span>{%trans %}Enter your postcode{% endtrans %}</span>
                                         </h2>
 
                                         <div class="l-grid l-grid--align-start l-grid--2-col l-grid--w-h-gutter">
                                             <div class="l-grid__item ">
-                                                <div><p>Enter your postcode to find contact details for the electoral services team at your local council and polling station details</p>
+                                                <div><p>{%trans %}Enter your postcode to find contact details for the electoral services team at your local council and polling station details{% endtrans %}</p>
                                                 </div>
                                             </div>
                                             <div class="l-grid__item l-grid__item--wrap">
                                                 <form id="polling_station_postcode_search-14945" class="postcode-search | js-postcode-lookup-form">
-                                                    <label for="postcode-search-14945" class="visually-hidden">Enter a postcode</label>
+                                                    <label for="postcode-search-14945" class="visually-hidden">{%trans %}Enter a postcode{% endtrans %}</label>
                                                     <input id="postcode-search-14945" type="text" class="postcode-search__input {% if request.query_params["invalid-postcode"] %} parsley-error{% endif %}" name="postcode-search" placeholder="Postcode" class="postcode-search__input" data-parsley-postcode data-parsley-errors-container=".js-errors-container-14945" required>
                                                     <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
-                                                        <span class="visually-hidden">Submit Postcode</span>
+                                                        <span class="visually-hidden">{%trans %}Submit Postcode{% endtrans %}</span>
                                                         <svg class="o-icon">
                                                             <use xlink:href="#icon-search"></use>
                                                         </svg>
@@ -44,7 +44,7 @@
                                                 <div class="postcode-search__error | js-errors-container-14945">
                                                     {% if request.query_params["invalid-postcode"] %}
                                                         <div id="parsley-id-5" class="filled">
-                                                            <span class="parsley-postcode">Please enter a valid postcode</span>
+                                                            <span class="parsley-postcode">{%trans %}Please enter a valid postcode{% endtrans %}</span>
                                                         </div>
                                                     {% endif %}
                                                 </div>
@@ -57,14 +57,6 @@
                         </div>
 
                     </div>
-
-                    <footer>
-                        <div class="c-review" role="status" aria-live="polite">
-                            <div class="c-review__item">
-                                <strong>Last updated:</strong> 6 May 2022
-                            </div>
-                        </div>
-                    </footer>
                 </div>
             </div>
 

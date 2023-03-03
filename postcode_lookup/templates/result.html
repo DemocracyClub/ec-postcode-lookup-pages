@@ -14,27 +14,79 @@
 
 {% block language_picker %}
     {% with route_name = "postcode" %}
-    {% include "includes/language_picker.html" %}
+        {% include "includes/language_picker.html" %}
     {% endwith %}
 {% endblock %}
 
 {% block content %}
-    <section class="container" aria-labelledby="polling-station-results">
-        <div class="polling-station">
-            {% for date in api_response.dates %}
-                <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
-                <p>The following elections are happening on this day:</p>
-                {% for ballot in date.ballots %}
-                    {% include "includes/single_ballot.html" %}
-                {% endfor %}
-            {% else%}
-                <p>You can register to vote at any time.
-                    <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
-                <p>If you need help registering, contact the electoral services team on:</p>
-            {% endfor %}
 
-        </div>
-    </section>
+    <style>
+        .dc-container {
+            margin-top:3.5rem;
+        }
+
+        .dc-container .dc-grid {
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
+        }
+        .dc-container .dc-grid .dc-polling-station {
+            flex-basis: 20em;
+            flex-grow: 1;
+
+
+        }
+        .dc-container .dc-grid .dc-ballot {
+            flex-basis: 0;
+            flex-grow: 999;
+        }
+
+        .dc-container .l-content-w-sidebar {
+            width: 95%;
+        }
+
+        @media screen and (max-width:767px){
+            .dc-container .dc-grid {
+                display: block;
+            }
+            .dc-container .l-content-w-sidebar {
+                width: 100%;
+            }
+            .dc-container {
+                margin-top:1rem;
+            }
+
+        }
+
+    </style>
+
+    <div class="dc-container">
+        {% for date in api_response.dates %}
+            <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
+            <div class="dc-grid">
+                <div class="dc-ballot">
+                    <p>The following elections are happening on this day:</p>
+                    {% for ballot in date.ballots %}
+                        {% include "includes/single_ballot.html" %}
+                    {% endfor %}
+                </div>
+
+                <div class="dc-polling-station">
+                    {%  include "includes/polling_station.html" %}
+                </div>
+            </div>
+        {% else%}
+            <p>You can register to vote at any time.
+                <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
+            <p>If you need help registering, contact the electoral services team on:</p>
+        {% endfor %}
+
+
+
+
+
+
+    </div>
 
     {% if api_response.registration == api_response.electoral_services %}
         {% with org = api_response.electoral_services, org_type="registration" %}
@@ -60,5 +112,7 @@
             <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>
 
         </div>
+    </div>
+
     </div>
 {% endblock %}
