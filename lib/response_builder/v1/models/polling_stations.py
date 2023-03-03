@@ -30,7 +30,7 @@ class Station(BaseModel):
         default_factory=str, description="A unique ID for this polling station"
     )
     type: str
-    geometry: str = Field(default=None)
+    geometry: Optional[Dict] = Field(default=None)
     properties: dict
     # station_id: str = Field(
     #     default_factory=str,
