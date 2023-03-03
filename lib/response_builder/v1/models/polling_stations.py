@@ -7,6 +7,19 @@ class AdvanceVotingStation(BaseModel):
     ...
 
 
+class StationProperties(BaseModel):
+    postcode: Union[str, None] = Field(
+        default_factory=None,
+        description="The postcode of the polling station, if available",
+        nullable=True,
+    )
+    address: Union[str, None] = Field(
+        default_factory=None,
+        description="The postcode of the polling station, if available",
+        nullable=True,
+    )
+
+
 class Station(BaseModel):
     """
     GeoJSON formatted information about a polling station.
@@ -16,22 +29,15 @@ class Station(BaseModel):
     id: str = Field(
         default_factory=str, description="A unique ID for this polling station"
     )
-
-    urls: Dict = Field(
-        default_factory=dict,
-        description=(
-            "A dict containing detail and geoJSON details of this polling station"
-        ),
-    )
-    station_id: str = Field(
-        default_factory=str,
-        description="The council provided ID for this polling sation",
-    )
-    postcode: Union[str, None] = Field(
-        default_factory=None,
-        description="The postcode of the polling station, if available",
-        nullable=True,
-    )
+    type: str
+    geometry: str = Field(default=None)
+    properties: dict
+    # station_id: str = Field(
+    #     default_factory=str,
+    #     description="The council provided ID for this polling sation",
+    #     alias="id"
+    # )
+    properties: StationProperties = Field(default=None)
 
 
 class PollingStation(BaseModel):
@@ -51,5 +57,6 @@ class PollingStation(BaseModel):
         description="HTML form for reporting problems with the polling station data",
     )
     station: Optional[Station] = Field(
-        default=None, description="Details about the polling station"
+        default=None,
+        description="Details about the polling station",
     )

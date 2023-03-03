@@ -78,7 +78,6 @@ class BaseModelFactory(Generic[T]):
             fake_data.update(**kwargs)
             kwargs = fake_data
 
-        print(kwargs)
         return self.__model__.parse_obj(kwargs)
 
 

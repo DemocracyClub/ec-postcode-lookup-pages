@@ -1,6 +1,8 @@
 import random
 
+from faker.providers import ElementsType
 from faker.providers.address.en_GB import Provider as GBAddressProvider
+from faker.providers.company.en_US import Provider
 from faker.providers.date_time import Provider as DateTimeProvider
 from uk_election_ids.slugger import slugify
 
@@ -802,6 +804,10 @@ def get_sample(data):
     return random.sample(data, 1)[0]
 
 
+def make_political_party_name():
+    return "Foo Party"
+
+
 def make_ward_name(add_extra_name=True):
     pre = get_sample(ward_prefixes)
     suf = get_sample(ward_suffixes)
@@ -891,6 +897,16 @@ class LocalBallotDataProvider(GenericBallotDataProvider):
 
     def local_election_name(self):
         return f"{self.organisation_name()} local election"
+
+
+class PoliticalPartyProvider(Provider):
+    formats: ElementsType[str] = ("{{last_name}} Party",)
+
+    def political_party_name(self) -> str:
+        return self.company()
+
+    def political_party_ec_id(self) -> str:
+        return f"PP{random.randrange(10,100)}"
 
 
 if __name__ == "__main__":

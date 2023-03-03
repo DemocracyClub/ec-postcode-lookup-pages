@@ -22,7 +22,7 @@ class AbstractBuilder:
         self.kwargs = kwargs
         self._factory = self.factory()
 
-    def build(self, **kwargs):
+    def build(self, **kwargs) -> BaseModel:
         return self._factory.build(**kwargs)
 
 
@@ -71,15 +71,19 @@ class BallotBuilder(AbstractBuilder):
 
 
 class LocalBallotBuilder(BallotBuilder):
-    factory = LocalElectionBallotFactory
+    factory: Ballot = LocalElectionBallotFactory
 
-    def with_candidates(self, count):
+    def with_candidates(self, count, verified=False):
+        self.factory.candidates_verified = verified
+        self.factory.seats_contested = 1
         for i in range(count):
             self.with_candidate()
+        return self
 
     def with_candidate(self, candidate=None, **kwargs):
         if not candidate:
             candidate = CandidateFactory().build(**kwargs)
-        if not hasattr(self.factory.__model__, "candidates"):
+        if not hasattr(self.factory, "candidates"):
             self.factory.candidates = []
         self.factory.candidates.append(candidate)
+        return self

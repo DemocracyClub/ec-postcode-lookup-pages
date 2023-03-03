@@ -48,6 +48,7 @@ class Notification(BaseModel):
 
 class Party(BaseModel):
     party_name: str = Field()
+    party_id: str = Field()
 
 
 class Person(BaseModel):
