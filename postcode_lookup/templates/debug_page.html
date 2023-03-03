@@ -60,7 +60,7 @@
         <dl>
             {% for postcode, details in sandbox_postcodes.items() %}
                 <dt>
-                    <a href="{{ request.url_for("sandbox_postcode_en") }}?postcode-search={{ postcode }}">{{ postcode }}</a>
+                    <a href="/sandbox/polling-stations?postcode-search={{ postcode }}">{{ postcode }}</a>
                 </dt>
                 <dd>
                     <pre>{{ details.description }}</pre>
