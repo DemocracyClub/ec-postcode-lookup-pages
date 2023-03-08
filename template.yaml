@@ -144,16 +144,15 @@ Resources:
               Enabled: true
               OriginShieldRegion: eu-west-2
           - Id: StaticPages
-            DomainName: !Select [1, !Split ["//", !GetAtt StaticPages.WebsiteURL]]
+            DomainName: !Sub "${FQDN}-static-pages.s3-website.eu-west-2.amazonaws.com"
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
             ConnectionAttempts: 1
             ConnectionTimeout: 2
             OriginShield:
-              Enabled: true
-              OriginShieldRegion: eu-west-2
+              Enabled: false
           - Id: Failover
-            DomainName: !Select [1, !Split ["//", !GetAtt FailOver.WebsiteURL]]
+            DomainName: !Sub "${FQDN}-failover.s3-website.eu-west-2.amazonaws.com"
             # Keep the ? to convert the path in to a query param
             OriginPath: "/index.html?"
             CustomOriginConfig:
