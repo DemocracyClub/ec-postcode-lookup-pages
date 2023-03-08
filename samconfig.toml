@@ -19,3 +19,25 @@ force_upload = true
 stack_name = "ec-postcode-lookup-dev"
 name = "ECPostcodeLookupFunction"
 region = "eu-west-2"
+
+
+[staging]
+[staging.deploy]
+[staging.deploy.parameters]
+stack_name = "ec-postcode-lookup-staging"
+s3_bucket = "aws-sam-cli-ec-postcode-lookup-staging-mw1tdi3jmooz"
+s3_prefix = "ec-postcode-lookup-staging"
+region = "eu-west-2"
+capabilities = "CAPABILITY_NAMED_IAM"
+
+confirm_changeset = false
+tags = "dc-product=\"ec-postcode-lookup\" dc-environment=\"staging\""
+progressbar = false
+fail_on_empty_changeset = false
+force_upload = true
+
+[staging.logs]
+[staging.logs.parameters]
+stack_name = "ec-postcode-lookup-staging"
+name = "ECPostcodeLookupFunction"
+region = "eu-west-2"

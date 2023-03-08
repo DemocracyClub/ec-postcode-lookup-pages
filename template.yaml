@@ -230,7 +230,8 @@ Resources:
               Cookies:
                 Forward: none
             ViewerProtocolPolicy: "redirect-to-https"
-            DefaultTTL: '3153600000'
+            DefaultTTL: '31536000'
+            MaxTTL: '31536000'
           - AllowedMethods: [ GET, HEAD, OPTIONS ]
             PathPattern: /i-am-a/voter/your-election-information
             TargetOriginId: StaticPagesOriginGroup
