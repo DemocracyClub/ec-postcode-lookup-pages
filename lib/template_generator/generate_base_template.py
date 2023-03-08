@@ -181,9 +181,7 @@ def download_assets(soup, static_path, souce_url):
                         """.c-social .o-external-link::after {display: none}"""
                     )
             with open(path, "r") as final_file:
-                hash = md5 = hashlib.md5(
-                    final_file.read().encode("utf8")
-                ).hexdigest()
+                hash = hashlib.md5(final_file.read().encode("utf8")).hexdigest()
                 initial_name, ext = path.name.split(".")
                 hashed_name = f"{initial_name}.{hash}.{ext}"
                 hashed_path = path.parent / hashed_name

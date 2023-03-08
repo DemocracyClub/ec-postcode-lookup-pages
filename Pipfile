@@ -10,6 +10,7 @@ pydantic = "*"
 mangum = "==0.15.0"
 httpx = "*"
 babel = "==2.11.0"
+dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/0.0.1.zip"}
 
 [dev-packages]
 uvicorn = "*"
@@ -25,7 +26,6 @@ ruff = "*"
 pytest-cov = "*"
 coverage = {extras = ["toml"], version = "*"}
 pytest-asyncio = "*"
-dc-api-response-builder = {path = "./lib/response_builder"}
 pytest-playwright = "*"
 
 [requires]

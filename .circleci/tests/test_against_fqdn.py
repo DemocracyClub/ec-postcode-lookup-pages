@@ -6,6 +6,7 @@ import pytest
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 
 FAILOVER_COMMENT = "DC failover page"
+STATIC_PAGE_COMMENT = "<!-- Static page content -->"
 
 
 @pytest.fixture(scope="session")
@@ -43,6 +44,7 @@ def test_postcode_form_en(fqdn):
     url = f"https://{fqdn}/i-am-a/voter/your-election-information"
     req = httpx.get(url)
     req.raise_for_status()
+    assert STATIC_PAGE_COMMENT in req.text
     assert FAILOVER_COMMENT not in req.text
 
 
@@ -50,4 +52,5 @@ def test_postcode_form_cy(fqdn):
     url = f"https://{fqdn}/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad"
     req = httpx.get(url)
     req.raise_for_status()
+    assert STATIC_PAGE_COMMENT in req.text
     assert FAILOVER_COMMENT not in req.text

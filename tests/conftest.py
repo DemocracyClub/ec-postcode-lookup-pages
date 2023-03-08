@@ -19,7 +19,7 @@ def uvicorn_server():
     port = randrange(8010, 8100)
     proc = Process(
         target=uvicorn.run,
-        args=("postcode_lookup.app:app",),
+        args=("app:app",),
         kwargs={
             "host": "127.0.0.1",
             "port": port,

@@ -53,4 +53,6 @@ with uvicorn_context() as root_url:
         path = root_path / page.lstrip("/")
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as file:
-            file.write(httpx.get(url, headers=request_headers).text)
+            content = httpx.get(url, headers=request_headers).text
+            content = content + """<!-- Static page content -->"""
+            file.write(content)
