@@ -201,6 +201,7 @@ workflows:
           context: [ deployment-development-ec-postcode-lookup ]
           filters: { branches: { only: [ main, master ] } }
 
+
       - sam_deploy:
           name: sam_deploy_staging
           dc-environment: staging
@@ -221,4 +222,27 @@ workflows:
           requires:
             - static_deploy_staging
           context: [ deployment-staging-ec-postcode-lookup ]
+          filters: { branches: { only: [ main, master ] } }
+
+
+      - sam_deploy:
+          name: sam_deploy_production
+          dc-environment: production
+          requires:
+            - smoke_test_staging
+          context: [ deployment-production-ec-postcode-lookup ]
+          filters: { branches: { only: [ main, master ] } }
+      - static_deploy:
+          name: static_deploy_production
+          dc-environment: production
+          requires:
+            - sam_deploy_production
+          context: [ deployment-production-ec-postcode-lookup ]
+          filters: { branches: { only: [ main, master ] } }
+      - smoke_test:
+          name: smoke_test_production
+          dc-environment: production
+          requires:
+            - static_deploy_production
+          context: [ deployment-production-ec-postcode-lookup ]
           filters: { branches: { only: [ main, master ] } }
