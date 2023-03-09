@@ -41,7 +41,6 @@ Resources:
     Properties:
       FunctionName: ECPostcodeLookupFunction
       Timeout: 60
-#      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/ECPostcodeLookupLambdaExecutionRole"
       CodeUri: postcode_lookup
       Handler: app.handler
       Runtime: python3.8
@@ -72,54 +71,44 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "${FQDN}-failover"
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: error.html
-    DeletionPolicy: Retain
+      AccessControl: Private
+    DeletionPolicy: Delete
+
   FailOverBucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
       PolicyDocument:
-        Id: MyPolicy
-        Version: 2012-10-17
         Statement:
-          - Sid: PublicReadForGetBucketObjects
-            Effect: Allow
-            Principal: '*'
-            Action: 's3:GetObject'
-            Resource: !Join
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref FailOver
-                - /*
+          - Action:
+              - 's3:*'
+            Effect: 'Allow'
+            Principal:
+              CanonicalUser: !GetAtt CfOriginAccessIdentity.S3CanonicalUserId
+            Resource:
+              - !Sub 'arn:aws:s3:::${FailOver}/*'
       Bucket: !Ref FailOver
 
   StaticPages:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: !Sub "${FQDN}-static-pages"
-        AccessControl: PublicRead
-        WebsiteConfiguration:
-          IndexDocument: index.html
-          ErrorDocument: error.html
-      DeletionPolicy: Retain
+        AccessControl: Private
+      DeletionPolicy: Delete
+
   StaticPagesBucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
       PolicyDocument:
-        Id: StaticPagesPublicAccessPolicy
+        Id: FailOverBucketPolicy
         Version: 2012-10-17
         Statement:
-          - Sid: PublicReadForGetBucketObjects
-            Effect: Allow
-            Principal: '*'
-            Action: 's3:GetObject'
-            Resource: !Join
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref StaticPages
-                - /*
+          - Action:
+              - 's3:*'
+            Effect: 'Allow'
+            Principal:
+              CanonicalUser: !GetAtt CfOriginAccessIdentity.S3CanonicalUserId
+            Resource:
+              - !Sub 'arn:aws:s3:::${StaticPages}/*'
       Bucket: !Ref StaticPages
 
 
@@ -144,22 +133,25 @@ Resources:
               Enabled: true
               OriginShieldRegion: eu-west-2
           - Id: StaticPages
-            DomainName: !Sub "${FQDN}-static-pages.s3-website.eu-west-2.amazonaws.com"
-            CustomOriginConfig:
-              OriginProtocolPolicy: "https-only"
+            DomainName: !GetAtt StaticPages.RegionalDomainName
             ConnectionAttempts: 1
             ConnectionTimeout: 2
             OriginShield:
               Enabled: false
+            OriginPath: ''
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
+
           - Id: Failover
-            DomainName: !Sub "${FQDN}-failover.s3-website.eu-west-2.amazonaws.com"
+            DomainName: !GetAtt FailOver.RegionalDomainName
             # Keep the ? to convert the path in to a query param
             OriginPath: "/index.html?"
-            CustomOriginConfig:
-              OriginProtocolPolicy: "https-only"
             OriginShield:
               Enabled: false
               OriginShieldRegion: eu-west-2
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
+
         OriginGroups:
           Quantity: 2
           Items:
@@ -250,6 +242,14 @@ Resources:
                 Forward: none
             ViewerProtocolPolicy: "redirect-to-https"
 
+
+  CfOriginAccessIdentity:
+    Metadata:
+      Comment: 'Access S3 bucket content only through CloudFront'
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: 'Access S3 bucket content only through CloudFront'
+    Type: 'AWS::CloudFront::CloudFrontOriginAccessIdentity'
 
   DnsRecord:
     Type: AWS::Route53::RecordSet
