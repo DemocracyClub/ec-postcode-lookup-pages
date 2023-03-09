@@ -137,7 +137,7 @@ Resources:
             ConnectionAttempts: 1
             ConnectionTimeout: 2
             OriginShield:
-              Enabled: false
+              Enabled: true
             OriginPath: ''
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
@@ -147,7 +147,7 @@ Resources:
             # Keep the ? to convert the path in to a query param
             OriginPath: "/index.html?"
             OriginShield:
-              Enabled: false
+              Enabled: true
               OriginShieldRegion: eu-west-2
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
@@ -227,6 +227,8 @@ Resources:
             PathPattern: /i-am-a/voter/your-election-information
             TargetOriginId: StaticPagesOriginGroup
             Compress: true
+            DefaultTTL: '60'
+            MaxTTL: '60'
             ForwardedValues:
               QueryString: false
               Cookies:
@@ -236,6 +238,8 @@ Resources:
             PathPattern: /cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad
             TargetOriginId: StaticPagesOriginGroup
             Compress: true
+            DefaultTTL: '60'
+            MaxTTL: '60'
             ForwardedValues:
               QueryString: false
               Cookies:
