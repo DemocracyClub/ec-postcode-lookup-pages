@@ -138,6 +138,7 @@ Resources:
             ConnectionTimeout: 2
             OriginShield:
               Enabled: true
+              OriginShieldRegion: eu-west-2
             OriginPath: ''
             S3OriginConfig:
               OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${CfOriginAccessIdentity}'
@@ -216,23 +217,15 @@ Resources:
             PathPattern: static/*
             TargetOriginId: Dynamic
             Compress: true
-            ForwardedValues:
-              QueryString: true
-              Cookies:
-                Forward: none
             ViewerProtocolPolicy: "redirect-to-https"
-            DefaultTTL: '31536000'
-            MaxTTL: '31536000'
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
           - AllowedMethods: [ GET, HEAD, OPTIONS ]
             PathPattern: /i-am-a/voter/your-election-information
             TargetOriginId: StaticPagesOriginGroup
             Compress: true
             DefaultTTL: '60'
             MaxTTL: '60'
-            ForwardedValues:
-              QueryString: false
-              Cookies:
-                Forward: none
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
             ViewerProtocolPolicy: "redirect-to-https"
           - AllowedMethods: [ GET, HEAD, OPTIONS ]
             PathPattern: /cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad
@@ -240,10 +233,7 @@ Resources:
             Compress: true
             DefaultTTL: '60'
             MaxTTL: '60'
-            ForwardedValues:
-              QueryString: false
-              Cookies:
-                Forward: none
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
             ViewerProtocolPolicy: "redirect-to-https"
 
 
