@@ -20,6 +20,11 @@ Parameters:
     Description: "The ARN of the cert to use"
     Type: AWS::SSM::Parameter::Value<String>
 
+  XForwardedForHost:
+    Default: XForwardedForHost
+    Description: "The ARN of the cert to use"
+    Type: AWS::SSM::Parameter::Value<String>
+
 Resources:
   ECDeployerRole:
     Type: AWS::IAM::Role
@@ -126,7 +131,7 @@ Resources:
               OriginProtocolPolicy: "https-only"
             OriginCustomHeaders:
               - HeaderName: X-Forwarded-Host
-                HeaderValue: www.staging-5em2ouy-qicelq4x33qps.eu-2.platformsh.site
+                HeaderValue: !Ref XForwardedForHost
               - HeaderName: X-Forwarded-Proto
                 HeaderValue: https
             OriginShield:
