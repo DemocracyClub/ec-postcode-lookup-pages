@@ -1,22 +1,20 @@
 from pathlib import Path
 
+from endpoints import (
+    failover,
+    live_postcode_form,
+    live_postcode_view,
+    live_uprn_view,
+    redirect_root_to_postcode_form,
+    sandbox_postcode_view,
+    sandbox_uprn_view,
+)
 from mangum import Mangum
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
-from starlette.routing import Route, Mount
-
+from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
-
-from endpoints import (
-    live_postcode_view,
-    redirect_root_to_postcode_form,
-    sandbox_postcode_view,
-    failover,
-    live_uprn_view,
-    sandbox_uprn_view,
-    live_postcode_form,
-)
-from utils import i18nMiddleware, ForwardedForMiddleware
+from utils import ForwardedForMiddleware, i18nMiddleware
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),

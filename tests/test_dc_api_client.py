@@ -1,6 +1,5 @@
 import httpx
 import pytest
-
 from dc_api_client import (
     InvalidPostcodeException,
     LiveAPIBackend,

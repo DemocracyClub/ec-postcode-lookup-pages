@@ -1,11 +1,10 @@
-import uvicorn
 from multiprocessing import Process
 from random import randrange
 
 import pytest
-from starlette.testclient import TestClient
-
+import uvicorn
 from app import app
+from starlette.testclient import TestClient
 
 
 @pytest.fixture(scope="function")

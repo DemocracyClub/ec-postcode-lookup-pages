@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-
 # This is needed to make imports work on AWS Lambda.
 # When running there, the `postcode_lookup` directory is the root
 # meaning that we can't use that in our imports.

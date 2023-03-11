@@ -4,6 +4,9 @@ line-length = 80
 [tool.ruff]
 line-length = 80
 ignore = ["E501"]
+extend-select = [
+    "I",
+]
 
 [tool.coverage.report]
 exclude_lines = [

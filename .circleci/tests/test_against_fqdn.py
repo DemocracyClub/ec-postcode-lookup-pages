@@ -2,7 +2,6 @@ import os
 
 import httpx
 import pytest
-
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 
 FAILOVER_COMMENT = "DC failover page"

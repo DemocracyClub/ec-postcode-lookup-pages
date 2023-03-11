@@ -3,7 +3,6 @@ import re
 import pytest
 from playwright.sync_api import Page
 
-
 URLS_TO_CHECK = [
     "/i-am-a/voter/your-election-information",
     "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
