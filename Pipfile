@@ -27,6 +27,7 @@ pytest-cov = "*"
 coverage = {extras = ["toml"], version = "*"}
 pytest-asyncio = "*"
 pytest-playwright = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"
