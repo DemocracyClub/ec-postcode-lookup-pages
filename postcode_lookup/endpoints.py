@@ -15,10 +15,9 @@ from utils import get_loader
 
 
 async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
-    response = get_loader(request).TemplateResponse(
+    return get_loader(request).TemplateResponse(
         "index.html", {"request": request, "url_prefix": backend.URL_PREFIX}
     )
-    return response
 
 
 live_postcode_form = functools.partial(
@@ -55,8 +54,9 @@ async def base_postcode_endpoint(
         api_response = backend(api_key="foo").get_postcode(postcode)
     except InvalidPostcodeException:
         return RedirectResponse(
-            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
-            + "?invalid-postcode=1"
+            request.url_for(
+                backend.URL_PREFIX + "_postcode_form_en"
+            ).include_query_params(**{"invalid-postcode": 1})
         )
     context = results_context(api_response)
     context["request"] = request

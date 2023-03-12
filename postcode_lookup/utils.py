@@ -1,5 +1,4 @@
 import typing
-import urllib
 from os import PathLike
 from pathlib import Path
 
@@ -32,10 +31,11 @@ def date_format(value):
 
 
 def translated_url(request: Request, name: str, **params: str) -> str:
-    url = request.url_for(name, **request.scope["path_params"])
     query_string = request.query_params
+    url = request.url_for(name, **request.scope["path_params"])
+
     if query_string:
-        url = f"{url}?{urllib.parse.urlencode(query_string)}"
+        url.include_query_params(**query_string)
     return url
 
 
