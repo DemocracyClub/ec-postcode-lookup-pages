@@ -1,0 +1,21 @@
+{% if request.scope.current_language == "cy" %}
+    <link rel="canonical" href="{{ request.url_for("live_postcode_form_cy") }}" />
+    <meta property="og:url" content="{{ request.url_for("live_postcode_form_cy") }}" />
+{% else %}
+    <link rel="canonical" href="{{ request.url_for("live_postcode_form_en") }}" />
+    <meta property="og:url" content="{{ request.url_for("live_postcode_form_en") }}" />
+{% endif %}
+<meta name="referrer" content="no-referrer" />
+<meta name="description" content="{% trans %}Enter your postcode to find your electoral services team at your local council. You need to send your postal and proxy vote application forms to them.{% endtrans %}" />
+<meta property="og:site_name" content="Electoral Commission UK" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{% trans %}Elections in your area{% endtrans %}" />
+<meta property="og:description" content="{% trans %}Find upcoming elections in your area, your polling station, candidates, and contact details for your local electoral services team{% endtrans %}" />
+<meta property="og:image" content="https://www.electoralcommission.org.uk/sites/default/files/styles/wysiwyg_media_large/public/2021-05/Untitled.jpg" />
+<meta property="og:image:url" content="https://www.electoralcommission.org.uk/sites/default/files/styles/wysiwyg_media_large/public/2021-05/Untitled.jpg" />
+<meta property="og:image:type" content="image/JPG" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@ElectoralCommUK" />
+<meta name="twitter:description" content="{% trans %}Find upcoming elections in your area, your polling station, candidates, and contact details for your local electoral services team{% endtrans %}" />
+<meta name="twitter:title" content="{% trans %}Elections in your area{% endtrans %}" />
+<meta name="twitter:image" content="https://www.electoralcommission.org.uk/sites/default/files/styles/wysiwyg_media_large/public/2021-05/Untitled.jpg" />

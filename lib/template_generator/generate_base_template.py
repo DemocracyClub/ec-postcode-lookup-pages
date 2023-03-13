@@ -2,10 +2,11 @@ import hashlib
 import re
 import shutil
 from pathlib import Path
+from typing import List
 from urllib.parse import urljoin
 
 import httpx
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 TEMPLATES = {
     "base.html": {
@@ -192,6 +193,49 @@ def download_assets(soup, static_path, souce_url):
     return assets
 
 
+def add_head_meta_blocks(soup: BeautifulSoup):
+    head_elements: List[Tag] = soup.find("head").children
+    for child in head_elements:
+        if child.name == "meta":
+            if (
+                "property" in child.attrs
+                and child.attrs["property"].split(":")[0] == "og"
+            ):
+                child.decompose()
+                continue
+            if (
+                "name" in child.attrs
+                and child.attrs["name"].split(":")[0] == "twitter"
+            ):
+                child.decompose()
+                continue
+            if child.attrs.get("name") in ["Generator", "description"]:
+                child.decompose()
+                continue
+
+        if child.name == "link" and child.attrs.get("rel") in [
+            ["alternate"],
+            ["canonical"],
+        ]:
+            child.decompose()
+            continue
+    _replace_content(
+        soup.head.find("title"),
+        """{% block html_title %}{% endblock html_title %}""",
+    )
+
+    soup.head.append(
+        BeautifulSoup(
+            """
+            {% block html_meta %}
+                {% include "includes/html_meta.html" %}
+            {% endblock html_meta %}""",
+            "html.parser",
+        ),
+    )
+    return soup
+
+
 project_path = Path() / "postcode_lookup"
 static_path = project_path / "static"
 shutil.rmtree(static_path.absolute(), ignore_errors=True)
@@ -206,6 +250,7 @@ for template, config in TEMPLATES.items():
     soup = rewrite_asset_urls(soup, assets, static_path)
     soup = remove_unwanted_content(soup)
     soup = add_local_font_css(soup)
+    soup = add_head_meta_blocks(soup)
 
     with template_path.open("w") as f:
         f.write(soup.prettify())

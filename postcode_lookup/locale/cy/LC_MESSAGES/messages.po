@@ -1,14 +1,9 @@
-# Welsh translations for PROJECT.
-# Copyright (C) 2023 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
-#
-#, fuzzy
+
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-03 11:49+0000\n"
+"POT-Creation-Date: 2023-03-13 22:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -20,6 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
+#: postcode_lookup/templates/includes/html_meta.html:12
+#: postcode_lookup/templates/includes/html_meta.html:20
 #: postcode_lookup/templates/index.html:4
 msgid "Elections in your area"
 msgstr "Gwybodaeth etholiadol"
@@ -60,6 +57,26 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
 
+#: postcode_lookup/templates/includes/html_meta.html:9
+#, fuzzy
+msgid ""
+"Enter your postcode to find your electoral services team at your local "
+"council. You need to send your postal and proxy vote application forms to"
+" them."
+msgstr ""
+"Dewch o hyd i'ch gwybodaeth am eich swyddfa gofrestru etholiadol a'ch "
+"gorsaf bleidleisio leol"
+
+#: postcode_lookup/templates/includes/html_meta.html:13
+#: postcode_lookup/templates/includes/html_meta.html:19
+msgid ""
+"Find upcoming elections in your area, your polling station, candidates, "
+"and contact details for your local electoral services team"
+msgstr ""
+"Dewch o hyd i etholiadau sydd ar ddod yn eich ardal, eich gorsaf "
+"bleidleisio, ymgeiswyr, a manylion cyswllt eich tîm gwasanaethau "
+"etholiadol lleol"
+
 #: postcode_lookup/templates/includes/polling_station.html:3
 msgid "Your polling station"
 msgstr "Eich gorsaf bleidleisio"
@@ -70,7 +87,8 @@ msgid ""
 "you where to vote. If you haven’t got one, contact your local council."
 msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
-"dweud wrthych ble i bleidleisio. Os nad oes gennych un, cysylltwch â'ch cyngor lleol."
+"dweud wrthych ble i bleidleisio. Os nad oes gennych un, cysylltwch â'ch "
+"cyngor lleol."
 
 #: postcode_lookup/templates/includes/polling_station.html:17
 msgid "Opening times"

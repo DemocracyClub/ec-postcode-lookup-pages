@@ -2,24 +2,13 @@
 <html dir="ltr" lang="cy" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
  <head>
   <meta charset="utf-8"/>
-  <link href="https://www.electoralcommission.org.uk/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad/etholiadau-yn-eich-ardal-chi-adborth" rel="canonical"/>
   <meta content="no-referrer" name="referrer"/>
-  <meta content="When you enter your postcode, you should be able to find out if there are any upcoming elections in your area, and the contact details for your electoral registration team." name="description"/>
-  <meta content="https://www.electoralcommission.org.uk/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad/etholiadau-yn-eich-ardal-chi-adborth" property="og:url"/>
-  <meta content="Etholiadau yn eich ardal chi: Adborth" property="og:title"/>
-  <meta content="When you enter your postcode, you should be able to find out if there are any upcoming elections in your area, and the contact details for your electoral registration team." property="og:description"/>
-  <meta content="summary" name="twitter:card"/>
-  <meta content="When you enter your postcode, you should be able to find out if there are any upcoming elections in your area, and the contact details for your electoral registration team." name="twitter:description"/>
-  <meta content="Etholiadau yn eich ardal chi: Adborth" name="twitter:title"/>
-  <meta content="Drupal 9 (https://www.drupal.org)" name="Generator"/>
   <meta content="width" name="MobileOptimized"/>
   <meta content="true" name="HandheldFriendly"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://www.electoralcommission.org.uk/core/misc/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
-  <link href="https://www.electoralcommission.org.uk/i-am-a/voter/elections-your-area/elections-your-area-feedback" hreflang="en" rel="alternate"/>
-  <link href="https://www.electoralcommission.org.uk/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad/etholiadau-yn-eich-ardal-chi-adborth" hreflang="cy" rel="alternate"/>
   <title>
-   Etholiadau yn eich ardal chi: Adborth | Electoral Commission
+   {% block html_title %}{% endblock html_title %}
   </title>
   <!-- Google Tag Manager -->
   <script>
@@ -73,6 +62,9 @@
 }
   </style>
   {% endif %}
+  {% block html_meta %}
+                {% include "includes/html_meta.html" %}
+            {% endblock html_meta %}
  </head>
  <body class="t-your-vote-matters path-node page-node-type-page no-js" style="padding: 0px; margin: 0px;">
   <!-- Google Tag Manager (noscript) -->
@@ -862,7 +854,7 @@
             Cynnwys cysylltiedig
            </h2>
            <div>
-            <div class="js-view-dom-id-9dace236261db27a36f0bce5600d5e90bfd17a8f904286582a0e7c388c96d853">
+            <div class="js-view-dom-id-7aee8ce7138aaa8ad7550fd55f6e88dde28dda88063c55521c3fd73a323b61cc">
              <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
               <div class="l-grid__item col-1">
                <article about="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad" class="c-teaser" typeof="schema:WebPage">
