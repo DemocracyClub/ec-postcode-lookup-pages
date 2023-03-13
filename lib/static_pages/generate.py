@@ -47,6 +47,7 @@ host = os.environ.get("FQDN", "www.electoralcommission.org.uk")
 request_headers = {
     "HOST": host,
     "X-Forwarded-Host": os.environ.get("X_FORWARDED_HOST", host),
+    "X-Forwarded-Proto": "https",
 }
 
 with uvicorn_context() as root_url:
