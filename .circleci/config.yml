@@ -16,6 +16,10 @@ jobs:
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
       - run: pipenv install --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
+      - run: pipenv requirements > postcode_lookup/requirements.txt
+      - persist_to_workspace:
+          root: ~/repo/
+          paths: [ postcode_lookup/requirements.txt ]
 
       - save_cache:
           when: on_success
