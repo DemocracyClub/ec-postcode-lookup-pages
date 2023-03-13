@@ -95,7 +95,7 @@ class i18nMiddleware:
                 scope["base_template"] = "base.html"
                 scope["current_language"] = "en"
 
-        await self.app(scope, receive, send)
+        return await self.app(scope, receive, send)
 
 
 class ForwardedForMiddleware:
