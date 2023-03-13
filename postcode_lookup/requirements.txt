@@ -16,4 +16,4 @@ sniffio==1.3.0 ; python_version >= '3.7'
 starlette[jinja2]==0.26.0.post1
 typing-extensions==4.4.0 ; python_version >= '3.7'
 https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/0.0.1.zip
-dateparser==1.1.5
+dateparser==1.1.7
