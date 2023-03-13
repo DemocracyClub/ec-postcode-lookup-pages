@@ -43,8 +43,10 @@ STATIC_URLS = [
 
 root_path = Path(__file__).parent.absolute() / "build/"
 
+host = os.environ.get("FQDN", "www.electoralcommission.org.uk")
 request_headers = {
-    "HOST": os.environ.get("FQDN", "www.electoralcommission.org.uk")
+    "HOST": host,
+    "X-Forwarded-Host": os.environ.get("X_FORWARDED_HOST", host),
 }
 
 with uvicorn_context() as root_url:

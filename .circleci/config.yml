@@ -129,6 +129,7 @@ jobs:
           name: "Export parameter store env vars"
           command: |
             echo "export FQDN=`aws ssm get-parameter --query Parameter.Value --name 'FQDN' --output text`" >> "$BASH_ENV"
+            echo "export X_FORWARDED_HOST=`aws ssm get-parameter --query Parameter.Value --name 'XForwardedForHost' --output text`" >> "$BASH_ENV"
       - run:
           name: "Update failover page"
           command: |
