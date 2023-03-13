@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-starlette = {extras = ["jinja2"], version = "*"}
+starlette = {extras = ["jinja2"], version = "0.26.0"}
 jinja2 = "*"
 pydantic = "*"
 mangum = "==0.15.0"
