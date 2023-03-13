@@ -39,7 +39,7 @@ def test_get_url(respx_mock):
 
 def test_get_postcode_endpoint(respx_mock, app_client):
     respx_mock.get(
-        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=foo&utm_source=ec_postcode_lookup"
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup"
     ).mock(return_value=httpx.Response(200, json=RootModel().dict()))
     resp = app_client.get(
         app_client.app.url_path_for("live_postcode_en"),

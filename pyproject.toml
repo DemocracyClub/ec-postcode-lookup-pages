@@ -7,7 +7,6 @@ ignore = ["E501"]
 extend-select = [
     "I",
     "C4",
-    "TCH",
     "SIM",
     "Q003",
     "RET",

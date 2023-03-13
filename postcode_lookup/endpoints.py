@@ -1,4 +1,5 @@
 import functools
+import os
 
 from dc_api_client import (
     BaseAPIClient,
@@ -51,7 +52,9 @@ async def base_postcode_endpoint(
         return Response(status_code=400)
 
     try:
-        api_response = backend(api_key="foo").get_postcode(postcode)
+        api_response = backend(
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+        ).get_postcode(postcode)
     except InvalidPostcodeException:
         return RedirectResponse(
             request.url_for(
@@ -91,7 +94,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
     uprn = request.path_params["uprn"]
     postcode = request.path_params["postcode"]
     try:
-        api_response = backend(api_key="foo").get_uprn(uprn)
+        api_response = backend(
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+        ).get_uprn(uprn)
     except InvalidUPRNException:
         return RedirectResponse(
             request.url_for(backend.URL_PREFIX + "_postcode_form_en")

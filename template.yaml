@@ -25,6 +25,11 @@ Parameters:
     Description: "The ARN of the cert to use"
     Type: AWS::SSM::Parameter::Value<String>
 
+  AppAPIKey:
+    Default: AppAPIKey
+    Description: "The DC aggregator API key"
+    Type: AWS::SSM::Parameter::Value<String>
+
 Resources:
   ECDeployerRole:
     Type: AWS::IAM::Role
@@ -53,6 +58,7 @@ Resources:
       Environment:
         Variables:
           FQDN: !Ref FQDN
+          API_KEY: !Ref AppAPIKey
       Events:
         HTTPRequests:
           Type: Api
