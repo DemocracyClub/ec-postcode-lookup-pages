@@ -54,7 +54,7 @@ Resources:
       CodeUri: postcode_lookup
       Handler: app.handler
       Runtime: python3.8
-      MemorySize: 128
+      MemorySize: 512
       Environment:
         Variables:
           FQDN: !Ref FQDN
