@@ -88,6 +88,16 @@ def remove_unwanted_content(soup: BeautifulSoup):
         soup.select_one(".c-translate-block__items"),
         "{% block language_picker %}{% endblock language_picker %}",
     )
+    _replace_content(
+        soup.select_one(
+            "#block-electoralcommission-views-block-related-content-taxonomy-related-2"
+        ),
+        """
+        {% block related_content %}
+        {% include "includes/related_content.html" %}
+        {% endblock related_content %}
+        """,
+    )
 
     return soup
 
@@ -194,6 +204,12 @@ def download_assets(soup, static_path, souce_url):
 
 
 def add_head_meta_blocks(soup: BeautifulSoup):
+    _replace_content(
+        soup.head.find("title"),
+        """{% block html_title %}
+        Elections in your area
+        {% endblock html_title %} | Electoral Commission""",
+    )
     head_elements: List[Tag] = soup.find("head").children
     for child in head_elements:
         if child.name == "meta":
@@ -219,10 +235,6 @@ def add_head_meta_blocks(soup: BeautifulSoup):
         ]:
             child.decompose()
             continue
-    _replace_content(
-        soup.head.find("title"),
-        """{% block html_title %}{% endblock html_title %}""",
-    )
 
     soup.head.append(
         BeautifulSoup(
@@ -243,7 +255,13 @@ shutil.rmtree(static_path.absolute(), ignore_errors=True)
 for template, config in TEMPLATES.items():
     template_path = project_path / "templates" / template
     req = httpx.get(config["source_url"])
-    soup = BeautifulSoup(req.text, "html.parser")
+    html_text = req.text
+    # The Welsh version of the site has a broken HTML tag that breaks Soup.
+    # Delete this before soup parsed it
+    html_text = html_text.replace(
+        "<link rel='dns-prefetch' href='https://fonts.googleapis.com'>", ""
+    )
+    soup = BeautifulSoup(html_text, "html.parser")
 
     assets = download_assets(soup, static_path, config["source_url"])
     soup = rewrite_urls(soup, config["source_url"])

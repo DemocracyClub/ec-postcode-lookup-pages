@@ -1,5 +1,17 @@
 {% extends request.base_template %}
 
+{% block html_title %}
+{% if api_response.dates %}
+        {% if api_response.dates|length > 1 %}
+            {% trans %}You have upcoming elections{% endtrans %}
+        {% else %}
+            {% trans %}You have an upcoming election{% endtrans %}
+        {% endif %}
+    {% else %}
+        {% trans %}There are no upcoming elections in your area{% endtrans %}
+    {% endif %}
+{% endblock html_title %}
+
 {% block page_title %}
     {% if api_response.dates %}
         {% if api_response.dates|length > 1 %}

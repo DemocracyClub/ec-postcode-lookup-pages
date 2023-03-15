@@ -8,7 +8,9 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://www.electoralcommission.org.uk/core/misc/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
   <title>
-   {% block html_title %}{% endblock html_title %}
+   {% block html_title %}
+        Elections in your area
+        {% endblock html_title %} | Electoral Commission
   </title>
   <!-- Google Tag Manager -->
   <script>
@@ -848,89 +850,9 @@
        </div>
        <div>
         <section aria-labelledby="block-electoralcommission-views-block-related-content-taxonomy-related-2-title" class="views-element-container" id="block-electoralcommission-views-block-related-content-taxonomy-related-2">
-         <div class="o-container">
-          <div class="o-container__padding">
-           <h2 id="block-electoralcommission-views-block-related-content-taxonomy-related-2-title">
-            Cynnwys cysylltiedig
-           </h2>
-           <div>
-            <div class="js-view-dom-id-7aee8ce7138aaa8ad7550fd55f6e88dde28dda88063c55521c3fd73a323b61cc">
-             <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
-              <div class="l-grid__item col-1">
-               <article about="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad" class="c-teaser" typeof="schema:WebPage">
-                <a class="c-teaser__link | js-teaser" href="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span property="schema:name">
-                     Gwybodaeth etholiadol
-                    </span>
-                   </span>
-                  </h3>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-2">
-               <article about="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/pleidleision-bersonol" class="c-teaser" typeof="schema:WebPage">
-                <a class="c-teaser__link | js-teaser" href="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/pleidleision-bersonol">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span property="schema:name">
-                     Pleidleisio'n bersonol
-                    </span>
-                   </span>
-                  </h3>
-                  <div class="c-teaser__desc">
-                   <span>
-                    Pleidleisio’n bersonol ar y diwrnod pleidleisio? Darganfyddwch ragor am yr hyn i’w ddisgwyl pan fyddwch yn mynd i’r orsaf bleidleisio.
-                   </span>
-                  </div>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-3">
-               <article about="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/am-beth-y-galla-i-bleidleisio" class="c-teaser">
-                <a class="c-teaser__link | js-teaser" href="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/am-beth-y-galla-i-bleidleisio">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span>
-                     Am beth y galla i bleidleisio?
-                    </span>
-                   </span>
-                  </h3>
-                  <div class="c-teaser__desc">
-                   <span>
-                    Darganfyddwch ragor am y mathau o etholiadau a gynhelir yn y DU.
-                   </span>
-                  </div>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-4">
-               <article about="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr" class="c-teaser">
-                <a class="c-teaser__link | js-teaser" href="/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span>
-                     Pleidleisiwr
-                    </span>
-                   </span>
-                  </h3>
-                 </div>
-                </a>
-               </article>
-              </div>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
+         {% block related_content %}
+        {% include "includes/related_content.html" %}
+        {% endblock related_content %}
         </section>
         <div id="block-feedbackform">
          <div class="o-container">

@@ -8,7 +8,9 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://www.electoralcommission.org.uk/core/misc/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
   <title>
-   {% block html_title %}{% endblock html_title %}
+   {% block html_title %}
+        Elections in your area
+        {% endblock html_title %} | Electoral Commission
   </title>
   <!-- Google Tag Manager -->
   <script>
@@ -877,94 +879,9 @@
        </div>
        <div>
         <section aria-labelledby="block-electoralcommission-views-block-related-content-taxonomy-related-2-title" class="views-element-container" id="block-electoralcommission-views-block-related-content-taxonomy-related-2">
-         <div class="o-container">
-          <div class="o-container__padding">
-           <h2 id="block-electoralcommission-views-block-related-content-taxonomy-related-2-title">
-            Related content
-           </h2>
-           <div>
-            <div class="js-view-dom-id-a2d64d69100fcb661f2e762f7b31fc4f92839ee5cbf85921d7822163cc2b7e8b">
-             <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
-              <div class="l-grid__item col-1">
-               <article about="/i-am-a/voter/your-election-information" class="c-teaser" typeof="schema:WebPage">
-                <a class="c-teaser__link | js-teaser" href="/i-am-a/voter/your-election-information">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span property="schema:name">
-                     Elections in your area
-                    </span>
-                   </span>
-                  </h3>
-                  <div class="c-teaser__desc">
-                   <span>
-                    Enter your postcode to find your electoral services team at your local council. You need to send your postal and proxy vote application forms to them.
-                   </span>
-                  </div>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-2">
-               <article about="/i-am-a/voter" class="c-teaser">
-                <a class="c-teaser__link | js-teaser" href="/i-am-a/voter">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span>
-                     Voter
-                    </span>
-                   </span>
-                  </h3>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-3">
-               <article about="/i-am-a/voter/voting-person" class="c-teaser" typeof="schema:WebPage">
-                <a class="c-teaser__link | js-teaser" href="/i-am-a/voter/voting-person">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span property="schema:name">
-                     Voting in person
-                    </span>
-                   </span>
-                  </h3>
-                  <div class="c-teaser__desc">
-                   <span>
-                    Voting in person on polling day? Learn more about what to expect when you go to the polling station.
-                   </span>
-                  </div>
-                 </div>
-                </a>
-               </article>
-              </div>
-              <div class="l-grid__item col-4">
-               <article about="/i-am-a/voter/types-elections" class="c-teaser">
-                <a class="c-teaser__link | js-teaser" href="/i-am-a/voter/types-elections">
-                 <div class="c-teaser__content">
-                  <h3 class="c-teaser__title">
-                   <span>
-                    <span>
-                     Types of elections
-                    </span>
-                   </span>
-                  </h3>
-                  <div class="c-teaser__desc">
-                   <span>
-                    Find out more about the types of elections in the UK.
-                   </span>
-                  </div>
-                 </div>
-                </a>
-               </article>
-              </div>
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
+         {% block related_content %}
+        {% include "includes/related_content.html" %}
+        {% endblock related_content %}
         </section>
         <div id="block-feedbackform">
          <div class="o-container">
