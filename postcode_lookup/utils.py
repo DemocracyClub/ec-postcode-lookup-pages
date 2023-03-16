@@ -6,7 +6,7 @@ import babel
 import dateparser
 import jinja2
 from babel.support import Translations
-from starlette.datastructures import Headers
+from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
 
@@ -30,12 +30,10 @@ def date_format(value):
     return babel.dates.format_datetime(date_obj, format)
 
 
-def translated_url(request: Request, name: str, **params: str) -> str:
-    query_string = request.query_params
+def translated_url(request: Request, name: str) -> URL:
     url = request.url_for(name, **request.scope["path_params"])
-
-    if query_string:
-        url.include_query_params(**query_string)
+    if query_string := request.query_params:
+        url = url.include_query_params(**query_string)
     return url
 
 
