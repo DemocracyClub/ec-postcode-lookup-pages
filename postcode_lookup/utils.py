@@ -15,6 +15,8 @@ def is_welsh(path: str) -> bool:
     """
     Returns True if the URL should be in welsh
     """
+
+    print(f"is_welsh function {path=}")
     return path.lstrip("/").startswith("cy")
 
 
