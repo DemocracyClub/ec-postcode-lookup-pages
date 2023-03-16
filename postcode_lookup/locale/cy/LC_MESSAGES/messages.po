@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-16 07:36+0000\n"
+"POT-Creation-Date: 2023-03-16 07:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -101,3 +101,4 @@ msgstr "Oriau agor"
 #, python-format
 msgid "%(ballot_date)s - 7am to 10pm"
 msgstr "%(ballot_date)s - 7am i 10pm"
+
