@@ -57,3 +57,15 @@ def test_screenshot_tested_urls(path, page, uvicorn_server):
     page.screenshot(
         path=f"test-reports/screenshots/{filename}.png", full_page=True
     )
+
+
+def test_query_params_in_translate_url(page, uvicorn_server):
+    page.goto(
+        url=str(
+            f"{uvicorn_server}/sandbox/polling-stations?postcode-search=AA11AA"
+        )
+    )
+
+    assert (
+        "/cy/sandbox/polling-stations?postcode-search=AA11AA" in page.content()
+    )
