@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-13 22:54+0000\n"
+"POT-Creation-Date: 2023-03-16 06:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "Elections in your area"
 msgstr "Gwybodaeth etholiadol"
 
-#: postcode_lookup/templates/index.html:25
+#: postcode_lookup/templates/index.html:26
 msgid "Enter your postcode"
 msgstr "Nodwch eich cod post"
 
-#: postcode_lookup/templates/index.html:30
+#: postcode_lookup/templates/index.html:31
 msgid ""
 "Enter your postcode to find contact details for the electoral services "
 "team at your local council and polling station details"
@@ -33,27 +33,30 @@ msgstr ""
 "Dewch o hyd i'ch gwybodaeth am eich swyddfa gofrestru etholiadol a'ch "
 "gorsaf bleidleisio leol"
 
-#: postcode_lookup/templates/index.html:35
+#: postcode_lookup/templates/index.html:36
 msgid "Enter a postcode"
 msgstr "Nodwch god post"
 
-#: postcode_lookup/templates/index.html:38
+#: postcode_lookup/templates/index.html:39
 msgid "Submit Postcode"
 msgstr "Cyflwyno cod post"
 
-#: postcode_lookup/templates/index.html:47
+#: postcode_lookup/templates/index.html:48
 msgid "Please enter a valid postcode"
 msgstr "Nodwch god post dilys"
 
 #: postcode_lookup/templates/result.html:6
+#: postcode_lookup/templates/result.html:18
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
 #: postcode_lookup/templates/result.html:8
+#: postcode_lookup/templates/result.html:20
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
 #: postcode_lookup/templates/result.html:11
+#: postcode_lookup/templates/result.html:23
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
 

@@ -1,0 +1,21 @@
+<div class="l-grid__item col-1">
+    <article about="{{ related_url }}" typeof="schema:WebPage" class="c-teaser">
+        <a href="{{ related_url }}" class="c-teaser__link | js-teaser">
+            <div class="c-teaser__content">
+                <h3 class="c-teaser__title">
+                    <span>
+                        <span property="schema:name">{{ related_title }}</span>
+                    </span>
+                </h3>
+
+                <div class="c-teaser__desc">
+                    <span>
+                        {{ related_description }}
+                    </span>
+
+                </div>
+            </div>
+
+        </a>
+    </article>
+</div>

@@ -1,0 +1,47 @@
+<section class="views-element-container" id="block-electoralcommission-views-block-related-content-taxonomy-related-2" aria-labelledby="block-electoralcommission-views-block-related-content-taxonomy-related-2-title">
+    <div class="o-container">
+        <div class="o-container__padding">
+
+            <h2 id="block-electoralcommission-views-block-related-content-taxonomy-related-2-title">Related content</h2>
+
+            <div>
+                <div class="js-view-dom-id-acc178f2bd619faed56de3856cb485835e35b28a3820021585d2a1a943ef8141">
+                    <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
+
+                        {% with
+                        related_title = "Register to vote",
+                        related_url="/i-am-a/voter/register-vote-and-update-your-details",
+                        related_description="All you need to register to vote is 5 minutes and your National Insurance number. Make sure you register to vote before the deadline for the elections in May."
+                                %}
+                            {% include "includes/single_related_content.html" %}
+                        {% endwith %}
+
+                        {% with
+                        related_title = "Apply to vote by post",
+                        related_url="/i-am-a/voter/apply-vote-post",
+                        related_description="Can't get to the polling station on polling day? Apply to vote by post by downloading and completing the application form."
+                                %}
+                            {% include "includes/single_related_content.html" %}
+                        {% endwith %}
+
+                        {% with
+                        related_title = "Apply to vote by proxy",
+                        related_url="/i-am-a/voter/apply-vote-proxy",
+                        related_description="Can't get to the polling station on polling day? Ask a trusted person to vote on your behalf and apply for a proxy vote."
+                                %}
+                            {% include "includes/single_related_content.html" %}
+                        {% endwith %}
+
+                        {% with
+                        related_title = "Voter ID requirement",
+                        related_url="/i-am-a/voter/voter-id",
+                        related_description="From 4 May 2023, voters in England will need to show photo ID to vote at polling stations in some elections."
+                                %}
+                            {% include "includes/single_related_content.html" %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
