@@ -30,12 +30,14 @@
                         <span>{{ org.phone }}</span>
                     </a>
                 </li>
+                {% if org.email %}
                 <li>
                     <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
                         <span class="visually-hidden">Email: </span>
                         <span>{{ org.email }}</span>
                     </a>
                 </li>
+                {% endif %}
                 <li>
                     <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
                         <span class="visually-hidden">Website: </span>
