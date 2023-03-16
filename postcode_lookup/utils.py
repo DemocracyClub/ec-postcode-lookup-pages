@@ -33,7 +33,7 @@ def date_format(value):
 def translated_url(request: Request, name: str) -> URL:
     url = request.url_for(name, **request.scope["path_params"])
     if query_string := request.query_params:
-        url = url.include_query_params(**query_string)
+        return url.include_query_params(**query_string)
     return url
 
 
