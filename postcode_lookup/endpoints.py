@@ -68,6 +68,8 @@ async def base_postcode_endpoint(
     template_name = "result.html"
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
+    loader = get_loader(request)
+    print(f"{loader.locale=}")
     return get_loader(request).TemplateResponse(template_name, context)
 
 
