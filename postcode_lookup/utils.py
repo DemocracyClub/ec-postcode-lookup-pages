@@ -51,7 +51,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
 
-        locale_dir = "postcode_lookup/locale"
+        locale_dir = Path(__file__).parent / "locale"
         list_of_desired_locales = [self.locale]
 
         translations = Translations.load(locale_dir, list_of_desired_locales)
