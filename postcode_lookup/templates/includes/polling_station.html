@@ -11,14 +11,14 @@
             <br>
         {% else %}
             <p>
-            {%trans %}You’ll get a poll card in the post before the election. This will tell you where to vote. If you haven’t got one, contact your local council.{% endtrans %}
+                {%trans %}You’ll get a poll card in the post before the election. This will tell you where to vote. If you haven’t got one, contact your local council.{% endtrans %}
             </p>
         {% endif %}
         <h3 class="o-type-h4">{% trans %}Opening times{% endtrans %}</h3>
         <ul class="u-list-reset">
             <li>
                 {% trans ballot_date=date.date|date_filter %}
-                {{ ballot_date }} - 7am to 10pm
+                    {{ ballot_date }} - 7am to 10pm
                 {% endtrans %}
             </li>
         </ul>

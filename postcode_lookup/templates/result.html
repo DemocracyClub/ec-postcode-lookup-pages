@@ -1,11 +1,16 @@
 {% extends request.base_template %}
 
 {% block html_title %}
-{% if api_response.dates %}
+    {% if api_response.dates %}
         {% if api_response.dates|length > 1 %}
             {% trans %}You have upcoming elections{% endtrans %}
         {% else %}
-            {% trans %}You have an upcoming election{% endtrans %}
+            {% if api_response.dates.0.notifications.0.type == "cancelled_election" %}
+                Cancelled election
+            {% else %}
+                {% trans %}You have an upcoming election{% endtrans %}
+            {% endif %}
+
         {% endif %}
     {% else %}
         {% trans %}There are no upcoming elections in your area{% endtrans %}
@@ -17,7 +22,11 @@
         {% if api_response.dates|length > 1 %}
             {% trans %}You have upcoming elections{% endtrans %}
         {% else %}
-            {% trans %}You have an upcoming election{% endtrans %}
+            {% if api_response.dates.0.notifications.0.type == "cancelled_election" %}
+                Cancelled election
+            {% else %}
+                {% trans %}You have an upcoming election{% endtrans %}
+            {% endif %}
         {% endif %}
     {% else %}
         {% trans %}There are no upcoming elections in your area{% endtrans %}
@@ -77,15 +86,19 @@
             <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
             <div class="dc-grid">
                 <div class="dc-ballot">
-                    <p>The following elections are happening on this day:</p>
+                    {% if not date.notifications.0.type == "cancelled_election" %}
+                        <p>The following elections are happening on this day:</p>
+                    {% endif %}
+
                     {% for ballot in date.ballots %}
                         {% include "includes/single_ballot.html" %}
                     {% endfor %}
                 </div>
-
-                <div class="dc-polling-station">
-                    {%  include "includes/polling_station.html" %}
-                </div>
+                {% if not date.notifications.0.type == "cancelled_election" %}
+                    <div class="dc-polling-station">
+                        {%  include "includes/polling_station.html" %}
+                    </div>
+                {% endif %}
             </div>
         {% else%}
             <p>You can register to vote at any time.

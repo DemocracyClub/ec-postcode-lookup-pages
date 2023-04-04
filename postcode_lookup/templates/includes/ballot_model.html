@@ -24,7 +24,7 @@
                 <li class=&quot;ballot__candidate&quot;>
                     {{ candidate.person.name }}
                     {% if ballot.metadata.cancelled_election.title == "Uncontested election" %}
-                    (elected unopposed)
+                        (elected unopposed)
                     {% endif %}
                     <br>
                     {{ candidate.party.party_name }}
