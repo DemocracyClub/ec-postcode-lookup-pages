@@ -17,13 +17,22 @@
 {% endif %}
 
 
-{% if ballot.candidates_verified and not ballot.cancelled %}
+{% if ballot.candidates_verified %}
+    {% if not ballot.cancelled or ballot.metadata.cancelled_election.title == "Uncontested election" %}
+        <ul class=&quot;u-list-reset ballot&quot;>
+            {% for candidate in ballot.candidates %}
+                <li class=&quot;ballot__candidate&quot;>
+                    {{ candidate.person.name }}
+                    {% if ballot.metadata.cancelled_election.title == "Uncontested election" %}
+                    (elected unopposed)
+                    {% endif %}
+                    <br>
+                    {{ candidate.party.party_name }}
+                </li>
+            {% endfor %}
+        </ul>
+        <p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/NE62EJ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; class=&quot;o-external-link&quot;>Who Can I Vote For <span class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your candidates</p>
+    {% endif %}
 
 
-    <ul class=&quot;u-list-reset ballot&quot;>
-        {% for candidate in ballot.candidates %}
-            <li class=&quot;ballot__candidate&quot;>{{ candidate.person.name }}<br>{{ candidate.party.party_name }}</li>
-        {% endfor %}
-    </ul>
-    <p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/NE62EJ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; class=&quot;o-external-link&quot;>Who Can I Vote For <span class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your candidates</p>
 {% endif %}
