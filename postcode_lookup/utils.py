@@ -6,6 +6,7 @@ import babel
 import dateparser
 import jinja2
 from babel.support import Translations
+from jinja2 import ChainableUndefined
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -46,6 +47,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env_options["extensions"] = [
             "jinja2.ext.i18n",
         ]
+        env_options["undefined"] = ChainableUndefined
         env = super()._create_env(directory, **env_options)
         env.filters["date_filter"] = date_format
         env.policies["ext.i18n.trimmed"] = True
