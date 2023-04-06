@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from endpoints import (
@@ -15,6 +16,20 @@ from starlette.middleware import Middleware
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 from utils import ForwardedForMiddleware, i18nMiddleware
+
+if sentry_dsn := os.environ.get("SENTRY_DSN"):
+    import sentry_sdk
+    from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
+    from sentry_sdk.integrations.starlette import StarletteIntegration
+
+    sentry_sdk.init(
+        dsn=sentry_dsn,
+        traces_sample_rate=0,
+        integrations=[
+            StarletteIntegration(transaction_style="endpoint"),
+            AwsLambdaIntegration(),
+        ],
+    )
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),

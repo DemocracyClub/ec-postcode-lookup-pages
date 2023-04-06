@@ -11,8 +11,7 @@ httpx = "0.23.1"
 babel = "==2.11.0"
 dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/0.0.5.zip"}
 dateparser = "==1.1.7"
-
-
+sentry-sdk = {extras = ["starlette"], version = "*"}
 
 [dev-packages]
 uvicorn = "*"
