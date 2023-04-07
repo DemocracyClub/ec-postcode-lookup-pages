@@ -29,6 +29,10 @@ Parameters:
     Default: AppAPIKey
     Description: "The DC aggregator API key"
     Type: AWS::SSM::Parameter::Value<String>
+  AppSentryDSN:
+    Default: SENTRY_DSN
+    Description: "The Sentry DSN"
+    Type: AWS::SSM::Parameter::Value<String>
 
 Resources:
   ECDeployerRole:
@@ -59,6 +63,7 @@ Resources:
         Variables:
           FQDN: !Ref FQDN
           API_KEY: !Ref AppAPIKey
+          SENTRY_DSN: !Ref AppSentryDSN
       Events:
         HTTPRequests:
           Type: Api
