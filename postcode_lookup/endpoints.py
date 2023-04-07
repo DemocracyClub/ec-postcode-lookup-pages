@@ -50,6 +50,8 @@ async def base_postcode_endpoint(
     postcode = request.query_params["postcode-search"]
     if postcode == "FA1LL":
         return Response(status_code=400)
+    if postcode == "FA2LL":
+        assert False
 
     try:
         api_response = backend(
