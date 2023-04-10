@@ -101,8 +101,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
         ).get_uprn(uprn)
     except InvalidUPRNException:
         return RedirectResponse(
-            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
-            + "?invalid-uprn=1"
+            request.url_for(
+                backend.URL_PREFIX + "_postcode_form_en"
+            ).include_query_params(**{"invalid-uprn": 1})
         )
     context = results_context(api_response)
     context["request"] = request
