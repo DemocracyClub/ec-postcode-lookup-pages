@@ -12,3 +12,7 @@ i18n_extract:
 .PHONY: i18n_compile
 i18n_compile:
 	pybabel compile -f -d postcode_lookup/locale/
+
+.PHONY: failover
+failover:
+	python failover/build.py
