@@ -67,6 +67,8 @@ async def base_postcode_endpoint(
     context["request"] = request
     context["postcode"] = postcode
     context["url_prefix"] = backend.URL_PREFIX
+    if api_response["recall_petitions"]:
+        context["recall_petitions"] = api_response["recall_petitions"]
     template_name = "result.html"
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
