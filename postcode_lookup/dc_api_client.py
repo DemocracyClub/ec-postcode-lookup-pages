@@ -50,7 +50,11 @@ class BaseAPIClient(ABC):
 
     @property
     def default_params(self) -> dict:
-        return {"auth_token": self.api_key, "utm_source": "ec_postcode_lookup"}
+        return {
+            "auth_token": self.api_key,
+            "utm_source": "ec_postcode_lookup",
+            "recall_petition": "1",
+        }
 
     def _get(self, endpoint, params=None):
         if not params:

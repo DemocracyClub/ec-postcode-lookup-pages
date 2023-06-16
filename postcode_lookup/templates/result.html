@@ -13,7 +13,11 @@
 
         {% endif %}
     {% else %}
-        {% trans %}There are no upcoming elections in your area{% endtrans %}
+        {% if parl_recall_petition %}
+            {% trans %}There is a recall petition in your area{% endtrans %}
+        {% else %}
+            {% trans %}There are no upcoming elections in your area{% endtrans %}
+        {% endif %}
     {% endif %}
 {% endblock html_title %}
 
@@ -29,7 +33,11 @@
             {% endif %}
         {% endif %}
     {% else %}
-        {% trans %}There are no upcoming elections in your area{% endtrans %}
+        {% if parl_recall_petition %}
+            {% trans %}There is a recall petition in your area{% endtrans %}
+        {% else %}
+            {% trans %}There are no upcoming elections in your area{% endtrans %}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
@@ -82,13 +90,17 @@
     </style>
 
     <div class="dc-container">
-    {% if api_response.dates %}
-    <p class="c-polling-station-slice">
-        You’ll need to take photo ID with you if you’re voting at the polling station.
-            <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
-                Check the list of accepted forms of photo ID</a>.
-    </p>
-    {% endif %}
+        {% if parl_recall_petition %}
+        {% include "includes/parl_recall_petition.html" %}
+        {% endif %}
+
+        {% if api_response.dates %}
+            <p class="c-polling-station-slice">
+                You’ll need to take photo ID with you if you’re voting at the polling station.
+                <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
+                    Check the list of accepted forms of photo ID</a>.
+            </p>
+        {% endif %}
 
         {% for date in api_response.dates %}
             <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
@@ -109,9 +121,11 @@
                 {% endif %}
             </div>
         {% else%}
+            {% if not parl_recall_petition %}
             <p>You can register to vote at any time.
                 <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
-            <p>If you need help registering, contact the electoral services team on:</p>
+            {% endif %}
+
         {% endfor %}
 
 

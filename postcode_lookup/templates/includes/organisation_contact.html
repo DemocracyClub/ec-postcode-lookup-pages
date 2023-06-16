@@ -4,6 +4,10 @@
 
 
             <h3 id="registration-services" class="o-type-h4">Get help with electoral registration</h3>
+
+            {% if parl_recall_petition %}
+            <p>The deadline to register to vote has passed for this recall petition.</p>
+            {% endif %}
             <p>
                 Send your postal and proxy vote applications to your local electoral registration team.
                 You can also contact them to find out if you’re on the electoral register,
