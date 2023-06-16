@@ -1,14 +1,14 @@
 <div class="dc-grid">
     <div class="dc-ballot">
-                <h2>Tuesday 20 June – 31st July</h2>
+        <h2>Tuesday 20 June – 31st July</h2>
 
         <p>A recall petition is the process by which an MP can lose their seat in the House of Commons.</p>
 
         <p>By signing a recall petition, you are saying you want your MP to lose their seat.
             You only need to sign the petition if you want to see your MP removed.</p>
 
-{#       TODO #}
-{#        <p><a href="#" style="text-decoration: underline;">Find out more about recall petitions.</a></p>#}
+        {#       TODO #}
+        {#        <p><a href="#" style="text-decoration: underline;">Find out more about recall petitions.</a></p>#}
 
         <p>You have six weeks to sign the petition at your signing place.</p>
         <p>You’ll need to take photo ID with you. <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
@@ -21,10 +21,17 @@
         <div class="polling-station__address">
             <div class="c-summary-box c-summary-box--grey">
                 <h3>Your signing place</h3>
-                <p>
-                    {{ parl_recall_petition.signing_station.address.replace("\n", "<br>")|safe }}<br>
-                    {{ parl_recall_petition.signing_station.postcode }}
-                </p>
+                {% if parl_recall_petition.signing_station %}
+                    <p>
+                        {{ parl_recall_petition.signing_station.address.replace("\n", "<br>")|safe }}<br>
+                        {{ parl_recall_petition.signing_station.postcode }}
+                    </p>
+                {% else %}
+                    <p>See <a href="https://www.southlanarkshire.gov.uk/info/200236/politicians/2156/recall_petition_-_rutherglen_and_hamilton_west_constituency" style="text-decoration: underline">
+                        South Lanarkshire's website</a> to find your signing place, or contact them using the details below.
+                    </p>
+                {% endif %}
+
 
 
                 <h3>Opening times</h3>
