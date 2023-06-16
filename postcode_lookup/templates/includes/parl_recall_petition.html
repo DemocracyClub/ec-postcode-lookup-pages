@@ -1,0 +1,48 @@
+<div class="dc-grid">
+    <div class="dc-ballot">
+                <h2>Tuesday 20 June – 31st July</h2>
+
+        <p>A recall petition is the process by which an MP can lose their seat in the House of Commons.</p>
+
+        <p>By signing a recall petition, you are saying you want your MP to lose their seat.
+            You only need to sign the petition if you want to see your MP removed.</p>
+
+{#       TODO #}
+{#        <p><a href="#" style="text-decoration: underline;">Find out more about recall petitions.</a></p>#}
+
+        <p>You have six weeks to sign the petition at your signing place.</p>
+        <p>You’ll need to take photo ID with you. <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
+            Check the list of accepted forms of photo ID</a>.</p>
+        <p>Registered postal voters will be sent a signing sheet by post.</p>
+
+
+    </div>
+    <div class="dc-polling-station">
+        <div class="polling-station__address">
+            <div class="c-summary-box c-summary-box--grey">
+                <h3>Your signing place</h3>
+                <p>
+                    {{ parl_recall_petition.signing_station.address.replace("\n", "<br>")|safe }}<br>
+                    {{ parl_recall_petition.signing_station.postcode }}
+                </p>
+
+
+                <h3>Opening times</h3>
+                <p>Monday to Friday — 9am – 5pm</p>
+                <p>There are extended opening hours on the following dates:</p>
+                <ul>
+                    <li>Monday 26 June <br> 9am – 8pm</li>
+                    <li>Saturday 1 July <br> 9am – 1pm</li>
+                    <li>Tuesday 4 July <br> 9am – 8pm</li>
+                    <li>Wednesday 12 July <br> 9am – 8pm</li>
+                    <li>Thursday 20 July <br> 9am – 8pm</li>
+                    <li>Saturday 22 July  <br> 9am – 1pm</li>
+                    <li>Thursday 27 July <br> 9am – 8pm</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
