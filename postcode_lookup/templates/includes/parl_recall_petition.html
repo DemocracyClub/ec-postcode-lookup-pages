@@ -1,6 +1,9 @@
 <div class="dc-grid">
     <div class="dc-ballot">
-        <h2>Tuesday 20 June – 31st July</h2>
+        {% if parl_recall_petition.signing_start and parl_recall_petition.signing_end %}
+        <h2>{{ parl_recall_petition.signing_start.strftime('%-d %B %Y') }} – {{ parl_recall_petition.signing_end.strftime('%-d %B %Y') }}</h2>
+        {% endif %}
+
 
         <p>A recall petition is the process by which an MP can lose their seat in the House of Commons.</p>
 
@@ -27,8 +30,8 @@
                         {{ parl_recall_petition.signing_station.postcode }}
                     </p>
                 {% else %}
-                    <p>See <a href="https://www.southlanarkshire.gov.uk/info/200236/politicians/2156/recall_petition_-_rutherglen_and_hamilton_west_constituency" style="text-decoration: underline">
-                        South Lanarkshire's website</a> to find your signing place, or contact them using the details below.
+                    <p>See <a href="https://www.northnorthants.gov.uk/elections-and-voting/recall-petition-wellingborough-constituency" style="text-decoration: underline">
+                        North Northamptonshire's website</a> to find your signing place, or contact them using the details below.
                     </p>
                 {% endif %}
 
@@ -36,16 +39,7 @@
 
                 <h3>Opening times</h3>
                 <p>Monday to Friday — 9am – 5pm</p>
-                <p>There are extended opening hours on the following dates:</p>
-                <ul>
-                    <li>Monday 26 June <br> 9am – 8pm</li>
-                    <li>Saturday 1 July <br> 9am – 1pm</li>
-                    <li>Tuesday 4 July <br> 9am – 8pm</li>
-                    <li>Wednesday 12 July <br> 9am – 8pm</li>
-                    <li>Thursday 20 July <br> 9am – 8pm</li>
-                    <li>Saturday 22 July  <br> 9am – 1pm</li>
-                    <li>Thursday 27 July <br> 9am – 8pm</li>
-                </ul>
+                <p>There are extended opening hours of 9am until 8pm on Monday 13 November 2023</p>
             </div>
         </div>
 

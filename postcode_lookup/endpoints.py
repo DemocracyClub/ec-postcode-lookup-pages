@@ -1,6 +1,7 @@
 import functools
 import os
 
+from dateutil.parser import parse
 from dc_api_client import (
     BaseAPIClient,
     InvalidPostcodeException,
@@ -69,6 +70,14 @@ async def base_postcode_endpoint(
     context["url_prefix"] = backend.URL_PREFIX
     if api_response.get("parl_recall_petition"):
         context["parl_recall_petition"] = api_response["parl_recall_petition"]
+        if "signing_start" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_start"] = parse(
+                context["parl_recall_petition"]["signing_start"]
+            )
+        if "signing_end" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_end"] = parse(
+                context["parl_recall_petition"]["signing_end"]
+            )
     template_name = "result.html"
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
