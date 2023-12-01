@@ -189,21 +189,21 @@ workflows:
           requires:
             - sam_build
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
       - static_deploy:
           name: static_deploy_development
           dc-environment: development
           requires:
             - sam_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
       - smoke_test:
           name: smoke_test_development
           dc-environment: development
           requires:
             - static_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
 
 
       - sam_deploy:
