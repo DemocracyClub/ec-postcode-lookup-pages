@@ -34,10 +34,17 @@ if sentry_dsn := os.environ.get("SENTRY_DSN"):
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),
     Route("/failover", endpoint=failover, name="failover"),
+    # TODO: Remove this once the new URL format is live
     Route(
         "/i-am-a/voter/your-election-information",
         endpoint=live_postcode_form,
         name="live_postcode_form_en",
+    ),
+    # New root URL format to be implemented soon
+    Route(
+        "/voting-elections/your-election-information",
+        endpoint=live_postcode_form,
+        name="live_postcode_form_en_new",
     ),
     Route(
         "/polling-stations/address/{postcode}/{uprn}",
@@ -49,10 +56,17 @@ routes = [
         endpoint=live_postcode_view,
         name="live_postcode_en",
     ),
+    # TODO: Remove this once the new URL format is live
     Route(
         "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
         endpoint=live_postcode_form,
         name="live_postcode_form_cy",
+    ),
+    # New root URL format to be implemented soon
+    Route(
+        "/cy/pleidleisio-etholiadau/gwybodaeth-etholiad",
+        endpoint=live_postcode_form,
+        name="live_postcode_form_cy_new",
     ),
     Route(
         "/cy/polling-stations/{postcode}/{uprn}",
