@@ -93,7 +93,7 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
-      - run: pip install aws-sam-cli==1.71.0
+      - run: pip install aws-sam-cli
 
       - run:
           name: "pipenv run sam deploy"
