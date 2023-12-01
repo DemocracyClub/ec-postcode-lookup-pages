@@ -66,9 +66,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/
-      - run: pip install --upgrade pip
-      - run: pip install aws-sam-cli==1.71.0
-      - run: pip install -r postcode_lookup/requirements.txt
+#      - run: pip install --upgrade pip
+#      - run: pip install -r postcode_lookup/requirements.txt
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
