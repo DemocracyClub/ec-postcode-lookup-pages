@@ -2,7 +2,6 @@ repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-    -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: debug-statements
     -   id: trailing-whitespace
@@ -18,3 +17,8 @@ repos:
   hooks:
     - id: ruff
       args: [--fix, --exit-non-zero-on-fix, --extend-exclude, TCH]
+-   repo: https://github.com/awslabs/cfn-python-lint
+    rev: v0.83.3 # The version of cfn-lint to use
+    hooks:
+    -   id: cfn-python-lint
+        files: template.yaml$
