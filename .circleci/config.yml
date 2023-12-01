@@ -6,13 +6,13 @@ orbs:
 jobs:
   install_and_update_dependencies:
     docker:
-      - image: cimg/python:3.8.12-browsers
+      - image: cimg/python:3.10-browsers
     working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
       - run: pipenv install --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
@@ -25,11 +25,11 @@ jobs:
           when: on_success
           paths:
             - ~/.local/share/virtualenvs/
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+          key: v2-dependencies-{{ checksum "Pipfile.lock" }}
 
   test:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
         environment:
           CIRCLECI: true
           PGHOST: 127.0.0.1
@@ -40,7 +40,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - run:
           name: Install Playwright-deps
@@ -60,7 +60,7 @@ jobs:
 
   sam_build:
     docker:
-      - image: amazon/aws-sam-cli-build-image-python3.8:latest
+      - image: public.ecr.aws/sam/build-python3.10:latest
     working_directory: ~/repo
     steps:
       - checkout
@@ -76,7 +76,7 @@ jobs:
 
   sam_deploy:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -115,7 +115,7 @@ jobs:
 
   static_deploy:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -126,7 +126,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
@@ -152,7 +152,7 @@ jobs:
 
   smoke_test:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -163,7 +163,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
