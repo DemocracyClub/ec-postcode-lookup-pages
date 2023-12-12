@@ -57,7 +57,7 @@ Resources:
       Timeout: 60
       CodeUri: postcode_lookup
       Handler: app.handler
-      Runtime: python3.8
+      Runtime: python3.10
       MemorySize: 512
       Environment:
         Variables:

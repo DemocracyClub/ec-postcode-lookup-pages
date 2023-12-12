@@ -1,23 +1,41 @@
 {% if request.scope.current_language == "cy" %}
-    <li class="en o-link-animate">
-        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link">
-            <span>English</span>
-        </a>
-    </li>
-    <li class="cy o-link-animate is-active">
-        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link is-active">
-            <span>Cymraeg</span>
-        </a>
-    </li>
+
+    <h2 class="visually-hidden">Language selection</h2>
+    <button class="o-button o-button--primary o-button--keyline-blue o-button--no-icon-transition" data-js-language-switcher-btn="" type="button" aria-expanded="false" aria-controls="language-switcher-dropdown"><span data-js-language-switcher-btn-label="">English</span><svg class="o-icon o-icon--small" focusable="false" role="presentation">
+            <use xlink:href="#icon-chevron-filled"></use>
+        </svg>
+    </button>
+
+    <div id="language-switcher-dropdown" class="c-language-switcher__dropdown" aria-hidden="true">
+
+        <nav><ul class="links c-language-switcher__menu">
+            <li data-drupal-link-system-path="node/927" class="en is-active"><a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link" lang="en" hreflang="en" data-drupal-link-system-path="node/927"><span>English</span></a></li>
+            <li data-drupal-link-system-path="node/927" class="cy is-active"><a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link is-active" lang="cy" hreflang="cy" data-drupal-link-system-path="node/927"><span>Cymraeg</span></a></li>
+        </ul>
+        </nav>
+    </div>
+
 {% else %}
-    <li class="en o-link-animate is-active">
-        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link is-active">
-            <span>English</span>
-        </a>
-    </li>
-    <li class="cy o-link-animate">
-        <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link">
-            <span>Cymraeg</span>
-        </a>
-    </li>
+
+
+    <h2 class="visually-hidden">Language selection</h2>
+    <button class="o-button o-button--primary o-button--keyline-blue o-button--no-icon-transition" data-js-language-switcher-btn="" type="button" aria-expanded="false" aria-controls="language-switcher-dropdown"><span data-js-language-switcher-btn-label="">English</span><svg class="o-icon o-icon--small" focusable="false" role="presentation">
+            <use xlink:href="#icon-chevron-filled"></use>
+        </svg>
+    </button>
+
+    <div id="language-switcher-dropdown" class="c-language-switcher__dropdown" aria-hidden="true">
+
+        <nav><ul class="links c-language-switcher__menu">
+            <li data-drupal-link-system-path="node/927" class="en is-active"><a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_en") }}" class="language-link is-active" lang="en" hreflang="en" data-drupal-link-system-path="node/927"><span>English</span></a></li>
+            <li data-drupal-link-system-path="node/927" class="cy is-active">
+                <a href="{{ translated_url(request, url_prefix + "_" + route_name  +"_cy") }}" class="language-link" lang="cy" hreflang="cy" data-drupal-link-system-path="node/927">
+                    <span>Cymraeg</span>
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </div>
+
+
 {% endif %}

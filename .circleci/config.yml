@@ -6,13 +6,13 @@ orbs:
 jobs:
   install_and_update_dependencies:
     docker:
-      - image: cimg/python:3.8.12-browsers
+      - image: cimg/python:3.10-browsers
     working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
       - run: pipenv install --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
@@ -25,11 +25,11 @@ jobs:
           when: on_success
           paths:
             - ~/.local/share/virtualenvs/
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+          key: v2-dependencies-{{ checksum "Pipfile.lock" }}
 
   test:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
         environment:
           CIRCLECI: true
           PGHOST: 127.0.0.1
@@ -40,7 +40,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - run:
           name: Install Playwright-deps
@@ -60,15 +60,14 @@ jobs:
 
   sam_build:
     docker:
-      - image: amazon/aws-sam-cli-build-image-python3.8:latest
+      - image: public.ecr.aws/sam/build-python3.10:latest
     working_directory: ~/repo
     steps:
       - checkout
       - attach_workspace:
           at: ~/repo/
-      - run: pip install --upgrade pip
-      - run: pip install aws-sam-cli==1.71.0
-      - run: pip install -r postcode_lookup/requirements.txt
+#      - run: pip install --upgrade pip
+#      - run: pip install -r postcode_lookup/requirements.txt
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
@@ -76,7 +75,7 @@ jobs:
 
   sam_deploy:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -94,7 +93,7 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
-      - run: pip install aws-sam-cli==1.71.0
+      - run: pip install aws-sam-cli
 
       - run:
           name: "pipenv run sam deploy"
@@ -115,7 +114,7 @@ jobs:
 
   static_deploy:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -126,7 +125,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
@@ -152,7 +151,7 @@ jobs:
 
   smoke_test:
     docker:
-      - image: cimg/python:3.8.12
+      - image: cimg/python:3.10
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -163,7 +162,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
@@ -190,21 +189,21 @@ workflows:
           requires:
             - sam_build
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
       - static_deploy:
           name: static_deploy_development
           dc-environment: development
           requires:
             - sam_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
       - smoke_test:
           name: smoke_test_development
           dc-environment: development
           requires:
             - static_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, add-new-urls ] } }
 
 
       - sam_deploy:

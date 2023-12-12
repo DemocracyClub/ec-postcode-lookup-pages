@@ -2,7 +2,7 @@
 
 # Installation
 
-Python >= 3.8 required.
+Python >= 3.10 required.
 
 Make a new virtualenv.
 
