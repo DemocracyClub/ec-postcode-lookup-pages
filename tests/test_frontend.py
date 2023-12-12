@@ -8,8 +8,8 @@ URLS_TO_CHECK = [
     "/i-am-a/voter/your-election-information",
     "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
     # New URLS
-    "/voting-elections/your-election-information",
-    "/cy/pleidleisio-etholiadau/gwybodaeth-etholiad",
+    "/voting-and-elections/your-election-information",
+    "/cy/pleidleisio-ac-etholiadau/gwybodaeth-etholiad",
     "/sandbox/polling-stations?postcode-search=AA11AA",
     "/cy/sandbox/polling-stations?postcode-search=AA11AA",
 ]

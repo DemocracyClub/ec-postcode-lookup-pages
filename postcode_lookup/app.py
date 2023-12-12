@@ -42,7 +42,7 @@ routes = [
     ),
     # New root URL format to be implemented soon
     Route(
-        "/voting-elections/your-election-information",
+        "/voting-and-elections/your-election-information",
         endpoint=live_postcode_form,
         name="live_postcode_form_en_new",
     ),
@@ -64,7 +64,7 @@ routes = [
     ),
     # New root URL format to be implemented soon
     Route(
-        "/cy/pleidleisio-etholiadau/gwybodaeth-etholiad",
+        "/cy/pleidleisio-ac-etholiadau/gwybodaeth-etholiad",
         endpoint=live_postcode_form,
         name="live_postcode_form_cy_new",
     ),
