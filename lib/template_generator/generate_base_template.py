@@ -85,19 +85,19 @@ def remove_unwanted_content(soup: BeautifulSoup):
     )
 
     _replace_content(
-        soup.select_one(".c-translate-block__items"),
+        soup.select_one(".c-language-switcher"),
         "{% block language_picker %}{% endblock language_picker %}",
     )
-    _replace_content(
-        soup.select_one(
-            "#block-electoralcommission-views-block-related-content-taxonomy-related-2"
-        ),
-        """
-        {% block related_content %}
-        {% include "includes/related_content.html" %}
-        {% endblock related_content %}
-        """,
-    )
+    # _replace_content(
+    #     soup.select_one(
+    #         "#block-electoralcommission-views-block-related-content-taxonomy-related-2"
+    #     ),
+    #     """
+    #     {% block related_content %}
+    #     {% include "includes/related_content.html" %}
+    #     {% endblock related_content %}
+    #     """,
+    # )
 
     return soup
 
