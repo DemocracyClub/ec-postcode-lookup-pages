@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "386684352f679573253d88855f31fc4be060d094697e2076e80d89ecd7f0427d"
+            "sha256": "5e54dda33fdd29f0ce316648b00c02bdb2b284cc35a50d9c88cfa2cca4aa43a2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -43,12 +43,12 @@
         },
         "dateparser": {
             "hashes": [
-                "sha256:fbed8b738a24c9cd7f47c4f2089527926566fe539e1a06125eddba75917b1eef",
-                "sha256:ff047d9cffad4d3113ead8ec0faf8a7fc43bab7d853ac8715e071312b53c465a"
+                "sha256:0b21ad96534e562920a0083e97fd45fa959882d4162acc358705144520a35830",
+                "sha256:7975b43a4222283e0ae15be7b4999d08c9a70e2d378ac87385b1ccf2cffbbb30"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.7'",
-            "version": "==1.1.7"
+            "version": "==1.2.0"
         },
         "dc-response-builder": {
             "file": "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/0.0.5.zip"

@@ -10,7 +10,7 @@ mangum = "==0.15.0"
 httpx = "0.23.1"
 babel = "==2.11.0"
 dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/0.0.5.zip"}
-dateparser = "==1.1.7"
+dateparser = "==1.2.0"
 sentry-sdk = {extras = ["starlette"], version = "*"}
 urllib3 = "<2"
 
