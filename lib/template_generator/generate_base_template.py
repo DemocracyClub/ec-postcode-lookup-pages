@@ -10,10 +10,10 @@ from bs4 import BeautifulSoup, Tag
 
 TEMPLATES = {
     "base.html": {
-        "source_url": "https://www.electoralcommission.org.uk/i-am-a/voter/elections-your-area/elections-your-area-feedback"
+        "source_url": "https://www.electoralcommission.org.uk/voting-and-elections/who-can-vote"
     },
     "base_cy.html": {
-        "source_url": "https://www.electoralcommission.org.uk/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad/etholiadau-yn-eich-ardal-chi-adborth"
+        "source_url": "https://www.electoralcommission.org.uk/cy/pleidleisio-ac-etholiadau/pwy-syn-gallu-pleidleisio"
     },
 }
 
@@ -71,11 +71,18 @@ def _replace_content(el, content):
 
 
 def remove_unwanted_content(soup: BeautifulSoup):
-    soup.select_one("#block-locationselector").replaceWith("")
+    location_selectors = soup.select("#block-locationselector")
+    if location_selectors:
+        for location_selector in location_selectors:
+            location_selector.replaceWith("")
+
     _replace_content(
-        soup.main.select_one(".l-main-content").parent,
+        soup.main.select_one("#block-electoralcommission-mainpagecontent"),
         """
         {% block content %}{% endblock content %}
+        {% block related_content %}
+        {% include "includes/related_content.html" %}
+        {% endblock related_content %}
         """,
     )
 
