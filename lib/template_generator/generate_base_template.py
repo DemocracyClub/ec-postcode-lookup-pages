@@ -10,10 +10,10 @@ from bs4 import BeautifulSoup, Tag
 
 TEMPLATES = {
     "base.html": {
-        "source_url": "https://www.electoralcommission.org.uk/i-am-a/voter/elections-your-area/elections-your-area-feedback"
+        "source_url": "https://www.electoralcommission.org.uk/voting-and-elections/who-can-vote"
     },
     "base_cy.html": {
-        "source_url": "https://www.electoralcommission.org.uk/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad/etholiadau-yn-eich-ardal-chi-adborth"
+        "source_url": "https://www.electoralcommission.org.uk/cy/pleidleisio-ac-etholiadau/pwy-syn-gallu-pleidleisio"
     },
 }
 
@@ -71,11 +71,18 @@ def _replace_content(el, content):
 
 
 def remove_unwanted_content(soup: BeautifulSoup):
-    soup.select_one("#block-locationselector").replaceWith("")
+    location_selectors = soup.select("#block-locationselector")
+    if location_selectors:
+        for location_selector in location_selectors:
+            location_selector.replaceWith("")
+
     _replace_content(
-        soup.main.select_one(".l-main-content").parent,
+        soup.main.select_one("#block-electoralcommission-mainpagecontent"),
         """
         {% block content %}{% endblock content %}
+        {% block related_content %}
+        {% include "includes/related_content.html" %}
+        {% endblock related_content %}
         """,
     )
 
@@ -85,19 +92,19 @@ def remove_unwanted_content(soup: BeautifulSoup):
     )
 
     _replace_content(
-        soup.select_one(".c-translate-block__items"),
+        soup.select_one(".c-language-switcher"),
         "{% block language_picker %}{% endblock language_picker %}",
     )
-    _replace_content(
-        soup.select_one(
-            "#block-electoralcommission-views-block-related-content-taxonomy-related-2"
-        ),
-        """
-        {% block related_content %}
-        {% include "includes/related_content.html" %}
-        {% endblock related_content %}
-        """,
-    )
+    # _replace_content(
+    #     soup.select_one(
+    #         "#block-electoralcommission-views-block-related-content-taxonomy-related-2"
+    #     ),
+    #     """
+    #     {% block related_content %}
+    #     {% include "includes/related_content.html" %}
+    #     {% endblock related_content %}
+    #     """,
+    # )
 
     return soup
 
@@ -254,7 +261,8 @@ shutil.rmtree(static_path.absolute(), ignore_errors=True)
 
 for template, config in TEMPLATES.items():
     template_path = project_path / "templates" / template
-    req = httpx.get(config["source_url"])
+    req = httpx.get(config["source_url"], timeout=300)
+    req.raise_for_status()
     html_text = req.text
     # The Welsh version of the site has a broken HTML tag that breaks Soup.
     # Delete this before soup parsed it
