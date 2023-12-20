@@ -156,7 +156,9 @@ def rewrite_css_urls(asset_text, souce_url):
         cleaned_url = re.sub('"', "", url)
         if cleaned_url[0] in ["/", ".."]:
             absolute_url = urljoin(souce_url, cleaned_url)
-            asset_text = asset_text.replace(cleaned_url, absolute_url)
+            asset_text = asset_text.replace(
+                f"({cleaned_url})", f"({absolute_url})"
+            )
     return asset_text
 
 
