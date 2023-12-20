@@ -196,7 +196,7 @@ def download_assets(soup, static_path, souce_url):
                     f.write(asset_text)
                 if file_type == "css":
                     f.write(
-                        """.c-social .o-external-link::after {display: none}"""
+                        """.c-social .o-external-link::after {display: none}\n"""
                     )
             with open(path, "r") as final_file:
                 hash = hashlib.md5(final_file.read().encode("utf8")).hexdigest()
