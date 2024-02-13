@@ -3,6 +3,9 @@ from abc import ABC, abstractmethod
 from urllib.parse import urljoin
 
 import httpx
+from response_builder.v1.generated_responses.root_responses import (
+    SINGLE_LOCAL_FUTURE_BALLOT_WITH_POLLING_STATION,
+)
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_BASE_URL, SANDBOX_POSTCODES
 
@@ -109,3 +112,16 @@ class SandboxAPIBackend(BaseAPIClient):
     def get_uprn(self, uprn: str) -> dict:
         response_dict = self._get(endpoint=f"sandbox/address/{uprn}/")
         return RootModel.parse_obj(response_dict.json()).dict()
+
+
+class MockAPIBackend(BaseAPIClient):
+    def get_uprn(self, uprn: str) -> dict:
+        pass
+
+    def get_postcode(self, postcode: str) -> dict:
+        resp = SINGLE_LOCAL_FUTURE_BALLOT_WITH_POLLING_STATION.build().dict()
+        print(resp)
+        return resp
+
+    POSTCODES = ["SW1A 1AA"]
+    URL_PREFIX = "mock"
