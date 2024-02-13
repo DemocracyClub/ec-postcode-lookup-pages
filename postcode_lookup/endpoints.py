@@ -7,6 +7,7 @@ from dc_api_client import (
     InvalidPostcodeException,
     InvalidUPRNException,
     LiveAPIBackend,
+    MockAPIBackend,
     SandboxAPIBackend,
 )
 from response_builder.v1.models.base import RootModel
@@ -27,6 +28,9 @@ live_postcode_form = functools.partial(
 )
 sandbox_postcode_form = functools.partial(
     base_postcode_form, backend=SandboxAPIBackend
+)
+mock_postcode_form = functools.partial(
+    base_postcode_form, backend=MockAPIBackend
 )
 
 
@@ -96,9 +100,9 @@ live_postcode_view = functools.partial(
 sandbox_postcode_view = functools.partial(
     base_postcode_endpoint, backend=SandboxAPIBackend
 )
-
-
-# TODO: mock_postcode_view = functools.partial(base_postcode_endpoint, backend=MockAPIBackend)
+mock_postcode_view = functools.partial(
+    base_postcode_endpoint, backend=MockAPIBackend
+)
 
 
 async def base_uprn_endpoint(request: Request, backend=None):

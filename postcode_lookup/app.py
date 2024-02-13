@@ -6,6 +6,7 @@ from endpoints import (
     live_postcode_form,
     live_postcode_view,
     live_uprn_view,
+    mock_postcode_view,
     redirect_root_to_postcode_form,
     sandbox_postcode_form,
     sandbox_postcode_view,
@@ -96,6 +97,27 @@ routes = [
         endpoint=sandbox_uprn_view,
         name="sandbox_uprn_cy",
     ),
+    # Mock
+    Route(
+        "/mock/polling-stations",
+        endpoint=mock_postcode_view,
+        name="mock_postcode_en",
+    ),
+    Route(
+        "/cy/mock/polling-stations",
+        endpoint=mock_postcode_view,
+        name="mock_postcode_cy",
+    ),
+    # Route(
+    #     "/mock/polling-stations/{postcode}/{uprn}",
+    #     endpoint=sandbox_uprn_view,
+    #     name="sandbox_uprn_en",
+    # ),
+    # Route(
+    #     "/cy/sandbox/polling-stations/{postcode}/{uprn}",
+    #     endpoint=sandbox_uprn_view,
+    #     name="sandbox_uprn_cy",
+    # ),
     Mount(
         "/themes/",
         app=StaticFiles(directory=Path(__file__).parent / "themes"),
