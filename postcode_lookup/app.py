@@ -7,6 +7,7 @@ from endpoints import (
     live_postcode_view,
     live_uprn_view,
     redirect_root_to_postcode_form,
+    sandbox_postcode_form,
     sandbox_postcode_view,
     sandbox_uprn_view,
 )
@@ -69,6 +70,16 @@ routes = [
         "/sandbox/polling-stations",
         endpoint=sandbox_postcode_view,
         name="sandbox_postcode_en",
+    ),
+    Route(
+        "/sandbox/i-am-a/voter/your-election-information",
+        endpoint=sandbox_postcode_form,
+        name="sandbox_postcode_form_en",
+    ),
+    Route(
+        "/sandbox/cy/i-am-a/voter/your-election-information",
+        endpoint=sandbox_postcode_form,
+        name="sandbox_postcode_form_cy",
     ),
     Route(
         "/cy/sandbox/polling-stations",

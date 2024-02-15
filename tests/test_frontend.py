@@ -69,3 +69,9 @@ def test_query_params_in_translate_url(page, uvicorn_server):
     assert (
         "/cy/sandbox/polling-stations?postcode-search=AA11AA" in page.content()
     )
+
+
+def test_query_params_missing(page, uvicorn_server):
+    response = page.goto(url=str(f"{uvicorn_server}/sandbox/polling-stations"))
+    assert response.status == 200
+    assert response.url.endswith("/i-am-a/voter/your-election-information")

@@ -48,7 +48,12 @@ async def base_postcode_endpoint(
     """
     if not backend:
         raise ValueError("Must specify a backend")
-    postcode = request.query_params["postcode-search"]
+
+    postcode = request.query_params.get("postcode-search", None)
+    if not postcode:
+        return RedirectResponse(
+            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
+        )
     if postcode == "FA1LL":
         return Response(status_code=400)
     if postcode == "FA2LL":
@@ -91,6 +96,8 @@ live_postcode_view = functools.partial(
 sandbox_postcode_view = functools.partial(
     base_postcode_endpoint, backend=SandboxAPIBackend
 )
+
+
 # TODO: mock_postcode_view = functools.partial(base_postcode_endpoint, backend=MockAPIBackend)
 
 
