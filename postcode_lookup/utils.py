@@ -1,4 +1,5 @@
 import typing
+from datetime import date
 from os import PathLike
 from pathlib import Path
 
@@ -26,7 +27,10 @@ def get_loader(request: Request) -> Jinja2Templates:
 
 
 def date_format(value):
-    date_obj = dateparser.parse(value)
+    if not value:
+        return ""
+    print(repr(value))
+    date_obj = value if isinstance(value, date) else dateparser.parse(value)
     format = "EEEE dd MMMM y"
     return babel.dates.format_datetime(date_obj, format)
 

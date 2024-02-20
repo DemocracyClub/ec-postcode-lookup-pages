@@ -53,7 +53,25 @@ class BaseSection(abc.ABC):
 
 
 class PollingStationSection(BaseSection):
-    template_name = "polling_station.html"
+    template_name = "includes/polling_station.html"
+
+    @property
+    def weight(self):
+        poll_date = parse(self.data.date).date()
+        if poll_date <= self.current_date:
+            return 1000
+
+        days_before_poll = 3
+
+        if (
+            poll_date - datetime.timedelta(days=days_before_poll)
+        ) < self.current_date:
+            return -1000
+        return 0
+
+
+class BallotSection(BaseSection):
+    template_name = "includes/ballots.html"
 
     @property
     def weight(self):
@@ -61,7 +79,7 @@ class PollingStationSection(BaseSection):
         if poll_date < self.current_date:
             return 1000
 
-        days_before_poll = 3
+        days_before_poll = 4
 
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
@@ -92,15 +110,24 @@ class ElectionDateTemplateSorter:
             print(event)
             if event["date"] <= current_date:
                 self.current_mode = event["label"]
-        self.sections = {
-            "polling_stations": PollingStationSection(
-                data=self.date_data,
-                mode=self.current_mode,
-                current_date=self.current_date,
-            )
-        }
-        for section_name, section in self.sections.items():
-            print(section_name, section.weight)
+        self.sections = sorted(
+            [
+                PollingStationSection(
+                    data=self.date_data,
+                    mode=self.current_mode,
+                    current_date=self.current_date,
+                ),
+                BallotSection(
+                    data=self.date_data,
+                    mode=self.current_mode,
+                    current_date=self.current_date,
+                ),
+            ],
+            key=lambda sec: sec.weight,
+            reverse=True,
+        )
+        for section in self.sections:
+            print(section, section.weight)
 
 
 class TemplateSorter:
@@ -108,8 +135,6 @@ class TemplateSorter:
     Given an API response, sorts template fragments ready for rendering
 
     """
-
-    dates = []
 
     def __init__(
         self,
@@ -120,6 +145,7 @@ class TemplateSorter:
         self.current_date = current_date
         self.mode = mode
         self.api_response = api_response
+        self.dates = []
         for date in self.api_response.dates:
             country = country_map[self.api_response.electoral_services.nation]
             self.dates.append(

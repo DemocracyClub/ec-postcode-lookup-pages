@@ -17,7 +17,7 @@
         <h3 class="o-type-h4">{% trans %}Opening times{% endtrans %}</h3>
         <ul class="u-list-reset">
             <li>
-                {% trans ballot_date=date.date|date_filter %}
+                {% trans ballot_date=date.date_data.date|date_filter %}
                     {{ ballot_date }} - 7am to 10pm
                 {% endtrans %}
             </li>
