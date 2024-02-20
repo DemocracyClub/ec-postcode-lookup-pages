@@ -49,8 +49,10 @@
         <ul>
             <li><a href="{{ request.url_for("live_postcode_form_en") }}">Postcode form (en)</a></li>
             <li><a href="{{ request.url_for("live_postcode_form_cy") }}">Postcode form (cy)</a></li>
-            <li><a href="{{ request.url_for("live_postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a></li>
-            <li><a href="{{ request.url_for("live_postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a></li>
+            <li><a href="{{ request.url_for("live_postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a>
+            </li>
+            <li><a href="{{ request.url_for("live_postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a>
+            </li>
         </ul>
 
         <h3>Sandbox</h3>
@@ -66,6 +68,19 @@
                     <pre>{{ details.description }}</pre>
                 </dd>
             {% endfor %}
+        </dl>
+
+        <h3>Mock</h3>
+        <p>Much more fine-tuned examples that update dynamically.</p>
+        <dl>
+            {% for postcode, details in mock_postcodes.items() %}
+                <dt>
+                    <a href="/mock/polling-stations?postcode-search={{ postcode }}">{{ postcode }}</a>
+                </dt>
+                <dd>
+                    <pre>{{ details.description }}</pre>
+                </dd>        {% endfor %}
+
         </dl>
 
     </main>
