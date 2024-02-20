@@ -1,44 +1,11 @@
 {% extends request.base_template %}
 
 {% block html_title %}
-    {% if api_response.dates %}
-        {% if api_response.dates|length > 1 %}
-            {% trans %}You have upcoming elections{% endtrans %}
-        {% else %}
-            {% if api_response.dates.0.notifications and api_response.dates.0.notifications.0.type == "cancelled_election" %}
-                Cancelled election
-            {% else %}
-                {% trans %}You have an upcoming election{% endtrans %}
-            {% endif %}
-
-        {% endif %}
-    {% else %}
-        {% if parl_recall_petition %}
-            {% trans %}There is a recall petition in your area{% endtrans %}
-        {% else %}
-            {% trans %}There are no upcoming elections in your area{% endtrans %}
-        {% endif %}
-    {% endif %}
+    {% trans %}You have an upcoming election{% endtrans %}
 {% endblock html_title %}
 
 {% block page_title %}
-    {% if api_response.dates %}
-        {% if api_response.dates|length > 1 %}
-            {% trans %}You have upcoming elections{% endtrans %}
-        {% else %}
-            {% if api_response.dates.0.notifications and api_response.dates.0.notifications.0.type == "cancelled_election" %}
-                Cancelled election
-            {% else %}
-                {% trans %}You have an upcoming election{% endtrans %}
-            {% endif %}
-        {% endif %}
-    {% else %}
-        {% if parl_recall_petition %}
-            {% trans %}There is a recall petition in your area{% endtrans %}
-        {% else %}
-            {% trans %}There are no upcoming elections in your area{% endtrans %}
-        {% endif %}
-    {% endif %}
+    {% trans %}You have an upcoming election{% endtrans %}
 {% endblock %}
 
 {% block language_picker %}
@@ -51,7 +18,7 @@
 
     <style>
         .dc-container {
-            margin-top:3.5rem;
+            margin-top: 3.5rem;
         }
 
         .dc-container .dc-grid {
@@ -59,12 +26,14 @@
             flex-wrap: wrap;
             flex-grow: 1;
         }
+
         .dc-container .dc-grid .dc-polling-station {
             flex-basis: 20em;
             flex-grow: 1;
 
 
         }
+
         .dc-container .dc-grid .dc-ballot {
             flex-basis: 0;
             flex-grow: 999;
@@ -74,15 +43,17 @@
             width: 95%;
         }
 
-        @media screen and (max-width:767px){
+        @media screen and (max-width: 767px) {
             .dc-container .dc-grid {
                 display: block;
             }
+
             .dc-container .l-content-w-sidebar {
                 width: 100%;
             }
+
             .dc-container {
-                margin-top:1rem;
+                margin-top: 1rem;
             }
 
         }
@@ -90,76 +61,19 @@
     </style>
 
     <div class="dc-container">
-        {% if parl_recall_petition %}
-        {% include "includes/parl_recall_petition.html" %}
-        {% endif %}
-
-        {% if api_response.dates %}
-            <p class="c-polling-station-slice">
-                You’ll need to take photo ID with you if you’re voting at the polling station.
-                <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
-                    Check the list of accepted forms of photo ID</a>.
-            </p>
-        {% endif %}
-
-        {% for date in api_response.dates %}
-            <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
-            <div class="dc-grid">
-                <div class="dc-ballot">
-                    {% if not date.notifications.0.type == "cancelled_election" %}
-                        <p>The following elections are happening on this day:</p>
-                    {% endif %}
-
-                    {% for ballot in date.ballots %}
-                        {% include "includes/single_ballot.html" %}
-                    {% endfor %}
-                </div>
-                {% if not date.notifications.0.type == "cancelled_election" %}
-                    <div class="dc-polling-station">
-                        {%  include "includes/polling_station.html" %}
-                    </div>
-                {% endif %}
-            </div>
-        {% else%}
-            {% if not parl_recall_petition %}
-            <p>You can register to vote at any time.
-                <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
-            {% endif %}
-
+        {% for date in template_sorter.dates %}
+            <h2>{{ date.date_data.date|date_filter }}</h2>
+            {% for section in date.sections %}
+                {% include section.template_name %}
+            {% endfor %}
         {% endfor %}
 
+        <div class="c-wysiwyg">
+            <div class="c-summary-box c-summary-box--grey">
+                <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>
 
-
-
-
-
-    </div>
-
-    {% if api_response.registration == api_response.electoral_services %}
-        {% with org = api_response.electoral_services, org_type="registration" %}
-            {%  include "includes/organisation_contact.html" %}
-        {% endwith %}
-    {%  else %}
-        {% with org = api_response.registration, org_type="registration" %}
-            {%  include "includes/organisation_contact.html" %}
-        {% endwith %}
-        {% with org = api_response.electoral_services, org_type="electoral_services" %}
-            {%  include "includes/organisation_contact.html" %}
-        {% endwith %}
-    {% endif %}
-
-
-
-
-
-
-
-    <div class="c-wysiwyg">
-        <div class="c-summary-box c-summary-box--grey">
-            <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>
-
+            </div>
         </div>
-    </div>
 
     </div>
 {% endblock %}

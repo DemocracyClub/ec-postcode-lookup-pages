@@ -90,6 +90,7 @@ async def base_postcode_endpoint(
                 context["parl_recall_petition"]["signing_end"]
             )
     template_sorter = TemplateSorter(context["api_response"])
+    context["template_sorter"] = template_sorter
     template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"

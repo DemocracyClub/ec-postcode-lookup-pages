@@ -1,0 +1,8 @@
+{% for ballot in date.date_data.ballots %}
+    TODO!
+	<h2>{{ ballot.election_name }}</h2>
+    {% for candidate in ballot.candidates %}
+    	{{ candidate }}
+    {% endfor %}
+    <a href="{{ ballot.wcivf_url }}">View on WhoCanIVoteFor</a>
+{% endfor %}
