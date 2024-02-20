@@ -10,10 +10,12 @@ from dc_api_client import (
     MockAPIBackend,
     SandboxAPIBackend,
 )
+from mock_responses import example_responses
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 from starlette.requests import Request
 from starlette.responses import RedirectResponse, Response
+from template_sorter import TemplateSorter
 from utils import get_loader
 
 
@@ -87,7 +89,8 @@ async def base_postcode_endpoint(
             context["parl_recall_petition"]["signing_end"] = parse(
                 context["parl_recall_petition"]["signing_end"]
             )
-    template_name = "result.html"
+    template_sorter = TemplateSorter(context["api_response"])
+    template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
     return get_loader(request).TemplateResponse(template_name, context)
@@ -175,7 +178,11 @@ async def redirect_root_to_postcode_form(request: Request):
 
     return get_loader(request).TemplateResponse(
         "debug_page.html",
-        {"request": request, "sandbox_postcodes": SANDBOX_POSTCODES},
+        {
+            "request": request,
+            "sandbox_postcodes": SANDBOX_POSTCODES,
+            "mock_postcodes": example_responses,
+        },
     )
 
 
