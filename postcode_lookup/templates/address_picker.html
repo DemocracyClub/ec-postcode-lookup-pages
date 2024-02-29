@@ -19,7 +19,11 @@
 
                 <ul class="links">
                     {% for address in api_response.addresses %}
-                        <li><a href="{{ request.url_for(url_prefix + "_uprn_" + request.current_language, postcode=postcode, uprn=address.slug) }}" class="links__link"><span>{{ address.address }}</span></a></li>
+                        <li>
+                            <a href="{{ request.url_for('sandbox' + '_uprn_' + request.current_language, postcode=postcode, uprn=address.slug) }}" class="links__link">
+                                <span>{{ address.address }}</span>
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
 
