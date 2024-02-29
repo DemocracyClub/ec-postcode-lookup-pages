@@ -1,17 +1,17 @@
 <div class="polling-station__address">
     <div class="c-summary-box c-summary-box--grey">
-        <h3>{%  trans %}Your polling station{% endtrans %}</h3>
+        <h3>{% trans %}Your polling station{% endtrans %}</h3>
 
-        {% if date.polling_station.polling_station_known %}
+        {% if date.date_data.polling_station.polling_station_known %}
 
             <address>
-                {{ date.polling_station.station.properties.address.replace("\n", "<br>")|safe }}
-                {{ date.polling_station.station.properties.postcode }}
+                {{ date.date_data.polling_station.station.properties.address.replace("\n", "<br>")|safe }}
+                {{ date.date_data.polling_station.station.properties.postcode }}
             </address>
             <br>
         {% else %}
             <p>
-                {%trans %}You’ll get a poll card in the post before the election. This will tell you where to vote. If you haven’t got one, contact your local council.{% endtrans %}
+                {%trans %}You'll get a poll card in the post before the election. This will tell you where to vote. If you haven't got one, contact your local council.{% endtrans %}
             </p>
         {% endif %}
         <h3 class="o-type-h4">{% trans %}Opening times{% endtrans %}</h3>
