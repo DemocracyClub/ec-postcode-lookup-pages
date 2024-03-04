@@ -1,6 +1,7 @@
 from response_builder.v1.generated_responses.root_responses import (
     CANCELLED_BALLOT,
     NO_LOCAL_BALLOTS,
+    RECENTLY_PASSED_LOCAL_BALLOT,
     # LOCAL_BALLOT_WITH_ID_REQUIREMENTS,
     GLA_BALLOT,
     MAYORAL_BALLOT,
@@ -22,6 +23,10 @@ example_responses = {
     "AA1 1AB": {
         "description": "Cancelled ballot",
         "response": CANCELLED_BALLOT,
+    },
+    "AA1 1BB": {
+        "description": "Recently passed local ballot", 
+        "response": RECENTLY_PASSED_LOCAL_BALLOT,
     },
     # "AA1 1AZ": {
     #     "description": "Single local ballot with ID requirements",
