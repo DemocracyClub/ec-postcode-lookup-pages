@@ -147,7 +147,11 @@ class TemplateSorter:
         self.api_response = api_response
         self.dates = []
         for date in self.api_response.dates:
-            country = country_map[self.api_response.electoral_services.nation]
+            if getattr(self.api_response, "electoral_services", None):
+                country = country_map[self.api_response.electoral_services.nation]
+            else:
+                country = Country.ENGLAND
+            
             self.dates.append(
                 ElectionDateTemplateSorter(
                     date, country, current_date=self.current_date
@@ -166,12 +170,13 @@ class TemplateSorter:
 
     @property
     def main_template_name(self):
-        if self.response_type == ResponseTypes.CONTACT_DETAILS:
-            return "results_contact_details.html"
-        if self.response_type == ResponseTypes.NO_UPCOMING:
-            return "results_no_upcoming.html"
-        if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
-            return "results_one_current.html"
-        if self.response_type == ResponseTypes.MULTIPLE_DATES:
-            return "results_multiple_dates.html"
-        return None
+        return "result.html"
+        # if self.response_type == ResponseTypes.CONTACT_DETAILS:
+        #     return "results_contact_details.html"
+        # if self.response_type == ResponseTypes.NO_UPCOMING:
+        #     return "results_no_upcoming.html"
+        # if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
+        #     return "results_one_current.html"
+        # if self.response_type == ResponseTypes.MULTIPLE_DATES:
+        #     return "results_multiple_dates.html"
+        # return None
