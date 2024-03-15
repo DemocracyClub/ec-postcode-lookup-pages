@@ -8,7 +8,11 @@
             {% if api_response.dates.0.notifications and api_response.dates.0.notifications.0.type == "cancelled_election" %}
                 Cancelled election
             {% else %}
-                {% trans %}You have an upcoming election{% endtrans %}
+                {% if parl_recall_petition %}
+                    {% trans %}You have upcoming elections{% endtrans %}
+                {% else %}
+                    {% trans %}You have an upcoming election{% endtrans %}
+                {% endif %}
             {% endif %}
 
         {% endif %}
@@ -29,7 +33,11 @@
             {% if api_response.dates.0.notifications and api_response.dates.0.notifications.0.type == "cancelled_election" %}
                 Cancelled election
             {% else %}
-                {% trans %}You have an upcoming election{% endtrans %}
+                {% if parl_recall_petition %}
+                    {% trans %}You have upcoming elections{% endtrans %}
+                {% else %}
+                    {% trans %}You have an upcoming election{% endtrans %}
+                {% endif %}
             {% endif %}
         {% endif %}
     {% else %}
@@ -51,7 +59,7 @@
 
     <style>
         .dc-container {
-            margin-top:3.5rem;
+            margin-top: 3.5rem;
         }
 
         .dc-container .dc-grid {
@@ -59,12 +67,14 @@
             flex-wrap: wrap;
             flex-grow: 1;
         }
+
         .dc-container .dc-grid .dc-polling-station {
             flex-basis: 20em;
             flex-grow: 1;
 
 
         }
+
         .dc-container .dc-grid .dc-ballot {
             flex-basis: 0;
             flex-grow: 999;
@@ -74,15 +84,17 @@
             width: 95%;
         }
 
-        @media screen and (max-width:767px){
+        @media screen and (max-width: 767px) {
             .dc-container .dc-grid {
                 display: block;
             }
+
             .dc-container .l-content-w-sidebar {
                 width: 100%;
             }
+
             .dc-container {
-                margin-top:1rem;
+                margin-top: 1rem;
             }
 
         }
@@ -90,17 +102,19 @@
     </style>
 
     <div class="dc-container">
-        {% if parl_recall_petition %}
-        {% include "includes/parl_recall_petition.html" %}
-        {% endif %}
-
         {% if api_response.dates %}
             <p class="c-polling-station-slice">
-                You’ll need to take photo ID with you if you’re voting at the polling station.
-                <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
+                You’ll need to take photo ID with you if you’re voting {% if parl_recall_petition %}or signing{% endif %} in person.
+                <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id"
+                   style="text-decoration: underline;">
                     Check the list of accepted forms of photo ID</a>.
             </p>
         {% endif %}
+        {% if parl_recall_petition %}
+            {% include "includes/parl_recall_petition.html" %}
+        {% endif %}
+
+
 
         {% for date in api_response.dates %}
             <h2 class="o-type-h2">{{ date.date|date_filter }}</h2>
@@ -116,35 +130,31 @@
                 </div>
                 {% if not date.notifications.0.type == "cancelled_election" %}
                     <div class="dc-polling-station">
-                        {%  include "includes/polling_station.html" %}
+                        {% include "includes/polling_station.html" %}
                     </div>
                 {% endif %}
             </div>
-        {% else%}
+        {% else %}
             {% if not parl_recall_petition %}
-            <p>You can register to vote at any time.
-                <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
+                <p>You can register to vote at any time.
+                    <a href="https://www.gov.uk/register-to-vote" class="link-underline">Register to vote now</a>.</p>
             {% endif %}
 
         {% endfor %}
-
-
-
-
 
 
     </div>
 
     {% if api_response.registration == api_response.electoral_services %}
         {% with org = api_response.electoral_services, org_type="registration" %}
-            {%  include "includes/organisation_contact.html" %}
+            {% include "includes/organisation_contact.html" %}
         {% endwith %}
-    {%  else %}
+    {% else %}
         {% with org = api_response.registration, org_type="registration" %}
-            {%  include "includes/organisation_contact.html" %}
+            {% include "includes/organisation_contact.html" %}
         {% endwith %}
         {% with org = api_response.electoral_services, org_type="electoral_services" %}
-            {%  include "includes/organisation_contact.html" %}
+            {% include "includes/organisation_contact.html" %}
         {% endwith %}
     {% endif %}
 
