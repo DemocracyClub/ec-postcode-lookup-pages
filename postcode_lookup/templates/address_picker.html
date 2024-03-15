@@ -1,7 +1,7 @@
 {% extends request.base_template %}
 
 {% block page_title %}
-    Multiple polling stations / electoral services were found for {{ postcode }}
+    Pick your address
 {% endblock %}
 
 {% block language_picker %}
@@ -15,7 +15,7 @@
     <section class="container" aria-labelledby="polling-station-results">
         <div class="polling-station">
             <div class="polling-station__list">
-                <h2>Please select an address from this list:</h2>
+                <h2>To make sure we get you the correct information, please pick your address:</h2>
 
                 <ul class="links">
                     {% for address in api_response.addresses %}

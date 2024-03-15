@@ -1,7 +1,8 @@
 <div class="dc-grid">
     <div class="dc-ballot">
         {% if parl_recall_petition.signing_start and parl_recall_petition.signing_end %}
-        <h2>{{ parl_recall_petition.signing_start.strftime('%-d %B %Y') }} – {{ parl_recall_petition.signing_end.strftime('%-d %B %Y') }}</h2>
+            <h2>{{ parl_recall_petition.name }}</h2>
+        <h3>{{ parl_recall_petition.signing_start.strftime('%-d %B %Y') }} – {{ parl_recall_petition.signing_end.strftime('%-d %B %Y') }}</h3>
         {% endif %}
 
 
@@ -9,9 +10,6 @@
 
         <p>By signing a recall petition, you are saying you want your MP to lose their seat.
             You only need to sign the petition if you want to see your MP removed.</p>
-
-        {#       TODO #}
-        {#        <p><a href="#" style="text-decoration: underline;">Find out more about recall petitions.</a></p>#}
 
         <p>You have six weeks to sign the petition at your signing place.</p>
         <p>You’ll need to take photo ID with you. <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
@@ -24,14 +22,14 @@
         <div class="polling-station__address">
             <div class="c-summary-box c-summary-box--grey">
                 <h3>Your signing place</h3>
-                {% if parl_recall_petition.signing_station %}
+                {% if parl_recall_petition.signing_station.address %}
                     <p>
                         {{ parl_recall_petition.signing_station.address.replace("\n", "<br>")|safe }}<br>
                         {{ parl_recall_petition.signing_station.postcode }}
                     </p>
                 {% else %}
-                    <p>See <a href="https://www.northnorthants.gov.uk/elections-and-voting/recall-petition-wellingborough-constituency" style="text-decoration: underline">
-                        North Northamptonshire's website</a> to find your signing place, or contact them using the details below.
+                    <p>See <a href="https://www.blackpool.gov.uk/Your-Council/Voting-and-elections/Recall-petition/Recall-petition-Blackpool-South.aspx" style="text-decoration: underline">
+                        Blackpool Council's website</a> to find your signing place, or contact them using the details below.
                     </p>
                 {% endif %}
 
@@ -39,7 +37,7 @@
 
                 <h3>Opening times</h3>
                 <p>Monday to Friday — 9am – 5pm</p>
-                <p>There are extended opening hours of 9am until 8pm on Monday 13 November 2023</p>
+                <p>Please note: the petition wil be closed due to bank holidays on Friday 29 March and Monday 1 April 2024.</p>
             </div>
         </div>
 
