@@ -2,7 +2,7 @@
     <div class="dc-ballot">
         {% if parl_recall_petition.signing_start and parl_recall_petition.signing_end %}
             <h2>{{ parl_recall_petition.name }}</h2>
-        <h3>{{ parl_recall_petition.signing_start.strftime('%-d %B %Y') }} – {{ parl_recall_petition.signing_end.strftime('%-d %B %Y') }}</h3>
+            <h3>{{ parl_recall_petition.signing_start.strftime('%-d %B %Y') }} – {{ parl_recall_petition.signing_end.strftime('%-d %B %Y') }}</h3>
         {% endif %}
 
 
@@ -12,7 +12,9 @@
             You only need to sign the petition if you want to see your MP removed.</p>
 
         <p>You have six weeks to sign the petition at your signing place.</p>
-        <p>You’ll need to take photo ID with you. <a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" style="text-decoration: underline;">
+        <p>You’ll need to take photo ID with you. <a
+                href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id"
+                style="text-decoration: underline;">
             Check the list of accepted forms of photo ID</a>.</p>
         <p>Registered postal voters will be sent a signing sheet by post.</p>
 
@@ -28,19 +30,27 @@
                         {{ parl_recall_petition.signing_station.postcode }}
                     </p>
                 {% else %}
-                    <p>See <a href="https://www.blackpool.gov.uk/Your-Council/Voting-and-elections/Recall-petition/Recall-petition-Blackpool-South.aspx" style="text-decoration: underline">
-                        Blackpool Council's website</a> to find your signing place, or contact them using the details below.
+                    <p>See <a
+                            href="https://www.blackpool.gov.uk/Your-Council/Voting-and-elections/Recall-petition/Recall-petition-Blackpool-South.aspx"
+                            style="text-decoration: underline">
+                        Blackpool Council's website</a> to find your signing place, or contact them using the details
+                        below.
                     </p>
                 {% endif %}
 
 
 
                 <h3>Opening times</h3>
-                <p>Monday to Friday — 9am – 5pm</p>
-                <p>Please note: the petition wil be closed due to bank holidays on Friday 29 March and Monday 1 April 2024.</p>
+                <p>Mondays — 9am – 5pm*<br>
+                    Tuesdays — 8am – 5pm<br>
+                    Wednesdays — 9am – 5pm<br>
+                    Thursdays — 9am – 8pm<br>
+                    Fridays — 9am – 5pm*
+                </p>
+                <p>* Please note: the petition wil be closed due to bank holidays on Friday 29 March and Monday 1 April
+                    2024.</p>
             </div>
         </div>
-
 
 
     </div>
