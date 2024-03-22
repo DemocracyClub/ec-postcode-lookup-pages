@@ -120,9 +120,9 @@
             <h2 class="o-type-h2">{{ date.date_data.date|date_filter }}</h2>
             <div class="dc-grid">
                 <div class="dc-ballot">
-                    {% for ballot in date.date_data.ballots  %} 
+                    {% for ballot in date.date_data.ballots  %}
                         {% if not ballot.cancelled %}
-                            <p>The following elections are happening on this day:</p> 
+                            <p>The following elections are happening on this day:</p>
                             {% include "includes/single_ballot.html" %}
                         {% else %}
                             <p>This {{ballot.ballot_title}} has been cancelled and will be rescheduled.</p>

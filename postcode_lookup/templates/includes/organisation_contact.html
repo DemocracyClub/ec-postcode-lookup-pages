@@ -1,54 +1,45 @@
-<div class="polling-station__address">
-    <div class="c-summary-box c-summary-box--grey">
-        {% if org_type == "registration" %}
+<section class="ec-ds-section {{ org_type }}">
+{% if org_type == "registration" %}
 
+    <h2 id="registration-services">Get help with electoral registration</h2>
 
-            <h3 id="registration-services" class="o-type-h4">Get help with electoral registration</h3>
+    <p>
+        Send your postal and proxy vote applications to your local electoral registration team.
+        You can also contact them to find out if you’re on the electoral register,
+        and if you already have a postal or proxy vote.
+    </p>
+{% endif %}
+{% if org_type == "electoral_services" %}
+    <h2 id="electoral-services">Your local council</h2>
 
-            {% if parl_recall_petition %}
-            <p>The deadline to register to vote has passed for this recall petition.</p>
-            {% endif %}
-            <p>
-                Send your postal and proxy vote applications to your local electoral registration team.
-                You can also contact them to find out if you’re on the electoral register,
-                and if you already have a postal or proxy vote.
-            </p>
-        {% endif %}
-        {% if org_type == "electoral_services" %}
-            <h3 id="electoral-services" class="o-type-h4">Your local council</h3>
-
-            <p>For questions about your poll card, polling place, or about returning your postal voting ballot, contact your council.</p>
-        {% endif %}
-        <address>
-            <div>
-                {{ org.name }}<br>
-                {% if org.address %}
-                    {{ org.address.replace("\n", "<br>")|safe }}<br>
-                {% endif %}
-                {{ org.postcode }}
-            </div>
-            <ul class="polling-station__services u-list-reset">
-                <li>
-                    <a href="tel:" class="js-skip-external-link-test">
-                        <span class="visually-hidden">Phone: </span>
-                        <span>{{ org.phone }}</span>
-                    </a>
-                </li>
-                {% if org.email %}
-                <li>
-                    <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
-                        <span class="visually-hidden">Email: </span>
-                        <span>{{ org.email }}</span>
-                    </a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
-                        <span class="visually-hidden">Website: </span>
-                        <span>{{ org.website }}</span>
-                        <span class="visually-hidden">(Opens in new window)</span></a>
-                </li>
-            </ul>
-        </address>
-    </div>
-</div>
+    <p>For questions about your poll card, polling place, or about returning your postal voting ballot, contact
+        your council.</p>
+{% endif %}
+<address>
+{{ org.name }}<br>
+{% if org.address %}
+    {{ org.address.replace("\n", "<br>")|safe }}<br>
+{% endif %}
+{{ org.postcode }}
+</address>
+<p>
+    <a href="tel:" class="js-skip-external-link-test">
+        Phone:
+        <span>{{ org.phone }}</span>
+    </a>
+</p>
+{% if org.email %}
+    <p>
+        <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
+            Email:
+            <span>{{ org.email }}</span>
+        </a>
+    </p>
+{% endif %}
+<p>
+    <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
+        <span class="visually-hidden">Website: </span>
+        <span>Website</span>
+        <span class="visually-hidden">(Opens in new window)</span></a>
+</p>
+</section>

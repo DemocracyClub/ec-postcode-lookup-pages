@@ -1,8 +1,25 @@
 {% for ballot in date.date_data.ballots %}
-    TODO!
-	<h2>{{ ballot.election_name }}</h2>
-    {% for candidate in ballot.candidates %}
-    	{{ candidate }}
-    {% endfor %}
-    <a href="{{ ballot.wcivf_url }}">View on WhoCanIVoteFor</a>
+    {% if not section.response_type.name == "ONE_CURRENT_BALLOT" %}
+        <h2>{{ ballot.election_name }}</h2>
+    {% endif %}
+    {% if ballot.cancelled %}
+        {% include 'includes/cancellation_reasons.html' %}
+    {% else %}
+        <h3>Candidates</h3>
+        {% if ballot.candidates_verified and section.context.show_candidates %}
+            <ol class="candidate-list">
+                {% for candidate in ballot.candidates %}
+                    <li>
+                        {{ candidate.person.name }}<br>
+                        {{ candidate.party.party_name }}
+                    </li>
+                {% endfor %}
+            </ol>
+            <p><a href="{{ ballot.wcivf_url }}">View on WhoCanIVoteFor</a></p>
+        {% else %}
+            {% trans sopn_date=section.context.sopn_publish_date|date_filter %}
+                The list of candidates for this election will be published after {{ sopn_date }}.
+            {% endtrans %}
+        {% endif %}
+    {% endif %}
 {% endfor %}

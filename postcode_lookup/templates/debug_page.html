@@ -11,7 +11,7 @@
 
         #container {
             margin: 0 auto;
-            max-width: 60ch;
+            max-width: 70ch;
         }
 
         .stack {
@@ -36,6 +36,14 @@
             --space: 2rem;
         }
 
+        table {
+            text-align: left;
+            border-collapse: separate;
+            border-spacing: 0 1em;
+        }
+        ul.sample_list {
+            padding:0
+        }
 
     </style>
 </head>
@@ -72,16 +80,42 @@
 
         <h3>Mock</h3>
         <p>Much more fine-tuned examples that update dynamically.</p>
-        <dl>
-            {% for postcode, details in mock_postcodes.items() %}
-                <dt>
-                    <a href="/mock/polling-stations?postcode-search={{ postcode }}">{{ postcode }}</a>
-                </dt>
-                <dd>
-                    <pre>{{ details.description }}</pre>
-                </dd>        {% endfor %}
 
-        </dl>
+        <table>
+            <thead>
+            <tr>
+                <th>Description</th>
+                <th>Steps</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for postcode, details in mock_postcodes.items() %}
+
+                <tr>
+                    <td><strong>{{ postcode }}</strong><br>{{ details.description }}</td>
+                    <td>
+                        {% if details.response.build().dates %}
+                            <ul class="sample_list">
+                                {% for label, date in ballot_stages.items() %}
+                                <li>
+                                    <a href="/mock/polling-stations?postcode-search={{ postcode }}&baseline_date={{ date }}">{{ label }}</a>
+                                </li>
+
+                                {% endfor %}
+                            </ul>
+
+                        {% else %}
+                            <a href="/mock/polling-stations?postcode-search={{ postcode }}">'No elections'</a>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+
+
+        </table>
 
     </main>
 </div>

@@ -1,0 +1,10 @@
+<h2 id="date-{{ date.date_data.date }}">
+    {{ date.date_data.date|date_filter }}{% if template_sorter.response_type.name == "ONE_CURRENT_BALLOT" %}:
+        {{ date.date_data.ballots.0.ballot_title }}
+    {% endif %}
+</h2>
+{% for section in date.sections %}
+    <section class="ec-ds-section {{ section.name }}">
+        {% include section.template_name %}
+    </section>
+{% endfor %}

@@ -1,0 +1,11 @@
+<h3>Voter registration</h3>
+{% if section.context.can_register %}
+    <h3>Register to vote</h3>
+    <p>You have until {{ section.timetable.registration_deadline|date_filter }}</p>
+{% else %}
+    <p>The deadline to register to vote in this election
+        was {{ section.timetable.registration_deadline|date_filter }}.</p>
+    <p>If you submitted your registration before then you will be able to vote in this election. <a
+            href="#electoral_services">Contact your council</a> to check if you are on the register.</p>
+    <p>You can <a href="https://gov.uk/register-to-vote/">register to vote</a> in future elections.</p>
+{% endif %}

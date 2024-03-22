@@ -1,0 +1,44 @@
+
+
+{% if ballot.cancellation_reason.name == "CANDIDATE_DEATH" %}
+    <h4>{% trans %}Cancelled and Rescheduled Election{% endtrans %}</h4>
+    <p>
+        {% trans initial_poll_date=date.date_data.date|date_filter %}
+            This election has been postponed due to the death of one of the candidates.
+            A new election will be held within 35 working days of the initial election date
+            ({{ initial_poll_date }}).
+        {% endtrans %}
+    </p>
+{% endif %}
+
+{% if ballot.cancellation_reason.name == "NO_CANDIDATES" %}
+    <p>
+        {% trans initial_poll_date=date.date_data.date|date_filter %}
+            This election was cancelled because no candidates stood for the available seats.
+            It will be rescheduled and be held within 35 working days of the initial polling day
+            ({{ initial_poll_date }}).
+        {% endtrans %}
+    </p>
+{% endif %}
+
+{% if ballot.cancellation_reason.name == "EQUAL_CANDIDATES" %}
+    <p>
+        {% trans initial_poll_date=date.date_data.date|date_filter %}
+            This election was cancelled because the number of candidates who stood was equal to the number of available seats.
+            The following candidates will take up this position:
+        {% endtrans %}
+    <ul>
+        {% for candidate in ballot.candidates %}
+            <li>{{ candidate.person.name }} ({{ candidate.party.party_name }})</li>
+        {% endfor %}
+    </ul>
+    </p>
+{% endif %}
+
+{% if ballot.cancellation_reason.name == "UNDER_CONTESTED" %}
+    <p>
+        {% trans initial_poll_date=date.date_data.date|date_filter %}
+            This election was cancelled because the number of candidates who stood was fewer than the number of available seats.
+        {% endtrans %}
+    </p>
+{% endif %}
