@@ -1,3 +1,4 @@
+import datetime
 import functools
 import os
 
@@ -60,6 +61,7 @@ async def base_postcode_endpoint(
         return RedirectResponse(
             request.url_for(backend.URL_PREFIX + "_postcode_form_en")
         )
+
     if postcode == "FA1LL":
         return Response(status_code=400)
     if postcode == "FA2LL":
@@ -67,7 +69,8 @@ async def base_postcode_endpoint(
 
     try:
         api_response = backend(
-            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
+            request=request,
         ).get_postcode(postcode)
     except InvalidPostcodeException:
         return RedirectResponse(
@@ -89,6 +92,7 @@ async def base_postcode_endpoint(
             context["parl_recall_petition"]["signing_end"] = parse(
                 context["parl_recall_petition"]["signing_end"]
             )
+    context["current_date"] = str(datetime.date.today())
     template_sorter = TemplateSorter(context["api_response"])
     context["template_sorter"] = template_sorter
     template_name = template_sorter.main_template_name
@@ -177,12 +181,20 @@ async def redirect_root_to_postcode_form(request: Request):
     if not request.app.debug:
         return Response(status_code=404)
 
+    poll_open_date = datetime.date.today()
+    ballot_stages = {
+        "Polling day": poll_open_date,
+        "After SOPNs": poll_open_date + datetime.timedelta(days=20),
+        "Before SOPNs": poll_open_date + datetime.timedelta(days=35),
+    }
+
     return get_loader(request).TemplateResponse(
         "debug_page.html",
         {
             "request": request,
             "sandbox_postcodes": SANDBOX_POSTCODES,
             "mock_postcodes": example_responses,
+            "ballot_stages": ballot_stages,
         },
     )
 

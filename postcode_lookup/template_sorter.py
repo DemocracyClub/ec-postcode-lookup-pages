@@ -4,7 +4,9 @@ from enum import Enum
 
 from dateparser import parse
 from response_builder.v1.models.base import Date, RootModel
+from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
+from uk_election_timetables.election import TimetableEvent
 from uk_election_timetables.election_ids import from_election_id
 
 # TODO: These might not be right! Implement in uk-election-timetables
@@ -18,6 +20,7 @@ TIMETABLE_TYPES = [
 
 class ResponseTypes(Enum):
     NO_UPCOMING = "No upcoming elections"
+    ONE_CURRENT_BALLOT = "A single upcoming ballot"
     ONE_CURRENT_DATE = "Elections one date"
     MULTIPLE_DATES = "Elections more than one date"
     CONTACT_DETAILS = "Just show contact details"
@@ -40,16 +43,35 @@ class BaseSection(abc.ABC):
     template_name = None
 
     def __init__(
-        self, data: Date, mode: str, current_date: datetime.date
+        self,
+        data: Date,
+        mode: str,
+        current_date: datetime.date,
+        timetable,
+        response_type: ResponseTypes,
     ) -> None:
         super().__init__()
         self.current_date = current_date
         self.mode = mode
         self.data = data
+        self.timetable = timetable
+        self.response_type = response_type
 
     @property
     def weight(self):
         return 0
+
+    @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
+    def context(self):
+        """
+        Holds extra context for this section, useful for template logic
+        :return:
+        """
+        return {}
 
 
 class PollingStationSection(BaseSection):
@@ -58,16 +80,13 @@ class PollingStationSection(BaseSection):
     @property
     def weight(self):
         poll_date = parse(self.data.date).date()
-        if poll_date <= self.current_date:
-            return 1000
 
         days_before_poll = 3
-
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
         ) < self.current_date:
             return -1000
-        return 0
+        return 1000
 
 
 class BallotSection(BaseSection):
@@ -75,17 +94,49 @@ class BallotSection(BaseSection):
 
     @property
     def weight(self):
-        poll_date = parse(self.data.date).date()
-        if poll_date < self.current_date:
-            return 1000
+        if self.timetable.is_before(TimetableEvent.SOPN_PUBLISH_DATE):
+            return 6000
 
-        days_before_poll = 4
+        if self.timetable.is_after(TimetableEvent.SOPN_PUBLISH_DATE):
+            return 1001
 
-        if (
-            poll_date - datetime.timedelta(days=days_before_poll)
-        ) < self.current_date:
-            return -1000
         return 0
+
+    @property
+    def context(self):
+        context = super().context
+        context["show_candidates"] = self.timetable.is_after(
+            TimetableEvent.SOPN_PUBLISH_DATE
+        )
+        context["sopn_publish_date"] = self.timetable.sopn_publish_date
+        return context
+
+
+class RegistrationDateSection(BaseSection):
+    template_name = "includes/registration_timetable.html"
+
+    @property
+    def weight(self):
+        if self.timetable.is_before(TimetableEvent.REGISTRATION_DEADLINE):
+            return 6000
+
+        if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
+            return 1001
+        return 0
+
+    @property
+    def context(self):
+        context = super().context
+        context["can_register"] = self.timetable.is_before(
+            TimetableEvent.REGISTRATION_DEADLINE
+        )
+        context["can_register_postal_vote"] = self.timetable.is_before(
+            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        )
+        context["can_register_vac"] = self.timetable.is_before(
+            TimetableEvent.VAC_APPLICATION_DEADLINE
+        )
+        return context
 
 
 class ElectionDateTemplateSorter:
@@ -93,38 +144,51 @@ class ElectionDateTemplateSorter:
         self,
         date_data: Date,
         country: Country,
+        response_type: ResponseTypes,
         current_date: datetime.date = None,
+        first_upcoming_date=True,
     ) -> None:
         if not current_date:
-            current_date = datetime.date.today()
+            current_date = str(datetime.date.today())
         self.current_date = current_date
+        self.response_type = response_type
 
         self.date_data = date_data
+        self.first_upcoming_date = first_upcoming_date
 
+        self.all_cancelled = all(
+            ballot.cancelled for ballot in self.date_data.ballots
+        )
+
+        # TODO: move to per ballot time tables
         self.timetable = from_election_id(
             self.date_data.ballots[0].election_id, country=country
         )
 
         self.current_mode = None
         for event in self.timetable.timetable:
-            print(event)
             if event["date"] <= current_date:
                 self.current_mode = event["label"]
+
+        section_kwargs = {
+            "data": self.date_data,
+            "mode": self.current_mode,
+            "response_type": self.response_type,
+            "current_date": self.current_date,
+            "timetable": self.timetable,
+        }
+
+        enabled_sections = [BallotSection]
+        if not self.all_cancelled:
+            enabled_sections.append(RegistrationDateSection)
+
+        if self.first_upcoming_date:
+            enabled_sections.append(PollingStationSection)
+
         self.sections = sorted(
-            [
-                PollingStationSection(
-                    data=self.date_data,
-                    mode=self.current_mode,
-                    current_date=self.current_date,
-                ),
-                BallotSection(
-                    data=self.date_data,
-                    mode=self.current_mode,
-                    current_date=self.current_date,
-                ),
-            ],
+            [section(**section_kwargs) for section in enabled_sections],
             key=lambda sec: sec.weight,
-            reverse=True,
+            # reverse=True,
         )
         for section in self.sections:
             print(section, section.weight)
@@ -143,20 +207,40 @@ class TemplateSorter:
         current_date: datetime.date = None,
     ) -> None:
         self.current_date = current_date
+        if not self.current_date:
+            self.current_date = datetime.date.today()
         self.mode = mode
         self.api_response = api_response
+
+        self.total_ballot_count = 0
         self.dates = []
-        for date in self.api_response.dates:
-            if getattr(self.api_response, "electoral_services", None):
-                country = country_map[self.api_response.electoral_services.nation]
+        self.electoral_services = getattr(
+            self.api_response, "electoral_services", None
+        )
+        self.electoral_registration = getattr(
+            self.api_response, "registration", None
+        )
+        for i, date in enumerate(self.api_response.dates):
+            if self.electoral_services:
+                country = country_map[
+                    self.api_response.electoral_services.nation
+                ]
             else:
                 country = Country.ENGLAND
-            
+
             self.dates.append(
                 ElectionDateTemplateSorter(
-                    date, country, current_date=self.current_date
+                    date,
+                    country,
+                    current_date=self.current_date,
+                    response_type=self.response_type,
+                    first_upcoming_date=not i > 0,
                 )
             )
+            self.total_ballot_count += len(date.ballots)
+        self.all_cancelled = all(
+            election_date.all_cancelled for election_date in self.dates
+        )
 
     @property
     def response_type(self):
@@ -165,18 +249,56 @@ class TemplateSorter:
         if not self.api_response.dates:
             return ResponseTypes.NO_UPCOMING
         if len(self.api_response.dates) == 1:
+            if len(self.api_response.dates[0].ballots) == 1:
+                return ResponseTypes.ONE_CURRENT_BALLOT
             return ResponseTypes.ONE_CURRENT_DATE
         return ResponseTypes.MULTIPLE_DATES
 
     @property
     def main_template_name(self):
-        return "result.html"
         # if self.response_type == ResponseTypes.CONTACT_DETAILS:
         #     return "results_contact_details.html"
-        # if self.response_type == ResponseTypes.NO_UPCOMING:
-        #     return "results_no_upcoming.html"
-        # if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
-        #     return "results_one_current.html"
-        # if self.response_type == ResponseTypes.MULTIPLE_DATES:
-        #     return "results_multiple_dates.html"
-        # return None
+        if self.response_type == ResponseTypes.NO_UPCOMING:
+            return "results_no_upcoming.html"
+        if self.response_type == ResponseTypes.ONE_CURRENT_BALLOT:
+            return "results_one_current_ballot.html"
+        if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
+            return "results_one_current_date.html"
+        if self.response_type == ResponseTypes.MULTIPLE_DATES:
+            return "results_multiple_dates.html"
+        raise ValueError("No template selected")
+
+    @property
+    def page_title(self):
+        """
+        Used in the HTML <title> tag and the page's H1 element
+        :return:
+        """
+        if self.mode == ApiModes.CONTACT_DETAILS:
+            return _("Contact details")
+
+        if not self.dates:
+            return _("There are no upcoming elections in your area")
+
+        if self.all_cancelled:
+            print(self.total_ballot_count)
+            return _(
+                "Cancelled election",
+                "Cancelled elections",
+                count=self.total_ballot_count,
+            )
+
+        soonest_date = self.dates[0].date_data.date
+        if str(self.current_date) == soonest_date:
+            return _("You have an election today")
+
+        if self.response_type == ResponseTypes.ONE_CURRENT_BALLOT:
+            return _("You have an upcoming election")
+
+        if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
+            return _("You have upcoming elections")
+
+        if self.response_type == ResponseTypes.MULTIPLE_DATES:
+            return _("You have upcoming elections")
+
+        return "Elections in your areas"

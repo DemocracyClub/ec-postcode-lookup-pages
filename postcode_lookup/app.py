@@ -15,8 +15,10 @@ from endpoints import (
 from mangum import Mangum
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
+from starlette.requests import HTTPConnection
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
+from starlette_babel import LocaleMiddleware, get_translator
 from utils import ForwardedForMiddleware, i18nMiddleware
 
 if sentry_dsn := os.environ.get("SENTRY_DSN"):
@@ -130,11 +132,25 @@ routes = [
     ),
 ]
 
+shared_translator = get_translator()  # process global instance
+shared_translator.load_from_directories([Path(__file__).parent / "locale"])
+
+
+def current_language_selector(conn: HTTPConnection) -> str | None:
+    return conn.scope["current_language"]
+
+
 app = Starlette(
     debug=True,
     routes=routes,
     middleware=[
         Middleware(i18nMiddleware),
+        Middleware(
+            LocaleMiddleware,
+            locales=["en", "cy"],
+            default_locale="en",
+            selectors=[current_language_selector],
+        ),
         Middleware(ForwardedForMiddleware),
     ],
 )

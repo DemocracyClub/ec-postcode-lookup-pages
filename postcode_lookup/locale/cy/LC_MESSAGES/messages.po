@@ -15,6 +15,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
+#: postcode_lookup/utils.py:58
+msgid "one"
+msgstr ""
+
+#: postcode_lookup/utils.py:59
+msgid "two"
+msgstr ""
+
+#: postcode_lookup/utils.py:60
+msgid "three"
+msgstr ""
+
+#: postcode_lookup/utils.py:61
+msgid "four"
+msgstr ""
+
+#: postcode_lookup/utils.py:62
+msgid "five"
+msgstr ""
+
+#: postcode_lookup/utils.py:63
+msgid "six"
+msgstr ""
+
+#: postcode_lookup/utils.py:64
+msgid "seven"
+msgstr ""
+
+#: postcode_lookup/utils.py:65
+msgid "eight"
+msgstr ""
+
+#: postcode_lookup/utils.py:66
+msgid "nine"
+msgstr ""
+
 #: postcode_lookup/templates/includes/html_meta.html:12
 #: postcode_lookup/templates/includes/html_meta.html:20
 #: postcode_lookup/templates/index.html:4
@@ -26,6 +62,8 @@ msgstr "Gwybodaeth etholiadol"
 #, fuzzy
 msgid "Upcoming election information"
 msgstr "Gwybodaeth etholiad sydd i ddod"
+msgid "Enter your postcode"
+msgstr "Nodwch eich cod post"
 
 #: postcode_lookup/templates/index.html:30
 msgid ""
@@ -37,6 +75,9 @@ msgstr ""
 "ble mae eich gorsaf bleidleisio. Gallwch hefyd ddod o hyd i fanylion cyswllt "
 "eich cyngor lleol."
 
+#: postcode_lookup/templates/index.html:35
+msgid "Enter a postcode"
+msgstr "Nodwch god post"
 
 #: postcode_lookup/templates/index.html:38
 msgid "Submit Postcode"
@@ -80,13 +121,41 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 
 #: postcode_lookup/templates/result.html:21
 #: postcode_lookup/templates/result.html:45
+#: postcode_lookup/templates/old_result.html:6
+#: postcode_lookup/templates/old_result.html:12
+#: postcode_lookup/templates/old_result.html:31
+#: postcode_lookup/templates/old_result.html:37
+msgid "You have upcoming elections"
+msgstr "Mae gennych etholiadau sydd ar y gweill"
+
+#: postcode_lookup/templates/old_result.html:14
+#: postcode_lookup/templates/old_result.html:39
+#: postcode_lookup/templates/results_multiple_dates.html:7
+#: postcode_lookup/templates/results_multiple_dates.html:15
+#: postcode_lookup/templates/results_one_current_ballot.html:7
+#: postcode_lookup/templates/results_one_current_ballot.html:15
+#: postcode_lookup/templates/results_one_current_date.html:7
+#: postcode_lookup/templates/results_one_current_date.html:15
+msgid "You have an upcoming election"
+msgstr "Mae gennych etholiad sydd ar y gweill"
+
+#: postcode_lookup/templates/old_result.html:21
+#: postcode_lookup/templates/old_result.html:45
 #, fuzzy
 msgid "There is a recall petition in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
 
 #: postcode_lookup/templates/result.html:23
 #: postcode_lookup/templates/result.html:47
+#: postcode_lookup/templates/old_result.html:23
+#: postcode_lookup/templates/old_result.html:47
+#: postcode_lookup/templates/results_no_upcoming.html:4
 msgid "There are no upcoming elections in your area"
+msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
+
+#: postcode_lookup/templates/results_no_upcoming.html:8
+#, fuzzy
+msgid "There are no upcoming elections in your areas"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
 
 #: postcode_lookup/templates/includes/html_meta.html:9
@@ -109,24 +178,25 @@ msgstr ""
 "bleidleisio, ymgeiswyr, a manylion cyswllt eich tîm gwasanaethau "
 "etholiadol lleol"
 
-#: postcode_lookup/templates/includes/polling_station.html:3
+#: postcode_lookup/templates/includes/polling_station.html:1
 msgid "Your polling station"
 msgstr "Eich gorsaf bleidleisio"
 
-#: postcode_lookup/templates/includes/polling_station.html:14
+#: postcode_lookup/templates/includes/polling_station.html:12
+#, fuzzy
 msgid ""
-"You’ll get a poll card in the post before the election. This will tell "
-"you where to vote. If you haven’t got one, contact your local council."
+"You'll get a poll card in the post before the election. This will tell "
+"you where to vote. If you haven't got one, contact your local council."
 msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
 "dweud wrthych ble i bleidleisio. Os nad oes gennych un, cysylltwch â'ch "
 "cyngor lleol."
 
-#: postcode_lookup/templates/includes/polling_station.html:17
+#: postcode_lookup/templates/includes/polling_station.html:15
 msgid "Opening times"
 msgstr "Oriau agor"
 
-#: postcode_lookup/templates/includes/polling_station.html:20
+#: postcode_lookup/templates/includes/polling_station.html:18
 #, python-format
 msgid "%(ballot_date)s - 7am to 10pm"
 msgstr "%(ballot_date)s - 7am i 10pm"
@@ -146,3 +216,5 @@ msgstr "%(ballot_date)s - 7am i 10pm"
 
 #~ msgid "Enter a postcode"
 #~ msgstr "Nodwch god post"
+#~ msgid "%(title)s"
+#~ msgstr ""

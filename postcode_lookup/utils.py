@@ -11,6 +11,8 @@ from jinja2 import ChainableUndefined
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
+from starlette_babel import get_locale
+from starlette_babel import gettext_lazy as _
 
 
 def is_welsh(path: str) -> bool:
@@ -29,10 +31,9 @@ def get_loader(request: Request) -> Jinja2Templates:
 def date_format(value):
     if not value:
         return ""
-    print(repr(value))
     date_obj = value if isinstance(value, date) else dateparser.parse(value)
     format = "EEEE dd MMMM y"
-    return babel.dates.format_datetime(date_obj, format)
+    return babel.dates.format_datetime(date_obj, format, locale=get_locale())
 
 
 def translated_url(request: Request, name: str) -> URL:
@@ -60,6 +61,71 @@ def additional_ballot_link(request, ballot) -> str:
     return f"""<p><a href="{url}" class="o-external-link">Find out more about this election at {label}</a></p>"""
 
 
+def apnumber(value):
+    """
+    For numbers 1-9, return the number spelled out. Otherwise, return the
+    number. This follows Associated Press style.
+    """
+    try:
+        value = int(value)
+    except (TypeError, ValueError):
+        return value
+    if not 0 < value < 10:
+        return value
+    return (
+        _("one"),
+        _("two"),
+        _("three"),
+        _("four"),
+        _("five"),
+        _("six"),
+        _("seven"),
+        _("eight"),
+        _("nine"),
+    )[value - 1]
+
+
+def pluralize(value, arg="s"):
+    """
+    Return a plural suffix if the value is not 1, '1', or an object of
+    length 1. By default, use 's' as the suffix:
+
+    * If value is 0, vote{{ value|pluralize }} display "votes".
+    * If value is 1, vote{{ value|pluralize }} display "vote".
+    * If value is 2, vote{{ value|pluralize }} display "votes".
+
+    If an argument is provided, use that string instead:
+
+    * If value is 0, class{{ value|pluralize:"es" }} display "classes".
+    * If value is 1, class{{ value|pluralize:"es" }} display "class".
+    * If value is 2, class{{ value|pluralize:"es" }} display "classes".
+
+    If the provided argument contains a comma, use the text before the comma
+    for the singular case and the text after the comma for the plural case:
+
+    * If value is 0, cand{{ value|pluralize:"y,ies" }} display "candies".
+    * If value is 1, cand{{ value|pluralize:"y,ies" }} display "candy".
+    * If value is 2, cand{{ value|pluralize:"y,ies" }} display "candies".
+    """
+    if "," not in arg:
+        arg = "," + arg
+    bits = arg.split(",")
+    if len(bits) > 2:
+        return ""
+    singular_suffix, plural_suffix = bits[:2]
+
+    try:
+        return singular_suffix if float(value) == 1 else plural_suffix
+    except ValueError:  # Invalid string that's not a number.
+        pass
+    except TypeError:  # Value isn't a string or a number; maybe it's a list?
+        try:
+            return singular_suffix if len(value) == 1 else plural_suffix
+        except TypeError:  # len() of unsized object.
+            pass
+    return ""
+
+
 class _i18nJinja2Templates(Jinja2Templates):
     locale = None
 
@@ -72,6 +138,8 @@ class _i18nJinja2Templates(Jinja2Templates):
         env_options["undefined"] = ChainableUndefined
         env = super()._create_env(directory, **env_options)
         env.filters["date_filter"] = date_format
+        env.filters["apnumber"] = apnumber
+        env.filters["pluralize"] = pluralize
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
         env.globals["additional_ballot_link"] = additional_ballot_link
@@ -114,6 +182,7 @@ class i18nMiddleware:
             if is_welsh(scope["path"]):
                 scope["base_template"] = "base_cy.html"
                 scope["current_language"] = "cy"
+
             else:
                 scope["base_template"] = "base.html"
                 scope["current_language"] = "en"

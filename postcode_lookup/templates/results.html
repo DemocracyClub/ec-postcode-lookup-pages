@@ -1,0 +1,32 @@
+{% extends request.base_template %}
+
+{% block html_title %}
+    {{ template_sorter.page_title }}
+{% endblock html_title %}
+
+{% block page_title %}
+    {{ template_sorter.page_title }}
+{% endblock %}
+
+{% block language_picker %}
+    {% with route_name = "postcode" %}
+        {% include "includes/language_picker.html" %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    {% block page_toc %}
+
+    {% endblock %}
+    <div class="dc-container">
+        {% for date in template_sorter.dates %}
+            {% include 'includes/single_date.html' %}
+        {% endfor %}
+
+
+        {% include 'includes/contact_details.html' %}
+
+        {% include 'includes/feedback_section.html' %}
+
+    </div>
+{% endblock %}

@@ -1,11 +1,14 @@
 import re
 from abc import ABC, abstractmethod
+from copy import deepcopy
 from urllib.parse import urljoin
 
 import httpx
 from mock_responses import example_responses
+from response_builder.v1.builders.base import RootBuilder
 from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_BASE_URL, SANDBOX_POSTCODES
+from starlette.requests import Request
 
 
 class InvalidPostcodeException(Exception): ...
@@ -36,8 +39,9 @@ def valid_postcode(postcode: str):
 class BaseAPIClient(ABC):
     URL_PREFIX = None
 
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, request: Request):
         self.api_key = api_key
+        self.request = request
         self.api_version = "v1"
         assert self.URL_PREFIX is not None, "URL_PREFIX must be set on backend"
 
@@ -113,11 +117,18 @@ class SandboxAPIBackend(BaseAPIClient):
 
 
 class MockAPIBackend(BaseAPIClient):
+    def get_mock_response(self, postcode):
+        builder: RootBuilder = example_responses[postcode]["response"]
+        if baseline_date := self.request.query_params.get("baseline_date"):
+            builder = deepcopy(builder)
+            builder = builder.set_date_baseline(baseline_date)
+        return builder.build().dict()
+
     def get_uprn(self, uprn: str) -> dict:
-        pass
+        return self.get_mock_response(uprn)
 
     def get_postcode(self, postcode: str) -> dict:
-        return example_responses[postcode]["response"].build().dict()
+        return self.get_mock_response(postcode)
 
     POSTCODES = example_responses
     URL_PREFIX = "mock"

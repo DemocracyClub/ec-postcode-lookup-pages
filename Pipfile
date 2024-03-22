@@ -15,7 +15,7 @@ sentry-sdk = {extras = ["starlette"], version = "*"}
 urllib3 = "<2"
 ruff = "*"
 typing-extensions = ">=3.7.4"
-
+starlette-babel = "*"
 
 [dev-packages]
 uvicorn = "*"
