@@ -11,6 +11,7 @@ from endpoints import (
     sandbox_postcode_form,
     sandbox_postcode_view,
     sandbox_uprn_view,
+    section_tester,
 )
 from mangum import Mangum
 from starlette.applications import Starlette
@@ -37,6 +38,7 @@ if sentry_dsn := os.environ.get("SENTRY_DSN"):
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),
+    Route("/sections/{section}/", endpoint=section_tester),
     Route("/failover", endpoint=failover, name="failover"),
     Route(
         "/i-am-a/voter/your-election-information",
