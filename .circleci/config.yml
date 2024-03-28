@@ -47,8 +47,8 @@ jobs:
           command: |
             sudo `pipenv --venv`/bin/playwright install-deps
       - run: pipenv run playwright install
-      - run: pipenv run black-check
       - run: pipenv run ruff
+      - run: pipenv run ruff-format
       - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
           file: /home/circleci/repo/test-reports/junit.xml

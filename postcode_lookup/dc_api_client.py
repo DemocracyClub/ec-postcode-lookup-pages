@@ -7,12 +7,10 @@ from response_builder.v1.models.base import RootModel
 from response_builder.v1.sandbox import SANDBOX_BASE_URL, SANDBOX_POSTCODES
 
 
-class InvalidPostcodeException(Exception):
-    ...
+class InvalidPostcodeException(Exception): ...
 
 
-class InvalidUPRNException(Exception):
-    ...
+class InvalidUPRNException(Exception): ...
 
 
 def valid_postcode(postcode: str):
@@ -70,12 +68,10 @@ class BaseAPIClient(ABC):
         return req
 
     @abstractmethod
-    def get_postcode(self, postcode: str) -> dict:
-        ...
+    def get_postcode(self, postcode: str) -> dict: ...
 
     @abstractmethod
-    def get_uprn(self, uprn: str) -> dict:
-        ...
+    def get_uprn(self, uprn: str) -> dict: ...
 
 
 class LiveAPIBackend(BaseAPIClient):

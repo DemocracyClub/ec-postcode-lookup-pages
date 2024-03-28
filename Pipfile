@@ -13,18 +13,18 @@ dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_buil
 dateparser = "==1.1.7"
 sentry-sdk = {extras = ["starlette"], version = "*"}
 urllib3 = "<2"
+ruff = "*"
 
 [dev-packages]
 uvicorn = "*"
-black = "*"
 pytest = "*"
 respx = "*"
 aws-sam-cli = "*"
 ipdb = "*"
 beautifulsoup4 = "*"
-pydantic = {extras = ["email"], version = "*"}
+pydantic = {extras = ["email"], version = "==2.6.4"}
 pydantic-factories = "*"
-ruff = "*"
+ruff = "0.3.4"
 pytest-cov = "*"
 coverage = {extras = ["toml"], version = "*"}
 pytest-asyncio = "*"
@@ -35,8 +35,7 @@ pre-commit = "*"
 python_version = "3.10"
 
 [scripts]
-black = "black ."
-black-check = "black --check ."
 pytest = "pytest"
-ruff = "ruff --diff postcode_lookup lib/template_generator"
+ruff = "ruff check"
+ruff-format = "ruff format ."
 build_templates = "python lib/template_generator/generate_base_template.py"
