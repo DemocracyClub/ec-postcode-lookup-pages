@@ -13,25 +13,38 @@
         {% endif %}
     {% endif %}
 {% else %}
-    <p>This election takes place on <time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>. <a href=&quot;/i-am-a/voter/types-elections&quot;>Find out more about voting in this election</a></p>
+    <p>This election takes place on <time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>.
+        <a href=&quot;/i-am-a/voter/types-elections&quot;>Find out more about voting in this election</a>.</p>
 {% endif %}
 
 
 {% if ballot.candidates_verified %}
     {% if not ballot.cancelled or ballot.metadata.cancelled_election.title == "Uncontested election" %}
-        <ul class=&quot;u-list-reset ballot&quot;>
-            {% for candidate in ballot.candidates %}
-                <li class=&quot;ballot__candidate&quot;>
-                    {{ candidate.person.name }}
-                    {% if ballot.metadata.cancelled_election.title == "Uncontested election" %}
-                        (elected unopposed)
-                    {% endif %}
-                    <br>
-                    {{ candidate.party.party_name }}
-                </li>
-            {% endfor %}
-        </ul>
-        <p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/{{ postcode }}&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; class=&quot;o-external-link&quot;>Who Can I Vote For <span class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your candidates</p>
+        {% if ballot.voting_system.uses_party_lists %}
+            <ul class=&quot;u-list-reset ballot&quot;>
+                {% for party_name, candidates in ballot.candidates|groupby('party.party_name')|sort %}
+                    <li>{{ party_name }} ({{ candidates|length }} candidates)</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <ul class=&quot;u-list-reset ballot&quot;>
+                {% for candidate in ballot.candidates %}
+                    <li class=&quot;ballot__candidate&quot;>
+                        {{ candidate.person.name }}
+                        {% if ballot.metadata.cancelled_election.title == "Uncontested election" %}
+                            (elected unopposed)
+                        {% endif %}
+                        <br>
+                        {{ candidate.party.party_name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/{{ postcode }}&quot; target=&quot;_blank&quot;
+                    rel=&quot;noopener&quot; class=&quot;o-external-link&quot;>Who Can I Vote For <span
+                class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your
+            candidates</p>
     {% endif %}
 
 
