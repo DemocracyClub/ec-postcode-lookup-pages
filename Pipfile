@@ -22,7 +22,7 @@ respx = "*"
 aws-sam-cli = "*"
 ipdb = "*"
 beautifulsoup4 = "*"
-pydantic = {extras = ["email"], version = "*"}
+pydantic = {extras = ["email"], version = "==2.6.4"}
 pydantic-factories = "*"
 ruff = "*"
 pytest-cov = "*"
