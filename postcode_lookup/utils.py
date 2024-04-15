@@ -38,6 +38,24 @@ def translated_url(request: Request, name: str) -> URL:
     return url
 
 
+def additional_ballot_link(request, ballot) -> str:
+    url, label = None, None
+    if any(
+        part in ballot.ballot_paper_id
+        for part in ("mayor.london", "gla.a", "gla.c")
+    ):
+        url = "https://www.londonelects.org.uk/im-voter"
+        label = "London Elects"
+    if "pcc." in ballot.ballot_paper_id:
+        url = f"https://choosemypcc.org.uk/area/gloucestershire/?postcode={request.query_params.get('postcode-search')}"
+        label = "'Choose My PCC'"
+
+    if not all((url, label)):
+        return ""
+
+    return f"""<p><a href="{url}" class="o-external-link">Find out more about this election at {label}</a></p>"""
+
+
 class _i18nJinja2Templates(Jinja2Templates):
     locale = None
 
@@ -52,6 +70,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.filters["date_filter"] = date_format
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
+        env.globals["additional_ballot_link"] = additional_ballot_link
 
         locale_dir = Path(__file__).parent / "locale"
         list_of_desired_locales = [self.locale]

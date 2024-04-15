@@ -15,6 +15,7 @@
 {% else %}
     <p>This election takes place on <time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>.
         <a href=&quot;/i-am-a/voter/types-elections&quot;>Find out more about voting in this election</a>.</p>
+    	{{ additional_ballot_link(request, ballot) }}
 {% endif %}
 
 
