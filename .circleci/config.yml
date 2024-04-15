@@ -42,6 +42,8 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
+      - run: pipenv run ruff
+      - run: pipenv run ruff-format
       - run:
           name: Install Playwright-deps
           command: |

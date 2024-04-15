@@ -1,5 +1,3 @@
-![](https://img.shields.io/badge/code%20style-black-black "Code style: Black")
-
 # Installation
 
 Python >= 3.10 required.
