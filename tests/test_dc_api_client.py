@@ -33,7 +33,7 @@ def test_get_url(respx_mock):
     respx_mock.get(
         "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1"
     ).mock(return_value=httpx.Response(200, json={}))
-    client = LiveAPIBackend(api_key="test")
+    client = LiveAPIBackend(api_key="test", request=None)
     client.get_postcode("SE22 8DJ")
 
 
@@ -51,7 +51,7 @@ def test_get_postcode_endpoint(respx_mock, app_client):
 
 
 def test_get_invalid_postcode_api_client(respx_mock):
-    client = LiveAPIBackend(api_key="test")
+    client = LiveAPIBackend(api_key="test", request=None)
     with pytest.raises(InvalidPostcodeException):
         client.get_postcode("FAIL")
 
