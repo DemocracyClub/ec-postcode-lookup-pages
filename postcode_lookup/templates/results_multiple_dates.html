@@ -1,14 +1,1 @@
 {% extends 'results.html' %}
-
-{% block page_toc %}
-    <p>
-        {% trans num_elections=template_sorter.dates|length|apnumber %}
-            You have {{ num_elections }} upcoming election dates:
-        {% endtrans %}
-    </p>
-    <ul>
-        {% for date in template_sorter.dates %}
-            <li><a href="#date-{{ date.date_data.date }}">{{ date.date_data.date|date_filter }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}

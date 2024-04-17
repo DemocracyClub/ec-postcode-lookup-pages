@@ -2,7 +2,7 @@ import abc
 import datetime
 from enum import Enum
 from functools import cached_property
-from typing import List, Optional, Tuple, Union
+from typing import Dict, List, Optional
 
 from dateparser import parse
 from response_builder.v1.models.base import Date, RootModel
@@ -10,6 +10,7 @@ from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
 from uk_election_timetables.election_ids import from_election_id
+from utils import date_format
 
 # TODO: These might not be right! Implement in uk-election-timetables
 #  and think about them harder
@@ -39,11 +40,6 @@ country_map = {
     "Wales": Country.WALES,
     "Northern Ireland": Country.NORTHERN_IRELAND,
 }
-
-TocType = Union[
-    Tuple[str, str], Tuple[str, str, Optional[List[Tuple[str, str]]]]
-]
-
 
 class BaseSection(abc.ABC):
     template_name = None
@@ -154,6 +150,9 @@ class RegistrationDateSection(BaseSection):
         context["can_register_vac"] = self.timetable.is_before(
             TimetableEvent.VAC_APPLICATION_DEADLINE
         )
+        context["htag"] = "h2"
+        if self.response_type == ResponseTypes.MULTIPLE_DATES:
+            context["htag"] = "h3"
         return context
 
     @property
@@ -330,7 +329,7 @@ class TemplateSorter:
         return "Elections in your areas"
 
     @cached_property
-    def toc_items(self) -> Optional[List[TocType]]:
+    def toc_items(self) -> Optional[List[Dict[str, str]]]:
         """
         Get the table of contents for a response
         """
@@ -340,17 +339,29 @@ class TemplateSorter:
 
         toc = []
 
-
-
         if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
             for section in self.dates[0].sections:
                 if isinstance(section, BallotSection):
                     for ballot in section.data.ballots:
                         toc.append(
-                            (ballot.ballot_title, ballot.ballot_paper_id)
+                            {"label": ballot.ballot_title, "anchor": ballot.ballot_paper_id}
                         )
                 else:
-                    toc.append((section.toc_label, section.toc_id))
+                    toc.append({"label": section.toc_label, "anchor": section.toc_id})
+
+        if self.response_type == ResponseTypes.MULTIPLE_DATES:
+            for date in self.dates:
+                sub_toc = []
+                for section in date.sections:
+                    if isinstance(section, BallotSection):
+                        for ballot in section.data.ballots:
+                            sub_toc.append(
+                                {"label": ballot.ballot_title, "anchor": ballot.ballot_paper_id}
+                            )
+                    else:
+                        sub_toc.append({"label": section.toc_label, "anchor": section.toc_id})
+                toc.append({"label": date_format(date.date_data.date), "anchor": f"date-{date.date_data.date}", "sub_toc": sub_toc})
+
         if toc:
             contact_details_toc = []
             if (
@@ -358,14 +369,14 @@ class TemplateSorter:
                     == self.api_response.electoral_services
             ):
                 contact_details_toc.append(
-                    (_("Your local council"), "electoral-services")
+                    {"label": _("Your local council"), "anchor": "electoral-services"}
                 )
             else:
                 contact_details_toc.append(
-                    (_("Electoral registration"), "registration-services")
+                    {"label": _("Electoral registration"), "anchor": "registration-services"}
                 )
                 contact_details_toc.append(
-                    (_("Your local council"), "electoral-services")
+                    {"label": _("Your local council"), "anchor": "electoral-services"}
                 )
 
             toc += contact_details_toc

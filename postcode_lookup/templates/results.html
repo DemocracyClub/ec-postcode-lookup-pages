@@ -20,8 +20,18 @@
                     <h2 id="page_nav_label">On this page</h2>
 
                     <ul>
-                        {% for label, anchor in template_sorter.toc_items %}
-                            <li><a href="#{{ anchor }}">{{ label }}</a></li>
+                        {% for toc_item in template_sorter.toc_items %}
+                            <li><a href="#{{ toc_item.anchor }}">{{ toc_item.label }}</a>
+
+                            {% if toc_item.sub_toc %}
+                            	<ul>
+                                    {% for sub_toc_item in toc_item.sub_toc %}
+                                    <li><a href="#{{ sub_toc_item.anchor }}">{{ sub_toc_item.label }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            </li>
                         {% endfor %}
                     </ul>
                 </nav>
