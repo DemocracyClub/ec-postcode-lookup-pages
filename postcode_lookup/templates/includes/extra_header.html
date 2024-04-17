@@ -6,14 +6,18 @@
     .dc-container * {
         margin-bottom:0;
     }
-    .dc-container > * + * {
-        margin-block-start: 1.4rem;
-
+    .dc-container > * + *, .ec-ds-section + .ec-ds-section {
+        margin-block-start: 2rem;
     }
 
-    .dc-container :is(h1,h2,h3,h4) + :is(p,ul,figure,h2,h3,h4) {
+    .dc-container :is(h1,h2,h3,h4) + :is(p,ul,details,figure,h2,h3,h4) {
         margin-block-start: 0.3em;
     }
+
+    .dc-container :is(p,ul,figure) + :is(p,ul,figure) {
+        margin-block-start: 1em;
+    }
+
     .dc-container a {
         text-decoration: underline !important;
     }
@@ -48,7 +52,7 @@
 
     .dc-container details summary {
         cursor: pointer;
-        font-size: 1.3rem;
+        font-size: 1rem;
         line-height: 1.4;
         font-weight: bold;
         list-style: none;

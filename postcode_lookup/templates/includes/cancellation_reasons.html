@@ -27,12 +27,13 @@
             This election was cancelled because the number of candidates who stood was equal to the number of available seats.
             The following candidates will take up this position:
         {% endtrans %}
+    </p>
     <ul>
         {% for candidate in ballot.candidates %}
             <li>{{ candidate.person.name }} ({{ candidate.party.party_name }})</li>
         {% endfor %}
     </ul>
-    </p>
+
 {% endif %}
 
 {% if ballot.cancellation_reason.name == "UNDER_CONTESTED" %}

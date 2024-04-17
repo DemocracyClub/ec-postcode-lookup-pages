@@ -4,7 +4,7 @@
     {% endif %}
 </h2>
 {% for section in date.sections %}
-    <section class="ec-ds-section {{ section.name }}">
+    <section class="ec-ds-section {{ section.name }}" id="{{ section.toc_id }}">
         {% include section.template_name %}
     </section>
 {% endfor %}

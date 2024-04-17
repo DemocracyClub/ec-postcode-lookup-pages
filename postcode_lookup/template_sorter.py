@@ -1,6 +1,8 @@
 import abc
 import datetime
 from enum import Enum
+from functools import cached_property
+from typing import List, Optional, Tuple, Union
 
 from dateparser import parse
 from response_builder.v1.models.base import Date, RootModel
@@ -38,6 +40,10 @@ country_map = {
     "Northern Ireland": Country.NORTHERN_IRELAND,
 }
 
+TocType = Union[
+    Tuple[str, str], Tuple[str, str, Optional[List[Tuple[str, str]]]]
+]
+
 
 class BaseSection(abc.ABC):
     template_name = None
@@ -66,6 +72,14 @@ class BaseSection(abc.ABC):
         return self.__class__.__name__
 
     @property
+    def toc_label(self):
+        return self.__class__.__name__
+
+    @property
+    def toc_id(self):
+        return self.__class__.__name__
+
+    @property
     def context(self):
         """
         Holds extra context for this section, useful for template logic
@@ -87,6 +101,10 @@ class PollingStationSection(BaseSection):
         ) < self.current_date:
             return -1000
         return 1000
+
+    @property
+    def toc_label(self):
+        return _("Where to vote")
 
 
 class BallotSection(BaseSection):
@@ -138,6 +156,14 @@ class RegistrationDateSection(BaseSection):
         )
         return context
 
+    @property
+    def toc_label(self):
+        return _("Voter registration")
+
+    @property
+    def toc_id(self):
+        return "voter-registration"
+
 
 class ElectionDateTemplateSorter:
     def __init__(
@@ -155,6 +181,7 @@ class ElectionDateTemplateSorter:
 
         self.date_data = date_data
         self.first_upcoming_date = first_upcoming_date
+        self.ballot_count = len(self.date_data.ballots)
 
         self.all_cancelled = all(
             ballot.cancelled for ballot in self.date_data.ballots
@@ -281,7 +308,6 @@ class TemplateSorter:
             return _("There are no upcoming elections in your area")
 
         if self.all_cancelled:
-            print(self.total_ballot_count)
             return _(
                 "Cancelled election",
                 "Cancelled elections",
@@ -302,3 +328,45 @@ class TemplateSorter:
             return _("You have upcoming elections")
 
         return "Elections in your areas"
+
+    @cached_property
+    def toc_items(self) -> Optional[List[TocType]]:
+        """
+        Get the table of contents for a response
+        """
+
+        if self.response_type == ResponseTypes.ONE_CURRENT_BALLOT:
+            return None
+
+        toc = []
+
+
+
+        if self.response_type == ResponseTypes.ONE_CURRENT_DATE:
+            for section in self.dates[0].sections:
+                if isinstance(section, BallotSection):
+                    for ballot in section.data.ballots:
+                        toc.append(
+                            (ballot.ballot_title, ballot.ballot_paper_id)
+                        )
+                else:
+                    toc.append((section.toc_label, section.toc_id))
+        if toc:
+            contact_details_toc = []
+            if (
+                    self.api_response.registration
+                    == self.api_response.electoral_services
+            ):
+                contact_details_toc.append(
+                    (_("Your local council"), "electoral-services")
+                )
+            else:
+                contact_details_toc.append(
+                    (_("Electoral registration"), "registration-services")
+                )
+                contact_details_toc.append(
+                    (_("Your local council"), "electoral-services")
+                )
+
+            toc += contact_details_toc
+        return toc

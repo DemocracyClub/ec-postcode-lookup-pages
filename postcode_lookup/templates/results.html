@@ -15,10 +15,21 @@
 {% endblock %}
 
 {% block content %}
-    {% block page_toc %}
-
-    {% endblock %}
     <div class="dc-container">
+        {% block page_toc %}
+            {% if template_sorter.toc_items %}
+                <nav class="page-nav" aria-labelledby="page-nav-label">
+                    <h2 id="page_nav_label">On this page</h2>
+
+                    <ul>
+                        {% for label, anchor in template_sorter.toc_items %}
+                            <li><a href="#{{ anchor }}">{{ label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% endblock %}
+
         {% for date in template_sorter.dates %}
             {% include 'includes/single_date.html' %}
         {% endfor %}
