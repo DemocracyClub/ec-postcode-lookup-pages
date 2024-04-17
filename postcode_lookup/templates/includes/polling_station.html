@@ -1,23 +1,20 @@
 {% if not date.all_cancelled %}
-        <h3>{% trans %}Your polling station{% endtrans %}</h3>
+    <h3>{% trans %}Your polling station{% endtrans %}</h3>
 
-        {% if date.date_data.polling_station.polling_station_known %}
-            <p>
-            <address>
-                {{ date.date_data.polling_station.station.properties.address.replace("\n", "<br>")|safe }}<br>
-                {{ date.date_data.polling_station.station.properties.postcode }}
-            </address>
-            </p>
-        {% else %}
-            <p>
-                {% trans %}You'll get a poll card in the post before the election. This will tell you where to vote. If
-                    you
-                    haven't got one, contact your local council.{% endtrans %}
-            </p>
-        {% endif %}
-        <h3>{% trans %}Opening times{% endtrans %}</h3>
-        {# TODO: Change for City of London #}
-        {% trans ballot_date=date.date_data.date|date_filter %}
-            {{ ballot_date }} - 7am to 10pm
-        {% endtrans %}
+    {% if date.date_data.polling_station.polling_station_known %}
+        <p>
+        <address>
+            {{ date.date_data.polling_station.station.properties.address.replace("\n", "<br>")|safe }}<br>
+            {{ date.date_data.polling_station.station.properties.postcode }}
+        </address>
+        </p>
+    {% else %}
+        <p>
+            {% trans %}You'll get a poll card in the post before the election. This will tell you where to vote. If
+                you
+                haven't got one, contact your local council.{% endtrans %}
+        </p>
+    {% endif %}
+    <h4>{% trans %}Opening times{% endtrans %}</h4>
+    {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
 {% endif %}

@@ -95,8 +95,8 @@ class PollingStationSection(BaseSection):
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
         ) < self.current_date:
-            return -1000
-        return 1000
+            return -6000
+        return 1001
 
     @property
     def toc_label(self):
@@ -109,10 +109,10 @@ class BallotSection(BaseSection):
     @property
     def weight(self):
         if self.timetable.is_before(TimetableEvent.SOPN_PUBLISH_DATE):
-            return 6000
+            return 1000
 
         if self.timetable.is_after(TimetableEvent.SOPN_PUBLISH_DATE):
-            return 1001
+            return -1000
 
         return 0
 
@@ -132,7 +132,7 @@ class RegistrationDateSection(BaseSection):
     @property
     def weight(self):
         if self.timetable.is_before(TimetableEvent.REGISTRATION_DEADLINE):
-            return 6000
+            return -6000
 
         if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
             return 1001
@@ -191,6 +191,10 @@ class ElectionDateTemplateSorter:
             self.date_data.ballots[0].election_id, country=country
         )
 
+        self.polling_station_opening_times_str = _("7am – 10pm")
+        if any("city-of-london" in ballot.ballot_paper_id for ballot in self.date_data.ballots):
+            self.polling_station_opening_times_str = _("8am – 8pm")
+
         self.current_mode = None
         for event in self.timetable.timetable:
             if event["date"] <= current_date:
@@ -216,8 +220,6 @@ class ElectionDateTemplateSorter:
             key=lambda sec: sec.weight,
             # reverse=True,
         )
-        for section in self.sections:
-            print(section, section.weight)
 
 
 class TemplateSorter:

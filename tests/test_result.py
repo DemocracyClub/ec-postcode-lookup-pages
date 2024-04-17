@@ -119,12 +119,12 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         single_ballot_sorter_before_deadline.dates[0],
     )
     # PollingStationSection
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -6000
     # This is the first event deadline in the sequence so there is nothing that
     # appears in the timetable before it.
     assert single_election_date_template_sorter.sections[0].mode is None
     # BallotSection
-    assert single_election_date_template_sorter.sections[1].weight == 6000
+    assert single_election_date_template_sorter.sections[1].weight == 1000
     assert single_election_date_template_sorter.sections[1].mode is None
 
     multiple_ballot_template_sorter_before_deadline = template_sorter(
@@ -140,9 +140,9 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -152,12 +152,12 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -6000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "List of candidates published"
     )
-    assert second_election_date_template_sorter.sections[1].weight == 1001
+    assert second_election_date_template_sorter.sections[1].weight == -1000
     assert (
         second_election_date_template_sorter.sections[1].mode
         == "List of candidates published"
@@ -173,9 +173,9 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         single_ballot_sorter_after_deadline.dates[0],
     )
     # TODO: I would have expected the mode to change here after
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -6000
     assert single_election_date_template_sorter.sections[0].mode is None
-    assert single_election_date_template_sorter.sections[1].weight == 6000
+    assert single_election_date_template_sorter.sections[1].weight == 1000
     assert single_election_date_template_sorter.sections[1].mode is None
 
     multiple_ballot_template_sorter_after_deadline = template_sorter(
@@ -189,9 +189,9 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = multiple_ballot_template_sorter_after_deadline.dates[
@@ -201,12 +201,12 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -6000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "List of candidates published"
     )
-    assert second_election_date_template_sorter.sections[1].weight == 1001
+    assert second_election_date_template_sorter.sections[1].weight == -1000
     assert (
         second_election_date_template_sorter.sections[1].mode
         == "List of candidates published"
@@ -232,12 +232,12 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         single_ballot_sorter_before_deadline.dates[0],
     )
     assert len(single_election_date_template_sorter.sections) == 3
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -6000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "Register to vote deadline"
     )
-    assert single_election_date_template_sorter.sections[1].weight == 1001
+    assert single_election_date_template_sorter.sections[1].weight == -1000
     assert (
         single_election_date_template_sorter.sections[1].mode
         == "Register to vote deadline"
@@ -255,9 +255,9 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -267,12 +267,12 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_before_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -6000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "Register to vote deadline"
     )
-    assert second_election_date_template_sorter.sections[1].weight == 1001
+    assert second_election_date_template_sorter.sections[1].weight == -1000
     assert (
         second_election_date_template_sorter.sections[1].mode
         == "Register to vote deadline"
@@ -287,12 +287,12 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         single_ballot_sorter_after_deadline,
         single_ballot_sorter_after_deadline.dates[0],
     )
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -6000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
     )
-    assert single_election_date_template_sorter.sections[1].weight == 1001
+    assert single_election_date_template_sorter.sections[1].weight == -1000
     assert (
         single_election_date_template_sorter.sections[1].mode
         == "Postal vote application deadline"
@@ -309,9 +309,9 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_after_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = multiple_ballot_template_sorter_after_deadline.dates[
@@ -321,12 +321,12 @@ def test_registration_deadline(template_sorter, election_date_template_sorter):
         multiple_ballot_template_sorter_after_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -6000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
     )
-    assert second_election_date_template_sorter.sections[1].weight == 1001
+    assert second_election_date_template_sorter.sections[1].weight == -1000
     assert (
         second_election_date_template_sorter.sections[1].mode
         == "Postal vote application deadline"
@@ -354,7 +354,7 @@ def test_postal_vote_application_deadline(
         single_ballot_sorter_before_deadline.dates[0],
     )
     # PollingStationSection
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -1000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "Register to vote deadline"
@@ -377,9 +377,9 @@ def test_postal_vote_application_deadline(
         multiple_ballot_template_sorter_before_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -389,7 +389,7 @@ def test_postal_vote_application_deadline(
         multiple_ballot_template_sorter_before_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -1000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "Register to vote deadline"
@@ -408,7 +408,7 @@ def test_postal_vote_application_deadline(
         single_ballot_sorter_after_deadline,
         single_ballot_sorter_after_deadline.dates[0],
     )
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -1000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
@@ -430,9 +430,9 @@ def test_postal_vote_application_deadline(
         multiple_ballot_template_sorter_after_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -442,7 +442,7 @@ def test_postal_vote_application_deadline(
         multiple_ballot_template_sorter_after_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -1000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
@@ -477,7 +477,7 @@ def test_vac_application_deadline(
         single_ballot_sorter_before_deadline.dates[0],
     )
     # PollingStationSection
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -1000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
@@ -500,9 +500,9 @@ def test_vac_application_deadline(
         multiple_ballot_template_sorter_before_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -512,7 +512,7 @@ def test_vac_application_deadline(
         multiple_ballot_template_sorter_before_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -1000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "Postal vote application deadline"
@@ -531,7 +531,7 @@ def test_vac_application_deadline(
         single_ballot_sorter_after_deadline,
         single_ballot_sorter_after_deadline.dates[0],
     )
-    assert single_election_date_template_sorter.sections[0].weight == 1000
+    assert single_election_date_template_sorter.sections[0].weight == -1000
     assert (
         single_election_date_template_sorter.sections[0].mode
         == "VAC application deadline"
@@ -553,9 +553,9 @@ def test_vac_application_deadline(
         multiple_ballot_template_sorter_after_deadline, first_election_date
     )
     assert len(first_election_date_template_sorter.sections) == 3
-    assert first_election_date_template_sorter.sections[0].weight == 1000
+    assert first_election_date_template_sorter.sections[0].weight == -6000
     assert first_election_date_template_sorter.sections[0].mode is None
-    assert first_election_date_template_sorter.sections[1].weight == 6000
+    assert first_election_date_template_sorter.sections[1].weight == 1000
     assert first_election_date_template_sorter.sections[1].mode is None
 
     second_election_date = (
@@ -565,7 +565,7 @@ def test_vac_application_deadline(
         multiple_ballot_template_sorter_after_deadline, second_election_date
     )
     assert len(second_election_date_template_sorter.sections) == 3
-    assert second_election_date_template_sorter.sections[0].weight == 1000
+    assert second_election_date_template_sorter.sections[0].weight == -1000
     assert (
         second_election_date_template_sorter.sections[0].mode
         == "VAC application deadline"
