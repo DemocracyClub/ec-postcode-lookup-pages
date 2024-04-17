@@ -81,26 +81,14 @@ async def base_postcode_endpoint(
                 backend.URL_PREFIX + "_postcode_form_en"
             ).include_query_params(**{"invalid-postcode": 1})
         )
-    context = results_context(api_response)
-    context["request"] = request
-    context["postcode"] = postcode
-    context["url_prefix"] = backend.URL_PREFIX
-    if api_response.get("parl_recall_petition"):
-        context["parl_recall_petition"] = api_response["parl_recall_petition"]
-        if "signing_start" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_start"] = parse(
-                context["parl_recall_petition"]["signing_start"]
-            )
-        if "signing_end" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_end"] = parse(
-                context["parl_recall_petition"]["signing_end"]
-            )
-    context["current_date"] = str(datetime.date.today())
+    context = results_context(api_response, request, postcode, backend)
+
     template_sorter = TemplateSorter(context["api_response"])
     context["template_sorter"] = template_sorter
     template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
+
     return get_loader(request).TemplateResponse(template_name, context)
 
 
@@ -130,7 +118,8 @@ async def base_uprn_endpoint(request: Request, backend=None):
     postcode = request.path_params["postcode"]
     try:
         api_response = backend(
-            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
+            request=request,
         ).get_uprn(uprn)
     except InvalidUPRNException:
         return RedirectResponse(
@@ -138,21 +127,11 @@ async def base_uprn_endpoint(request: Request, backend=None):
                 backend.URL_PREFIX + "_postcode_form_en"
             ).include_query_params(**{"invalid-uprn": 1})
         )
-    context = results_context(api_response)
-    context["request"] = request
-    context["postcode"] = postcode
-    context["url_prefix"] = backend.URL_PREFIX
-    if api_response.get("parl_recall_petition"):
-        context["parl_recall_petition"] = api_response["parl_recall_petition"]
-        if "signing_start" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_start"] = parse(
-                context["parl_recall_petition"]["signing_start"]
-            )
-        if "signing_end" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_end"] = parse(
-                context["parl_recall_petition"]["signing_end"]
-            )
-    template_name = "uprn.html"
+    context = results_context(api_response, request, postcode, backend)
+
+    template_sorter = TemplateSorter(context["api_response"])
+    context["template_sorter"] = template_sorter
+    template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
     return get_loader(request).TemplateResponse(template_name, context)
@@ -164,11 +143,32 @@ sandbox_uprn_view = functools.partial(
 )
 
 
-def results_context(api_response):
+def results_context(api_response, request, postcode, backend):
     api_json = api_response
-    return {
-        "api_response": RootModel.from_api_response(api_json),
-    }
+    context = {}
+    context["api_response"] = RootModel.from_api_response(api_json)
+    context["request"] = request
+    context["postcode"] = postcode
+    context["uprn"] = request.path_params.get("uprn", None)
+    context["url_prefix"] = backend.URL_PREFIX
+    if context["uprn"]:
+        context["route_name"] = "uprn"
+    else:
+        context["route_name"] = "postcode"
+
+    if api_response.get("parl_recall_petition"):
+        context["parl_recall_petition"] = api_response["parl_recall_petition"]
+        if "signing_start" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_start"] = parse(
+                context["parl_recall_petition"]["signing_start"]
+            )
+        if "signing_end" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_end"] = parse(
+                context["parl_recall_petition"]["signing_end"]
+            )
+    context["current_date"] = str(datetime.date.today())
+
+    return context
 
 
 def get_ballot_stages(poll_open_date):
