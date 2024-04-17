@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from endpoints import (
+    design_system_view,
     failover,
     live_postcode_form,
     live_postcode_view,
@@ -112,6 +113,12 @@ routes = [
         endpoint=mock_postcode_view,
         name="mock_postcode_cy",
     ),
+    Route(
+        "/design-system",
+        endpoint=design_system_view,
+        name="design_system_view",
+    ),
+
     # Route(
     #     "/mock/polling-stations/{postcode}/{uprn}",
     #     endpoint=sandbox_uprn_view,

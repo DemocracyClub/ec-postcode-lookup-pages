@@ -246,3 +246,12 @@ async def section_tester(request: Request):
             "sections": sections,
         },
     )
+
+
+async def design_system_view(request: Request):
+    return get_loader(request).TemplateResponse(
+        "design_system.html",
+        {
+            "request": request,
+        },
+    )
