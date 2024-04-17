@@ -9,6 +9,7 @@
             {% if ballot.candidates_verified and section.context.show_candidates %}
                 <details>
                     <summary>Candidates</summary>
+                    {{ additional_ballot_link(request, ballot) }}
                     <ol class="candidate-list">
                         {% if ballot.voting_system.uses_party_lists %}
                             {% for party_name, candidates in ballot.candidates|groupby('party.party_name') %}

@@ -8,6 +8,7 @@ import dateparser
 import jinja2
 from babel.support import Translations
 from jinja2 import ChainableUndefined
+from jinja2.filters import do_mark_safe
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -58,7 +59,9 @@ def additional_ballot_link(request, ballot) -> str:
     if not all((url, label)):
         return ""
 
-    return f"""<p><a href="{url}" class="o-external-link">Find out more about this election at {label}</a></p>"""
+    return do_mark_safe(
+        f"""<p><a href="{url}" class="o-external-link">Find out more about this election at {label}</a></p>"""
+    )
 
 
 def apnumber(value):
