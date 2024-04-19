@@ -47,7 +47,7 @@ def additional_ballot_link(request, ballot) -> str:
         url = "https://www.londonelects.org.uk/im-voter"
         label = "London Elects"
     if "pcc." in ballot.ballot_paper_id:
-        url = f"https://choosemypcc.org.uk/search/postcode?postcode={request.query_params.get('postcode-search')}"
+        url = f"https://choosemypcc.org.uk/search/postcode?postcode={request.query_params.get('postcode-search', request.path_params.get('postcode'))}"
         label = "'Choose My PCC'"
 
     if not all((url, label)):
