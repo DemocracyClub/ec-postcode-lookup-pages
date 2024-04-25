@@ -189,7 +189,7 @@ workflows:
           requires:
             - sam_build
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ development ] } }
       - static_deploy:
           name: static_deploy_development
           dc-environment: development
