@@ -22,17 +22,17 @@
                             <section data-location-content-countries="" class="c-polling-station-slice slice--view-mode--default slice-w-padding slice-location-polling-search" aria-labelledby="paragraph-14945-title" style="">
                                 <div class="container">
                                     <h2 id="paragraph-14945-title" class="slice__title">
-                                        <span>{%trans %}Enter your postcode{% endtrans %}</span>
+                                        <span>{%trans %}Upcoming election information{% endtrans %}</span>
                                     </h2>
 
                                     <div class="l-grid l-grid--align-start l-grid--2-col l-grid--w-h-gutter">
                                         <div class="l-grid__item ">
-                                            <div><p>{%trans %}Enter your postcode to find contact details for the electoral services team at your local council and polling station details{% endtrans %}</p>
+                                            <div><p>{%trans %}Enter your postcode to find out which elections are taking place, who's standing, and where your polling station is. You can also find contact details for your local council.{% endtrans %}</p>
                                             </div>
                                         </div>
                                         <div class="l-grid__item l-grid__item--wrap">
                                             <form id="polling_station_postcode_search-14945" class="postcode-search | js-postcode-lookup-form">
-                                                <label for="postcode-search-14945" class="visually-hidden">{%trans %}Enter a postcode{% endtrans %}</label>
+                                                <label for="postcode-search-14945" class="visually-hidden">{%trans %}Upcoming election information{% endtrans %}</label>
                                                 <input id="postcode-search-14945" type="text" class="postcode-search__input {% if request.query_params["invalid-postcode"] %} parsley-error{% endif %}" name="postcode-search" placeholder="Postcode" class="postcode-search__input" data-parsley-postcode data-parsley-errors-container=".js-errors-container-14945" required>
                                                 <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
                                                     <span class="visually-hidden">{%trans %}Submit Postcode{% endtrans %}</span>
@@ -53,13 +53,13 @@
                                 </div>
                             </section>
 
-                            {#                            <div class="c-polling-station-slice" style="margin-top:1em">#}
-                            {#                                <p>Elections are taking place in England on 4 May 2023, and polling stations will be#}
-                            {#                                    open from 7am to 10pm.</p>#}
-                            {#                                <p>If you're voting at the polling station, you'll need to take photo ID with you.</p>#}
-                            {#                                <p><a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" class="o-button o-button--primary o-button--dark">#}
-                            {#                                    Check the list of accepted forms of photo ID</a></p>#}
-                            {#                            </div>#}
+                                                        <div style="margin-top:1.5em; background-color: #ECF3F3; padding:2em; color: #076A6E;">
+                                                            <h3 style="color: #077988">{%  trans %}England and Wales elections, 2 May 2024{% endtrans %}</h3>
+                                                            <p>{%  trans %}Polling stations will be open from 7am to 10pm.{% endtrans %}</p>
+                                                            <p>{%  trans %}If you're voting at the polling station, you'll need to take photo ID with you.{% endtrans %}</p>
+                                                            <p><a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" class="o-button o-button--primary o-button--dark">
+                                                                {%  trans %}Check the list of accepted forms of photo ID{% endtrans %}</a></p>
+                                                        </div>
                         </div>
 
                     </div>

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-16 07:53+0000\n"
+"POT-Creation-Date: 2024-04-26 14:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -21,42 +21,71 @@ msgstr ""
 msgid "Elections in your area"
 msgstr "Gwybodaeth etholiadol"
 
-#: postcode_lookup/templates/index.html:26
-msgid "Enter your postcode"
-msgstr "Nodwch eich cod post"
+#: postcode_lookup/templates/index.html:25
+#: postcode_lookup/templates/index.html:35
+#, fuzzy
+msgid "Upcoming election information"
+msgstr "Gwybodaeth etholiad sydd i ddod"
 
-#: postcode_lookup/templates/index.html:31
+#: postcode_lookup/templates/index.html:30
 msgid ""
-"Enter your postcode to find contact details for the electoral services "
-"team at your local council and polling station details"
+"Enter your postcode to find out which elections are taking place, who's "
+"standing, and where your polling station is. You can also find contact "
+"details for your local council."
 msgstr ""
-"Dewch o hyd i'ch gwybodaeth am eich swyddfa gofrestru etholiadol a'ch "
-"gorsaf bleidleisio leol"
+"Nodwch eich cod post i ganfod pa etholiadau sy'n digwydd, pwy sy'n sefyll, a "
+"ble mae eich gorsaf bleidleisio. Gallwch hefyd ddod o hyd i fanylion cyswllt "
+"eich cyngor lleol."
 
-#: postcode_lookup/templates/index.html:36
-msgid "Enter a postcode"
-msgstr "Nodwch god post"
 
-#: postcode_lookup/templates/index.html:39
+#: postcode_lookup/templates/index.html:38
 msgid "Submit Postcode"
 msgstr "Cyflwyno cod post"
 
-#: postcode_lookup/templates/index.html:48
+#: postcode_lookup/templates/index.html:47
 msgid "Please enter a valid postcode"
 msgstr "Nodwch god post dilys"
 
+#: postcode_lookup/templates/index.html:57
+msgid "England and Wales elections, 2 May 2024"
+msgstr "Etholiadau Lloegr a Chymru, 2 Mai 2024"
+
+#: postcode_lookup/templates/index.html:58
+msgid "Polling stations will be open from 7am to 10pm."
+msgstr "Bydd gorsafoedd pleidleisio ar agor o 7am i 10pm."
+
+#: postcode_lookup/templates/index.html:59
+msgid ""
+"If you're voting at the polling station, you'll need to take photo ID "
+"with you."
+msgstr ""
+"Os ydych chi'n pleidleisio yn y gorsaf bleidleisio, bydd angen i chi gymryd "
+"adnabod llun gyda chi."
+
+#: postcode_lookup/templates/index.html:61
+msgid "Check the list of accepted forms of photo ID"
+msgstr "Gwiriwch y rhestr o ffurfiau adnabod llun a dderbynnir"
+
 #: postcode_lookup/templates/result.html:6
-#: postcode_lookup/templates/result.html:18
+#: postcode_lookup/templates/result.html:12
+#: postcode_lookup/templates/result.html:31
+#: postcode_lookup/templates/result.html:37
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/templates/result.html:8
-#: postcode_lookup/templates/result.html:20
+#: postcode_lookup/templates/result.html:14
+#: postcode_lookup/templates/result.html:39
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/templates/result.html:11
+#: postcode_lookup/templates/result.html:21
+#: postcode_lookup/templates/result.html:45
+#, fuzzy
+msgid "There is a recall petition in your area"
+msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
+
 #: postcode_lookup/templates/result.html:23
+#: postcode_lookup/templates/result.html:47
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
 
@@ -102,3 +131,18 @@ msgstr "Oriau agor"
 msgid "%(ballot_date)s - 7am to 10pm"
 msgstr "%(ballot_date)s - 7am i 10pm"
 
+#~ msgid "Enter your postcode"
+#~ msgstr "Nodwch eich cod post"
+
+#~ msgid ""
+#~ "Enter your postcode to find contact "
+#~ "details for the electoral services team"
+#~ " at your local council and polling"
+#~ " station details"
+#~ msgstr ""
+#~ "Dewch o hyd i'ch gwybodaeth am "
+#~ "eich swyddfa gofrestru etholiadol a'ch "
+#~ "gorsaf bleidleisio leol"
+
+#~ msgid "Enter a postcode"
+#~ msgstr "Nodwch god post"
