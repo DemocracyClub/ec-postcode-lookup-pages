@@ -1,4 +1,5 @@
-{% if api_response.registration == api_response.electoral_services %}
+<div class="card">
+    {% if api_response.registration == api_response.electoral_services %}
     {% with org = api_response.electoral_services, org_type="electoral_services" %}
         {% include "includes/organisation_contact.html" %}
     {% endwith %}
@@ -13,3 +14,4 @@
         {% include "includes/organisation_contact.html" %}
     {% endwith %}
 {% endif %}
+</div>

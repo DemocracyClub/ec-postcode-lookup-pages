@@ -25,7 +25,9 @@
                         {% endif %}
 
                     </ol>
-                    <p><a href="{{ ballot.wcivf_url }}">View on WhoCanIVoteFor</a></p>
+                    <p><a href="{{ ballot.wcivf_url }}">
+                        Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
+                    </a></p>
                 </details>
             {% else %}
                 {% trans sopn_date=section.context.sopn_publish_date|date_filter %}
