@@ -204,7 +204,7 @@ workflows:
           requires:
             - static_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master, mock-api-backend ] } }
+          filters: { branches: { only: [ main, master ] } }
 
 
       - sam_deploy:
