@@ -2,6 +2,8 @@
 {% if section.context.can_register %}
     <h3>Register to vote</h3>
     <p>You have until {{ section.timetable.registration_deadline|date_filter }}</p>
+    <p><a href="https://gov.uk/register-to-vote/" class="o-button o-button--primary o-button--dark o-external-link">
+        Register to vote</a></p>
 {% else %}
     <p>The deadline to register to vote on {{ section.data.date|date_filter }}
         was {{ section.timetable.registration_deadline|date_filter }}.</p>
