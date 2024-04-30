@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-26 14:11+0100\n"
+"POT-Creation-Date: 2024-04-30 16:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -15,48 +15,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.11.0\n"
 
-#: postcode_lookup/template_sorter.py:103
+#: postcode_lookup/template_sorter.py:104
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:160
+#: postcode_lookup/template_sorter.py:161
+#: postcode_lookup/templates/includes/registration_timetable.html:1
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:194
+#: postcode_lookup/template_sorter.py:200
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:196
+#: postcode_lookup/template_sorter.py:205
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:306
+#: postcode_lookup/template_sorter.py:318
 msgid "Contact details"
 msgstr "Manylion cyswllt"
 
-#: postcode_lookup/template_sorter.py:309
+#: postcode_lookup/template_sorter.py:321
 #: postcode_lookup/templates/old_result.html:23
 #: postcode_lookup/templates/old_result.html:47
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:312
-msgid "Cancelled election"
-msgstr "Etholiad wedi'i ganslo"
+#: postcode_lookup/template_sorter.py:327
+msgid "Uncontested"
+msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:320
+#: postcode_lookup/template_sorter.py:334
+msgid "Postponed"
+msgstr "Wedi'i ohirio"
+
+#: postcode_lookup/template_sorter.py:344
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:323
+#: postcode_lookup/template_sorter.py:347
 #: postcode_lookup/templates/old_result.html:14
 #: postcode_lookup/templates/old_result.html:39
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:326
-#: postcode_lookup/template_sorter.py:329
+#: postcode_lookup/template_sorter.py:350
+#: postcode_lookup/template_sorter.py:353
 #: postcode_lookup/templates/old_result.html:6
 #: postcode_lookup/templates/old_result.html:12
 #: postcode_lookup/templates/old_result.html:31
@@ -64,48 +69,49 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:374
-#: postcode_lookup/template_sorter.py:381
+#: postcode_lookup/template_sorter.py:418
+#: postcode_lookup/template_sorter.py:431
+#: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:378
+#: postcode_lookup/template_sorter.py:425
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/utils.py:77
+#: postcode_lookup/utils.py:79
 msgid "one"
 msgstr "un"
 
-#: postcode_lookup/utils.py:78
+#: postcode_lookup/utils.py:80
 msgid "two"
 msgstr "dau"
 
-#: postcode_lookup/utils.py:79
+#: postcode_lookup/utils.py:81
 msgid "three"
 msgstr "tri"
 
-#: postcode_lookup/utils.py:80
+#: postcode_lookup/utils.py:82
 msgid "four"
 msgstr "pedwar"
 
-#: postcode_lookup/utils.py:81
+#: postcode_lookup/utils.py:83
 msgid "five"
 msgstr "pump"
 
-#: postcode_lookup/utils.py:82
+#: postcode_lookup/utils.py:84
 msgid "six"
 msgstr "chwech"
 
-#: postcode_lookup/utils.py:83
+#: postcode_lookup/utils.py:85
 msgid "seven"
 msgstr "saith"
 
-#: postcode_lookup/utils.py:84
+#: postcode_lookup/utils.py:86
 msgid "eight"
 msgstr "wyth"
 
-#: postcode_lookup/utils.py:85
+#: postcode_lookup/utils.py:87
 msgid "nine"
 msgstr "naw"
 
@@ -120,8 +126,6 @@ msgstr "Etholiadau yn eich ardal"
 #, fuzzy
 msgid "Upcoming election information"
 msgstr "Gwybodaeth etholiad sydd i ddod"
-msgid "Enter your postcode"
-msgstr "Rhowch eich cod post"
 
 #: postcode_lookup/templates/index.html:30
 #, fuzzy
@@ -130,13 +134,9 @@ msgid ""
 "standing, and where your polling station is. You can also find contact "
 "details for your local council."
 msgstr ""
-"Nodwch eich cod post i ganfod pa etholiadau sy'n digwydd, pwy sy'n sefyll, a "
-"ble mae eich gorsaf bleidleisio. Gallwch hefyd ddod o hyd i fanylion cyswllt "
-"eich cyngor lleol."
-
-#: postcode_lookup/templates/index.html:35
-msgid "Enter a postcode"
-msgstr "Rhowch god post"
+"Nodwch eich cod post i ganfod pa etholiadau sy'n digwydd, pwy sy'n "
+"sefyll, a ble mae eich gorsaf bleidleisio. Gallwch hefyd ddod o hyd i "
+"fanylion cyswllt eich cyngor lleol."
 
 #: postcode_lookup/templates/index.html:38
 msgid "Submit Postcode"
@@ -159,58 +159,19 @@ msgid ""
 "If you're voting at the polling station, you'll need to take photo ID "
 "with you."
 msgstr ""
-"Os ydych chi'n pleidleisio yn y gorsaf bleidleisio, bydd angen i chi gymryd "
-"adnabod llun gyda chi."
+"Os ydych chi'n pleidleisio yn y gorsaf bleidleisio, bydd angen i chi "
+"gymryd adnabod llun gyda chi."
 
 #: postcode_lookup/templates/index.html:61
 msgid "Check the list of accepted forms of photo ID"
 msgstr "Gwiriwch y rhestr o ffurfiau adnabod llun a dderbynnir"
-
-#: postcode_lookup/templates/result.html:6
-#: postcode_lookup/templates/result.html:12
-#: postcode_lookup/templates/result.html:31
-#: postcode_lookup/templates/result.html:37
-msgid "You have upcoming elections"
-msgstr "Mae gennych etholiadau sydd ar y gweill"
-
-#: postcode_lookup/templates/result.html:14
-#: postcode_lookup/templates/result.html:39
-msgid "You have an upcoming election"
-msgstr "Mae gennych etholiad sydd ar y gweill"
-
-#: postcode_lookup/templates/result.html:21
-#: postcode_lookup/templates/result.html:45
-#: postcode_lookup/templates/old_result.html:6
-#: postcode_lookup/templates/old_result.html:12
-#: postcode_lookup/templates/old_result.html:31
-#: postcode_lookup/templates/old_result.html:37
-msgid "You have upcoming elections"
-msgstr "Mae gennych etholiadau sydd ar y gweill"
-
-#: postcode_lookup/templates/old_result.html:14
-#: postcode_lookup/templates/old_result.html:39
-#: postcode_lookup/templates/results_multiple_dates.html:7
-#: postcode_lookup/templates/results_multiple_dates.html:15
-#: postcode_lookup/templates/results_one_current_ballot.html:7
-#: postcode_lookup/templates/results_one_current_ballot.html:15
-#: postcode_lookup/templates/results_one_current_date.html:7
-#: postcode_lookup/templates/results_one_current_date.html:15
-msgid "You have an upcoming election"
-msgstr "Mae gennych etholiad sydd ar y gweill"
 
 #: postcode_lookup/templates/old_result.html:21
 #: postcode_lookup/templates/old_result.html:45
 msgid "There is a recall petition in your area"
 msgstr "Mae deiseb adalw yn eich ardal"
 
-#: postcode_lookup/templates/result.html:23
-#: postcode_lookup/templates/result.html:47
-#: postcode_lookup/templates/old_result.html:23
-#: postcode_lookup/templates/old_result.html:47
-#: postcode_lookup/templates/results_no_upcoming.html:4
-msgid "There are no upcoming elections in your area"
-msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
-#: postcode_lookup/templates/includes/ballots.html:31
+#: postcode_lookup/templates/includes/ballots.html:33
 #, python-format
 msgid ""
 "<h3>Candidates</h3> <p>The list of candidates for this election will be "
@@ -220,8 +181,9 @@ msgstr ""
 "chyhoeddi ar ôl %(sopn_date)s.</p>"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:4
-msgid "Cancelled and Rescheduled Election"
-msgstr "Etholiad wedi'i ganslo ac wedi'i aildrefnu"
+#, fuzzy
+msgid "Postponed Election"
+msgstr "Etholiad wedi'i ohirio"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:6
 #, python-format
@@ -235,36 +197,55 @@ msgstr ""
 "dyddiad etholiad cychwynnol (%(initial_poll_date)s)."
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:16
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"This election was cancelled because no candidates stood for the available"
-" seats. It will be rescheduled and be held within 35 working days of the "
-"initial polling day (%(initial_poll_date)s)."
+"No candidates stood for the available seats, so no election can be held. "
+"The election will be rescheduled and held within 35 days of the original "
+"polling day (%(initial_poll_date)s)."
 msgstr ""
 "Canslwyd yr etholiad hwn oherwydd na safodd unrhyw ymgeiswyr ar gyfer y "
 "seddau sydd ar gael. Bydd yn cael ei aildrefnu a'i gynnal o fewn 35 "
 "diwrnod gwaith o'r diwrnod pleidleisio cychwynnol "
 "(%(initial_poll_date)s)."
 
-#: postcode_lookup/templates/includes/cancellation_reasons.html:26
+#: postcode_lookup/templates/includes/cancellation_reasons.html:25
+#, fuzzy
+msgid "Uncontested Election"
+msgstr "Etholiad wedi'i ganslo"
+
+#: postcode_lookup/templates/includes/cancellation_reasons.html:28
+#, fuzzy
 msgid ""
-"This election was cancelled because the number of candidates who stood "
-"was equal to the number of available seats. The following candidates will"
-" take up this position:"
+"No election will be held because the number of candidates who stood was "
+"equal to the number of available seats. The following candidates will "
+"take up this position:"
 msgstr ""
 "Canslwyd yr etholiad hwn gan fod nifer yr ymgeiswyr a safodd yn gyfartal "
 "â nifer y seddau sydd ar gael. Bydd yr ymgeiswyr canlynol yn cymryd y "
 "safle hwn:"
 
-#: postcode_lookup/templates/includes/cancellation_reasons.html:41
-#, fuzzy
+#: postcode_lookup/templates/includes/cancellation_reasons.html:43
+#, python-format
 msgid ""
-"This election was cancelled because the number of candidates who stood "
-"was fewer than the number of available seats."
+"This election was postponed because the number of candidates who stood "
+"was fewer than the number of available seats. The election will be "
+"rescheduled and held within 35 days of the original polling day "
+"(%(initial_poll_date)s)."
 msgstr ""
-"Canslwyd yr etholiad hwn gan fod nifer yr ymgeiswyr a safodd yn gyfartal "
-"â nifer y seddau sydd ar gael. Bydd yr ymgeiswyr canlynol yn cymryd y "
-"safle hwn:"
+"Fe ohiriwyd yr etholiad hwn gan fod nifer yr ymgeiswyr a safodd yn llai "
+"na nifer y seddau sydd ar gael. Bydd yr etholiad yn cael ei aildrefnu a'i"
+" gynnal o fewn 35 diwrnod o'r diwrnod pleidleisio gwreiddiol "
+"(%(initial_poll_date)s)."
+
+#: postcode_lookup/templates/includes/feedback_section.html:2
+msgid "Feedback"
+msgstr "Adborth"
+
+#: postcode_lookup/templates/includes/feedback_section.html:4
+msgid ""
+"Did you find what you were looking for? If not, <a "
+"href=\"/node/24756\">let us know</a>"
+msgstr "A wnaethoch chi ddod o hyd i'r hyn roeddech yn chwilio amdano? Os na, <a href=\"/node/24756\">rhowch wybod i ni</a>"
 
 #: postcode_lookup/templates/includes/html_meta.html:9
 #, fuzzy
@@ -286,6 +267,59 @@ msgstr ""
 "bleidleisio, ymgeiswyr, a manylion cyswllt eich tîm gwasanaethau "
 "etholiadol lleol"
 
+#: postcode_lookup/templates/includes/organisation_contact.html:4
+#, fuzzy
+msgid "Get help with electoral registration"
+msgstr "Cael cymorth gyda chofrestru etholiadol"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:7
+msgid ""
+"Send your postal and proxy vote applications to your local electoral "
+"registration team. You can also contact them to find out if you’re on the"
+" electoral register, and if you already have a postal or proxy vote."
+msgstr "Anfonwch eich ceisiadau pleidleisio post a dirprwy i'ch tîm cofrestru etholiadol lleol. Gallwch hefyd gysylltu â hwy i ddarganfod a ydych chi ar y gofrestr etholiadol, ac os oes gennych bleidlais post neu dirprwy eisoes."
+
+#: postcode_lookup/templates/includes/organisation_contact.html:17
+msgid "Electoral Office for Northern Ireland"
+msgstr "Swyddfa Etholiadol Gogledd Iwerddon"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:19
+msgid ""
+"For questions about your poll card, polling place, or about returning "
+"your postal voting ballot, contact the Electoral Office for Northern "
+"Ireland."
+msgstr "Am gwestiynau am eich cerdyn pleidleisio, eich man pleidleisio, neu am ddychwelyd eich papur pleidleisio post, cysylltwch â Swyddfa Etholiadol Gogledd Iwerddon."
+
+#: postcode_lookup/templates/includes/organisation_contact.html:26
+msgid ""
+"<p>For questions about your poll card, polling station, or about "
+"returning your postal voting ballot, contact your council.</p>"
+msgstr "<p>Am gwestiynau am eich cerdyn pleidleisio, eich gorsaf bleidleisio, neu am ddychwelyd eich papur pleidleisio post, cysylltwch â'ch cyngor.</p>"
+
+
+#: postcode_lookup/templates/includes/organisation_contact.html:45
+#, python-format
+msgid "Phone: <span>%(number)s</span>"
+msgstr "Ffôn: <span>%(number)s</span>"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:55
+#, python-format
+msgid "Email: <span>%(email)s</span>"
+msgstr "E-bost: <span>%(email)s</span>"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:64
+#, python-format
+msgid "%(org_name)s website"
+msgstr "Gwefan %(org_name)s"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:67
+msgid "Website"
+msgstr "Gwefan"
+
+#: postcode_lookup/templates/includes/organisation_contact.html:69
+msgid "(Opens in new window)"
+msgstr "(Yn agor mewn ffenestr newydd)"
+
 #: postcode_lookup/templates/includes/polling_station.html:2
 msgid "Your polling station"
 msgstr "Eich gorsaf bleidleisio"
@@ -294,23 +328,41 @@ msgstr "Eich gorsaf bleidleisio"
 #, fuzzy
 msgid ""
 "You'll get a poll card in the post before the election. This will tell "
-"you where to vote. If you haven't got one, contact your local council."
+"you where to vote. If you haven’t received your polling card, contact "
+"your local council."
 msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
 "dweud wrthych ble i bleidleisio. Os nad oes gennych un, cysylltwch â'ch "
 "cyngor lleol."
 
-#: postcode_lookup/templates/includes/polling_station.html:18
+#: postcode_lookup/templates/includes/polling_station.html:17
 msgid "Opening times"
 msgstr "Oriau agor"
 
-#: postcode_lookup/templates/includes/polling_station.html:18
+#: postcode_lookup/templates/includes/registration_timetable.html:8
 #, python-format
-msgid "%(ballot_date)s - 7am to 10pm"
-msgstr "%(ballot_date)s - 7am i 10pm"
+msgid ""
+"<p>The deadline to register to vote on %(date)s was "
+"%(registration_deadline)s.</p> <p>If you registered to vote before the "
+"deadline, then you will be able to vote in this election. <a "
+"href=\"#electoral_services\">Contact your council</a> to check if you are"
+" on the register.</p> <p>You can <a href=\"https://gov.uk/register-to-"
+"vote/\">register to vote</a> in future elections.</p>"
+msgstr ""
+"<p>Y dyddiad cau i gofrestru i bleidleisio ar %(date)s oedd "
+"%(registration_deadline)s.</p> <p>Os cofrestrwyd chi i bleidleisio cyn y "
+"dyddiad cau, yna byddwch yn gallu pleidleisio yn yr etholiad hwn. <a "
+"href=\"#electoral_services\">Cysylltwch â'ch cyngor</a> i wirio os ydych "
+"ar y gofrestr.</p> <p>Gallwch <a href=\"https://gov.uk/register-to-"
+"vote/\">gofrestru i bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
+
+#: postcode_lookup/templates/includes/single_date.html:9
+#, python-format
+msgid "You will have %(count)s ballot papers to fill out:"
+msgstr "Bydd gennych %(count)s papurau pleidleisio i'w llenwi:"
 
 #~ msgid "Enter your postcode"
-#~ msgstr "Nodwch eich cod post"
+#~ msgstr "Rhowch eich cod post"
 
 #~ msgid ""
 #~ "Enter your postcode to find contact "
@@ -323,7 +375,8 @@ msgstr "%(ballot_date)s - 7am i 10pm"
 #~ "gorsaf bleidleisio leol"
 
 #~ msgid "Enter a postcode"
-#~ msgstr "Nodwch god post"
+#~ msgstr "Rhowch god post"
+
 #~ msgid "%(title)s"
 #~ msgstr ""
 
@@ -332,3 +385,18 @@ msgstr "%(ballot_date)s - 7am i 10pm"
 
 #~ msgid "%(ballot_date)s - 7am to 10pm"
 #~ msgstr "%(ballot_date)s - 7am i 10pm"
+
+#~ msgid "Cancelled and Rescheduled Election"
+#~ msgstr "Etholiad wedi'i ganslo ac wedi'i aildrefnu"
+
+#~ msgid ""
+#~ "This election was cancelled because the"
+#~ " number of candidates who stood was"
+#~ " fewer than the number of available"
+#~ " seats."
+#~ msgstr ""
+#~ "Canslwyd yr etholiad hwn gan fod "
+#~ "nifer yr ymgeiswyr a safodd yn "
+#~ "gyfartal â nifer y seddau sydd ar"
+#~ " gael. Bydd yr ymgeiswyr canlynol yn"
+#~ " cymryd y safle hwn:"

@@ -1,25 +1,33 @@
 <section class="ec-ds-section {{ org_type }}">
     {% if org_type == "registration" %}
 
-        <h2 id="registration-services">Get help with electoral registration</h2>
+        <h2 id="registration-services">{% trans %}Get help with electoral registration{% endtrans %}</h2>
 
         <p>
-            Send your postal and proxy vote applications to your local electoral registration team.
-            You can also contact them to find out if you’re on the electoral register,
-            and if you already have a postal or proxy vote.
+            {% trans %}
+
+                Send your postal and proxy vote applications to your local electoral registration team.
+                You can also contact them to find out if you’re on the electoral register,
+                and if you already have a postal or proxy vote.
+            {% endtrans %}
         </p>
     {% endif %}
     {% if org_type == "electoral_services" %}
         {% if org.nation == "Northern Ireland" %}
-            <h2 id="electoral-services">Electoral Office for Northern Ireland</h2>
-            <p>For questions about your poll card, polling place, or about returning your
-                postal voting ballot, contact the Electoral Office for Northern Ireland.</p>
+            <h2 id="electoral-services">{% trans %}Electoral Office for Northern Ireland{% endtrans %}</h2>
+            <p>
+                {% trans %}
+                    For questions about your poll card, polling place, or about returning your
+                    postal voting ballot, contact the Electoral Office for Northern Ireland.
+                {% endtrans %}
+            </p>
         {% else %}
-            <h2 id="electoral-services">Your local council</h2>
-
-            <p>For questions about your poll card, polling station, or about returning your postal voting ballot,
-                contact
-                your council.</p>
+            <h2 id="electoral-services">{% trans %}Your local council{% endtrans %}</h2>
+            {% trans %}
+                <p>For questions about your poll card, polling station, or about returning your postal voting ballot,
+                    contact
+                    your council.</p>
+            {% endtrans %}
         {% endif %}
 
     {% endif %}
@@ -34,8 +42,9 @@
         <p>
 
             <a href="tel:" class="js-skip-external-link-test">
-                Phone:
-                <span>{{ org.phone }}</span>
+                {% trans number=org.phone %}
+                    Phone: <span>{{ number }}</span>
+                {% endtrans %}
             </a>
         </p>
     {% endif %}
@@ -43,18 +52,20 @@
     {% if org.email %}
         <p>
             <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
-                Email:
-                <span>{{ org.email }}</span>
+                {% trans email=org.email %}
+                    Email: <span>{{ email }}</span>
+                {% endtrans %}
             </a>
         </p>
     {% endif %}
     <p>
         <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
             {% if org.name %}
-                {{ org.name }} website
+                {% trans org_name=org.name %}{{ org_name }} website{% endtrans %}
+
             {% else %}
-                Website
+                {% trans %}Website{% endtrans %}
             {% endif %}
-            <span class="visually-hidden">(Opens in new window)</span></a>
+            <span class="visually-hidden">{% trans %}(Opens in new window){% endtrans %}</span></a>
     </p>
 </section>
