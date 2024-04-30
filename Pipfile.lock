@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "48c0025a5d474d95205242bf826c151a236307031497a1b35d63333676e8d294"
+            "sha256": "203ac6cf64fbc301b70f959f3bb338ea3fe9c48f013965f53eacef8432e0e393"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -51,7 +51,7 @@
             "version": "==1.1.7"
         },
         "dc-response-builder": {
-            "file": "https://github.com/DemocracyClub/dc_response_builder/archive/3e6e012bf0b67a15c7a77a7cac842df81f1ec046.zip"
+            "file": "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/1.0.0.tar.gz"
         },
         "dnspython": {
             "hashes": [
@@ -438,10 +438,10 @@
         },
         "uk-election-ids": {
             "hashes": [
-                "sha256:043d4699ff3717c85649b9fc79e1fa2b9dcdb18e62a7bdc45179c4c516b5e157",
-                "sha256:f75aaaa362728426f459fca1fb2b6c610ff2093ea2f27e944e81e2ed10f6e35c"
+                "sha256:af0428ecf5d1802d7834ed0b843b67c873f3b02da53d54a822b1a11f9cf8ef31",
+                "sha256:b53bbda223e65db0e7eedffa38616c62a82f86e7b99b021522934c5b09598a02"
             ],
-            "version": "==0.7.3"
+            "version": "==0.8.0"
         },
         "uk-election-timetables": {
             "hashes": [
@@ -2204,6 +2204,7 @@
                 "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc",
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
+            "markers": "python_version > '3.6' and python_version < '3.11'",
             "version": "==2.0.1"
         },
         "tomlkit": {

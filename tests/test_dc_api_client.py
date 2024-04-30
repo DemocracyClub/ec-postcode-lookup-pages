@@ -6,7 +6,8 @@ from dc_api_client import (
     valid_postcode,
 )
 from endpoints import base_postcode_endpoint
-from response_builder.v1.models.base import RootModel
+from response_builder.v1.models.base import PostcodeLocation, RootModel
+from response_builder.v1.models.common import Point
 from utils import date_format
 
 
@@ -40,7 +41,16 @@ def test_get_url(respx_mock):
 def test_get_postcode_endpoint(respx_mock, app_client):
     respx_mock.get(
         "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1"
-    ).mock(return_value=httpx.Response(200, json=RootModel().dict()))
+    ).mock(
+        return_value=httpx.Response(
+            200,
+            json=RootModel(
+                postcode_location=PostcodeLocation(
+                    geometry=Point(coordinates=[], type="Point"), type="Feature"
+                )
+            ).dict(),
+        )
+    )
     resp = app_client.get(
         app_client.app.url_path_for("live_postcode_en"),
         params={"postcode-search": "SE228DJ"},

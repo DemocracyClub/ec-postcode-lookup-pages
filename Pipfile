@@ -15,7 +15,7 @@ urllib3 = "<2"
 ruff = "*"
 typing-extensions = ">=3.7.4"
 starlette-babel = "*"
-dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/3e6e012bf0b67a15c7a77a7cac842df81f1ec046.zip"}
+dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/1.0.0.tar.gz"}
 uk-election-timetables = "*"
 
 [dev-packages]
