@@ -1,6 +1,9 @@
+import datetime
 import re
 
 import pytest
+from endpoints import get_ballot_stages
+from mock_responses import example_responses
 from playwright.sync_api import Page
 
 URLS_TO_CHECK = [
@@ -9,7 +12,16 @@ URLS_TO_CHECK = [
     "/sandbox/polling-stations?postcode-search=AA11AA",
     "/cy/sandbox/polling-stations?postcode-search=AA11AA",
 ]
-
+for postcode, details  in example_responses.items():
+    if details["response"].build().dates:
+        for date in get_ballot_stages(datetime.date.today()).values():
+            URLS_TO_CHECK.append(
+                f"/mock/polling-stations?postcode-search={postcode}&baseline_date={date}"
+            )
+    else:
+        URLS_TO_CHECK.append(
+            f"/mock/polling-stations?postcode-search={postcode}"
+        )
 
 @pytest.mark.parametrize(
     "path",
@@ -23,7 +35,7 @@ def test_pages_not_requesting_404(path, page: Page, uvicorn_server):
     """
 
     def response_handler(response):
-        assert response.status == 200
+        assert response.status in (200, 204)
 
     page.on("response", response_handler)
     page.goto(url=str(f"{uvicorn_server}{path}"))
@@ -41,7 +53,7 @@ def test_pages_no_console_output(path, page: Page, uvicorn_server):
     """
 
     def console_handler(message):
-        assert not message.text, "Found browser console output"
+        assert not message.text, f"Found browser console output: {message.text}"
 
     page.on("console", console_handler)
     page.goto(url=str(f"{uvicorn_server}{path}"))

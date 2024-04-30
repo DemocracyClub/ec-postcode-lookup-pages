@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  codecov: codecov/codecov@3.1.0
-  aws-cli: circleci/aws-cli@3.1
+  codecov: codecov/codecov@4.0.1
+  aws-cli: circleci/aws-cli@4.1.3
 
 jobs:
   install_and_update_dependencies:
@@ -42,6 +42,8 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
+      - run: pipenv run ruff
+      - run: pipenv run ruff-format
       - run:
           name: Install Playwright-deps
           command: |
@@ -173,7 +175,6 @@ jobs:
 
 
 workflows:
-  version: 2
   test_build_deploy:
     jobs:
       - install_and_update_dependencies
@@ -189,21 +190,21 @@ workflows:
           requires:
             - sam_build
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ development ] } }
+          filters: { branches: { only: [ development, mock-api-backend ] } }
       - static_deploy:
           name: static_deploy_development
           dc-environment: development
           requires:
             - sam_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, mock-api-backend ] } }
       - smoke_test:
           name: smoke_test_development
           dc-environment: development
           requires:
             - static_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ main, master, mock-api-backend ] } }
 
 
       - sam_deploy:

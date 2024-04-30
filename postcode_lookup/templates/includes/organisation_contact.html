@@ -1,54 +1,71 @@
-<div class="polling-station__address">
-    <div class="c-summary-box c-summary-box--grey">
-        {% if org_type == "registration" %}
+<section class="ec-ds-section {{ org_type }}">
+    {% if org_type == "registration" %}
 
+        <h2 id="registration-services">{% trans %}Get help with electoral registration{% endtrans %}</h2>
 
-            <h3 id="registration-services" class="o-type-h4">Get help with electoral registration</h3>
+        <p>
+            {% trans %}
 
-            {% if parl_recall_petition %}
-            <p>The deadline to register to vote has passed for this recall petition.</p>
-            {% endif %}
-            <p>
                 Send your postal and proxy vote applications to your local electoral registration team.
                 You can also contact them to find out if you’re on the electoral register,
                 and if you already have a postal or proxy vote.
+            {% endtrans %}
+        </p>
+    {% endif %}
+    {% if org_type == "electoral_services" %}
+        {% if org.nation == "Northern Ireland" %}
+            <h2 id="electoral-services">{% trans %}Electoral Office for Northern Ireland{% endtrans %}</h2>
+            <p>
+                {% trans %}
+                    For questions about your poll card, polling place, or about returning your
+                    postal voting ballot, contact the Electoral Office for Northern Ireland.
+                {% endtrans %}
             </p>
+        {% else %}
+            <h2 id="electoral-services">{% trans %}Your local council{% endtrans %}</h2>
+            {% trans %}
+                <p>For questions about your poll card, polling station, or about returning your postal voting ballot,
+                    contact
+                    your council.</p>
+            {% endtrans %}
         {% endif %}
-        {% if org_type == "electoral_services" %}
-            <h3 id="electoral-services" class="o-type-h4">Your local council</h3>
 
-            <p>For questions about your poll card, polling place, or about returning your postal voting ballot, contact your council.</p>
+    {% endif %}
+    <address>
+        {% if org.name %}{{ org.name }}<br>{% endif %}
+        {% if org.address %}
+            {{ org.address.replace("\n", "<br>")|safe }}<br>
         {% endif %}
-        <address>
-            <div>
-                {{ org.name }}<br>
-                {% if org.address %}
-                    {{ org.address.replace("\n", "<br>")|safe }}<br>
-                {% endif %}
-                {{ org.postcode }}
-            </div>
-            <ul class="polling-station__services u-list-reset">
-                <li>
-                    <a href="tel:" class="js-skip-external-link-test">
-                        <span class="visually-hidden">Phone: </span>
-                        <span>{{ org.phone }}</span>
-                    </a>
-                </li>
-                {% if org.email %}
-                <li>
-                    <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
-                        <span class="visually-hidden">Email: </span>
-                        <span>{{ org.email }}</span>
-                    </a>
-                </li>
-                {% endif %}
-                <li>
-                    <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
-                        <span class="visually-hidden">Website: </span>
-                        <span>{{ org.website }}</span>
-                        <span class="visually-hidden">(Opens in new window)</span></a>
-                </li>
-            </ul>
-        </address>
-    </div>
-</div>
+        {{ org.postcode }}
+    </address>
+    {% if org.phone %}
+        <p>
+
+            <a href="tel:" class="js-skip-external-link-test">
+                {% trans number=org.phone %}
+                    Phone: <span>{{ number }}</span>
+                {% endtrans %}
+            </a>
+        </p>
+    {% endif %}
+
+    {% if org.email %}
+        <p>
+            <a href="mailto:{{ org.email }}" class="js-skip-external-link-test">
+                {% trans email=org.email %}
+                    Email: <span>{{ email }}</span>
+                {% endtrans %}
+            </a>
+        </p>
+    {% endif %}
+    <p>
+        <a href="{{ org.website }}" target="_blank" rel="noopener" class="o-external-link">
+            {% if org.name %}
+                {% trans org_name=org.name %}{{ org_name }} website{% endtrans %}
+
+            {% else %}
+                {% trans %}Website{% endtrans %}
+            {% endif %}
+            <span class="visually-hidden">{% trans %}(Opens in new window){% endtrans %}</span></a>
+    </p>
+</section>

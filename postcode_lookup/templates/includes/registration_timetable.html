@@ -1,0 +1,15 @@
+<{{ section.context.htag }} id="voter-registration">{% trans %}Voter registration{% endtrans %}</{{ section.context.htag }}>
+{% if section.context.can_register %}
+    <h3>Register to vote</h3>
+    <p>You have until {{ section.timetable.registration_deadline|date_filter }}</p>
+    <p><a href="https://gov.uk/register-to-vote/" class="o-button o-button--primary o-button--dark o-external-link">
+        Register to vote</a></p>
+{% else %}
+    {% trans date=section.data.date|date_filter, registration_deadline=section.timetable.registration_deadline|date_filter %}
+    <p>The deadline to register to vote on {{ date }}
+        was {{ registration_deadline }}.</p>
+    <p>If you registered to vote before the deadline, then you will be able to vote in this election. <a
+            href="#electoral_services">Contact your council</a> to check if you are on the register.</p>
+    <p>You can <a href="https://gov.uk/register-to-vote/">register to vote</a> in future elections.</p>
+    {% endtrans %}
+{% endif %}

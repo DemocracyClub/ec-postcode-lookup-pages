@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo page | EC postcode look-up pages</title>
+    <style>
+
+        body {
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+        }
+
+        #container {
+            margin: 0 auto;
+            max-width: 70ch;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .stack > * {
+            margin-block: 0;
+        }
+
+        .stack > * + * {
+            margin-block-start: var(--space, 2rem);
+        }
+
+        .stack > h1 + *, h2 + *, h3 + *, h4 + * {
+            --space: 0.5rem;
+        }
+
+        .stack > h1 + h2, h2 + h3, h3 + h4, h4 + h5 {
+            --space: 2rem;
+        }
+
+        table {
+            text-align: left;
+            border-collapse: separate;
+            border-spacing: 0 1em;
+        }
+
+        ul.sample_list {
+            padding: 0
+        }
+
+        .example_section, .example_section li {
+            color: #002C57;
+            font-family: "Swis721LtBTW05-Medium","helvetica","arial",sans-serif;
+            font-size: 20px !important;
+            line-height: 30px;
+            overflow-wrap: break-word
+        }
+    </style>
+</head>
+<body>
+
+{% for section in sections %}
+    <h2>{{ section.title }}</h2>
+    <div style="max-width:70ch; margin:0 auto; border:1px solid #CCC; padding:1em;" class="stack example_section dc-container">
+        {{ section.content }}
+    </div>
+
+    <hr>
+{% endfor %}
+
+
+</body>
+</html>

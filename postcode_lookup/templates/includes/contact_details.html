@@ -1,0 +1,17 @@
+<div class="card">
+    {% if api_response.registration == api_response.electoral_services %}
+    {% with org = api_response.electoral_services, org_type="electoral_services" %}
+        {% include "includes/organisation_contact.html" %}
+    {% endwith %}
+{% else %}
+    {% if api_response.registration %}
+        {% with org = api_response.registration, org_type="registration" %}
+            {% include "includes/organisation_contact.html" %}
+        {% endwith %}
+    {% endif %}
+
+    {% with org = api_response.electoral_services, org_type="electoral_services" %}
+        {% include "includes/organisation_contact.html" %}
+    {% endwith %}
+{% endif %}
+</div>

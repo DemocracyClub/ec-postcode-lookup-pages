@@ -1,0 +1,21 @@
+<div style="background-color: darkgray;margin:0; padding:0;">
+    <pre style="margin:0; padding:0;">
+        Current date: {{ current_date }}
+        {{ template_sorter.mode }}
+        {{ template_sorter.response_type }}
+        {{ template_sorter.main_template_name }}
+    {% for date in template_sorter.dates %}
+        {% for section in date.sections %}
+        	{{ section }}: {{ section.weight }}
+        {% endfor %}
+
+    {% endfor %}
+
+
+
+        <details style="margin:0 5em; padding:0;">
+            <summary>API response</summary>
+            <code>{{ template_sorter.api_response.json(indent=4) }}</code>
+        </details>
+    </pre>
+</div>

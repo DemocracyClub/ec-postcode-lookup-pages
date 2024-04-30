@@ -143,6 +143,7 @@ def add_local_font_css(soup):
 }
             </style>
             {% endif %}
+            {% include 'includes/extra_header.html' %}
             """,
             "html.parser",
         ),

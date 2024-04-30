@@ -1,0 +1,51 @@
+{% extends request.base_template %}
+
+{% block html_title %}
+    {{ template_sorter.page_title }}
+{% endblock html_title %}
+
+{% block page_title %}
+    {{ template_sorter.page_title }}
+{% endblock %}
+
+{% block language_picker %}
+    {% include "includes/language_picker.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="dc-container">
+        {% block page_toc %}
+            {% if template_sorter.toc_items %}
+                <nav class="page-nav" aria-labelledby="page-nav-label">
+                    <h2 id="page_nav_label">On this page</h2>
+
+                    <ul>
+                        {% for toc_item in template_sorter.toc_items %}
+                            <li><a href="#{{ toc_item.anchor }}">{{ toc_item.label }}</a>
+
+                            {% if toc_item.sub_toc %}
+                            	<ul>
+                                    {% for sub_toc_item in toc_item.sub_toc %}
+                                    <li><a href="#{{ sub_toc_item.anchor }}">{{ sub_toc_item.label }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% endblock %}
+
+        {% for date in template_sorter.dates %}
+            {% include 'includes/single_date.html' %}
+        {% endfor %}
+
+
+        {% include 'includes/contact_details.html' %}
+
+        {% include 'includes/feedback_section.html' %}
+
+    </div>
+{% endblock %}

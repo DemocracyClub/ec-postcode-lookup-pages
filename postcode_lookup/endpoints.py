@@ -1,3 +1,4 @@
+import datetime
 import functools
 import os
 
@@ -7,12 +8,18 @@ from dc_api_client import (
     InvalidPostcodeException,
     InvalidUPRNException,
     LiveAPIBackend,
+    MockAPIBackend,
     SandboxAPIBackend,
 )
-from response_builder.v1.models.base import RootModel
+from markupsafe import Markup
+from mock_responses import example_responses
+from response_builder.v1.builders.ballots import StockLocalBallotBuilder
+from response_builder.v1.generated_responses.candidates import all_candidates
+from response_builder.v1.models.base import CancellationReason, RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 from starlette.requests import Request
 from starlette.responses import RedirectResponse, Response
+from template_sorter import TemplateSorter
 from utils import get_loader
 
 
@@ -27,6 +34,9 @@ live_postcode_form = functools.partial(
 )
 sandbox_postcode_form = functools.partial(
     base_postcode_form, backend=SandboxAPIBackend
+)
+mock_postcode_form = functools.partial(
+    base_postcode_form, backend=MockAPIBackend
 )
 
 
@@ -54,6 +64,7 @@ async def base_postcode_endpoint(
         return RedirectResponse(
             request.url_for(backend.URL_PREFIX + "_postcode_form_en")
         )
+
     if postcode == "FA1LL":
         return Response(status_code=400)
     if postcode == "FA2LL":
@@ -61,7 +72,8 @@ async def base_postcode_endpoint(
 
     try:
         api_response = backend(
-            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
+            request=request,
         ).get_postcode(postcode)
     except InvalidPostcodeException:
         return RedirectResponse(
@@ -69,23 +81,14 @@ async def base_postcode_endpoint(
                 backend.URL_PREFIX + "_postcode_form_en"
             ).include_query_params(**{"invalid-postcode": 1})
         )
-    context = results_context(api_response)
-    context["request"] = request
-    context["postcode"] = postcode
-    context["url_prefix"] = backend.URL_PREFIX
-    if api_response.get("parl_recall_petition"):
-        context["parl_recall_petition"] = api_response["parl_recall_petition"]
-        if "signing_start" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_start"] = parse(
-                context["parl_recall_petition"]["signing_start"]
-            )
-        if "signing_end" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_end"] = parse(
-                context["parl_recall_petition"]["signing_end"]
-            )
-    template_name = "result.html"
+    context = results_context(api_response, request, postcode, backend)
+
+    template_sorter = TemplateSorter(context["api_response"])
+    context["template_sorter"] = template_sorter
+    template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
+
     return get_loader(request).TemplateResponse(template_name, context)
 
 
@@ -96,9 +99,9 @@ live_postcode_view = functools.partial(
 sandbox_postcode_view = functools.partial(
     base_postcode_endpoint, backend=SandboxAPIBackend
 )
-
-
-# TODO: mock_postcode_view = functools.partial(base_postcode_endpoint, backend=MockAPIBackend)
+mock_postcode_view = functools.partial(
+    base_postcode_endpoint, backend=MockAPIBackend
+)
 
 
 async def base_uprn_endpoint(request: Request, backend=None):
@@ -115,7 +118,8 @@ async def base_uprn_endpoint(request: Request, backend=None):
     postcode = request.path_params["postcode"]
     try:
         api_response = backend(
-            api_key=os.environ.get("API_KEY", "ec-postcode-testing")
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
+            request=request,
         ).get_uprn(uprn)
     except InvalidUPRNException:
         return RedirectResponse(
@@ -123,21 +127,11 @@ async def base_uprn_endpoint(request: Request, backend=None):
                 backend.URL_PREFIX + "_postcode_form_en"
             ).include_query_params(**{"invalid-uprn": 1})
         )
-    context = results_context(api_response)
-    context["request"] = request
-    context["postcode"] = postcode
-    context["url_prefix"] = backend.URL_PREFIX
-    if api_response.get("parl_recall_petition"):
-        context["parl_recall_petition"] = api_response["parl_recall_petition"]
-        if "signing_start" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_start"] = parse(
-                context["parl_recall_petition"]["signing_start"]
-            )
-        if "signing_end" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_end"] = parse(
-                context["parl_recall_petition"]["signing_end"]
-            )
-    template_name = "uprn.html"
+    context = results_context(api_response, request, postcode, backend)
+
+    template_sorter = TemplateSorter(context["api_response"])
+    context["template_sorter"] = template_sorter
+    template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
     return get_loader(request).TemplateResponse(template_name, context)
@@ -149,10 +143,39 @@ sandbox_uprn_view = functools.partial(
 )
 
 
-def results_context(api_response):
+def results_context(api_response, request, postcode, backend):
     api_json = api_response
+    context = {}
+    context["api_response"] = RootModel.from_api_response(api_json)
+    context["request"] = request
+    context["postcode"] = postcode
+    context["uprn"] = request.path_params.get("uprn", None)
+    context["url_prefix"] = backend.URL_PREFIX
+    if context["uprn"]:
+        context["route_name"] = "uprn"
+    else:
+        context["route_name"] = "postcode"
+
+    if api_response.get("parl_recall_petition"):
+        context["parl_recall_petition"] = api_response["parl_recall_petition"]
+        if "signing_start" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_start"] = parse(
+                context["parl_recall_petition"]["signing_start"]
+            )
+        if "signing_end" in context["parl_recall_petition"]:
+            context["parl_recall_petition"]["signing_end"] = parse(
+                context["parl_recall_petition"]["signing_end"]
+            )
+    context["current_date"] = str(datetime.date.today())
+
+    return context
+
+
+def get_ballot_stages(poll_open_date):
     return {
-        "api_response": RootModel.from_api_response(api_json),
+        "Polling day": poll_open_date,
+        "After SOPNs": poll_open_date + datetime.timedelta(days=20),
+        "Before SOPNs": poll_open_date + datetime.timedelta(days=35),
     }
 
 
@@ -169,11 +192,66 @@ async def redirect_root_to_postcode_form(request: Request):
     if not request.app.debug:
         return Response(status_code=404)
 
+    poll_open_date = datetime.date.today()
+    ballot_stages = get_ballot_stages(poll_open_date)
+
     return get_loader(request).TemplateResponse(
         "debug_page.html",
-        {"request": request, "sandbox_postcodes": SANDBOX_POSTCODES},
+        {
+            "request": request,
+            "sandbox_postcodes": SANDBOX_POSTCODES,
+            "mock_postcodes": example_responses,
+            "ballot_stages": ballot_stages,
+        },
     )
 
 
 def failover(request: Request):
     return Response(status_code=400)
+
+
+async def section_tester(request: Request):
+    template_name = "section_tester.html"
+
+    sections = []
+
+    if request.path_params["section"] == "cancellation_reasons":
+        base_ballot = StockLocalBallotBuilder().with_candidates(all_candidates)
+        for cancellation_reason in CancellationReason:
+            ballot = base_ballot.with_cancellation_reason(
+                cancellation_reason
+            ).build()
+            template = get_loader(request).TemplateResponse(
+                "includes/cancellation_reasons.html",
+                {
+                    "request": request,
+                    "initial_poll_date": ballot.poll_open_date,
+                    "ballot": ballot,
+                },
+            )
+
+            sections.append(
+                {
+                    "content": Markup(template.body.decode()).replace(
+                        "\\n", ""
+                    ),
+                    "title": cancellation_reason.name,
+                }
+            )
+
+    return get_loader(request).TemplateResponse(
+        template_name,
+        {
+            "request": request,
+            "sections": sections,
+        },
+    )
+
+
+async def design_system_view(request: Request):
+    return get_loader(request).TemplateResponse(
+        "design_system.html",
+        {
+            "request": request,
+        },
+    )

@@ -2,20 +2,25 @@ import os
 from pathlib import Path
 
 from endpoints import (
+    design_system_view,
     failover,
     live_postcode_form,
     live_postcode_view,
     live_uprn_view,
+    mock_postcode_view,
     redirect_root_to_postcode_form,
     sandbox_postcode_form,
     sandbox_postcode_view,
     sandbox_uprn_view,
+    section_tester,
 )
 from mangum import Mangum
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
+from starlette.requests import HTTPConnection
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
+from starlette_babel import LocaleMiddleware, get_translator
 from utils import ForwardedForMiddleware, i18nMiddleware
 
 if sentry_dsn := os.environ.get("SENTRY_DSN"):
@@ -34,6 +39,7 @@ if sentry_dsn := os.environ.get("SENTRY_DSN"):
 
 routes = [
     Route("/", endpoint=redirect_root_to_postcode_form),
+    Route("/sections/{section}/", endpoint=section_tester),
     Route("/failover", endpoint=failover, name="failover"),
     Route(
         "/i-am-a/voter/your-election-information",
@@ -96,6 +102,33 @@ routes = [
         endpoint=sandbox_uprn_view,
         name="sandbox_uprn_cy",
     ),
+    # Mock
+    Route(
+        "/mock/polling-stations",
+        endpoint=mock_postcode_view,
+        name="mock_postcode_en",
+    ),
+    Route(
+        "/cy/mock/polling-stations",
+        endpoint=mock_postcode_view,
+        name="mock_postcode_cy",
+    ),
+    Route(
+        "/design-system",
+        endpoint=design_system_view,
+        name="design_system_view",
+    ),
+
+    # Route(
+    #     "/mock/polling-stations/{postcode}/{uprn}",
+    #     endpoint=sandbox_uprn_view,
+    #     name="sandbox_uprn_en",
+    # ),
+    # Route(
+    #     "/cy/sandbox/polling-stations/{postcode}/{uprn}",
+    #     endpoint=sandbox_uprn_view,
+    #     name="sandbox_uprn_cy",
+    # ),
     Mount(
         "/themes/",
         app=StaticFiles(directory=Path(__file__).parent / "themes"),
@@ -108,11 +141,25 @@ routes = [
     ),
 ]
 
+shared_translator = get_translator()  # process global instance
+shared_translator.load_from_directories([Path(__file__).parent / "locale"])
+
+
+def current_language_selector(conn: HTTPConnection) -> str | None:
+    return conn.scope["current_language"]
+
+
 app = Starlette(
     debug=True,
     routes=routes,
     middleware=[
         Middleware(i18nMiddleware),
+        Middleware(
+            LocaleMiddleware,
+            locales=["en", "cy"],
+            default_locale="en",
+            selectors=[current_language_selector],
+        ),
         Middleware(ForwardedForMiddleware),
     ],
 )
