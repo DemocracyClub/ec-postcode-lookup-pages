@@ -1,14 +1,14 @@
 {% for ballot in date.date_data.ballots %}
     <div class="ec-ds-section">
         {% if not section.response_type.name == "ONE_CURRENT_BALLOT" %}
-            <h3 id="{{ ballot.ballot_paper_id }}">{{ ballot.election_name }}</h3>
+
         {% endif %}
         {% if ballot.cancelled %}
             {% include 'includes/cancellation_reasons.html' %}
         {% else %}
             {% if ballot.candidates_verified and section.context.show_candidates %}
                 <details>
-                    <summary>Candidates</summary>
+                    <summary id="{{ ballot.ballot_paper_id }}">{{ ballot.election_name }} candidates</summary>
                     {{ additional_ballot_link(request, ballot) }}
                     <ol class="candidate-list">
                         {% if ballot.voting_system.uses_party_lists %}

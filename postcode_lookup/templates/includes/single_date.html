@@ -3,6 +3,21 @@
         {{ date.date_data.ballots.0.ballot_title }}
     {% endif %}
 </h2>
+
+{% if date.date_data.ballots|length > 1 %}
+    <p>
+        {% trans count=date.date_data.ballots|length %}
+            You will have {{ count }} ballot papers to fill out:
+        {% endtrans %}
+    </p>
+    <ul>
+        {% for ballot in date.date_data.ballots %}
+            <li>{{ ballot.ballot_title }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
 {% for section in date.sections %}
     <section class="ec-ds-section {{ section.name }}" id="{{ section.toc_id }}">
         {% include section.template_name %}

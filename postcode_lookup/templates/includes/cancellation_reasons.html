@@ -1,5 +1,5 @@
 
-
+<h3 id="{{ ballot.ballot_paper_id }}">{{ ballot.ballot_title }}</h3>
 {% if ballot.cancellation_reason.name == "CANDIDATE_DEATH" %}
     <h4>{% trans %}Postponed Election{% endtrans %}</h4>
     <p>
@@ -41,8 +41,9 @@
 {% if ballot.cancellation_reason.name == "UNDER_CONTESTED" %}
     <p>
         {% trans initial_poll_date=ballot.poll_open_date|date_filter %}
-            This election was cancelled because the number of candidates who stood was fewer than the number of
-            available seats.
+            This election was postponed because the number of candidates who stood was fewer than the number of
+            available seats. The election will be rescheduled and held within 35 days of the original polling day
+            ({{ initial_poll_date }}).
         {% endtrans %}
     </p>
 {% endif %}

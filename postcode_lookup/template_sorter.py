@@ -5,7 +5,7 @@ from functools import cached_property
 from typing import Dict, List, Optional
 
 from dateparser import parse
-from response_builder.v1.models.base import Date, RootModel
+from response_builder.v1.models.base import CancellationReason, Date, RootModel
 from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
@@ -40,6 +40,7 @@ country_map = {
     "Wales": Country.WALES,
     "Northern Ireland": Country.NORTHERN_IRELAND,
 }
+
 
 class BaseSection(abc.ABC):
     template_name = None
@@ -185,6 +186,11 @@ class ElectionDateTemplateSorter:
         self.all_cancelled = all(
             ballot.cancelled for ballot in self.date_data.ballots
         )
+        self.cancellation_reasons = {
+            ballot.cancellation_reason.name
+            for ballot in self.date_data.ballots
+            if ballot.cancelled
+        }
 
         # TODO: move to per ballot time tables
         self.timetable = from_election_id(
@@ -192,7 +198,10 @@ class ElectionDateTemplateSorter:
         )
 
         self.polling_station_opening_times_str = _("7am – 10pm")
-        if any("city-of-london" in ballot.ballot_paper_id for ballot in self.date_data.ballots):
+        if any(
+            "city-of-london" in ballot.ballot_paper_id
+            for ballot in self.date_data.ballots
+        ):
             self.polling_station_opening_times_str = _("8am – 8pm")
 
         self.current_mode = None
@@ -269,6 +278,9 @@ class TemplateSorter:
         self.all_cancelled = all(
             election_date.all_cancelled for election_date in self.dates
         )
+        self.all_cancelled_reasons = set()
+        for date in self.dates:
+            self.all_cancelled_reasons.update(date.cancellation_reasons)
 
     @property
     def response_type(self):
@@ -309,9 +321,21 @@ class TemplateSorter:
             return _("There are no upcoming elections in your area")
 
         if self.all_cancelled:
+            cancellation_reasons = self.all_cancelled_reasons
+            verbs = []
+            if CancellationReason.EQUAL_CANDIDATES.name in cancellation_reasons:
+                verbs.append(str(_("Uncontested")))
+            postponed = {
+                CancellationReason.NO_CANDIDATES.name,
+                CancellationReason.CANDIDATE_DEATH.name,
+                CancellationReason.UNDER_CONTESTED.name,
+            }
+            if cancellation_reasons.issubset(postponed):
+                verbs.append(str(_("Postponed")))
+            verb = " and ".join(verbs)
             return _(
-                "Cancelled election",
-                "Cancelled elections",
+                f"{verb} election",
+                f"{verb} elections",
                 count=self.total_ballot_count,
             )
 
@@ -346,10 +370,15 @@ class TemplateSorter:
                 if isinstance(section, BallotSection):
                     for ballot in section.data.ballots:
                         toc.append(
-                            {"label": ballot.ballot_title, "anchor": ballot.ballot_paper_id}
+                            {
+                                "label": ballot.ballot_title,
+                                "anchor": ballot.ballot_paper_id,
+                            }
                         )
                 else:
-                    toc.append({"label": section.toc_label, "anchor": section.toc_id})
+                    toc.append(
+                        {"label": section.toc_label, "anchor": section.toc_id}
+                    )
 
         if self.response_type == ResponseTypes.MULTIPLE_DATES:
             for date in self.dates:
@@ -358,27 +387,50 @@ class TemplateSorter:
                     if isinstance(section, BallotSection):
                         for ballot in section.data.ballots:
                             sub_toc.append(
-                                {"label": ballot.ballot_title, "anchor": ballot.ballot_paper_id}
+                                {
+                                    "label": ballot.ballot_title,
+                                    "anchor": ballot.ballot_paper_id,
+                                }
                             )
                     else:
-                        sub_toc.append({"label": section.toc_label, "anchor": section.toc_id})
-                toc.append({"label": date_format(date.date_data.date), "anchor": f"date-{date.date_data.date}", "sub_toc": sub_toc})
+                        sub_toc.append(
+                            {
+                                "label": section.toc_label,
+                                "anchor": section.toc_id,
+                            }
+                        )
+                toc.append(
+                    {
+                        "label": date_format(date.date_data.date),
+                        "anchor": f"date-{date.date_data.date}",
+                        "sub_toc": sub_toc,
+                    }
+                )
 
         if toc:
             contact_details_toc = []
             if (
-                    self.api_response.registration
-                    == self.api_response.electoral_services
+                self.api_response.registration
+                == self.api_response.electoral_services
             ):
                 contact_details_toc.append(
-                    {"label": _("Your local council"), "anchor": "electoral-services"}
+                    {
+                        "label": _("Your local council"),
+                        "anchor": "electoral-services",
+                    }
                 )
             else:
                 contact_details_toc.append(
-                    {"label": _("Electoral registration"), "anchor": "registration-services"}
+                    {
+                        "label": _("Electoral registration"),
+                        "anchor": "registration-services",
+                    }
                 )
                 contact_details_toc.append(
-                    {"label": _("Your local council"), "anchor": "electoral-services"}
+                    {
+                        "label": _("Your local council"),
+                        "anchor": "electoral-services",
+                    }
                 )
 
             toc += contact_details_toc
