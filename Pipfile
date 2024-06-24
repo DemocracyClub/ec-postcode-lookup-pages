@@ -25,7 +25,7 @@ respx = "*"
 aws-sam-cli = "*"
 ipdb = "*"
 beautifulsoup4 = "*"
-pydantic = {extras = ["email"], version = "==2.6.4"}
+pydantic = {extras = ["email"], version = "<2"}
 pydantic-factories = "*"
 ruff = "0.4.10"
 pytest-cov = "*"
