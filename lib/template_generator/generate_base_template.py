@@ -8,6 +8,26 @@ from urllib.parse import urljoin
 import httpx
 from bs4 import BeautifulSoup, Tag
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
+    "Accept-Language": "en-GB,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate",
+    "DNT": "1",
+    "Connection": "keep-alive",
+    "Cookie": "__cf_bm=WbQ13AzV7xV4sObvFzwyLMD6gNfUGaLDqyY1fMF1FkY-1719217501-1.0.1.1-Trbp.aODPGxNkDki6oOHtqpmdRn_TQ4ws6jKiBC5U8nPrx6edTaqCq_CL7n.R8YEK8xQtATmp5Cqqzr.Tu9mjA",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Sec-GPC": "1",
+    "Priority": "u=0, i",
+    "TE": "trailers",
+    "If-Modified-Since": "Sun, 23 Jun 2023 10:28:42 GMT",
+}
+client = httpx.Client(headers=headers)
+
 TEMPLATES = {
     "base.html": {
         "source_url": "https://www.electoralcommission.org.uk/voting-and-elections/who-can-vote"
@@ -70,6 +90,11 @@ def _replace_content(el, content):
     )
 
 
+def _wrap_content(el, before, after):
+    el.insert_before(before)
+    el.insert_after(after)
+
+
 def remove_unwanted_content(soup: BeautifulSoup):
     location_selectors = soup.select("#block-locationselector")
     if location_selectors:
@@ -89,6 +114,12 @@ def remove_unwanted_content(soup: BeautifulSoup):
     _replace_content(
         soup.select_one(".c-hero__title"),
         "{% block page_title %}{% endblock page_title %}",
+    )
+
+    _wrap_content(
+        soup.select_one(".c-hero"),
+        "{% block page_hero %}",
+        "{% endblock page_hero %}",
     )
 
     _replace_content(
@@ -193,7 +224,7 @@ def download_assets(soup, static_path, souce_url):
             with open(path, "w") as f:
                 for file in files:
                     url = urljoin(souce_url, file)
-                    asset_text = httpx.get(url).text
+                    asset_text = client.get(url).text
                     if file_type == "css":
                         asset_text = rewrite_css_urls(asset_text, souce_url)
                     f.write(asset_text)
@@ -264,7 +295,7 @@ shutil.rmtree(static_path.absolute(), ignore_errors=True)
 
 for template, config in TEMPLATES.items():
     template_path = project_path / "templates" / template
-    req = httpx.get(config["source_url"], timeout=300)
+    req = client.get(config["source_url"], timeout=300)
     req.raise_for_status()
     html_text = req.text
     # The Welsh version of the site has a broken HTML tag that breaks Soup.
@@ -273,7 +304,6 @@ for template, config in TEMPLATES.items():
         "<link rel='dns-prefetch' href='https://fonts.googleapis.com'>", ""
     )
     soup = BeautifulSoup(html_text, "html.parser")
-
     assets = download_assets(soup, static_path, config["source_url"])
     soup = rewrite_urls(soup, config["source_url"])
     soup = rewrite_asset_urls(soup, assets, static_path)
