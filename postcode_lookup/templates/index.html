@@ -1,7 +1,64 @@
 {% extends request.base_template %}
 
-{% block page_title %}
-    {% trans %}Elections in your area{% endtrans %}
+{% block page_hero %}
+{% endblock %}
+{% block breadcrumbs %}
+        {{ super() }}
+    <div class="c-hero--landing-page c-hero" style="border-top:1px solid white;">
+        <div class="o-container">
+            <div class="c-hero__wrapper dc-background-image">
+                <div class="c-hero__content">
+                    <h1 class="c-hero__title">
+                        {% trans %}My next election{% endtrans %}
+
+                    </h1>
+                    <p>{% trans %}
+                        Enter your postcode to find out about voting in your next election. We'll tell you who's
+                        standing, where your polling station is, and who to contact if you need
+                        help.
+
+                    {% endtrans %}</p>
+                    <form id="dc-postcode-search-form">
+                        <label for="postcode-search">
+                            {% trans %}Enter your postcode{% endtrans %}</label>
+                        <p class="dc-form-hint">eg. SW1A 2AA</p>
+                        <div class="dc-inline-form">
+                            <input
+                                    id="postcode-search"
+                                    type="text"
+                                    name="postcode-search"
+                                    pattern="^([A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0AA)$"
+                                    required>
+                            <button type="submit" name="Submit Postcode"
+                                    formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
+                                Search
+                            </button>
+
+
+                        </div>
+                    </form>
+                    <script>
+                        // Get the postcode input element
+                        const postcodeInput = document.getElementById('postcode-search');
+
+                        // Function to set custom validity message
+                        postcodeInput.addEventListener('invalid', function (event) {
+                            if (postcodeInput.validity.patternMismatch) {
+                                postcodeInput.setCustomValidity('Please enter a valid UK postcode, e.g., SW1A 1AA.');
+                            } else {
+                                postcodeInput.setCustomValidity(''); // Clear custom messages if no pattern mismatch
+                            }
+                        });
+
+                        // Clear custom validity message on input
+                        postcodeInput.addEventListener('input', function () {
+                            postcodeInput.setCustomValidity('');
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block language_picker %}
@@ -12,65 +69,34 @@
 
 
 {% block content %}
-    <div class="l-main-content">
-        <div class="l-content-w-sidebar">
-            <div data-drupal-messages-fallback="" class="hidden"></div><div id="block-electoralcommission-mainpagecontent">
-            <div about="/i-am-a/voter/your-election-information" typeof="schema:WebPage">
-                <div>
-                    <div>
-                        <div>
-                            <section data-location-content-countries="" class="c-polling-station-slice slice--view-mode--default slice-w-padding slice-location-polling-search" aria-labelledby="paragraph-14945-title" style="">
-                                <div class="container">
-                                    <h2 id="paragraph-14945-title" class="slice__title">
-                                        <span>{%trans %}Upcoming election information{% endtrans %}</span>
-                                    </h2>
+    <div class="dc-main-content">
+        <h2>{% trans %}What this tool can tell you{% endtrans %}</h2>
 
-                                    <div class="l-grid l-grid--align-start l-grid--2-col l-grid--w-h-gutter">
-                                        <div class="l-grid__item ">
-                                            <div><p>{%trans %}Enter your postcode to find out which elections are taking place, who's standing, and where your polling station is. You can also find contact details for your local council.{% endtrans %}</p>
-                                            </div>
-                                        </div>
-                                        <div class="l-grid__item l-grid__item--wrap">
-                                            <form id="polling_station_postcode_search-14945" class="postcode-search | js-postcode-lookup-form">
-                                                <label for="postcode-search-14945" class="visually-hidden">{%trans %}Upcoming election information{% endtrans %}</label>
-                                                <input id="postcode-search-14945" type="text" class="postcode-search__input {% if request.query_params["invalid-postcode"] %} parsley-error{% endif %}" name="postcode-search" placeholder="Postcode" class="postcode-search__input" data-parsley-postcode data-parsley-errors-container=".js-errors-container-14945" required>
-                                                <button type="submit" name="Submit Postcode" class="postcode-search__btn" formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
-                                                    <span class="visually-hidden">{%trans %}Submit Postcode{% endtrans %}</span>
-                                                    <svg class="o-icon">
-                                                        <use xlink:href="#icon-search"></use>
-                                                    </svg>
-                                                </button>
-                                            </form>
-                                            <div class="postcode-search__error | js-errors-container-14945">
-                                                {% if request.query_params["invalid-postcode"] %}
-                                                    <div id="parsley-id-5" class="filled">
-                                                        <span class="parsley-postcode">{%trans %}Please enter a valid postcode{% endtrans %}</span>
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+        <ul class="grid" style="--gridCellMin: 40ch;--gridCellBG: var(--ec-light-purple)">
+            <li>
+                <h3>Which elections are happening in my area?</h3>
+                <p>When you enter your postcode, you’ll find out which elections are coming up in your area. This
+                    includes UK Parliamentary general elections, Scottish Parliament elections, Senedd elections, local elections, mayoral elections,
+                    Police and Crime Commissioner elections and by-elections.</p>
+            </li>
+            <li>
+                <h3>Where is my polling station?</h3>
+                <p>Your polling station might not be the same for every election. Check which polling station you need
+                    to go to for the next election in your area.</p>
+            </li>
+            <li>
+                <h3>What do I need to take with me when I vote?</h3>
+                <p>Some elections might require you to take photo ID and some might not. When you enter your postcode,
+                    you will find out if you need photo ID to vote in the elections coming up in your area.
+                    You do not need to take your poll card to vote.</p>
+            </li>
+            <li>
+                <h3>Who can I vote for?</h3>
+                <p>Enter your postcode to find out who the candidates in your area are.</p>
+            </li>
 
-{#                            <div style="margin-top:1.5em; background-color: #ECF3F3; padding:2em; color: #076A6E;">#}
-{#                                <h3 style="color: #077988">{%  trans %}England and Wales elections, 2 May 2024{% endtrans %}</h3>#}
-{#                                <p>{%  trans %}Polling stations will be open from 7am to 10pm.{% endtrans %}</p>#}
-{#                                <p>{%  trans %}If you're voting at the polling station, you'll need to take photo ID with you.{% endtrans %}</p>#}
-{#                                <p><a href="https://www.electoralcommission.org.uk/i-am-a/voter/voter-id/accepted-forms-photo-id" class="o-button o-button--primary o-button--dark">#}
-{#                                    {%  trans %}Check the list of accepted forms of photo ID{% endtrans %}</a></p>#}
-{#                            </div>#}
-                        </div>
+        </ul>
 
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-
-        </div>
 
     </div>
 
