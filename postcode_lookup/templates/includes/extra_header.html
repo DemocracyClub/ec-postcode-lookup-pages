@@ -1,11 +1,20 @@
 <style>
-    .dc-container {
+    :root {
         --ec-light-blue: #25B2D3;
+        --ec-dark-blue: #002C57;
+        --ec-purple: #6B528D;
+        --ec-light-purple: #F2F0F3;
+    }
+
+    .dc-container {
+
         max-width: 80ch;
     }
+
     .dc-container * {
-        margin-bottom:0;
+        margin-bottom: 0;
     }
+
     .dc-container > * + *, .ec-ds-section + .ec-ds-section, .ec-ds-section > * + * {
         margin-block-start: 2rem;
     }
@@ -41,7 +50,7 @@
         border-color: var(--ec-light-blue);
         border-style: solid;
         border-width: 1px 0;
-        margin-right:2em;
+        margin-right: 2em;
 
 
     }
@@ -94,7 +103,7 @@
     .dc-container .card {
         background-color: #ECF3F3;
         color: #076A6E;
-        padding:1.2em 2em 2em 2em;
+        padding: 1.2em 2em 2em 2em;
     }
 
     .dc-container nav.page-nav {
@@ -105,24 +114,137 @@
     }
 
     .dc-container nav.page-nav h2 {
-        font-size:1em;
+        font-size: 1em;
     }
+
     .dc-container nav.page-nav ul {
         list-style-type: none;
-        padding:0;
+        padding: 0;
 
     }
+
     .dc-container nav.page-nav ul li {
-        line-height:1.8em;
+        line-height: 1.8em;
     }
+
     .dc-container nav.page-nav ul li ul {
         padding-left: 2em;
     }
 
     .dc-container hr {
-        border:none;
+        border: none;
         border-top: 1px solid var(--ec-light-blue);
-        margin:2rem 0;
+        margin: 2rem 0;
+    }
+
+    body#dc .c-hero, body#dc .c-breadcrumb {
+        background-color: var(--ec-purple);
+
+    }
+
+    body#dc .c-hero p {
+        max-width: 50ch
+    }
+
+    body#dc .c-hero__wrapper.dc-background-image {
+        background-image: url("/static/images/hero-people-outlines.png");
+        background-repeat: no-repeat;
+        background-position: 100% 100%;
+        background-size: clamp(300px, 40vw, 550px);
+    }
+
+    @media (max-width: 950px) {
+        body#dc .c-hero__wrapper.dc-background-image {
+            background-image: none;
+        }
+
+        body#dc .c-hero p {
+            max-width: 70ch
+        }
+
+        body#dc #dc-postcode-search-form {
+            max-width: 70ch
+        }
+    }
+
+    body#dc #dc-postcode-search-form {
+        max-width: 50ch
+    }
+
+    body#dc #dc-postcode-search-form label {
+        font-weight: bold;
+    }
+
+
+    body#dc #dc-postcode-search-form .dc-form-hint {
+        font-size: 0.8rem;
+        opacity: 70%;
+    }
+
+    body#dc form#dc-postcode-search-form .dc-inline-form {
+        min-width: fit-content;
+        display: flex;
+
+    }
+
+    body#dc form#dc-postcode-search-form .dc-inline-form button {
+        padding: 1em;
+        background-color: var(--ec-dark-blue);
+        color: white;
+    }
+
+    body#dc form#dc-postcode-search-form .dc-inline-form button:hover,
+    body#dc form#dc-postcode-search-form .dc-inline-form button:focus
+    {
+        background-color: var(--ec-light-blue);
+    }
+
+    body#dc form#dc-postcode-search-form .dc-inline-form input {
+        padding: 1em;
+        background-color: white;
+        color: var(--ec-dark-blue);
+        border: none;
+        max-width: 50ch;
+        min-width: 15ch;
+        width: 100%;
+    }
+
+    body#dc form#dc-postcode-search-form.error .dc-inline-form input:not(:valid) {
+        border: 4px solid red;
+    }
+
+    p.error_message {
+        display:none;
+    }
+    p.error_message:has(+ .dc-inline-form input[aria-invalid="true"])
+    {
+        display:block;
+        border-left:4px solid red !important;
+        padding-left:1em;
+    }
+    p.error_message:has(+ .dc-inline-form input[aria-invalid="false"]),
+    p.error_message:has(+ .dc-inline-form input:valid) {
+        display:none;
+    }
+
+
+    body#dc .grid {
+        display: grid;
+        padding: 0;
+        grid-gap: var(--gridGap, 1.25rem);
+        grid-template-columns: repeat(auto-fit, minmax(min(var(--gridCellMin), 100%), 1fr));
+    }
+
+    body#dc .grid li {
+        list-style: none;
+        background-color: var(--gridCellBG);
+        padding: 1.25rem;
+    }
+
+    body#dc .dc-main-content {
+        max-width: 1400px;
     }
 
 </style>
+
+<span style="display: none !important;"><span id="ec-voter-wizard-app"></span></span>

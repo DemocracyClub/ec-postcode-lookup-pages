@@ -12,7 +12,7 @@ URLS_TO_CHECK = [
     "/sandbox/polling-stations?postcode-search=AA11AA",
     "/cy/sandbox/polling-stations?postcode-search=AA11AA",
 ]
-for postcode, details  in example_responses.items():
+for postcode, details in example_responses.items():
     if details["response"].build().dates:
         for date in get_ballot_stages(datetime.date.today()).values():
             URLS_TO_CHECK.append(
@@ -22,6 +22,7 @@ for postcode, details  in example_responses.items():
         URLS_TO_CHECK.append(
             f"/mock/polling-stations?postcode-search={postcode}"
         )
+
 
 @pytest.mark.parametrize(
     "path",
@@ -53,6 +54,8 @@ def test_pages_no_console_output(path, page: Page, uvicorn_server):
     """
 
     def console_handler(message):
+        if "Third-party cookie will be blocked" in message.text:
+            return
         assert not message.text, f"Found browser console output: {message.text}"
 
     page.on("console", console_handler)
