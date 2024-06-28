@@ -175,6 +175,7 @@
         font-weight: bold;
     }
 
+
     body#dc #dc-postcode-search-form .dc-form-hint {
         font-size: 0.8rem;
         opacity: 70%;
@@ -192,6 +193,12 @@
         color: white;
     }
 
+    body#dc form#dc-postcode-search-form .dc-inline-form button:hover,
+    body#dc form#dc-postcode-search-form .dc-inline-form button:focus
+    {
+        background-color: var(--ec-light-blue);
+    }
+
     body#dc form#dc-postcode-search-form .dc-inline-form input {
         padding: 1em;
         background-color: white;
@@ -202,12 +209,24 @@
         width: 100%;
     }
 
-    body#dc form#dc-postcode-search-form .dc-inline-form *:focus,
-    body#dc form#dc-postcode-search-form .dc-inline-form *:focus-visible {
-        outline: 2px solid var(--ec-light-blue);
-        outline-offset: -2px;
-        box-shadow: none;
+    body#dc form#dc-postcode-search-form.error .dc-inline-form input:not(:valid) {
+        border: 4px solid red;
     }
+
+    p.error_message {
+        display:none;
+    }
+    p.error_message:has(+ .dc-inline-form input[aria-invalid="true"])
+    {
+        display:block;
+        border-left:4px solid red !important;
+        padding-left:1em;
+    }
+    p.error_message:has(+ .dc-inline-form input[aria-invalid="false"]),
+    p.error_message:has(+ .dc-inline-form input:valid) {
+        display:none;
+    }
+
 
     body#dc .grid {
         display: grid;

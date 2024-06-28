@@ -3,7 +3,7 @@
 {% block page_hero %}
 {% endblock %}
 {% block breadcrumbs %}
-        {{ super() }}
+    {{ super() }}
     <div class="c-hero--landing-page c-hero" style="border-top:1px solid white;">
         <div class="o-container">
             <div class="c-hero__wrapper dc-background-image">
@@ -22,6 +22,7 @@
                         <label for="postcode-search">
                             {% trans %}Enter your postcode{% endtrans %}</label>
                         <p class="dc-form-hint">eg. SW1A 2AA</p>
+                        <p class="error_message">Please enter a valid UK postcode</p>
                         <div class="dc-inline-form">
                             <input
                                     id="postcode-search"
@@ -29,6 +30,7 @@
                                     name="postcode-search"
                                     pattern="^([A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0AA)$"
                                     required>
+
                             <button type="submit" name="Submit Postcode"
                                     formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
                                 Search
@@ -54,6 +56,28 @@
                         postcodeInput.addEventListener('input', function () {
                             postcodeInput.setCustomValidity('');
                         });
+
+
+                        // Function to get query parameter value by name
+                        function getQueryParam(param) {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            return urlParams.get(param);
+                        }
+
+                        const errorParam = getQueryParam('invalid-postcode');
+                        if (errorParam === '1') {
+                            // Display the error message
+                            document.getElementById('dc-postcode-search-form').classList.add("error");
+                            postcodeInput.setAttribute("aria-invalid", "true")
+                        }
+
+                        postcodeInput.addEventListener('input', function () {
+                            if (postcodeInput.validity.valid) {
+                                postcodeInput.setAttribute("aria-invalid", "false");
+                            }
+
+                        })
+
                     </script>
                 </div>
             </div>
@@ -76,7 +100,8 @@
             <li>
                 <h3>Which elections are happening in my area?</h3>
                 <p>When you enter your postcode, you’ll find out which elections are coming up in your area. This
-                    includes UK Parliamentary general elections, Scottish Parliament elections, Senedd elections, local elections, mayoral elections,
+                    includes UK Parliamentary general elections, Scottish Parliament elections, Senedd elections, local
+                    elections, mayoral elections,
                     Police and Crime Commissioner elections and by-elections.</p>
             </li>
             <li>
