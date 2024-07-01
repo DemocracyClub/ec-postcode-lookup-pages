@@ -435,3 +435,10 @@ class TemplateSorter:
 
             toc += contact_details_toc
         return toc
+
+    def has_and_parl_ballots(self):
+        for date in self.dates:
+            for ballot in date.date_data.ballots:
+                if ballot.ballot_paper_id.startswith("parl."):
+                    return True
+        return False

@@ -23,11 +23,25 @@
             </p>
         {% else %}
             <h2 id="electoral-services">{% trans %}Your local council{% endtrans %}</h2>
+
             {% trans %}
+
+
                 <p>For questions about your poll card, polling station, or about returning your postal voting ballot,
                     contact
                     your council.</p>
             {% endtrans %}
+
+            {% if template_sorter.has_and_parl_ballots() %}
+                {% trans %}
+                    <p>
+                        Here are contact details for your usual election team. However, for some elections, electoral
+                        boundaries mean that your neighbouring election team may be responsible for the constituency you
+                        are
+                        in. Your usual election team will be able to provide their contact details if this is the case.
+                    </p>
+                {% endtrans %}
+            {% endif %}
         {% endif %}
 
     {% endif %}
