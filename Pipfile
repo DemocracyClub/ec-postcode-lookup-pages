@@ -11,7 +11,7 @@ httpx = "0.27.0"
 babel = "==2.15.0"
 dateparser = "==1.2.0"
 sentry-sdk = {extras = ["starlette"], version = "*"}
-urllib3 = "<2"
+urllib3 = "<3"
 ruff = "*"
 typing-extensions = ">=3.7.4"
 starlette-babel = "*"
@@ -25,9 +25,9 @@ respx = "*"
 aws-sam-cli = "*"
 ipdb = "*"
 beautifulsoup4 = "*"
-pydantic = {extras = ["email"], version = "<2"}
+pydantic = {extras = ["email"], version = "<3"}
 pydantic-factories = "*"
-ruff = "0.4.10"
+ruff = "0.5.1"
 pytest-cov = "*"
 coverage = {extras = ["toml"], version = "*"}
 pytest-asyncio = "*"
