@@ -7,7 +7,8 @@ Make a new virtualenv.
 ```shell
 $ pip install -U pip
 $ pip install pipenv
-$ pipenv install --dev
+$ pipenv sync --dev
+$ playwright install
 ```
 
 Run tests:
