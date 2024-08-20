@@ -41,15 +41,13 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
-      - run: pipenv run ruff
-      - run: pipenv run ruff-format
+      - run: pipenv run ruff check .
+      - run: pipenv run ruff format . --check
       - run:
           name: Install Playwright-deps
           command: |
             sudo `pipenv --venv`/bin/playwright install-deps
       - run: pipenv run playwright install
-      - run: pipenv run ruff
-      - run: pipenv run ruff-format
       - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
           file: /home/circleci/repo/test-reports/junit.xml
