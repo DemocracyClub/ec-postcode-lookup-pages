@@ -10,7 +10,6 @@ mangum = "==0.17.0"
 httpx = "0.27.0"
 babel = "==2.15.0"
 dateparser = "==1.2.0"
-sentry-sdk = {extras = ["starlette"], version = "*"}
 urllib3 = "<2"
 ruff = "*"
 typing-extensions = ">=3.7.4"
@@ -18,6 +17,7 @@ starlette-babel = "*"
 dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/1.0.0.tar.gz"}
 uk-election-timetables = "*"
 certifi = "*"
+sentry-sdk = {extras = ["starlette"], version = "*"}
 
 [dev-packages]
 uvicorn = "*"
