@@ -14,7 +14,7 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "Pipfile.lock" }}
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
-      - run: pipenv install --dev
+      - run: pipenv sync --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
       - run: pipenv requirements > postcode_lookup/requirements.txt
       - persist_to_workspace:
