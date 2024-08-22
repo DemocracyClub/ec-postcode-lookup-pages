@@ -258,7 +258,7 @@ class TemplateSorter:
             self.api_response, "registration", None
         )
         for i, date in enumerate(self.api_response.dates):
-            if parse(date.date) < datetime.datetime.today():
+            if parse(date.date).date() < datetime.datetime.today().date():
                 continue
             if self.electoral_services:
                 country = country_map[
