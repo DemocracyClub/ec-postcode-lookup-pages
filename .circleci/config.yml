@@ -65,8 +65,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/
-#      - run: pip install --upgrade pip
-#      - run: pip install -r postcode_lookup/requirements.txt
+      - run: pip install setuptools wheel
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
