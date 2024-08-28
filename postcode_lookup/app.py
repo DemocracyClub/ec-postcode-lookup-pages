@@ -118,7 +118,6 @@ routes = [
         endpoint=design_system_view,
         name="design_system_view",
     ),
-
     # Route(
     #     "/mock/polling-stations/{postcode}/{uprn}",
     #     endpoint=sandbox_uprn_view,
