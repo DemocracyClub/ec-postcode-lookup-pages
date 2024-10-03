@@ -151,7 +151,7 @@ def current_language_selector(conn: HTTPConnection) -> str | None:
 
 # This function is used to enable basic auth in development and staging environments
 def enable_auth():
-    return os.environ.get("SAM_LAMBDA_CONFIG_ENV") in ["development", "staging"]
+    return os.environ.get("DC_ENVIRONMENT") in ["development", "staging"]
 
 
 app = Starlette(
