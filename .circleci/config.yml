@@ -167,6 +167,7 @@ jobs:
           name: "Post deploy tests"
           command: |
             export FQDN=`aws ssm get-parameter --query Parameter.Value --name 'FQDN' --output text`
+            export DC_ENVIRONMENT=`aws ssm get-parameter --query Parameter.Value --name 'DC_ENVIRONMENT' --output text`
             pipenv run pytest .circleci/tests/
 
 
