@@ -15,7 +15,6 @@ from endpoints import (
     section_tester,
 )
 from mangum import Mangum
-from middleware import BasicAuthMiddleware
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.requests import HTTPConnection
@@ -149,11 +148,6 @@ def current_language_selector(conn: HTTPConnection) -> str | None:
     return conn.scope["current_language"]
 
 
-# This function is used to enable basic auth in development and staging environments
-def enable_auth():
-    return os.environ.get("DC_ENVIRONMENT") in ["development", "staging"]
-
-
 app = Starlette(
     debug=True,
     routes=routes,
@@ -166,7 +160,6 @@ app = Starlette(
             selectors=[current_language_selector],
         ),
         Middleware(ForwardedForMiddleware),
-        Middleware(BasicAuthMiddleware, enable_auth=enable_auth()),
     ],
 )
 
