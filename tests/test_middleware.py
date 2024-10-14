@@ -5,14 +5,6 @@ from starlette.routing import Route
 from starlette.testclient import TestClient
 
 
-def mock_auth_enabled():
-    return True
-
-
-def mock_auth_disabled():
-    return False
-
-
 def create_app(enable_auth):
     async def homepage(request):
         return PlainTextResponse("Hello, world!")
@@ -25,7 +17,7 @@ def create_app(enable_auth):
 
 
 def test_no_auth_required():
-    app = create_app(mock_auth_disabled)
+    app = create_app(enable_auth=False)
     client = TestClient(app)
     response = client.get("/")
     assert response.status_code == 200
@@ -33,7 +25,7 @@ def test_no_auth_required():
 
 
 def test_auth_required_success():
-    app = create_app(mock_auth_enabled)
+    app = create_app(enable_auth=True)
     client = TestClient(app)
     response = client.get("/", headers={"Authorization": "Basic ZGM6ZGM="})
     assert response.status_code == 200
@@ -41,7 +33,7 @@ def test_auth_required_success():
 
 
 def test_auth_required_failure():
-    app = create_app(mock_auth_enabled)
+    app = create_app(enable_auth=True)
     client = TestClient(app)
     response = client.get("/")
     assert response.status_code == 401
@@ -50,7 +42,7 @@ def test_auth_required_failure():
 
 
 def test_auth_required_invalid_credentials():
-    app = create_app(mock_auth_enabled)
+    app = create_app(enable_auth=True)
     client = TestClient(app)
     response = client.get("/", headers={"Authorization": "Basic invalid"})
     assert response.status_code == 401

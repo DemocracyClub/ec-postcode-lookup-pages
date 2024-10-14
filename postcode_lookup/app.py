@@ -166,7 +166,7 @@ app = Starlette(
             selectors=[current_language_selector],
         ),
         Middleware(ForwardedForMiddleware),
-        Middleware(BasicAuthMiddleware, enable_auth=enable_auth),
+        Middleware(BasicAuthMiddleware, enable_auth=enable_auth()),
     ],
 )
 

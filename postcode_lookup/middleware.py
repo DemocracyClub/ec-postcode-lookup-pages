@@ -4,8 +4,8 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 
 
 class BasicAuthMiddleware:
-    def __init__(self, app: ASGIApp, enable_auth: callable) -> None:
-        self.enable_auth = enable_auth()
+    def __init__(self, app: ASGIApp, enable_auth: bool) -> None:
+        self.enable_auth = enable_auth
         self.app = app
 
     async def __call__(
