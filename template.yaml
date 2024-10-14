@@ -29,15 +29,9 @@ Parameters:
     Default: AppAPIKey
     Description: "The DC aggregator API key"
     Type: AWS::SSM::Parameter::Value<String>
-
   AppSentryDSN:
     Default: SENTRY_DSN
     Description: "The Sentry DSN"
-    Type: AWS::SSM::Parameter::Value<String>
-
-  DCEnvironment:
-    Default: DC_ENVIRONMENT
-    Description: "The DC_ENVIRONMENT environment variable passed to the app."
     Type: AWS::SSM::Parameter::Value<String>
 
 Resources:
@@ -70,7 +64,6 @@ Resources:
           FQDN: !Ref FQDN
           API_KEY: !Ref AppAPIKey
           SENTRY_DSN: !Ref AppSentryDSN
-          DC_ENVIRONMENT: !Ref DCEnvironment
       Events:
         HTTPRequests:
           Type: Api

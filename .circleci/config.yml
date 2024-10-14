@@ -81,7 +81,8 @@ jobs:
         enum: [ development, staging, production ]
     environment:
       SAM_CONFIG_FILE: samconfig.toml
-      DC_ENVIRONMENT: <<parameters.dc-environment>>
+      SAM_LAMBDA_CONFIG_ENV: <<parameters.dc-environment>>
+      SAM_PUBLIC_CONFIG_ENV: <<parameters.dc-environment>>-public-access
     steps:
       - checkout
       - attach_workspace:
@@ -97,7 +98,7 @@ jobs:
           command: |
             pipenv run sam deploy ${DASH_DASH_DEBUG} \
               --config-file ~/repo/${SAM_CONFIG_FILE} \
-              --config-env $DC_ENVIRONMENT \
+              --config-env $SAM_LAMBDA_CONFIG_ENV \
               --template-file ~/repo/.aws-sam/build/template.yaml \
               --parameter-overrides "GitHash='$CIRCLE_SHA1'"
       - aws-cli/setup
@@ -166,7 +167,6 @@ jobs:
           name: "Post deploy tests"
           command: |
             export FQDN=`aws ssm get-parameter --query Parameter.Value --name 'FQDN' --output text`
-            export DC_ENVIRONMENT=`aws ssm get-parameter --query Parameter.Value --name 'DC_ENVIRONMENT' --output text`
             pipenv run pytest .circleci/tests/
 
 
