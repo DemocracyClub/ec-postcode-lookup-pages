@@ -7,12 +7,6 @@ from mock_responses import (
     NO_LOCAL_BALLOTS,
     SINGLE_LOCAL_FUTURE_BALLOT_WITH_POLLING_STATION,
 )
-from template_sorter import (
-    ApiModes,
-    ElectionDateTemplateSorter,
-    TemplateSorter,
-)
-from uk_election_timetables.calendars import Country
 from uk_election_timetables.election_ids import from_election_id
 
 
@@ -57,49 +51,6 @@ def test_uk_election_timetable():
 
 
 # https://election-timetable.democracyclub.org.uk/?election_date=2024-05-02
-
-
-@pytest.fixture
-def template_sorter():
-    def get_template_sorter(mock_response, date):
-        api_response = mock_response
-        # The dates exist in the api_response, but not
-        # in the format that matches the RootBuilder:
-        # dates = api_response._values["dates"] vs
-        # dates = api_response.dates so I've set it here.
-        api_response.dates = api_response._values["dates"]
-        mode = ApiModes.UPCOMING_ELECTIONS
-
-        sorter = TemplateSorter(
-            api_response=api_response, mode=mode, current_date=date
-        )
-        sorter.country = Country.ENGLAND
-        sorter.dates = api_response.dates
-
-        return sorter
-
-    return get_template_sorter
-
-
-@pytest.fixture
-def election_date_template_sorter():
-    def get_election_date_template_sorter(template_sorter, date):
-        election_date_sorter = ElectionDateTemplateSorter(
-            date_data=date,
-            country=template_sorter.country,
-            current_date=template_sorter.current_date,
-            response_type=template_sorter.response_type,
-        )
-        election_date_sorter.current_date = template_sorter.current_date
-
-        election_date_sorter.timetable = from_election_id(
-            template_sorter.dates[0].ballots[0].election_id,
-            country=template_sorter.country,
-        )
-
-        return election_date_sorter
-
-    return get_election_date_template_sorter
 
 
 @freeze_time("2024-04-04")
