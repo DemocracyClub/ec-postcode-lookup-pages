@@ -1,37 +1,39 @@
 {% for ballot in date.date_data.ballots %}
     <div class="ec-ds-section">
-        {% if ballot.cancelled %}
-            {% include 'includes/cancellation_reasons.html' %}
-        {% else %}
-            {% if ballot.candidates_verified and section.context.show_candidates %}
-                <details>
-                    <summary id="{{ ballot.ballot_paper_id }}">{{ ballot.election_name }} candidates</summary>
-                    {{ additional_ballot_link(request, ballot) }}
-                    <ol class="candidate-list">
-                        {% if ballot.voting_system.uses_party_lists %}
-                            {% for party_name, candidates in ballot.candidates|groupby('party.party_name') %}
-                                <li>{{ party_name }} ({{ candidates|length }} candidates)</li>
-                            {% endfor %}
-                        {% else %}
-                            {% for candidate in ballot.candidates %}
-                                <li>
-                                    {{ candidate.person.name }}<br>
-                                    {{ candidate.party.party_name }}
-                                </li>
-                            {% endfor %}
-                        {% endif %}
+        <div id="{{ ballot.ballot_paper_id }}">
+          {% if ballot.cancelled %}
+              {% include 'includes/cancellation_reasons.html' %}
+          {% else %}
+              {% if ballot.candidates_verified and section.context.show_candidates %}
+                  <details>
+                      <summary>{{ ballot.election_name }} candidates</summary>
+                      {{ additional_ballot_link(request, ballot) }}
+                      <ol class="candidate-list">
+                          {% if ballot.voting_system.uses_party_lists %}
+                              {% for party_name, candidates in ballot.candidates|groupby('party.party_name') %}
+                                  <li>{{ party_name }} ({{ candidates|length }} candidates)</li>
+                              {% endfor %}
+                          {% else %}
+                              {% for candidate in ballot.candidates %}
+                                  <li>
+                                      {{ candidate.person.name }}<br>
+                                      {{ candidate.party.party_name }}
+                                  </li>
+                              {% endfor %}
+                          {% endif %}
 
-                    </ol>
-                    <p><a href="{{ ballot.wcivf_url }}">
-                        Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
-                    </a></p>
-                </details>
-            {% else %}
-                {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
-                    <h3>{{ election_name }} candidates</h3>
-                    <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>
-                {% endtrans %}
-            {% endif %}
-        {% endif %}
+                      </ol>
+                      <p><a href="{{ ballot.wcivf_url }}">
+                          Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
+                      </a></p>
+                  </details>
+              {% else %}
+                  {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
+                      <h3>{{ election_name }} candidates</h3>
+                      <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>
+                  {% endtrans %}
+              {% endif %}
+          {% endif %}
+        </div>
     </div>
 {% endfor %}
