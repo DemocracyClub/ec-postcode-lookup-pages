@@ -5,7 +5,7 @@
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.10"
+            "python_version": "3.12"
         },
         "sources": [
             {
@@ -443,10 +443,11 @@
         },
         "uk-election-timetables": {
             "hashes": [
-                "sha256:303733e644c0c3747dc73cdf522f8105e9393fbff492bda732b73cd8adc676c3"
+                "sha256:12d7b8b141254fb9a02114438c6db4063dce2867bf42205da0b7d2bea787150e",
+                "sha256:9a4e857ae1465bd6c6cc0918722b0dc9373577794aa5d60c3ac7363270b66470"
             ],
             "index": "pypi",
-            "version": "==3.0.0"
+            "version": "==4.0.0"
         },
         "urllib3": {
             "hashes": [
