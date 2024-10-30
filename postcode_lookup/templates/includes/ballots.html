@@ -1,8 +1,5 @@
 {% for ballot in date.date_data.ballots %}
     <div class="ec-ds-section">
-        {% if not section.response_type.name == "ONE_CURRENT_BALLOT" %}
-
-        {% endif %}
         {% if ballot.cancelled %}
             {% include 'includes/cancellation_reasons.html' %}
         {% else %}
