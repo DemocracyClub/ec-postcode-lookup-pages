@@ -177,12 +177,8 @@ class CityOfLondonRegistrationDateSection(RegistrationDateSection):
 
     @property
     def weight(self):
-        if self.timetable.is_before(TimetableEvent.REGISTRATION_DEADLINE):
-            return -5999
-
-        if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
-            return 1002
-        return 0
+        parent_weight = super().weight
+        return 0 if parent_weight == 0 else parent_weight + 1
 
     @property
     def context(self):
