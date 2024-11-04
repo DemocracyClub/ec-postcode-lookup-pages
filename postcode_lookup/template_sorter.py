@@ -169,7 +169,7 @@ class RegistrationDateSection(BaseSection):
 
 
 class CityOfLondonRegistrationDateSection(RegistrationDateSection):
-    template_name = "includes/registration_timetable_col.html"
+    template_name = "includes/registration_timetable_city_of_london.html"
 
     def __init__(self, *args, **kwargs) -> None:
         self.with_headers = kwargs.pop("with_headers")
