@@ -123,3 +123,7 @@ dmypy.json
 
 # Deployment related files
 /.aws-sam/
+
+
+# Playwright screenshots
+test-reports
