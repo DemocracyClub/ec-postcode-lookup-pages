@@ -1,3 +1,9 @@
+from response_builder.v1.builders.ballots import (
+    LocalBallotBuilder,
+    ParlBallotBuilder,
+)
+from response_builder.v1.builders.base import RootBuilder
+from response_builder.v1.generated_responses import candidates
 from response_builder.v1.generated_responses.root_responses import (
     CANCELLED_BALLOT_CANDIDATE_DEATH,
     CANCELLED_BALLOT_EQUAL_CANDIDATES,
@@ -10,6 +16,49 @@ from response_builder.v1.generated_responses.root_responses import (
     SINGLE_LOCAL_FUTURE_BALLOT_WITH_POLLING_STATION,
     SINGLE_LOCAL_FUTURE_BALLOT_WITHOUT_POLLING_STATION,
 )
+
+
+class CityOfLondonParlBallot(ParlBallotBuilder):
+    def __init__(self, poll_open_date, **kwargs):
+        super().__init__(**kwargs)
+        self.with_ballot_paper_id(
+            f"parl.cities-of-london-and-westminster.{poll_open_date}"
+        )
+        self.with_ballot_title(
+            "UK Parliamentary general election Cities of London and Westminster"
+        )
+        self.with_date(poll_open_date)
+        self.with_post_name("Cities of London and Westminster")
+        self.with_election_name("UK Parliamentary general election")
+        self.with_election_id(f"parl.{poll_open_date}")
+        self.with_candidates(candidates.all_candidates)
+
+
+class CityOfLondonLocalBallot(LocalBallotBuilder):
+    def __init__(self, poll_open_date, **kwargs):
+        super().__init__(**kwargs)
+        self.with_ballot_paper_id(
+            f"local.city-of-london.aldersgate.{poll_open_date}"
+        )
+        self.with_ballot_title("City of London local election Aldersgate")
+        self.with_date(poll_open_date)
+        self.with_post_name("Aldersgate")
+        self.with_election_name("City of London local election")
+        self.with_election_id(f"local.city-of-london.{poll_open_date}")
+        self.with_candidates(candidates.all_candidates)
+
+
+CITY_OF_LONDON_COUNCIL_AND_PARL_DIFFERENT_DAYS = (
+    RootBuilder()
+    .with_ballot(CityOfLondonLocalBallot("2025-03-20").build())
+    .with_ballot(CityOfLondonParlBallot("2025-05-01").build())
+)
+CITY_OF_LONDON_COUNCIL_AND_PARL_SAME_DAY = (
+    RootBuilder()
+    .with_ballot(CityOfLondonLocalBallot("2025-03-20").build())
+    .with_ballot(CityOfLondonParlBallot("2025-03-20").build())
+)
+
 
 __ALL__ = ("example_responses",)
 example_responses = {
@@ -69,4 +118,12 @@ example_responses = {
     #     "description": "Police and Crime Commissioner ballot",
     #     "response": PCC_BALLOT,
     # },
+    "AA1 1AL": {
+        "description": "City of London (Common Councilman) and UK Parl ballots on different upcoming dates",
+        "response": CITY_OF_LONDON_COUNCIL_AND_PARL_DIFFERENT_DAYS,
+    },
+    "AA1 1AM": {
+        "description": "City of London (Common Councilman) and UK Parl ballots on the same date",
+        "response": CITY_OF_LONDON_COUNCIL_AND_PARL_SAME_DAY,
+    },
 }
