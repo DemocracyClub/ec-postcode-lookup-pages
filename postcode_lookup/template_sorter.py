@@ -165,7 +165,7 @@ class RegistrationDateSection(BaseSection):
 
     @property
     def toc_id(self):
-        return f"voter-registration-{self.timetable.registration_deadline}"
+        return f"voter-registration-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
 
 
 class CityOfLondonRegistrationDateSection(RegistrationDateSection):
@@ -192,7 +192,7 @@ class CityOfLondonRegistrationDateSection(RegistrationDateSection):
 
     @property
     def toc_id(self):
-        return f"voter-registration-col-{self.timetable.registration_deadline}"
+        return f"voter-registration-col-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
 
 
 class ElectionDateTemplateSorter:
