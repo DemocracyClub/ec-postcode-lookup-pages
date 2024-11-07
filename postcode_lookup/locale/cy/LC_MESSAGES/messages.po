@@ -140,7 +140,7 @@ msgstr "Nodwch god post dilys"
 
 #: postcode_lookup/templates/index.html:97
 msgid "What this tool can tell you"
-msgstr ""
+msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
 #: postcode_lookup/templates/old_result.html:21
 #: postcode_lookup/templates/old_result.html:45
@@ -349,7 +349,7 @@ msgstr "Ble i bleidleisio"
 #: postcode_lookup/templates/includes/registration_timetable.html:5
 #, fuzzy, python-format
 msgid "You have until %(date)s"
-msgstr ""
+msgstr "Mae gennych hyd nes %(date)s"
 
 #: postcode_lookup/templates/includes/registration_timetable.html:16
 #, python-format
