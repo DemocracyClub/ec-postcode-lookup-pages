@@ -349,7 +349,7 @@ msgstr "Ble i bleidleisio"
 #: postcode_lookup/templates/includes/registration_timetable.html:5
 #, fuzzy, python-format
 msgid "You have until %(date)s"
-msgstr "Mae gennych etholiad heddiw"
+msgstr ""
 
 #: postcode_lookup/templates/includes/registration_timetable.html:16
 #, python-format
@@ -402,12 +402,6 @@ msgid ""
 "href=\"https://www.speakforthecity.com/\">register to vote in the City of"
 " London</a> in future elections.</p>"
 msgstr ""
-"<p>Y dyddiad cau i gofrestru i bleidleisio ar %(date)s oedd "
-"%(registration_deadline)s.</p> <p>Os cofrestrwyd chi i bleidleisio cyn y "
-"dyddiad cau, yna byddwch yn gallu pleidleisio yn yr etholiad hwn. <a "
-"href=\"#electoral_services\">Cysylltwch â'ch cyngor</a> i wirio os ydych "
-"ar y gofrestr.</p> <p>Gallwch <a href=\"https://gov.uk/register-to-"
-"vote/\">gofrestru i bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
 
 #: postcode_lookup/templates/includes/single_date.html:9
 #, python-format
