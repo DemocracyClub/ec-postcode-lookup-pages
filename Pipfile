@@ -15,7 +15,7 @@ ruff = "*"
 typing-extensions = ">=3.7.4"
 starlette-babel = "*"
 dc-response-builder = {file = "https://github.com/DemocracyClub/dc_response_builder/archive/refs/tags/1.0.0.tar.gz"}
-uk-election-timetables = "*"
+uk-election-timetables = "==4.1.0"
 certifi = "*"
 sentry-sdk = {extras = ["starlette"], version = "*"}
 
