@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "55dd652387b5e85ab774d75da86c6c421322c042a7351d7d8089abfc6f9fa207"
+            "sha256": "337472a7831b22fd39cd924ac2ebae037ba763c4f6f6de99dbac261583184997"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -443,11 +443,11 @@
         },
         "uk-election-timetables": {
             "hashes": [
-                "sha256:12d7b8b141254fb9a02114438c6db4063dce2867bf42205da0b7d2bea787150e",
-                "sha256:9a4e857ae1465bd6c6cc0918722b0dc9373577794aa5d60c3ac7363270b66470"
+                "sha256:0b225e786085bdc9e40fd59619b2134c0bb316e2cfcf89c8ee894b8dcbf52719",
+                "sha256:65d74ba008f2e89a6f7c5a84d3fea96664104390e545193c116f78b56aa8a333"
             ],
             "index": "pypi",
-            "version": "==4.0.0"
+            "version": "==4.1.0"
         },
         "urllib3": {
             "hashes": [
