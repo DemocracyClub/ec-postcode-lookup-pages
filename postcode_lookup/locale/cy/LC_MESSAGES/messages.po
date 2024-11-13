@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-30 16:43+0100\n"
+"POT-Creation-Date: 2024-11-04 11:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -13,55 +13,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.11.0\n"
+"Generated-By: Babel 2.15.0\n"
 
 #: postcode_lookup/template_sorter.py:104
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:161
+#: postcode_lookup/template_sorter.py:164
+#: postcode_lookup/template_sorter.py:191
 #: postcode_lookup/templates/includes/registration_timetable.html:1
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:2
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:200
+#: postcode_lookup/template_sorter.py:230
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:205
+#: postcode_lookup/template_sorter.py:235
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:318
+#: postcode_lookup/template_sorter.py:382
 msgid "Contact details"
 msgstr "Manylion cyswllt"
 
-#: postcode_lookup/template_sorter.py:321
+#: postcode_lookup/template_sorter.py:385
 #: postcode_lookup/templates/old_result.html:23
 #: postcode_lookup/templates/old_result.html:47
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:327
+#: postcode_lookup/template_sorter.py:391
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:334
+#: postcode_lookup/template_sorter.py:398
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:344
+#: postcode_lookup/template_sorter.py:408
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:347
+#: postcode_lookup/template_sorter.py:411
 #: postcode_lookup/templates/old_result.html:14
 #: postcode_lookup/templates/old_result.html:39
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:350
-#: postcode_lookup/template_sorter.py:353
+#: postcode_lookup/template_sorter.py:414
+#: postcode_lookup/template_sorter.py:417
 #: postcode_lookup/templates/old_result.html:6
 #: postcode_lookup/templates/old_result.html:12
 #: postcode_lookup/templates/old_result.html:31
@@ -69,13 +71,13 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:418
-#: postcode_lookup/template_sorter.py:431
+#: postcode_lookup/template_sorter.py:482
+#: postcode_lookup/template_sorter.py:495
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:425
+#: postcode_lookup/template_sorter.py:489
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
@@ -115,67 +117,41 @@ msgstr "wyth"
 msgid "nine"
 msgstr "naw"
 
-#: postcode_lookup/templates/includes/html_meta.html:12
-#: postcode_lookup/templates/includes/html_meta.html:20
-#: postcode_lookup/templates/index.html:4
-msgid "Elections in your area"
-msgstr "Etholiadau yn eich ardal"
-
-#: postcode_lookup/templates/index.html:25
-#: postcode_lookup/templates/index.html:35
+#: postcode_lookup/templates/index.html:12
 #, fuzzy
-msgid "Upcoming election information"
-msgstr "Gwybodaeth etholiad sydd i ddod"
+msgid "My next election"
+msgstr "Etholiad wedi'i ohirio"
 
-#: postcode_lookup/templates/index.html:30
+#: postcode_lookup/templates/index.html:15
 #, fuzzy
 msgid ""
-"Enter your postcode to find out which elections are taking place, who's "
-"standing, and where your polling station is. You can also find contact "
-"details for your local council."
+"Enter your postcode to find out about voting in your next election. We'll"
+" tell you who's standing, where your polling station is, and who to "
+"contact if you need help."
 msgstr ""
 "Nodwch eich cod post i ganfod pa etholiadau sy'n digwydd, pwy sy'n "
 "sefyll, a ble mae eich gorsaf bleidleisio. Gallwch hefyd ddod o hyd i "
 "fanylion cyswllt eich cyngor lleol."
 
-#: postcode_lookup/templates/index.html:38
-msgid "Submit Postcode"
-msgstr "Cyflwyno Cod Post"
-
-#: postcode_lookup/templates/index.html:47
-msgid "Please enter a valid postcode"
+#: postcode_lookup/templates/index.html:23
+#, fuzzy
+msgid "Enter your postcode"
 msgstr "Nodwch god post dilys"
 
-#: postcode_lookup/templates/index.html:57
-msgid "England and Wales elections, 2 May 2024"
-msgstr "Etholiadau Lloegr a Chymru, 2 Mai 2024"
-
-#: postcode_lookup/templates/index.html:58
-msgid "Polling stations will be open from 7am to 10pm."
-msgstr "Bydd gorsafoedd pleidleisio ar agor o 7am i 10pm."
-
-#: postcode_lookup/templates/index.html:59
-msgid ""
-"If you're voting at the polling station, you'll need to take photo ID "
-"with you."
-msgstr ""
-"Os ydych chi'n pleidleisio yn y gorsaf bleidleisio, bydd angen i chi "
-"gymryd adnabod llun gyda chi."
-
-#: postcode_lookup/templates/index.html:61
-msgid "Check the list of accepted forms of photo ID"
-msgstr "Gwiriwch y rhestr o ffurfiau adnabod llun a dderbynnir"
+#: postcode_lookup/templates/index.html:97
+msgid "What this tool can tell you"
+msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
 #: postcode_lookup/templates/old_result.html:21
 #: postcode_lookup/templates/old_result.html:45
 msgid "There is a recall petition in your area"
 msgstr "Mae deiseb adalw yn eich ardal"
 
-#: postcode_lookup/templates/includes/ballots.html:33
-#, python-format
+#: postcode_lookup/templates/includes/ballots.html:31
+#, fuzzy, python-format
 msgid ""
-"<h3>Candidates</h3> <p>The list of candidates for this election will be "
-"published after %(sopn_date)s.</p>"
+"<h3>%(election_name)s candidates</h3> <p>The list of candidates for this "
+"election will be published after %(sopn_date)s.</p>"
 msgstr ""
 "<h3>Ymgeiswyr</h3> <p>Bydd rhestr o ymgeiswyr yr etholiad hwn yn cael ei "
 "chyhoeddi ar ôl %(sopn_date)s.</p>"
@@ -245,7 +221,9 @@ msgstr "Adborth"
 msgid ""
 "Did you find what you were looking for? If not, <a "
 "href=\"/node/24756\">let us know</a>"
-msgstr "A wnaethoch chi ddod o hyd i'r hyn roeddech yn chwilio amdano? Os na, <a href=\"/node/24756\">rhowch wybod i ni</a>"
+msgstr ""
+"A wnaethoch chi ddod o hyd i'r hyn roeddech yn chwilio amdano? Os na, <a "
+"href=\"/node/24756\">rhowch wybod i ni</a>"
 
 #: postcode_lookup/templates/includes/html_meta.html:9
 #, fuzzy
@@ -256,6 +234,11 @@ msgid ""
 msgstr ""
 "Dewch o hyd i'ch gwybodaeth am eich swyddfa gofrestru etholiadol a'ch "
 "gorsaf bleidleisio leol"
+
+#: postcode_lookup/templates/includes/html_meta.html:12
+#: postcode_lookup/templates/includes/html_meta.html:20
+msgid "Elections in your area"
+msgstr "Etholiadau yn eich ardal"
 
 #: postcode_lookup/templates/includes/html_meta.html:13
 #: postcode_lookup/templates/includes/html_meta.html:19
@@ -277,7 +260,11 @@ msgid ""
 "Send your postal and proxy vote applications to your local electoral "
 "registration team. You can also contact them to find out if you’re on the"
 " electoral register, and if you already have a postal or proxy vote."
-msgstr "Anfonwch eich ceisiadau pleidleisio post a dirprwy i'ch tîm cofrestru etholiadol lleol. Gallwch hefyd gysylltu â hwy i ddarganfod a ydych chi ar y gofrestr etholiadol, ac os oes gennych bleidlais post neu dirprwy eisoes."
+msgstr ""
+"Anfonwch eich ceisiadau pleidleisio post a dirprwy i'ch tîm cofrestru "
+"etholiadol lleol. Gallwch hefyd gysylltu â hwy i ddarganfod a ydych chi "
+"ar y gofrestr etholiadol, ac os oes gennych bleidlais post neu dirprwy "
+"eisoes."
 
 #: postcode_lookup/templates/includes/organisation_contact.html:17
 msgid "Electoral Office for Northern Ireland"
@@ -288,35 +275,48 @@ msgid ""
 "For questions about your poll card, polling place, or about returning "
 "your postal voting ballot, contact the Electoral Office for Northern "
 "Ireland."
-msgstr "Am gwestiynau am eich cerdyn pleidleisio, eich man pleidleisio, neu am ddychwelyd eich papur pleidleisio post, cysylltwch â Swyddfa Etholiadol Gogledd Iwerddon."
+msgstr ""
+"Am gwestiynau am eich cerdyn pleidleisio, eich man pleidleisio, neu am "
+"ddychwelyd eich papur pleidleisio post, cysylltwch â Swyddfa Etholiadol "
+"Gogledd Iwerddon."
 
-#: postcode_lookup/templates/includes/organisation_contact.html:26
+#: postcode_lookup/templates/includes/organisation_contact.html:27
 msgid ""
 "<p>For questions about your poll card, polling station, or about "
 "returning your postal voting ballot, contact your council.</p>"
-msgstr "<p>Am gwestiynau am eich cerdyn pleidleisio, eich gorsaf bleidleisio, neu am ddychwelyd eich papur pleidleisio post, cysylltwch â'ch cyngor.</p>"
+msgstr ""
+"<p>Am gwestiynau am eich cerdyn pleidleisio, eich gorsaf bleidleisio, neu"
+" am ddychwelyd eich papur pleidleisio post, cysylltwch â'ch cyngor.</p>"
 
+#: postcode_lookup/templates/includes/organisation_contact.html:36
+msgid ""
+"<p> Here are contact details for your usual election team. However, for "
+"some elections, electoral boundaries mean that your neighbouring election"
+" team may be responsible for the constituency you are in. Your usual "
+"election team will be able to provide their contact details if this is "
+"the case. </p>"
+msgstr ""
 
-#: postcode_lookup/templates/includes/organisation_contact.html:45
+#: postcode_lookup/templates/includes/organisation_contact.html:59
 #, python-format
 msgid "Phone: <span>%(number)s</span>"
 msgstr "Ffôn: <span>%(number)s</span>"
 
-#: postcode_lookup/templates/includes/organisation_contact.html:55
+#: postcode_lookup/templates/includes/organisation_contact.html:69
 #, python-format
 msgid "Email: <span>%(email)s</span>"
 msgstr "E-bost: <span>%(email)s</span>"
 
-#: postcode_lookup/templates/includes/organisation_contact.html:64
+#: postcode_lookup/templates/includes/organisation_contact.html:78
 #, python-format
 msgid "%(org_name)s website"
 msgstr "Gwefan %(org_name)s"
 
-#: postcode_lookup/templates/includes/organisation_contact.html:67
+#: postcode_lookup/templates/includes/organisation_contact.html:81
 msgid "Website"
 msgstr "Gwefan"
 
-#: postcode_lookup/templates/includes/organisation_contact.html:69
+#: postcode_lookup/templates/includes/organisation_contact.html:83
 msgid "(Opens in new window)"
 msgstr "(Yn agor mewn ffenestr newydd)"
 
@@ -339,7 +339,19 @@ msgstr ""
 msgid "Opening times"
 msgstr "Oriau agor"
 
-#: postcode_lookup/templates/includes/registration_timetable.html:8
+#: postcode_lookup/templates/includes/registration_timetable.html:3
+#: postcode_lookup/templates/includes/registration_timetable.html:11
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:6
+#, fuzzy
+msgid "Register to vote"
+msgstr "Ble i bleidleisio"
+
+#: postcode_lookup/templates/includes/registration_timetable.html:5
+#, fuzzy, python-format
+msgid "You have until %(date)s"
+msgstr "Mae gennych hyd nes %(date)s"
+
+#: postcode_lookup/templates/includes/registration_timetable.html:16
 #, python-format
 msgid ""
 "<p>The deadline to register to vote on %(date)s was "
@@ -355,6 +367,41 @@ msgstr ""
 "href=\"#electoral_services\">Cysylltwch â'ch cyngor</a> i wirio os ydych "
 "ar y gofrestr.</p> <p>Gallwch <a href=\"https://gov.uk/register-to-"
 "vote/\">gofrestru i bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
+
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:24
+msgid ""
+"City of London council elections do not use the same electoral register "
+"as other elections."
+msgstr ""
+
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:10
+msgid ""
+"Both residents and city workers are eligible to vote. There is one "
+"register published annually, and the deadline to apply is 30 November "
+"each year. The new register comes into force on 16 February each year, "
+"and cannot be modified after that date."
+msgstr ""
+
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:19
+msgid "Register to vote in the City of London"
+msgstr ""
+
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:23
+msgid "Registration in the City of London"
+msgstr ""
+
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:26
+#, fuzzy, python-format
+msgid ""
+"<p>The deadline to register to vote in City of London local elections on "
+"%(date)s was %(registration_deadline)s.</p> <p>If you registered to vote "
+"before the deadline, then you will be able to vote in this election. <a "
+"href=\"#electoral_services\">Contact City of London</a> to check if you "
+"are on the register.</p> <p>You can <a "
+"href=\"https://www.speakforthecity.com/\">register to vote in the City of"
+" London</a> in future elections.</p>"
+msgstr ""
 
 #: postcode_lookup/templates/includes/single_date.html:9
 #, python-format
@@ -400,3 +447,28 @@ msgstr "Bydd gennych %(count)s papurau pleidleisio i'w llenwi:"
 #~ "gyfartal â nifer y seddau sydd ar"
 #~ " gael. Bydd yr ymgeiswyr canlynol yn"
 #~ " cymryd y safle hwn:"
+
+#~ msgid "Upcoming election information"
+#~ msgstr "Gwybodaeth etholiad sydd i ddod"
+
+#~ msgid "Submit Postcode"
+#~ msgstr "Cyflwyno Cod Post"
+
+#~ msgid "England and Wales elections, 2 May 2024"
+#~ msgstr "Etholiadau Lloegr a Chymru, 2 Mai 2024"
+
+#~ msgid "Polling stations will be open from 7am to 10pm."
+#~ msgstr "Bydd gorsafoedd pleidleisio ar agor o 7am i 10pm."
+
+#~ msgid ""
+#~ "If you're voting at the polling "
+#~ "station, you'll need to take photo "
+#~ "ID with you."
+#~ msgstr ""
+#~ "Os ydych chi'n pleidleisio yn y "
+#~ "gorsaf bleidleisio, bydd angen i chi "
+#~ "gymryd adnabod llun gyda chi."
+
+#~ msgid "Check the list of accepted forms of photo ID"
+#~ msgstr "Gwiriwch y rhestr o ffurfiau adnabod llun a dderbynnir"
+
