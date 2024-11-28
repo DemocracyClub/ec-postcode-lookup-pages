@@ -55,7 +55,6 @@ Resources:
               - 'sts:AssumeRole'
       RoleName: ECDeployer
 
-
   ECPostcodeLookupFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -75,11 +74,13 @@ Resources:
         HTTPRequests:
           Type: Api
           Properties:
+            RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
             Path: /{proxy+}
             Method: ANY
         HTTPRequestRoots:
           Type: Api
           Properties:
+            RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
             Path: /
             Method: ANY
 
@@ -89,6 +90,16 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${ECPostcodeLookupFunction}
       RetentionInDays: 60
+
+  ECPostcodeLookupFunctionApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      AlwaysDeploy: True
+      StageName: Prod
+      Cors:
+        AllowMethods: "'GET'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
 
   FailOver:
     Type: AWS::S3::Bucket
@@ -143,7 +154,7 @@ Resources:
         Comment: 'Cloudfront Distribution pointing to Lambda origin'
         Origins:
           - Id: Dynamic
-            DomainName: !Sub "${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com"
+            DomainName: !Sub "${ECPostcodeLookupFunctionApiGateway}.execute-api.${AWS::Region}.amazonaws.com"
             OriginPath: "/Prod"
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
@@ -281,6 +292,6 @@ Resources:
 Outputs:
   ECPostcodeLookupFqdn:
     Description: "API Gateway endpoint FQDN for EC Postcode Lookup function"
-    Value: !Sub "${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com"
+    Value: !Sub "${ECPostcodeLookupFunctionApiGateway}.execute-api.${AWS::Region}.amazonaws.com"
     Export:
       Name: !Join [ ":", [ !Ref "AWS::StackName", "ECPostcodeLookupFqdn" ] ]
