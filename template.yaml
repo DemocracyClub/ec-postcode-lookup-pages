@@ -1,5 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
+Transform: 
+  - AWS::LanguageExtensions
+  - AWS::Serverless-2016-10-31
 Description: "EC Postcode Lookup app: Lambda, API Gateway"
 
 Globals:
@@ -40,6 +42,11 @@ Parameters:
     Description: "The DC_ENVIRONMENT environment variable passed to the app."
     Type: AWS::SSM::Parameter::Value<String>
 
+Conditions:
+  UseBasicAuth: !Or
+    - !Equals [ !Ref DCEnvironment, development ]
+    - !Equals [ !Ref DCEnvironment, staging ]
+
 Resources:
   ECDeployerRole:
     Type: AWS::IAM::Role
@@ -54,7 +61,6 @@ Resources:
             Action:
               - 'sts:AssumeRole'
       RoleName: ECDeployer
-
 
   ECPostcodeLookupFunction:
     Type: AWS::Serverless::Function
@@ -75,11 +81,13 @@ Resources:
         HTTPRequests:
           Type: Api
           Properties:
+            RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
             Path: /{proxy+}
             Method: ANY
         HTTPRequestRoots:
           Type: Api
           Properties:
+            RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
             Path: /
             Method: ANY
 
@@ -89,6 +97,43 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${ECPostcodeLookupFunction}
       RetentionInDays: 60
+
+  ECPostcodeLookupFunctionApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      AlwaysDeploy: True
+      StageName: Prod
+      Cors:
+        AllowMethods: "'GET'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+      Auth:
+        DefaultAuthorizer: !If [ UseBasicAuth, "BasicAuthFunction", !Ref AWS::NoValue]
+        Authorizers:
+          BasicAuthFunction:
+            FunctionArn: !GetAtt BasicAuthFunction.Arn
+            FunctionPayloadType: REQUEST
+            Identity:
+              Headers:
+                - Authorization
+              ReauthorizeEvery: 3600
+
+  BasicAuthGatewayResponse:
+    Condition: UseBasicAuth
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.www-authenticate: "'Basic realm=\"Restricted\"'"
+      ResponseType: UNAUTHORIZED
+      RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
+      StatusCode: '401'
+
+  BasicAuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./postcode_lookup/
+      Handler: lambda_basic_auth.lambda_handler
+      Runtime: python3.12
 
   FailOver:
     Type: AWS::S3::Bucket
@@ -143,7 +188,7 @@ Resources:
         Comment: 'Cloudfront Distribution pointing to Lambda origin'
         Origins:
           - Id: Dynamic
-            DomainName: !Sub "${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com"
+            DomainName: !Sub "${ECPostcodeLookupFunctionApiGateway}.execute-api.${AWS::Region}.amazonaws.com"
             OriginPath: "/Prod"
             CustomOriginConfig:
               OriginProtocolPolicy: "https-only"
@@ -281,6 +326,6 @@ Resources:
 Outputs:
   ECPostcodeLookupFqdn:
     Description: "API Gateway endpoint FQDN for EC Postcode Lookup function"
-    Value: !Sub "${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com"
+    Value: !Sub "${ECPostcodeLookupFunctionApiGateway}.execute-api.${AWS::Region}.amazonaws.com"
     Export:
       Name: !Join [ ":", [ !Ref "AWS::StackName", "ECPostcodeLookupFqdn" ] ]
