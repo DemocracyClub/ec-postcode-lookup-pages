@@ -12,7 +12,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+            - v3-dependencies-{{ checksum "Pipfile.lock" }}
       - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
       - run: pipenv sync --dev
       - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
@@ -25,7 +25,7 @@ jobs:
           when: on_success
           paths:
             - ~/.local/share/virtualenvs/
-          key: v2-dependencies-{{ checksum "Pipfile.lock" }}
+          key: v3-dependencies-{{ checksum "Pipfile.lock" }}
 
   test:
     docker:
@@ -39,7 +39,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+            - v3-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - run: pipenv run ruff check .
       - run: pipenv run ruff format . --check
@@ -88,7 +88,7 @@ jobs:
           at: ~/repo/
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+            - v3-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - run: pip install aws-sam-cli
 
@@ -122,7 +122,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+            - v3-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
@@ -159,7 +159,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "Pipfile.lock" }}
+            - v3-dependencies-{{ checksum "Pipfile.lock" }}
       - run: *install-pipenv
       - aws-cli/setup
       - run:
