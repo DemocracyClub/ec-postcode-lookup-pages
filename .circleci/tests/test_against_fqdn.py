@@ -9,7 +9,17 @@ STATIC_PAGE_COMMENT = "<!-- Static page content -->"
 
 
 def make_request(url):
-    req = httpx.get(url, timeout=20)
+    dc_env = os.environ.get("DC_ENVIRONMENT")
+
+    if dc_env == "development" or dc_env == "staging":
+        req = httpx.get(
+            url,
+            timeout=20,
+            auth=("dc", "dc"),
+        )
+    else:
+        req = httpx.get(url, timeout=20)
+
     req.raise_for_status()
     return req
 
