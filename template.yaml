@@ -286,7 +286,14 @@ Resources:
             TargetOriginId: Dynamic
             Compress: true
             ViewerProtocolPolicy: "redirect-to-https"
-            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: none
+              Headers:
+                - Authorization
+                - Origin
+            MinTTL: '50'
           - AllowedMethods: [ GET, HEAD, OPTIONS ]
             PathPattern: /i-am-a/voter/your-election-information
             TargetOriginId: StaticPagesOriginGroup
