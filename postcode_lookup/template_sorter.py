@@ -229,7 +229,7 @@ class ElectionDateTemplateSorter:
 
         self.polling_station_opening_times_str = _("7am – 10pm")
         if any(
-            ballot.ballot_paper_id.startswith("local.city-of-london.")
+            ballot.ballot_paper_id.startswith("local.city-of-london")
             for ballot in self.date_data.ballots
         ):
             self.polling_station_opening_times_str = _("8am – 8pm")
@@ -253,13 +253,13 @@ class ElectionDateTemplateSorter:
             b
             for b in self.date_data.ballots
             if not b.cancelled
-            and b.ballot_paper_id.startswith("local.city-of-london.")
+            and b.ballot_paper_id.startswith("local.city-of-london")
         ]
         other_ballots = [
             b
             for b in self.date_data.ballots
             if not b.cancelled
-            and not b.ballot_paper_id.startswith("local.city-of-london.")
+            and not b.ballot_paper_id.startswith("local.city-of-london")
         ]
         if len(other_ballots) > 0:
             enabled_sections.append(
