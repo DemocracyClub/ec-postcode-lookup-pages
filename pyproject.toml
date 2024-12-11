@@ -4,6 +4,20 @@ version = "0.0.0"
 description = "tbd"
 readme = "README.md"
 requires-python = "==3.12.*"
+dependencies = [
+    "babel==2.15.0",
+    "certifi==2024.7.4",
+    "httpx==0.27.0",
+    "jinja2==3.1.4",
+    "mangum==0.17.0",
+    "sentry-sdk[starlette]==2.13.0",
+    "starlette-babel==1.0.0",
+    "starlette==0.41.3",
+    "typing-extensions==4.12.2",
+    "uk-election-timetables==4.1.0",
+    "urllib3==1.26.19",
+    "dc-response-builder",
+]
 
 [tool.ruff]
 line-length = 80
@@ -24,3 +38,27 @@ exclude_lines = [
 
 [tool.pytest.ini_options]
 pythonpath = ["postcode_lookup"]
+
+[tool.uv.sources]
+dc-response-builder = { git = "https://github.com/DemocracyClub/dc_response_builder.git", rev = "1.0.0" }
+
+[dependency-groups]
+dev = [
+    "aws-sam-cli==1.119.0",
+    "beautifulsoup4==4.12.3",
+    "ipdb==0.13.13",
+    "pydantic-factories==1.17.3",
+    "pydantic[email]==1.10.17",
+    "pytest==8.2.2",
+    "respx==0.21.1",
+    "uvicorn==0.30.1",
+    "ruff==0.4.10",
+    "pytest-cov==5.0.0",
+    "coverage[toml]==7.5.4",
+    "pytest-asyncio==0.23.7",
+    "pytest-playwright==0.5.0",
+    "pre-commit==3.7.1",
+    "freezegun==1.5.1",
+    "playwright==1.45.1",
+    "beautifulsoup4==4.12.3",
+]
