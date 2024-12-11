@@ -413,8 +413,7 @@ def test_vac_application_deadline(
     template_sorter, election_date_template_sorter
 ):
     """this tests is after vac application deadline.
-    test that the page shows the vac application advice at the
-    top of the page and upcoming elections
+    test that the page shows upcoming elections
     and polling station if available next.
     assert that registration and postal vote deadline and
     candidates are not shown.

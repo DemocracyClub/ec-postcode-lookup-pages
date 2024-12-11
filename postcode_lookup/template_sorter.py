@@ -148,9 +148,6 @@ class RegistrationDateSection(BaseSection):
         context["can_register_postal_vote"] = self.timetable.is_before(
             TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
         )
-        context["can_register_vac"] = self.timetable.is_before(
-            TimetableEvent.VAC_APPLICATION_DEADLINE
-        )
         context["htag_primary"] = "h2"
         context["htag_secondary"] = "h3"
         if self.response_type == ResponseTypes.MULTIPLE_DATES:
