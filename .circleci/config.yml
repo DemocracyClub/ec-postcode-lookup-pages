@@ -70,7 +70,7 @@ jobs:
       - attach_workspace:
           at: ~/repo/
       - install_uv
-      - run: uv pip install setuptools wheel
+      - run: uv sync --dev  --no-python-downloads
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
