@@ -95,7 +95,7 @@ jobs:
           keys:
             - v4-dependencies-{{ checksum "uv.lock" }}
       - install_uv
-      - run: uv sync --dev  --no-python-downloads
+      - run: uv venv
       - run: uv pip install aws-sam-cli
 
       - run:
@@ -130,6 +130,7 @@ jobs:
           keys:
             - v4-dependencies-{{ checksum "uv.lock" }}
       - install_uv
+      - run: uv venv
       - aws-cli/setup
       - run:
           name: "Export parameter store env vars"
