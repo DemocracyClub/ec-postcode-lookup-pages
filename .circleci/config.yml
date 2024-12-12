@@ -3,6 +3,12 @@ orbs:
   codecov: codecov/codecov@4.1.0
   aws-cli: circleci/aws-cli@4.2.3
 
+commands:
+  install_uv:
+    steps:
+      - run: pip install --upgrade uv">=0.4.27,<0.5.0"
+
+
 jobs:
   install_and_update_dependencies:
     docker:
@@ -12,11 +18,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "Pipfile.lock" }}
-      - run: &install-pipenv pip install -U pipenv pip --quiet --no-input
-      - run: pipenv sync --dev
-      - run: pipenv run pipenv check # before save_cache so an insecure cache is never saved
-      - run: pipenv requirements > postcode_lookup/requirements.txt
+            - v4-dependencies-{{ checksum "uv.lock" }}
+      - install_uv
+      - run: uv sync --dev --no-python-downloads
+      - run: uv export --no-hashes --no-dev > postcode_lookup/requirements.txt
       - persist_to_workspace:
           root: ~/repo/
           paths: [ postcode_lookup/requirements.txt ]
@@ -25,7 +30,7 @@ jobs:
           when: on_success
           paths:
             - ~/.local/share/virtualenvs/
-          key: v3-dependencies-{{ checksum "Pipfile.lock" }}
+          key: v4-dependencies-{{ checksum "uv.lock" }}
 
   test:
     docker:
@@ -39,16 +44,15 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "Pipfile.lock" }}
-      - run: *install-pipenv
-      - run: pipenv run ruff check .
-      - run: pipenv run ruff format . --check
+            - v4-dependencies-{{ checksum "uv.lock" }}
+      - install_uv
+      - run: ./scripts/code-check.sh
       - run:
           name: Install Playwright-deps
           command: |
-            sudo `pipenv --venv`/bin/playwright install-deps
-      - run: pipenv run playwright install
-      - run: pipenv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
+            sudo .venv/bin/playwright install-deps
+      - run: uv run playwright install
+      - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
           file: /home/circleci/repo/test-reports/junit.xml
       - store_artifacts:
@@ -65,7 +69,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/
-      - run: pip install setuptools wheel
+      - install_uv
+      - run: uv sync --dev  --no-python-downloads
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
@@ -88,14 +93,15 @@ jobs:
           at: ~/repo/
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "Pipfile.lock" }}
-      - run: *install-pipenv
-      - run: pip install aws-sam-cli
+            - v4-dependencies-{{ checksum "uv.lock" }}
+      - install_uv
+      - run: uv sync --dev  --no-python-downloads
+      - run: uv pip install aws-sam-cli
 
       - run:
-          name: "pipenv run sam deploy"
+          name: "uv run sam deploy"
           command: |
-            pipenv run sam deploy ${DASH_DASH_DEBUG} \
+            uv run sam deploy ${DASH_DASH_DEBUG} \
               --config-file ~/repo/${SAM_CONFIG_FILE} \
               --config-env $DC_ENVIRONMENT \
               --template-file ~/repo/.aws-sam/build/template.yaml \
@@ -122,8 +128,8 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "Pipfile.lock" }}
-      - run: *install-pipenv
+            - v4-dependencies-{{ checksum "uv.lock" }}
+      - install_uv
       - aws-cli/setup
       - run:
           name: "Export parameter store env vars"
@@ -133,14 +139,14 @@ jobs:
       - run:
           name: "Update failover page"
           command: |
-            pipenv run python failover/build.py
+            uv run python failover/build.py
             aws s3 cp failover/dist/index.html "s3://${FQDN}-failover/index.html" \
               --cache-control max-age=0 \
               --content-type text/html
       - run:
           name: "Update static pages"
           command: |
-            pipenv run python lib/static_pages/generate.py
+            uv run python lib/static_pages/generate.py
             aws s3 sync \
                 lib/static_pages/build/ "s3://${FQDN}-static-pages/" \
                 --cache-control max-age=600 \
@@ -159,15 +165,16 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "Pipfile.lock" }}
-      - run: *install-pipenv
+            - v4-dependencies-{{ checksum "uv.lock" }}
+      - install_uv
+      - run: uv sync --dev  --no-python-downloads
       - aws-cli/setup
       - run:
           name: "Post deploy tests"
           command: |
             export FQDN=`aws ssm get-parameter --query Parameter.Value --name 'FQDN' --output text`
             export DC_ENVIRONMENT=`aws ssm get-parameter --query Parameter.Value --name 'DC_ENVIRONMENT' --output text`
-            pipenv run pytest .circleci/tests/
+            uv run pytest .circleci/tests/
 
 
 workflows:
