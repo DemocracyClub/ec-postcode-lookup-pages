@@ -12,13 +12,13 @@ $ playwright install
 Run tests:
 
 ```shell
-$ uv pytest
+$ uv run pytest
 ```
 
 Run the service:
 
 ```shell
-$ uv uvicorn postcode_lookup.app:app --reload
+$ uv run uvicorn postcode_lookup.app:app --reload
 ```
 
 Visit `http://127.0.0.1:8000`
