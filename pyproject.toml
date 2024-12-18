@@ -19,7 +19,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "aws-sam-cli==1.119.0",
     "beautifulsoup4==4.12.3",
     "ipdb==0.13.13",
     "pydantic-factories==1.17.3",

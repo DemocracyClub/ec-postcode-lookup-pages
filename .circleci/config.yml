@@ -71,8 +71,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo/
-      - install_uv
-      - run: uv sync --dev  --no-python-downloads
       - run: sam build ${DASH_DASH_DEBUG} --template-file template.yaml
       - persist_to_workspace:
           root: ~/repo/
@@ -80,7 +78,7 @@ jobs:
 
   sam_deploy:
     docker:
-      - image: cimg/python:3.12
+      - image: public.ecr.aws/sam/build-python3.12:latest
     working_directory: ~/repo/
     parameters:
       dc-environment:
@@ -96,14 +94,11 @@ jobs:
       - restore_cache:
           keys:
             - v5-dependencies-{{ checksum "uv.lock" }}
-      - install_uv
-      - run: uv venv
-      - run: uv pip install aws-sam-cli
 
       - run:
-          name: "uv run sam deploy"
+          name: "sam deploy"
           command: |
-            uv run sam deploy ${DASH_DASH_DEBUG} \
+            sam deploy ${DASH_DASH_DEBUG} \
               --config-file ~/repo/${SAM_CONFIG_FILE} \
               --config-env $DC_ENVIRONMENT \
               --template-file ~/repo/.aws-sam/build/template.yaml \
