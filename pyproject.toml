@@ -17,6 +17,9 @@ dependencies = [
     "dc-response-builder",
 ]
 
+[tool.uv]
+package = false
+
 [tool.ruff]
 line-length = 80
 lint.ignore = ["E501"]
