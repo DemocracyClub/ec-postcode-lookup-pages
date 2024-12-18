@@ -18,9 +18,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "uv.lock" }}
+            - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
       - run: uv sync --dev --no-python-downloads
+      - run: uv lock --locked
       - run: uv export --no-hashes --no-dev > postcode_lookup/requirements.txt
       - persist_to_workspace:
           root: ~/repo/
@@ -29,8 +30,9 @@ jobs:
       - save_cache:
           when: on_success
           paths:
-            - ~/.local/share/virtualenvs/
-          key: v4-dependencies-{{ checksum "uv.lock" }}
+            - ./.venv
+            - $HOME/.cache/uv
+          key: v5-dependencies-{{ checksum "uv.lock" }}
 
   test:
     docker:
@@ -44,7 +46,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "uv.lock" }}
+            - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
       - run: ./scripts/code-check.sh
       - run:
@@ -93,7 +95,7 @@ jobs:
           at: ~/repo/
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "uv.lock" }}
+            - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
       - run: uv venv
       - run: uv pip install aws-sam-cli
@@ -128,7 +130,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "uv.lock" }}
+            - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
       - run: uv venv
       - aws-cli/setup
@@ -166,7 +168,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v4-dependencies-{{ checksum "uv.lock" }}
+            - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
       - run: uv sync --dev  --no-python-downloads
       - aws-cli/setup
