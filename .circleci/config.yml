@@ -127,7 +127,6 @@ jobs:
           keys:
             - v5-dependencies-{{ checksum "uv.lock" }}
       - install_uv
-      - run: uv venv
       - aws-cli/setup
       - run:
           name: "Export parameter store env vars"
