@@ -64,6 +64,8 @@ Resources:
 
   ECPostcodeLookupFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       FunctionName: ECPostcodeLookupFunction
       Timeout: 60
@@ -130,6 +132,8 @@ Resources:
 
   BasicAuthFunction:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: makefile
     Properties:
       CodeUri: ./postcode_lookup/
       Handler: lambda_basic_auth.lambda_handler
