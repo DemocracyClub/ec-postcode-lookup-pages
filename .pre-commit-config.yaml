@@ -1,21 +1,21 @@
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
-    -   id: end-of-file-fixer
-    -   id: debug-statements
-    -   id: trailing-whitespace
-    -   id: check-merge-conflict
-    -   id: check-json
-- repo: https://github.com/charliermarsh/ruff-pre-commit
-  # Ruff version.
-  rev: 'v0.3.7'
-  hooks:
-    - id: ruff
-      args: [--fix, --exit-non-zero-on-fix, --extend-exclude, TCH]
-    - id: ruff-format
--   repo: https://github.com/awslabs/cfn-python-lint
+      - id: end-of-file-fixer
+      - id: debug-statements
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-json
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.4.10
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix, --extend-exclude, TCH]
+      - id: ruff-format
+  - repo: https://github.com/awslabs/cfn-python-lint
     rev: v0.86.2 # The version of cfn-lint to use
     hooks:
-    -   id: cfn-python-lint
+      - id: cfn-python-lint
         files: template.yaml$
