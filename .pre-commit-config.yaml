@@ -15,7 +15,7 @@ repos:
         args: [--fix, --exit-non-zero-on-fix, --extend-exclude, TCH]
       - id: ruff-format
   - repo: https://github.com/awslabs/cfn-python-lint
-    rev: v0.86.2 # The version of cfn-lint to use
+    rev: v0.87.11 # The version of cfn-lint to use
     hooks:
       - id: cfn-python-lint
         files: template.yaml$
