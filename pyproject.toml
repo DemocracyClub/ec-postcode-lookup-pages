@@ -8,7 +8,7 @@ dependencies = [
     "babel==2.15.0",
     "dateparser==1.2.0",
     "httpx==0.27.0",
-    "jinja2==3.1.4",
+    "jinja2==3.1.5",
     "mangum==0.17.0",
     "sentry-sdk[starlette]==2.13.0",
     "starlette-babel==1.0.0",
