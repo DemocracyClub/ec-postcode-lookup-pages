@@ -23,6 +23,8 @@ from starlette.staticfiles import StaticFiles
 from starlette_babel import LocaleMiddleware, get_translator
 from utils import ForwardedForMiddleware, i18nMiddleware
 
+environment = os.environ.get("DC_ENVIRONMENT", "local")
+
 if sentry_dsn := os.environ.get("SENTRY_DSN"):
     import sentry_sdk
     from sentry_sdk.integrations.aws_lambda import AwsLambdaIntegration
@@ -149,7 +151,7 @@ def current_language_selector(conn: HTTPConnection) -> str | None:
 
 
 app = Starlette(
-    debug=True,
+    debug=(environment == "local"),
     routes=routes,
     middleware=[
         Middleware(i18nMiddleware),
