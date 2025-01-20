@@ -26,11 +26,11 @@ wheels = [
 
 [[package]]
 name = "babel"
-version = "2.15.0"
+version = "2.16.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/15/d2/9671b93d623300f0aef82cde40e25357f11330bdde91743891b22a555bed/babel-2.15.0.tar.gz", hash = "sha256:8daf0e265d05768bc6c7a314cf1321e9a123afc328cc635c18622a2f30a04413", size = 9390000 }
+sdist = { url = "https://files.pythonhosted.org/packages/2a/74/f1bc80f23eeba13393b7222b11d95ca3af2c1e28edca18af487137eefed9/babel-2.16.0.tar.gz", hash = "sha256:d1f3554ca26605fe173f3de0c65f750f5a42f924499bf134de6423582298e316", size = 9348104 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/27/45/377f7e32a5c93d94cd56542349b34efab5ca3f9e2fd5a68c5e93169aa32d/Babel-2.15.0-py3-none-any.whl", hash = "sha256:08706bdad8d0a3413266ab61bd6c34d0c28d6e1e7badf40a2cebe67644e2e1fb", size = 9634913 },
+    { url = "https://files.pythonhosted.org/packages/ed/20/bc79bc575ba2e2a7f70e8a1155618bb1301eaa5132a8271373a6903f73f8/babel-2.16.0-py3-none-any.whl", hash = "sha256:368b5b98b37c06b7daf6696391c3240c938b37767d4584413e8438c5c435fa8b", size = 9587599 },
 ]
 
 [[package]]
@@ -216,15 +216,15 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "babel", specifier = "==2.15.0" },
+    { name = "babel", specifier = "==2.16.0" },
     { name = "dateparser", specifier = "==1.2.0" },
     { name = "dc-response-builder", git = "https://github.com/DemocracyClub/dc_response_builder.git?tag=1.0.0" },
     { name = "httpx", specifier = "==0.27.0" },
     { name = "jinja2", specifier = "==3.1.5" },
-    { name = "mangum", specifier = "==0.17.0" },
+    { name = "mangum", specifier = "==0.19.0" },
     { name = "sentry-sdk", extras = ["starlette"], specifier = "==2.13.0" },
-    { name = "starlette", specifier = "==0.41.3" },
-    { name = "starlette-babel", specifier = "==1.0.0" },
+    { name = "starlette", specifier = "==0.45.2" },
+    { name = "starlette-babel", specifier = "==1.0.3" },
     { name = "uk-election-timetables", specifier = "==4.2.1" },
     { name = "urllib3", specifier = "==1.26.19" },
 ]
@@ -445,14 +445,14 @@ wheels = [
 
 [[package]]
 name = "mangum"
-version = "0.17.0"
+version = "0.19.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a6/3d/c9664d56ad6b32d7c7ebf82a77cacc290ebed033f96adf0c98a9114ace4e/mangum-0.17.0.tar.gz", hash = "sha256:5b4e26375e12eed051687670466d17968f8b74beecaca432edd4eb4127f78509", size = 14222 }
+sdist = { url = "https://files.pythonhosted.org/packages/97/e0/6ee9bfa27226252a449cba12fc57d3f1c3ce661813377ab33e29245389a4/mangum-0.19.0.tar.gz", hash = "sha256:e388e7c491b7b67970f8234e46fd4a7b21ff87785848f418de08148f71cf0bd6", size = 85792 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/3d/aa091b88f5fe2c4d73fd42831affc4aab26cdbdf0bab9925e1cabf297aaa/mangum-0.17.0-py3-none-any.whl", hash = "sha256:f00be705605bc4793958df62e4d249abf58d254c39d90bb410d069570206f4a2", size = 17191 },
+    { url = "https://files.pythonhosted.org/packages/77/ec/dd1cae5f6b1b4a08c01de587b45e889036b2f8c06408621e0cb273909965/mangum-0.19.0-py3-none-any.whl", hash = "sha256:e500b35f495d5e68ac98bc97334896d6101523f2ee2c57ba6a61893b65266e59", size = 17083 },
 ]
 
 [[package]]
@@ -918,28 +918,28 @@ wheels = [
 
 [[package]]
 name = "starlette"
-version = "0.41.3"
+version = "0.45.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1a/4c/9b5764bd22eec91c4039ef4c55334e9187085da2d8a2df7bd570869aae18/starlette-0.41.3.tar.gz", hash = "sha256:0e4ab3d16522a255be6b28260b938eae2482f98ce5cc934cb08dce8dc3ba5835", size = 2574159 }
+sdist = { url = "https://files.pythonhosted.org/packages/90/4f/e1c9f4ec3dae67a94c9285ed275355d5f7cf0f3a5c34538c8ae5412af550/starlette-0.45.2.tar.gz", hash = "sha256:bba1831d15ae5212b22feab2f218bab6ed3cd0fc2dc1d4442443bb1ee52260e0", size = 2574026 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/00/2b325970b3060c7cecebab6d295afe763365822b1306a12eeab198f74323/starlette-0.41.3-py3-none-any.whl", hash = "sha256:44cedb2b7c77a9de33a8b74b2b90e9f50d11fcf25d8270ea525ad71a25374ff7", size = 73225 },
+    { url = "https://files.pythonhosted.org/packages/aa/ab/fe4f57c83620b39dfc9e7687ebad59129ff05170b99422105019d9a65eec/starlette-0.45.2-py3-none-any.whl", hash = "sha256:4daec3356fb0cb1e723a5235e5beaf375d2259af27532958e2d79df549dad9da", size = 71505 },
 ]
 
 [[package]]
 name = "starlette-babel"
-version = "1.0.0"
+version = "1.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
     { name = "pytz" },
     { name = "starlette" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/aa/59402bb6874c4aedd5816de4bcbbc45fe735a5a5dcd3319cd596e3d6ba0f/starlette_babel-1.0.0.tar.gz", hash = "sha256:228dcc8e497fcda1533bf61f77b7286cbdf17340e125d72596fd3dce65e9a5b1", size = 16234 }
+sdist = { url = "https://files.pythonhosted.org/packages/03/30/1d2148e38016472f55de70088ea8d9e9cf3fc15244e09e71ad4ca5499942/starlette_babel-1.0.3.tar.gz", hash = "sha256:03b0d230ffec432b8653ae04c9294a40f26ae8d5d3c01829438883c5e6a6d19a", size = 16056 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2d/dc/1469807125675c5347cfa14822b2822a092d0a2b0f22adbb7a89c76bf8e1/starlette_babel-1.0.0-py3-none-any.whl", hash = "sha256:54f06fea7ed266149950233606a4c65548edee483211c1ff8d169b05004029e3", size = 14909 },
+    { url = "https://files.pythonhosted.org/packages/d3/35/31d1540f6315be88a8fe25624d1e688276b48472d450a8da00a10c645c2a/starlette_babel-1.0.3-py3-none-any.whl", hash = "sha256:884ce60e74e80da7ef8e0781c025c17e70a1e948cf5c788a1668e7d14646e1a6", size = 14954 },
 ]
 
 [[package]]
