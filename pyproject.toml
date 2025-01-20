@@ -14,7 +14,7 @@ dependencies = [
     "starlette-babel==1.0.3",
     "starlette==0.45.2",
     "uk-election-timetables==4.2.1",
-    "urllib3==1.26.19",
+    "urllib3==2.3.0",
     "dc-response-builder",
 ]
 
