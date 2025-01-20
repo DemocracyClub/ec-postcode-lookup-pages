@@ -225,7 +225,7 @@ requires-dist = [
     { name = "sentry-sdk", extras = ["starlette"], specifier = "==2.13.0" },
     { name = "starlette", specifier = "==0.41.3" },
     { name = "starlette-babel", specifier = "==1.0.0" },
-    { name = "uk-election-timetables", specifier = "==4.1.0" },
+    { name = "uk-election-timetables", specifier = "==4.2.1" },
     { name = "urllib3", specifier = "==1.26.19" },
 ]
 
@@ -1001,11 +1001,11 @@ wheels = [
 
 [[package]]
 name = "uk-election-timetables"
-version = "4.1.0"
+version = "4.2.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/92/24/9e6103ddb38856ff83906205f2b16036ef2d99f2c3fc7089164e8bb8bf47/uk_election_timetables-4.1.0.tar.gz", hash = "sha256:0b225e786085bdc9e40fd59619b2134c0bb316e2cfcf89c8ee894b8dcbf52719", size = 17909 }
+sdist = { url = "https://files.pythonhosted.org/packages/63/80/d93a5dd135bf4cd10b393fe0b6934c34c191056da3cf1e6b54d457628594/uk_election_timetables-4.2.1.tar.gz", hash = "sha256:b0aa4ed00c3c613b90f4b4091d63a52d3ab1bf9287eb1e5ed95e73495045ce77", size = 18158 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/60/7070f929b7f29f899fb964398158f7f837cf3327c2f15196ec7d79862cc3/uk_election_timetables-4.1.0-py3-none-any.whl", hash = "sha256:65d74ba008f2e89a6f7c5a84d3fea96664104390e545193c116f78b56aa8a333", size = 20249 },
+    { url = "https://files.pythonhosted.org/packages/70/26/e3d4c04910b611784861ca7fa8b1a11416e760cbdf04805ca35ef829fd2c/uk_election_timetables-4.2.1-py3-none-any.whl", hash = "sha256:57d4a5262622161bd456e1a5ee6f1d456c5350a4851ee3dfc8f38bbf5077fd72", size = 20414 },
 ]
 
 [[package]]
