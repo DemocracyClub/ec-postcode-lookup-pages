@@ -219,7 +219,7 @@ class ElectionDateTemplateSorter:
         self.cancellation_reasons = {
             ballot.cancellation_reason.name
             for ballot in self.date_data.ballots
-            if ballot.cancelled
+            if ballot.cancelled and ballot.cancellation_reason
         }
 
         # TODO: move to per ballot time tables
