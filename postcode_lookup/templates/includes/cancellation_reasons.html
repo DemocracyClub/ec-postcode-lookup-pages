@@ -1,4 +1,3 @@
-
 <h3 id="{{ ballot.ballot_paper_id }}">{{ ballot.ballot_title }}</h3>
 {% if ballot.cancellation_reason.name == "CANDIDATE_DEATH" %}
     <h4>{% trans %}Postponed Election{% endtrans %}</h4>
@@ -46,4 +45,16 @@
             ({{ initial_poll_date }}).
         {% endtrans %}
     </p>
+{% endif %}
+
+{% if not ballot.cancellation_reason and ballot.metadata.cancelled_election %}
+    {% if ballot.metadata.cancelled_election.title %}
+        <h4>{{ ballot.metadata.cancelled_election.title }}</h4>
+    {% endif %}
+    {% if ballot.metadata.cancelled_election.detail %}
+        <p>{{ ballot.metadata.cancelled_election.detail }}</p>
+    {% endif %}
+    {% if ballot.metadata.cancelled_election.url %}
+        <p><a href="{{ ballot.metadata.cancelled_election.url }}">Read more</a></p>
+    {% endif %}
 {% endif %}
