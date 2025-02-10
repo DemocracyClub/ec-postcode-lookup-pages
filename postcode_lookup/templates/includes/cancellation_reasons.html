@@ -52,7 +52,7 @@
         <h4>{{ ballot.metadata.cancelled_election.title }}</h4>
     {% endif %}
     {% if ballot.metadata.cancelled_election.detail %}
-        <p>{{ ballot.metadata.cancelled_election.detail }}</p>
+        <p>{{ ballot.metadata.cancelled_election.detail | nl2br }}</p>
     {% endif %}
     {% if ballot.metadata.cancelled_election.url %}
         <p><a href="{{ ballot.metadata.cancelled_election.url }}">Read more</a></p>

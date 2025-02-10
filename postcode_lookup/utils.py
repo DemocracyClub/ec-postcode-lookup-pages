@@ -9,6 +9,7 @@ import jinja2
 from babel.support import Translations
 from jinja2 import ChainableUndefined
 from jinja2.filters import do_mark_safe
+from markupsafe import Markup, escape
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -35,6 +36,10 @@ def date_format(value):
     date_obj = value if isinstance(value, date) else dateparser.parse(value)
     format = "EEEE dd MMMM y"
     return babel.dates.format_datetime(date_obj, format, locale=get_locale())
+
+
+def nl2br(value):
+    return Markup("<br>\n".join([escape(line) for line in value.splitlines()]))
 
 
 def translated_url(request: Request, name: str) -> URL:
@@ -143,6 +148,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.filters["date_filter"] = date_format
         env.filters["apnumber"] = apnumber
         env.filters["pluralize"] = pluralize
+        env.filters["nl2br"] = nl2br
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
         env.globals["additional_ballot_link"] = additional_ballot_link
