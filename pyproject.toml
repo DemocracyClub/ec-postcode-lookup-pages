@@ -22,7 +22,7 @@ dev = [
     "beautifulsoup4==4.12.3",
     "ipdb==0.13.13",
     "pydantic-factories==1.17.3",
-    "pydantic[email]==1.10.17",
+    "pydantic[email]==1.10.21",
     "pytest==8.3.4",
     "respx==0.21.1",
     "uvicorn==0.30.1",
