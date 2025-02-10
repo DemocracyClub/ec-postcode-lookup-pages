@@ -110,20 +110,19 @@ wheels = [
 
 [[package]]
 name = "coverage"
-version = "7.5.4"
+version = "7.6.11"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ef/05/31553dc038667012853d0a248b57987d8d70b2d67ea885605f87bcb1baba/coverage-7.5.4.tar.gz", hash = "sha256:a44963520b069e12789d0faea4e9fdb1e410cdc4aab89d94f7f55cbb7fef0353", size = 793238 }
+sdist = { url = "https://files.pythonhosted.org/packages/89/4e/38141d42af7452f4b7c5d3d7442a8018de34754ef52eb9a400768bc8d59e/coverage-7.6.11.tar.gz", hash = "sha256:e642e6a46a04e992ebfdabed79e46f478ec60e2c528e1e1a074d63800eda4286", size = 805460 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/96/58bcb3417c2fd38fae862704599f7088451bb6c8786f5cec6887366e78d9/coverage-7.5.4-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:54317c2b806354cbb2dc7ac27e2b93f97096912cc16b18289c5d4e44fc663233", size = 205392 },
-    { url = "https://files.pythonhosted.org/packages/2c/63/4f781db529b585a6ef3860ea01390951b006dbea9ada4ea3a3d830e325f4/coverage-7.5.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:042183de01f8b6d531e10c197f7f0315a61e8d805ab29c5f7b51a01d62782747", size = 205634 },
-    { url = "https://files.pythonhosted.org/packages/57/50/c5aadf036078072f31d8f1ae1a6000cc70f3f6cf652939c2d77551174d77/coverage-7.5.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a6bb74ed465d5fb204b2ec41d79bcd28afccf817de721e8a807d5141c3426638", size = 238754 },
-    { url = "https://files.pythonhosted.org/packages/eb/a6/57c42994b1686461c7b0b29de3b6d3d60c5f23a656f96460f9c755a31506/coverage-7.5.4-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b3d45ff86efb129c599a3b287ae2e44c1e281ae0f9a9bad0edc202179bcc3a2e", size = 235783 },
-    { url = "https://files.pythonhosted.org/packages/88/52/7054710a881b09d295e93b9889ac204c241a6847a8c05555fc6e1d8799d5/coverage-7.5.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5013ed890dc917cef2c9f765c4c6a8ae9df983cd60dbb635df8ed9f4ebc9f555", size = 237865 },
-    { url = "https://files.pythonhosted.org/packages/a0/c3/57ef08c70483b83feb4e0d22345010aaf0afbe442dba015da3b173076c36/coverage-7.5.4-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:1014fbf665fef86cdfd6cb5b7371496ce35e4d2a00cda501cf9f5b9e6fced69f", size = 237340 },
-    { url = "https://files.pythonhosted.org/packages/d8/44/465fa8f8edc11a18cbb83673f29b1af20ccf5139a66fbe2768ff67527ff0/coverage-7.5.4-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:3684bc2ff328f935981847082ba4fdc950d58906a40eafa93510d1b54c08a66c", size = 235663 },
-    { url = "https://files.pythonhosted.org/packages/ef/e5/829ddcfb29ad41661ba8e9cac7dc52100fd2c4853bb93d668a3ebde64862/coverage-7.5.4-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:581ea96f92bf71a5ec0974001f900db495488434a6928a2ca7f01eee20c23805", size = 237309 },
-    { url = "https://files.pythonhosted.org/packages/98/f6/f9c96fbf9b36be3f4d8c252ab2b4944420d99425f235f492784498804182/coverage-7.5.4-cp312-cp312-win32.whl", hash = "sha256:73ca8fbc5bc622e54627314c1a6f1dfdd8db69788f3443e752c215f29fa87a0b", size = 207988 },
-    { url = "https://files.pythonhosted.org/packages/0e/c1/2b7c7dcf4c273aac7676f12fb2b5524b133671d731ab91bd9a41c21675b9/coverage-7.5.4-cp312-cp312-win_amd64.whl", hash = "sha256:cef4649ec906ea7ea5e9e796e68b987f83fa9a718514fe147f538cfeda76d7a7", size = 208756 },
+    { url = "https://files.pythonhosted.org/packages/65/83/cf3d6ac06bd02e1fb7fc6609d7a3be799328a94938dd2a64cf091989b8ce/coverage-7.6.11-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:dbb1a822fd858d9853333a7c95d4e70dde9a79e65893138ce32c2ec6457d7a36", size = 208543 },
+    { url = "https://files.pythonhosted.org/packages/e7/e1/b1448995072ab033898758179e208afa924f4625ea4524ec868fafbae77d/coverage-7.6.11-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:61c834cbb80946d6ebfddd9b393a4c46bec92fcc0fa069321fcb8049117f76ea", size = 208805 },
+    { url = "https://files.pythonhosted.org/packages/80/22/11ae7726086bf16ad35ecd1ebf31c0c709647b2618977bc088003bd38808/coverage-7.6.11-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a46d56e99a31d858d6912d31ffa4ede6a325c86af13139539beefca10a1234ce", size = 239768 },
+    { url = "https://files.pythonhosted.org/packages/7d/68/717286bda6530f39f3ac16899dac1855a71921aca5ee565484269326c979/coverage-7.6.11-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5b48db06f53d1864fea6dbd855e6d51d41c0f06c212c3004511c0bdc6847b297", size = 242023 },
+    { url = "https://files.pythonhosted.org/packages/93/57/4b028c7c882411d9ca3f12cd4223ceeb5cb39f84bb91c4fb21a06440cbd9/coverage-7.6.11-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:b6ff5be3b1853e0862da9d349fe87f869f68e63a25f7c37ce1130b321140f963", size = 239610 },
+    { url = "https://files.pythonhosted.org/packages/44/88/720c9eba316406f243670237306bcdb8e269e4d0e12b191a697f66369404/coverage-7.6.11-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:be05bde21d5e6eefbc3a6de6b9bee2b47894b8945342e8663192809c4d1f08ce", size = 241212 },
+    { url = "https://files.pythonhosted.org/packages/1d/ae/a09edf77bd535d597de13679262845f5cb6ff1fab37a3065640fb3d5e6e8/coverage-7.6.11-cp312-cp312-win32.whl", hash = "sha256:e3b746fa0ffc5b6b8856529de487da8b9aeb4fb394bb58de6502ef45f3434f12", size = 211186 },
+    { url = "https://files.pythonhosted.org/packages/80/5d/63ad5e3f1421504194da0228d259a3913884830999d1297b5e16b59bcb0f/coverage-7.6.11-cp312-cp312-win_amd64.whl", hash = "sha256:ac476e6d0128fb7919b3fae726de72b28b5c9644cb4b579e4a523d693187c551", size = 211974 },
+    { url = "https://files.pythonhosted.org/packages/24/f3/63cd48409a519d4f6cf79abc6c89103a8eabc5c93e496f40779269dba0c0/coverage-7.6.11-py3-none-any.whl", hash = "sha256:f0f334ae844675420164175bf32b04e18a81fe57ad8eb7e0cfd4689d681ffed7", size = 200446 },
 ]
 
 [[package]]
@@ -230,7 +229,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "beautifulsoup4", specifier = "==4.12.3" },
-    { name = "coverage", extras = ["toml"], specifier = "==7.5.4" },
+    { name = "coverage", extras = ["toml"], specifier = "==7.6.11" },
     { name = "freezegun", specifier = "==1.5.1" },
     { name = "ipdb", specifier = "==0.13.13" },
     { name = "playwright", specifier = "==1.45.1" },
