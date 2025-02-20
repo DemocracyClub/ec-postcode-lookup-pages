@@ -123,11 +123,16 @@ def test_sopn_day(template_sorter, election_date_template_sorter):
         single_ballot_sorter_after_deadline,
         single_ballot_sorter_after_deadline.dates[0],
     )
-    # TODO: I would have expected the mode to change here after
     assert single_election_date_template_sorter.sections[0].weight == -6000
-    assert single_election_date_template_sorter.sections[0].mode is None
+    assert (
+        single_election_date_template_sorter.sections[0].mode
+        == "List of candidates published"
+    )
     assert single_election_date_template_sorter.sections[1].weight == 1000
-    assert single_election_date_template_sorter.sections[1].mode is None
+    assert (
+        single_election_date_template_sorter.sections[1].mode
+        == "List of candidates published"
+    )
 
     multiple_ballot_template_sorter_after_deadline = template_sorter(
         MULTIPLE_BALLOTS_WITH_VOTING_SYSTEM_AND_POLLING_STATION,
