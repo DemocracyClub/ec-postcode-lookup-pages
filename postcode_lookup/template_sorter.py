@@ -10,7 +10,7 @@ from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
 from uk_election_timetables.election_ids import from_election_id
-from utils import date_format
+from utils import ballot_cancellation_suffix, date_format
 
 # TODO: These might not be right! Implement in uk-election-timetables
 #  and think about them harder
@@ -436,9 +436,14 @@ class TemplateSorter:
             for section in self.dates[0].sections:
                 if isinstance(section, BallotSection):
                     for ballot in section.data.ballots:
+                        title = ballot.ballot_title
+                        if ballot.cancelled:
+                            title = (
+                                f"{title} {ballot_cancellation_suffix(ballot)}"
+                            )
                         toc.append(
                             {
-                                "label": ballot.ballot_title,
+                                "label": title,
                                 "anchor": ballot.ballot_paper_id,
                             }
                         )

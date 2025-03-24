@@ -6,13 +6,13 @@
 
 {% if date.uncancelled_ballot_count > 1 %}
     <p>
-        {% trans count=date.date_data.uncancelled_ballot_count %}
+        {% trans count=date.uncancelled_ballot_count %}
             You will have {{ count }} ballot papers to fill out:
         {% endtrans %}
     </p>
     <ul>
         {% for ballot in date.date_data.ballots %}
-            <li>{{ ballot.ballot_title }}</li>
+            <li>{{ ballot.ballot_title }} {{ ballot|ballot_cancellation_suffix }}</li>
         {% endfor %}
     </ul>
 {% endif %}
