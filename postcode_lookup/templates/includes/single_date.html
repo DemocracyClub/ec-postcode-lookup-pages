@@ -4,9 +4,9 @@
     {% endif %}
 </h2>
 
-{% if date.date_data.ballots|length > 1 %}
+{% if date.uncancelled_ballot_count > 1 %}
     <p>
-        {% trans count=date.date_data.ballots|length %}
+        {% trans count=date.date_data.uncancelled_ballot_count %}
             You will have {{ count }} ballot papers to fill out:
         {% endtrans %}
     </p>

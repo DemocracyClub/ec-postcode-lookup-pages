@@ -212,6 +212,9 @@ class ElectionDateTemplateSorter:
         self.date_data = date_data
         self.first_upcoming_date = first_upcoming_date
         self.ballot_count = len(self.date_data.ballots)
+        self.uncancelled_ballot_count = len(
+            [b for b in self.date_data.ballots if not b.cancelled]
+        )
 
         self.all_cancelled = all(
             ballot.cancelled for ballot in self.date_data.ballots
