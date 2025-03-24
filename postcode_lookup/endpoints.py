@@ -25,7 +25,7 @@ from utils import get_loader
 
 async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
     return get_loader(request).TemplateResponse(
-        "index.html", {"request": request, "url_prefix": backend.URL_PREFIX}
+        request, "index.html", context={"url_prefix": backend.URL_PREFIX}
     )
 
 
@@ -89,7 +89,9 @@ async def base_postcode_endpoint(
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
 
-    return get_loader(request).TemplateResponse(template_name, context)
+    return get_loader(request).TemplateResponse(
+        request, template_name, context=context
+    )
 
 
 # Use functools.partial to create a view function per backend
@@ -134,7 +136,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
     template_name = template_sorter.main_template_name
     if context["api_response"].address_picker:
         template_name = "address_picker.html"
-    return get_loader(request).TemplateResponse(template_name, context)
+    return get_loader(request).TemplateResponse(
+        request, template_name, context=context
+    )
 
 
 live_uprn_view = functools.partial(base_uprn_endpoint, backend=LiveAPIBackend)
@@ -147,7 +151,6 @@ def results_context(api_response, request, postcode, backend):
     api_json = api_response
     context = {}
     context["api_response"] = RootModel.from_api_response(api_json)
-    context["request"] = request
     context["postcode"] = postcode
     context["uprn"] = request.path_params.get("uprn", None)
     context["url_prefix"] = backend.URL_PREFIX
@@ -196,9 +199,9 @@ async def redirect_root_to_postcode_form(request: Request):
     ballot_stages = get_ballot_stages(poll_open_date)
 
     return get_loader(request).TemplateResponse(
+        request,
         "debug_page.html",
-        {
-            "request": request,
+        context={
             "sandbox_postcodes": SANDBOX_POSTCODES,
             "mock_postcodes": example_responses,
             "ballot_stages": ballot_stages,
@@ -222,9 +225,9 @@ async def section_tester(request: Request):
                 cancellation_reason
             ).build()
             template = get_loader(request).TemplateResponse(
+                request,
                 "includes/cancellation_reasons.html",
-                {
-                    "request": request,
+                context={
                     "initial_poll_date": ballot.poll_open_date,
                     "ballot": ballot,
                 },
@@ -240,9 +243,9 @@ async def section_tester(request: Request):
             )
 
     return get_loader(request).TemplateResponse(
+        request,
         template_name,
-        {
-            "request": request,
+        context={
             "sections": sections,
         },
     )
@@ -250,8 +253,6 @@ async def section_tester(request: Request):
 
 async def design_system_view(request: Request):
     return get_loader(request).TemplateResponse(
+        request,
         "design_system.html",
-        {
-            "request": request,
-        },
     )
