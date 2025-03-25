@@ -12,7 +12,7 @@
     </p>
     <ul>
         {% for ballot in date.date_data.ballots %}
-            <li>{{ ballot.ballot_title }} {{ ballot|ballot_cancellation_suffix }}</li>
+            <li>{{ ballot.ballot_title }}{{ ballot|ballot_cancellation_suffix }}</li>
         {% endfor %}
     </ul>
 {% endif %}

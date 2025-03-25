@@ -439,7 +439,7 @@ class TemplateSorter:
                         title = ballot.ballot_title
                         if ballot.cancelled:
                             title = (
-                                f"{title} {ballot_cancellation_suffix(ballot)}"
+                                f"{title}{ballot_cancellation_suffix(ballot)}"
                             )
                         toc.append(
                             {

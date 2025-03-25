@@ -144,17 +144,17 @@ def ballot_cancellation_suffix(ballot: Ballot) -> str:
     if not ballot.cancellation_reason:
         # We don't really know what's going on here
         # so let's assume it's postponed.
-        return _("(postponed)")
+        return _(" (postponed)")
 
     if ballot.cancellation_reason in [
         CancellationReason.NO_CANDIDATES,
         CancellationReason.CANDIDATE_DEATH,
         CancellationReason.UNDER_CONTESTED,
     ]:
-        return _("(postponed)")
+        return _(" (postponed)")
 
     if ballot.cancellation_reason == CancellationReason.EQUAL_CANDIDATES:
-        return _("(uncontested)")
+        return _(" (uncontested)")
 
     # If we've got here we don't really know what's going on. Return nothing
     # to be safe.
