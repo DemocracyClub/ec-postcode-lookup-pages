@@ -15,6 +15,10 @@
             <li>{{ ballot.ballot_title }}{{ ballot|ballot_cancellation_suffix }}</li>
         {% endfor %}
     </ul>
+{% else %}
+    {% trans count=date.uncancelled_ballot_count %}
+        You will have one ballot paper to fill out.
+    {% endtrans %}
 {% endif %}
 
 
