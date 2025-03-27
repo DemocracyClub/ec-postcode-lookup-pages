@@ -146,19 +146,27 @@ def ballot_cancellation_suffix(ballot: Ballot) -> str:
         # so let's assume it's postponed.
         return _(" (postponed)")
 
-    if ballot.cancellation_reason in [
-        CancellationReason.NO_CANDIDATES,
-        CancellationReason.CANDIDATE_DEATH,
-        CancellationReason.UNDER_CONTESTED,
-    ]:
+    if is_postponed(ballot.cancellation_reason):
         return _(" (postponed)")
 
-    if ballot.cancellation_reason == CancellationReason.EQUAL_CANDIDATES:
+    if is_uncontested(ballot.cancellation_reason):
         return _(" (uncontested)")
 
     # If we've got here we don't really know what's going on. Return nothing
     # to be safe.
     return ""
+
+
+def is_postponed(cancellation_reason: CancellationReason) -> bool:
+    return cancellation_reason in [
+        CancellationReason.NO_CANDIDATES,
+        CancellationReason.CANDIDATE_DEATH,
+        CancellationReason.UNDER_CONTESTED,
+    ]
+
+
+def is_uncontested(cancellation_reason: CancellationReason) -> bool:
+    return cancellation_reason == CancellationReason.EQUAL_CANDIDATES
 
 
 class _i18nJinja2Templates(Jinja2Templates):

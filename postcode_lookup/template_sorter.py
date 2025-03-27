@@ -5,12 +5,17 @@ from functools import cached_property
 from typing import Dict, List, Optional
 
 from dateparser import parse
-from response_builder.v1.models.base import CancellationReason, Date, RootModel
+from response_builder.v1.models.base import Date, RootModel
 from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
 from uk_election_timetables.election_ids import from_election_id
-from utils import ballot_cancellation_suffix, date_format
+from utils import (
+    ballot_cancellation_suffix,
+    date_format,
+    is_postponed,
+    is_uncontested,
+)
 
 # TODO: These might not be right! Implement in uk-election-timetables
 #  and think about them harder
@@ -390,14 +395,10 @@ class TemplateSorter:
         if self.all_cancelled:
             cancellation_reasons = self.all_cancelled_reasons
             verbs = []
-            if CancellationReason.EQUAL_CANDIDATES.name in cancellation_reasons:
+            if any(is_uncontested(reason) for reason in cancellation_reasons):
                 verbs.append(str(_("Uncontested")))
-            postponed = {
-                CancellationReason.NO_CANDIDATES.name,
-                CancellationReason.CANDIDATE_DEATH.name,
-                CancellationReason.UNDER_CONTESTED.name,
-            }
-            if cancellation_reasons.issubset(postponed):
+
+            if any(is_postponed(reason) for reason in cancellation_reasons):
                 verbs.append(str(_("Postponed")))
             verb = " and ".join(verbs)
             return _(
