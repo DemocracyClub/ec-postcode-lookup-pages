@@ -10,6 +10,7 @@ from babel.support import Translations
 from jinja2 import ChainableUndefined
 from jinja2.filters import do_mark_safe
 from markupsafe import Markup, escape
+from response_builder.v1.models.base import Ballot, CancellationReason
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
@@ -134,6 +135,40 @@ def pluralize(value, arg="s"):
     return ""
 
 
+def ballot_cancellation_suffix(ballot: Ballot) -> str:
+    # Used when a ballot is 'cancelled' and we want to label
+    # it wit the right wording. This is normally 'postponed' but sometimes
+    # 'cancelled' or some other text.
+    if not ballot.cancelled:
+        return ""
+    if not ballot.cancellation_reason:
+        # We don't really know what's going on here
+        # so let's assume it's postponed.
+        return _(" (postponed)")
+
+    if is_postponed(ballot.cancellation_reason):
+        return _(" (postponed)")
+
+    if is_uncontested(ballot.cancellation_reason):
+        return _(" (uncontested)")
+
+    # If we've got here we don't really know what's going on. Return nothing
+    # to be safe.
+    return ""
+
+
+def is_postponed(cancellation_reason: CancellationReason) -> bool:
+    return cancellation_reason in [
+        CancellationReason.NO_CANDIDATES,
+        CancellationReason.CANDIDATE_DEATH,
+        CancellationReason.UNDER_CONTESTED,
+    ]
+
+
+def is_uncontested(cancellation_reason: CancellationReason) -> bool:
+    return cancellation_reason == CancellationReason.EQUAL_CANDIDATES
+
+
 class _i18nJinja2Templates(Jinja2Templates):
     locale = None
 
@@ -152,6 +187,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
         env.globals["additional_ballot_link"] = additional_ballot_link
+        env.filters["ballot_cancellation_suffix"] = ballot_cancellation_suffix
 
         locale_dir = Path(__file__).parent / "locale"
         list_of_desired_locales = [self.locale]

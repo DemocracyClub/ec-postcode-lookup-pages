@@ -1,4 +1,4 @@
-<h3 id="{{ ballot.ballot_paper_id }}">{{ ballot.ballot_title }}</h3>
+<h3 id="{{ ballot.ballot_paper_id }}">{{ ballot.ballot_title }}{{ ballot|ballot_cancellation_suffix }}</h3>
 {% if ballot.cancellation_reason.name == "CANDIDATE_DEATH" %}
     <h4>{% trans %}Postponed Election{% endtrans %}</h4>
     <p>
