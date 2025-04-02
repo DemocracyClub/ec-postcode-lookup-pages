@@ -102,7 +102,7 @@ class PollingStationSection(BaseSection):
             poll_date - datetime.timedelta(days=days_before_poll)
         ) < self.current_date:
             return -6000
-        return 1001
+        return 1003
 
     @property
     def toc_label(self):
@@ -132,6 +132,46 @@ class BallotSection(BaseSection):
         return context
 
 
+class PostalVotesSection(BaseSection):
+    template_name = "includes/postal_votes.html"
+
+    @property
+    def weight(self):
+        if self.timetable.is_before(
+            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        ):
+            return -5000
+
+        if self.timetable.is_after(
+            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        ):
+            return 1001
+        return 0
+
+    @property
+    def context(self):
+        context = super().context
+        context["can_register"] = self.timetable.is_before(
+            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        )
+
+        context["htag_primary"] = "h2"
+        context["htag_secondary"] = "h3"
+        if self.response_type == ResponseTypes.MULTIPLE_DATES:
+            context["htag_primary"] = "h3"
+            context["htag_secondary"] = "h4"
+        context["toc_id"] = self.toc_id
+        return context
+
+    @property
+    def toc_label(self):
+        return _("Voting by post")
+
+    @property
+    def toc_id(self):
+        return f"postal-votes-{self.timetable.poll_date}-{self.timetable.postal_vote_application_deadline}"
+
+
 class RegistrationDateSection(BaseSection):
     template_name = "includes/registration_timetable.html"
 
@@ -141,7 +181,7 @@ class RegistrationDateSection(BaseSection):
             return -6000
 
         if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
-            return 1001
+            return 1002
         return 0
 
     @property
@@ -149,12 +189,6 @@ class RegistrationDateSection(BaseSection):
         context = super().context
         context["can_register"] = self.timetable.is_before(
             TimetableEvent.REGISTRATION_DEADLINE
-        )
-        context["can_register_postal_vote"] = self.timetable.is_before(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        )
-        context["can_register_vac"] = self.timetable.is_before(
-            TimetableEvent.VAC_APPLICATION_DEADLINE
         )
         context["htag_primary"] = "h2"
         context["htag_secondary"] = "h3"
@@ -295,7 +329,10 @@ class ElectionDateTemplateSorter:
                 )
             )
 
-        if self.first_upcoming_date:
+        if not self.all_cancelled:
+            enabled_sections.append(PostalVotesSection(**section_kwargs))
+
+        if not self.all_cancelled and self.first_upcoming_date:
             enabled_sections.append(PollingStationSection(**section_kwargs))
 
         self.sections = sorted(enabled_sections, key=lambda sec: sec.weight)

@@ -1,0 +1,40 @@
+<{{ section.context.htag_primary }} id="{{toc_id}}">{% trans %}Voting by post{% endtrans %}</{{ section.context.htag_primary }}>
+{% if section.context.can_register %}
+    <{{ section.context.htag_secondary }}>{% trans %}Apply for a postal vote{% endtrans %}</{{ section.context.htag_secondary }}>
+    <p>
+      {% trans %}
+        If you know that you won't be able to get to the polling station on polling day, you can vote by post.
+      {% endtrans %}
+      {% trans date=section.timetable.postal_vote_application_deadline|date_filter %}
+        You have until {{ date }}.
+      {% endtrans %}
+    </p>
+    <p>
+      <a href="https://www.gov.uk/apply-postal-vote" class="o-button o-button--primary o-button--dark o-external-link">
+        {% trans %}Apply for a postal vote{% endtrans %}
+      </a>
+    </p>
+    <p>
+      {% trans %}
+        <a href="https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/apply-vote-post">Read more</a> about voting by post.
+      {% endtrans %}
+    </p>
+{% else %}
+    {%
+        trans
+        date=section.data.date|date_filter,
+        application_deadline=section.timetable.postal_vote_application_deadline|date_filter
+    %}
+    <p>
+      The deadline to apply for a postal vote for the elections taking place on {{ date }} was {{ application_deadline }}.
+      You can <a href="https://www.gov.uk/apply-postal-vote">apply for a postal vote</a> in future elections.
+    </p>
+    {% endtrans %}
+{% endif %}
+<{{ section.context.htag_secondary }}>{% trans %}If you have a postal vote{% endtrans %}</{{ section.context.htag_secondary }}>
+<p>
+  {% trans %}
+    Your local council will send your postal voting pack after the deadline to become a candidate has passed.
+    This is around three weeks before polling day.
+  {% endtrans %}
+</p>
