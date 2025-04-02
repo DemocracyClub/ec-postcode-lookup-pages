@@ -5,6 +5,7 @@ from functools import cached_property
 from typing import Dict, List, Optional
 
 from dateparser import parse
+from postal_votes import get_postal_vote_dispatch_dates
 from response_builder.v1.models.base import Date, RootModel
 from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
@@ -135,6 +136,12 @@ class BallotSection(BaseSection):
 class PostalVotesSection(BaseSection):
     template_name = "includes/postal_votes.html"
 
+    def __init__(
+        self, postal_vote_dispatch_dates: List[datetime.date], **kwargs
+    ) -> None:
+        super().__init__(**kwargs)
+        self.dispatch_dates = postal_vote_dispatch_dates
+
     @property
     def weight(self):
         if self.timetable.is_before(
@@ -154,6 +161,7 @@ class PostalVotesSection(BaseSection):
         context["can_register"] = self.timetable.is_before(
             TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
         )
+        context["dispatch_dates"] = self.dispatch_dates
 
         context["htag_primary"] = "h2"
         context["htag_secondary"] = "h3"
@@ -242,6 +250,7 @@ class ElectionDateTemplateSorter:
         response_type: ResponseTypes,
         current_date: datetime.date = None,
         first_upcoming_date=True,
+        postal_vote_dispatch_dates=None,
     ) -> None:
         if not current_date:
             current_date = str(datetime.date.today())
@@ -330,7 +339,11 @@ class ElectionDateTemplateSorter:
             )
 
         if not self.all_cancelled:
-            enabled_sections.append(PostalVotesSection(**section_kwargs))
+            merged_kwargs = {
+                **section_kwargs,
+                **{"postal_vote_dispatch_dates": postal_vote_dispatch_dates},
+            }
+            enabled_sections.append(PostalVotesSection(**merged_kwargs))
 
         if not self.all_cancelled and self.first_upcoming_date:
             enabled_sections.append(PollingStationSection(**section_kwargs))
@@ -365,12 +378,21 @@ class TemplateSorter:
             self.api_response, "registration", None
         )
         for i, date in enumerate(self.api_response.dates):
+            postal_vote_dispatch_dates = None
+            if (
+                self.electoral_services
+                # we only hold postal votes dispatch data data for one
+                # election. TODO: remove/review after 2025-05-01
+                and date.date == "2025-05-01"
+            ):
+                postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
+                    self.electoral_services.council_id
+                )
+
             if parse(date.date).date() < datetime.datetime.today().date():
                 continue
             if self.electoral_services:
-                country = country_map[
-                    self.api_response.electoral_services.nation
-                ]
+                country = country_map[self.electoral_services.nation]
             else:
                 country = Country.ENGLAND
 
@@ -381,6 +403,7 @@ class TemplateSorter:
                     current_date=self.current_date,
                     response_type=self.response_type,
                     first_upcoming_date=not i > 0,
+                    postal_vote_dispatch_dates=postal_vote_dispatch_dates,
                 )
             )
             self.total_ballot_count += len(date.ballots)
