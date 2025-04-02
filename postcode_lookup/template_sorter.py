@@ -123,7 +123,7 @@ class BallotSection(BaseSection):
 
         return 0
 
-    @property
+    @cached_property
     def context(self):
         context = super().context
         context["show_candidates"] = self.timetable.is_after(
@@ -155,7 +155,7 @@ class PostalVotesSection(BaseSection):
             return 1001
         return 0
 
-    @property
+    @cached_property
     def context(self):
         context = super().context
         context["can_register"] = self.timetable.is_before(
@@ -192,7 +192,7 @@ class RegistrationDateSection(BaseSection):
             return 1002
         return 0
 
-    @property
+    @cached_property
     def context(self):
         context = super().context
         context["can_register"] = self.timetable.is_before(
@@ -227,7 +227,7 @@ class CityOfLondonRegistrationDateSection(RegistrationDateSection):
         parent_weight = super().weight
         return 0 if parent_weight == 0 else parent_weight + 1
 
-    @property
+    @cached_property
     def context(self):
         context = super().context
         context["with_headers"] = self.with_headers
