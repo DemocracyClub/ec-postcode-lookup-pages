@@ -377,13 +377,13 @@ msgid ""
 "/ways-vote/apply-vote-post\">Read more</a> about voting by post."
 msgstr ""
 
-#: postcode_lookup/templates/includes/postal_votes.html:24
+#: postcode_lookup/templates/includes/postal_votes.html:25
 #, python-format
 msgid ""
-"<p> The deadline to apply for a postal vote for the elections taking "
-"place on %(date)s was %(application_deadline)s. You can <a "
+"The deadline to apply for a postal vote for the elections taking place on"
+" %(date)s was %(application_deadline)s. You can <a "
 "href=\"https://www.gov.uk/apply-postal-vote\">apply for a postal vote</a>"
-" in future elections. </p>"
+" in future elections."
 msgstr ""
 
 #: postcode_lookup/templates/includes/postal_votes.html:34

@@ -20,16 +20,16 @@
       {% endtrans %}
     </p>
 {% else %}
+  <p>
     {%
-        trans
-        date=section.data.date|date_filter,
-        application_deadline=section.timetable.postal_vote_application_deadline|date_filter
+      trans
+      date=section.data.date|date_filter,
+      application_deadline=section.timetable.postal_vote_application_deadline|date_filter
     %}
-    <p>
       The deadline to apply for a postal vote for the elections taking place on {{ date }} was {{ application_deadline }}.
       You can <a href="https://www.gov.uk/apply-postal-vote">apply for a postal vote</a> in future elections.
-    </p>
     {% endtrans %}
+  </p>
 {% endif %}
 <{{ section.context.htag_secondary }}>{% trans %}If you have a postal vote{% endtrans %}</{{ section.context.htag_secondary }}>
 <p>
