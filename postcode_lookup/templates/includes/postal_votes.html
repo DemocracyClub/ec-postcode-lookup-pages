@@ -32,22 +32,33 @@
   </p>
 {% endif %}
 <{{ section.context.htag_secondary }}>{% trans %}If you have a postal vote{% endtrans %}</{{ section.context.htag_secondary }}>
-<p>
+
   {% if section.context.dispatch_dates %}
     {%
       trans
       date0=section.context.dispatch_dates.0|date_filter,
       date1=section.context.dispatch_dates.1|date_filter,
-      date2=section.context.dispatch_dates.2|date_filter
+      date2=section.context.dispatch_dates.2|date_filter,
+      date3=section.context.dispatch_dates.3|date_filter,
+      application_deadline=section.timetable.postal_vote_application_deadline|date_filter,
+      polling_day=section.data.date|date_filter
     %}
-      If you applied for your postal vote by {{ date0 }}, your local council will send your postal voting pack from {{ date1 }}.
-      You can <a href="#electoral-services">contact your local council</a> if you have not received your postal voting pack.
-      They can issue replacement packs after {{ date2 }}.
+      <ul>
+        <li>If you already have a postal vote or successfully apply by {{ date0 }}, your pack will be sent from {{ date1 }}.</li>
+        <li>If you apply after {{ date1 }} up to 5pm on {{ application_deadline }}, your pack will be sent from {{ date2 }}.</li>
+      </ul>
+
+      <p>
+        You can <a href="#electoral-services">contact your local council</a> if you have not received your postal voting pack.
+        Replacement packs can only be issued from {{ date3 }} until 5pm on {{ polling_day }}.
+      </p>
     {% endtrans %}
   {% else %}
-    {% trans %}
-      Your local council will send your postal voting pack after the deadline to become a candidate has passed.
-      This is around three weeks before polling day.
-    {% endtrans %}
+    <p>
+      {% trans %}
+        Your local council will send your postal voting pack after the deadline to become a candidate has passed.
+        This is around three weeks before polling day.
+      {% endtrans %}
+    </p>
   {% endif %}
-</p>
+
