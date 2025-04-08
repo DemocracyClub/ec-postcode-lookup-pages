@@ -86,6 +86,21 @@ def test_get_invalid_postcode_frontend(respx_mock, app_client):
     assert resp.next_request.url.query.decode() == "invalid-postcode=1"
 
 
+def test_api_error_frontend(respx_mock, app_client):
+    respx_mock.get(
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1"
+    ).mock(return_value=httpx.Response(500))
+
+    resp = app_client.get(
+        "/polling-stations",
+        params={"postcode-search": "SE228DJ"},
+        follow_redirects=False,
+    )
+
+    assert resp.status_code == 307
+    assert resp.next_request.url.query.decode() == "api-error=1"
+
+
 @pytest.mark.parametrize(
     "postcode,valid",
     [

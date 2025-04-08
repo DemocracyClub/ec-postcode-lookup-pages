@@ -22,7 +22,7 @@
                         <label for="postcode-search">
                             {% trans %}Enter your postcode{% endtrans %}</label>
                         <p class="dc-form-hint">eg. SW1A 2AA</p>
-                        <p class="error_message">Please enter a valid UK postcode</p>
+                        <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
                         <div class="dc-inline-form">
                             <input
                                     id="postcode-search"
@@ -64,12 +64,21 @@
                             return urlParams.get(param);
                         }
 
-                        const errorParam = getQueryParam('invalid-postcode');
-                        if (errorParam === '1') {
-                            // Display the error message
-                            document.getElementById('dc-postcode-search-form').classList.add("error");
-                            postcodeInput.setAttribute("aria-invalid", "true")
+                        // Function to handle error message display
+                        function handleErrorDisplay(param, message = null) {
+                            if (getQueryParam(param) === '1') {
+                                // display error message
+                                document.getElementById('dc-postcode-search-form').classList.add("error");
+                                postcodeInput.setAttribute("aria-invalid", "true");
+                                // optionally customize message text
+                                if (message) {
+                                    document.getElementById('postcode-search-error-message').innerHTML = message;
+                                }
+                            }
                         }
+
+                        handleErrorDisplay('invalid-postcode');
+                        handleErrorDisplay('api-error', "Sorry, there's a problem with this service at the moment. We're working to fix it as soon as possible.");
 
                         postcodeInput.addEventListener('input', function () {
                             if (postcodeInput.validity.valid) {
