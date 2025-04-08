@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-08 13:53+0100\n"
+"POT-Creation-Date: 2025-04-08 15:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -19,56 +19,56 @@ msgstr ""
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:176
+#: postcode_lookup/template_sorter.py:183
 #: postcode_lookup/templates/includes/postal_votes.html:1
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:211
-#: postcode_lookup/template_sorter.py:238
+#: postcode_lookup/template_sorter.py:218
+#: postcode_lookup/template_sorter.py:245
 #: postcode_lookup/templates/includes/registration_timetable.html:1
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:2
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:281
+#: postcode_lookup/template_sorter.py:289
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:286
+#: postcode_lookup/template_sorter.py:294
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:450
+#: postcode_lookup/template_sorter.py:469
 msgid "Contact details"
 msgstr "Manylion cyswllt"
 
-#: postcode_lookup/template_sorter.py:453
+#: postcode_lookup/template_sorter.py:472
 #: postcode_lookup/templates/old_result.html:23
 #: postcode_lookup/templates/old_result.html:47
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:459
+#: postcode_lookup/template_sorter.py:478
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:462
+#: postcode_lookup/template_sorter.py:481
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:472
+#: postcode_lookup/template_sorter.py:491
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:475
+#: postcode_lookup/template_sorter.py:494
 #: postcode_lookup/templates/old_result.html:14
 #: postcode_lookup/templates/old_result.html:39
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:478
-#: postcode_lookup/template_sorter.py:481
+#: postcode_lookup/template_sorter.py:497
+#: postcode_lookup/template_sorter.py:500
 #: postcode_lookup/templates/old_result.html:6
 #: postcode_lookup/templates/old_result.html:12
 #: postcode_lookup/templates/old_result.html:31
@@ -76,13 +76,13 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:551
-#: postcode_lookup/template_sorter.py:564
+#: postcode_lookup/template_sorter.py:570
+#: postcode_lookup/template_sorter.py:583
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:558
+#: postcode_lookup/template_sorter.py:577
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
@@ -374,7 +374,8 @@ msgstr "Mae gennych hyd nes %(date)s"
 #: postcode_lookup/templates/includes/postal_votes.html:18
 msgid ""
 "<a href=\"https://www.electoralcommission.org.uk/voting-and-elections"
-"/ways-vote/apply-vote-post\">Read more</a> about voting by post."
+"/ways-vote/apply-vote-post\">Read more about applying for a postal "
+"vote</a>."
 msgstr ""
 
 #: postcode_lookup/templates/includes/postal_votes.html:25
@@ -396,13 +397,10 @@ msgid ""
 "<ul> <li>If you already have a postal vote or successfully apply by "
 "%(date0)s, your pack will be sent from %(date1)s.</li> <li>If you apply "
 "after %(date0)s up to 5pm on %(application_deadline)s, your pack will be "
-"sent from %(date2)s.</li> </ul> <p> You can <a href=\"#electoral-"
-"services\">contact your local council</a> if you have not received your "
-"postal voting pack. Replacement packs can only be issued from %(date3)s "
-"until 5pm on %(polling_day)s. </p>"
+"sent from %(date2)s.</li> </ul>"
 msgstr ""
 
-#: postcode_lookup/templates/includes/postal_votes.html:58
+#: postcode_lookup/templates/includes/postal_votes.html:51
 msgid ""
 "Your local council will send your postal voting pack after the deadline "
 "to become a candidate has passed. This is around three weeks before "
@@ -411,6 +409,15 @@ msgstr ""
 "Bydd eich cyngor lleol yn anfon eich pecyn pleidleisio drwy’r post ar ôl "
 "i’r dyddiad cau ar gyfer dod yn ymgeisydd fynd heibio. Mae hyn tua thair "
 "wythnos cyn y diwrnod pleidleisio."
+
+#: postcode_lookup/templates/includes/postal_votes.html:61
+#, python-format
+msgid ""
+"You can <a href=\"#electoral-services\">contact your local council</a> if"
+" you have not received your postal voting pack. Replacement packs can "
+"only be issued from %(replacement_pack_start_date)s until 5pm on "
+"%(polling_day)s."
+msgstr ""
 
 #: postcode_lookup/templates/includes/registration_timetable.html:3
 #: postcode_lookup/templates/includes/registration_timetable.html:11

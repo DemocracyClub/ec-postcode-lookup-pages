@@ -137,10 +137,14 @@ class PostalVotesSection(BaseSection):
     template_name = "includes/postal_votes.html"
 
     def __init__(
-        self, postal_vote_dispatch_dates: List[datetime.date], **kwargs
+        self,
+        postal_vote_dispatch_dates: List[datetime.date],
+        replacement_pack_start_date: datetime.date,
+        **kwargs,
     ) -> None:
         super().__init__(**kwargs)
         self.dispatch_dates = postal_vote_dispatch_dates
+        self.replacement_pack_start_date = replacement_pack_start_date
 
     @property
     def weight(self):
@@ -162,6 +166,9 @@ class PostalVotesSection(BaseSection):
             TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
         )
         context["dispatch_dates"] = self.dispatch_dates
+        context["replacement_pack_start_date"] = (
+            self.replacement_pack_start_date
+        )
 
         context["htag_primary"] = "h2"
         context["htag_secondary"] = "h3"
@@ -251,6 +258,7 @@ class ElectionDateTemplateSorter:
         current_date: datetime.date = None,
         first_upcoming_date=True,
         postal_vote_dispatch_dates=None,
+        replacement_pack_start_date=None,
     ) -> None:
         if not current_date:
             current_date = str(datetime.date.today())
@@ -341,7 +349,10 @@ class ElectionDateTemplateSorter:
         if not self.all_cancelled:
             merged_kwargs = {
                 **section_kwargs,
-                **{"postal_vote_dispatch_dates": postal_vote_dispatch_dates},
+                **{
+                    "postal_vote_dispatch_dates": postal_vote_dispatch_dates,
+                    "replacement_pack_start_date": replacement_pack_start_date,
+                },
             }
             enabled_sections.append(PostalVotesSection(**merged_kwargs))
 
@@ -379,6 +390,7 @@ class TemplateSorter:
         )
         for i, date in enumerate(self.api_response.dates):
             postal_vote_dispatch_dates = None
+            replacement_pack_start_date = None
             if (
                 self.electoral_services
                 # we only hold postal votes dispatch data data for one
@@ -388,6 +400,13 @@ class TemplateSorter:
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
                 )
+                # hard-coded for May 2025
+                # this is the date when replacement packs can be issued from
+                # for ALL councils
+                # TODO: add this to the timetable library
+                replacement_pack_start_date = datetime.datetime.strptime(
+                    "25/04/2025", "%d/%m/%Y"
+                ).date()
 
             if parse(date.date).date() < datetime.datetime.today().date():
                 continue
@@ -404,6 +423,7 @@ class TemplateSorter:
                     response_type=self.response_type,
                     first_upcoming_date=not i > 0,
                     postal_vote_dispatch_dates=postal_vote_dispatch_dates,
+                    replacement_pack_start_date=replacement_pack_start_date,
                 )
             )
             self.total_ballot_count += len(date.ballots)
