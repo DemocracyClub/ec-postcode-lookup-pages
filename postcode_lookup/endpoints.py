@@ -4,6 +4,7 @@ import os
 
 from dateutil.parser import parse
 from dc_api_client import (
+    ApiError,
     BaseAPIClient,
     InvalidPostcodeException,
     InvalidUPRNException,
@@ -75,12 +76,18 @@ async def base_postcode_endpoint(
             api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
             request=request,
         ).get_postcode(postcode)
-    except InvalidPostcodeException:
+    except (InvalidPostcodeException, ApiError) as e:
+        query_param = (
+            "invalid-postcode"
+            if isinstance(e, InvalidPostcodeException)
+            else "api-error"
+        )
         return RedirectResponse(
             request.url_for(
                 backend.URL_PREFIX + "_postcode_form_en"
-            ).include_query_params(**{"invalid-postcode": 1})
+            ).include_query_params(**{query_param: 1})
         )
+
     context = results_context(api_response, request, postcode, backend)
 
     template_sorter = TemplateSorter(context["api_response"])

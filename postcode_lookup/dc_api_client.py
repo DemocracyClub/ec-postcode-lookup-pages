@@ -17,6 +17,12 @@ class InvalidPostcodeException(Exception): ...
 class InvalidUPRNException(Exception): ...
 
 
+class ApiError(Exception):
+    """
+    Custom exception class to represent errors encountered while interacting with the API.
+    """
+
+
 def valid_postcode(postcode: str):
     postcode = str(postcode)[:10]
     if not postcode:
@@ -69,6 +75,8 @@ class BaseAPIClient(ABC):
         params.update(self.default_params)
         url = urljoin(self.get_base_url, endpoint)
         req = httpx.get(url, params=params)
+        if req.status_code == 400:
+            raise InvalidPostcodeException
         req.raise_for_status()
         return req
 
@@ -89,7 +97,7 @@ class LiveAPIBackend(BaseAPIClient):
             try:
                 return self._get(endpoint=f"postcode/{postcode}/").json()
             except httpx.HTTPError:
-                raise InvalidPostcodeException
+                raise ApiError
         raise InvalidPostcodeException
 
     def get_uprn(self, uprn: str) -> dict:

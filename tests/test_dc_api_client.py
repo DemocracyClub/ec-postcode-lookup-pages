@@ -1,6 +1,7 @@
 import httpx
 import pytest
 from dc_api_client import (
+    ApiError,
     InvalidPostcodeException,
     LiveAPIBackend,
     valid_postcode,
@@ -66,6 +67,15 @@ def test_get_invalid_postcode_api_client(respx_mock):
         client.get_postcode("FAIL")
 
 
+def test_api_error_api_client(respx_mock):
+    client = LiveAPIBackend(api_key="test", request=None)
+    respx_mock.get(
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1"
+    ).mock(return_value=httpx.Response(500))
+    with pytest.raises(ApiError):
+        client.get_postcode("SE228DJ")
+
+
 def test_get_invalid_postcode_frontend(respx_mock, app_client):
     resp = app_client.get(
         "/polling-stations",
@@ -73,6 +83,7 @@ def test_get_invalid_postcode_frontend(respx_mock, app_client):
         follow_redirects=False,
     )
     assert resp.status_code == 307
+    assert resp.next_request.url.query.decode() == "invalid-postcode=1"
 
 
 @pytest.mark.parametrize(
