@@ -19,10 +19,6 @@ def get_postal_vote_dispatch_dates(council_id):
                 datetime.strptime(row["Date 1"], "%d/%m/%Y").date(),
                 datetime.strptime(row["Date 2"], "%d/%m/%Y").date(),
                 datetime.strptime(row["Date 3"], "%d/%m/%Y").date(),
-                # hard-coded for May 2025
-                # this is the date when replacement packs can be issued from
-                # for ALL councils
-                datetime.strptime("25/04/2025", "%d/%m/%Y").date(),
             ]
         except ValueError:
             return None

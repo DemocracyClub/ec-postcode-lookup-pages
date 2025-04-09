@@ -16,7 +16,7 @@
     </p>
     <p>
       {% trans %}
-        <a href="https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/apply-vote-post">Read more</a> about voting by post.
+        <a href="https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/apply-vote-post">Read more about applying for a postal vote</a>.
       {% endtrans %}
     </p>
 {% else %}
@@ -39,19 +39,12 @@
       date0=section.context.dispatch_dates.0|date_filter,
       date1=section.context.dispatch_dates.1|date_filter,
       date2=section.context.dispatch_dates.2|date_filter,
-      date3=section.context.dispatch_dates.3|date_filter,
-      application_deadline=section.timetable.postal_vote_application_deadline|date_filter,
-      polling_day=section.data.date|date_filter
+      application_deadline=section.timetable.postal_vote_application_deadline|date_filter
     %}
       <ul>
         <li>If you already have a postal vote or successfully apply by {{ date0 }}, your pack will be sent from {{ date1 }}.</li>
         <li>If you apply after {{ date0 }} up to 5pm on {{ application_deadline }}, your pack will be sent from {{ date2 }}.</li>
       </ul>
-
-      <p>
-        You can <a href="#electoral-services">contact your local council</a> if you have not received your postal voting pack.
-        Replacement packs can only be issued from {{ date3 }} until 5pm on {{ polling_day }}.
-      </p>
     {% endtrans %}
   {% else %}
     <p>
@@ -62,3 +55,15 @@
     </p>
   {% endif %}
 
+  {% if section.context.replacement_pack_start_date %}
+    <p>
+      {%
+        trans
+        replacement_pack_start_date=section.context.replacement_pack_start_date|date_filter,
+        polling_day=section.data.date|date_filter
+      %}
+        You can <a href="#electoral-services">contact your local council</a> if you have not received your postal voting pack.
+        Replacement packs can only be issued from {{ replacement_pack_start_date }} until 5pm on {{ polling_day }}.
+      {% endtrans %}
+    </p>
+  {% endif %}
