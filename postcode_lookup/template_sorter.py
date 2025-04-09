@@ -113,6 +113,10 @@ class PollingStationSection(BaseSection):
 class BallotSection(BaseSection):
     template_name = "includes/ballots.html"
 
+    def __init__(self, has_parishes: bool, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.has_parishes = has_parishes
+
     @property
     def weight(self):
         if self.timetable.is_before(TimetableEvent.SOPN_PUBLISH_DATE):
@@ -130,6 +134,7 @@ class BallotSection(BaseSection):
             TimetableEvent.SOPN_PUBLISH_DATE
         )
         context["sopn_publish_date"] = self.timetable.sopn_publish_date
+        context["has_parishes"] = self.has_parishes
         return context
 
 
@@ -306,7 +311,17 @@ class ElectionDateTemplateSorter:
             "timetable": self.timetable,
         }
 
-        enabled_sections = [BallotSection(**section_kwargs)]
+        # TODO: Also make this false for London
+        self.has_parishes = country != Country.NORTHERN_IRELAND
+
+        enabled_sections = [
+            BallotSection(
+                **{
+                    **section_kwargs,
+                    **{"has_parishes": True},
+                }
+            )
+        ]
 
         city_of_london_ballots = [
             b
