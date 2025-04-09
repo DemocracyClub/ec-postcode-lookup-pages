@@ -480,6 +480,11 @@ class TemplateSorter:
 
             if any(is_postponed(reason) for reason in cancellation_reasons):
                 verbs.append(str(_("Postponed")))
+
+            if not verbs:
+                # We don't really know what's going on here
+                # so let's assume it's postponed.
+                verbs.append(str(_("Postponed")))
             verb = " and ".join(verbs)
             return _(
                 f"{verb} election",
