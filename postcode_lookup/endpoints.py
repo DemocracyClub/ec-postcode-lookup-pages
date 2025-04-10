@@ -78,9 +78,7 @@ async def base_postcode_endpoint(
         ).get_postcode(postcode)
     except (InvalidPostcodeException, ApiError) as e:
         query_param = (
-            "invalid-postcode"
-            if isinstance(e, InvalidPostcodeException)
-            else "api-error"
+            "api-error" if isinstance(e, ApiError) else "invalid-postcode"
         )
         return RedirectResponse(
             request.url_for(
