@@ -130,11 +130,12 @@ async def base_uprn_endpoint(request: Request, backend=None):
             api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
             request=request,
         ).get_uprn(uprn)
-    except InvalidUPRNException:
+    except (InvalidUPRNException, ApiError) as e:
+        query_param = "api-error" if isinstance(e, ApiError) else "invalid-uprn"
         return RedirectResponse(
             request.url_for(
                 backend.URL_PREFIX + "_postcode_form_en"
-            ).include_query_params(**{"invalid-uprn": 1})
+            ).include_query_params(**{query_param: 1})
         )
     context = results_context(api_response, request, postcode, backend)
 

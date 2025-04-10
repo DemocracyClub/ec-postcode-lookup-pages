@@ -75,8 +75,10 @@ class BaseAPIClient(ABC):
         params.update(self.default_params)
         url = urljoin(self.get_base_url, endpoint)
         req = httpx.get(url, params=params)
-        if req.status_code == 400:
+        if endpoint.startswith("postcode/") and req.status_code == 400:
             raise InvalidPostcodeException
+        if endpoint.startswith("address/") and req.status_code == 404:
+            raise InvalidUPRNException
         req.raise_for_status()
         return req
 
@@ -104,7 +106,7 @@ class LiveAPIBackend(BaseAPIClient):
         try:
             return self._get(endpoint=f"address/{uprn}/").json()
         except httpx.HTTPError:
-            raise InvalidUPRNException
+            raise ApiError
 
 
 class SandboxAPIBackend(BaseAPIClient):
