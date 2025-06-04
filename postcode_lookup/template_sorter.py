@@ -113,9 +113,9 @@ class PollingStationSection(BaseSection):
 class BallotSection(BaseSection):
     template_name = "includes/ballots.html"
 
-    def __init__(self, has_parishes: bool, **kwargs) -> None:
+    def __init__(self, parish_message: str, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.has_parishes = has_parishes
+        self.parish_message = parish_message
 
     @property
     def weight(self):
@@ -134,7 +134,7 @@ class BallotSection(BaseSection):
             TimetableEvent.SOPN_PUBLISH_DATE
         )
         context["sopn_publish_date"] = self.timetable.sopn_publish_date
-        context["has_parishes"] = self.has_parishes
+        context["parish_message"] = self.parish_message
         return context
 
 
@@ -257,6 +257,7 @@ class CityOfLondonRegistrationDateSection(RegistrationDateSection):
 class ElectionDateTemplateSorter:
     def __init__(
         self,
+        *,
         date_data: Date,
         country: Country,
         response_type: ResponseTypes,
@@ -264,6 +265,7 @@ class ElectionDateTemplateSorter:
         first_upcoming_date=True,
         postal_vote_dispatch_dates=None,
         replacement_pack_start_date=None,
+        in_london: bool = False,
     ) -> None:
         if not current_date:
             current_date = str(datetime.date.today())
@@ -311,14 +313,26 @@ class ElectionDateTemplateSorter:
             "timetable": self.timetable,
         }
 
-        # TODO: Also make this false for London
-        self.has_parishes = country != Country.NORTHERN_IRELAND
+        self.parish_message = ""
+        if country == Country.ENGLAND:
+            if not in_london:
+                self.parish_message = _(
+                    "There may also be parish or town council elections in some areas."
+                )
+        elif country == Country.SCOTLAND:
+            self.parish_message = _(
+                "There may also be community council elections in some areas."
+            )
+        elif country == Country.Wales:
+            self.parish_message = _(
+                "There may also be town or community council elections in some areas."
+            )
 
         enabled_sections = [
             BallotSection(
                 **{
                     **section_kwargs,
-                    **{"has_parishes": True},
+                    **{"parish_message": self.parish_message},
                 }
             )
         ]
@@ -430,15 +444,23 @@ class TemplateSorter:
             else:
                 country = Country.ENGLAND
 
+            in_london = False
+            if self.electoral_services:
+                in_london = any(
+                    id_.startswith("E09")
+                    for id_ in self.electoral_services.identifiers
+                )
+
             self.dates.append(
                 ElectionDateTemplateSorter(
-                    date,
-                    country,
+                    date_data=date,
+                    country=country,
                     current_date=self.current_date,
                     response_type=self.response_type,
                     first_upcoming_date=not i > 0,
                     postal_vote_dispatch_dates=postal_vote_dispatch_dates,
                     replacement_pack_start_date=replacement_pack_start_date,
+                    in_london=in_london,
                 )
             )
             self.total_ballot_count += len(date.ballots)
