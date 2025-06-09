@@ -38,8 +38,8 @@
     </div>
 {% endfor %}
 
-{% if section.context.has_parishes %}
+{% if section.context.parish_message %}
   <div class="ec-ds-section">
-    {% trans %}There may also be parish, town or community council elections in some areas.{% endtrans %}
+    {{ section.context.parish_message }}
   </div>
 {% endif %}

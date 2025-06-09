@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-09 16:06+0100\n"
+"POT-Creation-Date: 2025-06-04 15:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -31,45 +31,60 @@ msgstr "Pleidleisio drwy'r post"
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:294
+#: postcode_lookup/template_sorter.py:296
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:299
+#: postcode_lookup/template_sorter.py:301
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:485
+#: postcode_lookup/template_sorter.py:319
+msgid "There may also be parish or town council elections in some areas."
+msgstr ""
+
+#: postcode_lookup/template_sorter.py:323
+msgid "There may also be community council elections in some areas."
+msgstr ""
+
+#: postcode_lookup/template_sorter.py:327
+#, fuzzy
+msgid "There may also be town or community council elections in some areas."
+msgstr ""
+"Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
+"ardaloedd."
+
+#: postcode_lookup/template_sorter.py:507
 msgid "Contact details"
 msgstr "Manylion cyswllt"
 
-#: postcode_lookup/template_sorter.py:488
+#: postcode_lookup/template_sorter.py:510
 #: postcode_lookup/templates/old_result.html:23
 #: postcode_lookup/templates/old_result.html:47
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:494
+#: postcode_lookup/template_sorter.py:516
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:497
-#: postcode_lookup/template_sorter.py:502
+#: postcode_lookup/template_sorter.py:519
+#: postcode_lookup/template_sorter.py:524
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:512
+#: postcode_lookup/template_sorter.py:534
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:515
+#: postcode_lookup/template_sorter.py:537
 #: postcode_lookup/templates/old_result.html:14
 #: postcode_lookup/templates/old_result.html:39
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:518
-#: postcode_lookup/template_sorter.py:521
+#: postcode_lookup/template_sorter.py:540
+#: postcode_lookup/template_sorter.py:543
 #: postcode_lookup/templates/old_result.html:6
 #: postcode_lookup/templates/old_result.html:12
 #: postcode_lookup/templates/old_result.html:31
@@ -77,13 +92,13 @@ msgstr "Mae gennych etholiad sydd ar y gweill"
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:591
-#: postcode_lookup/template_sorter.py:604
+#: postcode_lookup/template_sorter.py:613
+#: postcode_lookup/template_sorter.py:626
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:598
+#: postcode_lookup/template_sorter.py:620
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
@@ -153,7 +168,7 @@ msgstr ""
 msgid "Enter your postcode"
 msgstr "Nodwch god post dilys"
 
-#: postcode_lookup/templates/index.html:97
+#: postcode_lookup/templates/index.html:106
 msgid "What this tool can tell you"
 msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
@@ -170,14 +185,6 @@ msgid ""
 msgstr ""
 "<h3>Ymgeiswyr</h3> <p>Bydd rhestr o ymgeiswyr yr etholiad hwn yn cael ei "
 "chyhoeddi ar ôl %(sopn_date)s.</p>"
-
-#: postcode_lookup/templates/includes/ballots.html:43
-msgid ""
-"There may also be parish, town or community council elections in some "
-"areas."
-msgstr ""
-"Mae'n bosib y bydd etholiadau cynghorau plwyf, tref neu gymuned mewn rhai"
-" ardaloedd."
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:3
 #, fuzzy
