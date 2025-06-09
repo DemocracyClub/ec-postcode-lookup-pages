@@ -323,7 +323,7 @@ class ElectionDateTemplateSorter:
             self.parish_message = _(
                 "There may also be community council elections in some areas."
             )
-        elif country == Country.Wales:
+        elif country == Country.WALES:
             self.parish_message = _(
                 "There may also be town or community council elections in some areas."
             )
