@@ -15,6 +15,7 @@ dependencies = [
     "starlette==0.46.0",
     "uk-election-timetables==4.2.3",
     "dc-response-builder",
+    "rnet>=2.2.15",
 ]
 
 [dependency-groups]
