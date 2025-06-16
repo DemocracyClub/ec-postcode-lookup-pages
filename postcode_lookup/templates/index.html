@@ -42,11 +42,14 @@
                     <script>
                         // Get the postcode input element
                         const postcodeInput = document.getElementById('postcode-search');
+                        const error_message = 'Please enter a valid UK postcode, e.g., SW1A 1AA.'
 
                         // Function to set custom validity message
                         postcodeInput.addEventListener('invalid', function (event) {
                             if (postcodeInput.validity.patternMismatch) {
-                                postcodeInput.setCustomValidity('Please enter a valid UK postcode, e.g., SW1A 1AA.');
+                                postcodeInput.setCustomValidity(error_message);
+                            } else if (postcodeInput.validity.valueMissing) {
+                                postcodeInput.setCustomValidity(error_message);
                             } else {
                                 postcodeInput.setCustomValidity(''); // Clear custom messages if no pattern mismatch
                             }
