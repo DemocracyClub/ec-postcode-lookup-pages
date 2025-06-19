@@ -28,7 +28,9 @@
                       </a></p>
                   </details>
               {% else %}
-                  {% if not ballot.ballot_paper_id.startswith('ref.') %}
+                  {% if ballot.ballot_paper_id.startswith('ref.') %}
+                    {% include 'includes/referendum.html' %}
+                  {% else %}
                     {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
                         <h3>{{ election_name }} candidates</h3>
                         <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>

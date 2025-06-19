@@ -1,0 +1,26 @@
+{% if (ballot.metadata.referendum and ballot.metadata.referendum.question and ballot.metadata.referendum.answers) or ballot.metadata.referendum.url %}
+
+  <details>
+      <summary>{{ ballot.election_name }}</summary>
+
+      {% if ballot.metadata.referendum and ballot.metadata.referendum.question and ballot.metadata.referendum.answers %}
+        <p style="margin-top: 1em;">
+          {% trans %}The question you will be asked on the ballot paper is:{% endtrans %}
+          {{ ballot.metadata.referendum.question }}
+          {% for answer in ballot.metadata.referendum.answers %}
+            <blockquote>{{ answer }}</blockquote>
+            {% if not loop.last %}or{% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+
+      {% if ballot.metadata.referendum.url %}
+        <p style="margin-top: 1em;">
+          <a href="{{ ballot.metadata.referendum.url }}">
+            {% trans %}Read more about this referendum{% endtrans %}
+          </a>
+        <p>
+      {% endif %}
+  </details>
+
+{% endif %}
