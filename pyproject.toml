@@ -13,7 +13,7 @@ dependencies = [
     "sentry-sdk[starlette]==2.21.0",
     "starlette-babel==1.0.3",
     "starlette==0.46.0",
-    "uk-election-timetables==4.2.3",
+    "uk-election-timetables==4.3.0",
     "dc-response-builder",
 ]
 
