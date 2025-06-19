@@ -49,7 +49,7 @@
                             if (postcodeInput.validity.patternMismatch) {
                                 postcodeInput.setCustomValidity(error_message);
                             } else if (postcodeInput.validity.valueMissing) {
-                                postcodeInput.setCustomValidity('Please enter a valid UK postcode, e.g., SW1A 1AA.');
+                                postcodeInput.setCustomValidity(error_message);
                             } else {
                                 postcodeInput.setCustomValidity(''); // Clear custom messages if no pattern mismatch
                             }
