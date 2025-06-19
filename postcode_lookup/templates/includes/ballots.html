@@ -28,10 +28,12 @@
                       </a></p>
                   </details>
               {% else %}
-                  {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
-                      <h3>{{ election_name }} candidates</h3>
-                      <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>
-                  {% endtrans %}
+                  {% if not ballot.ballot_paper_id.startswith('ref.') %}
+                    {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
+                        <h3>{{ election_name }} candidates</h3>
+                        <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>
+                    {% endtrans %}
+                  {% endif %}
               {% endif %}
           {% endif %}
         </div>
