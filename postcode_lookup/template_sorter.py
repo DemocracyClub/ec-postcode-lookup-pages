@@ -11,6 +11,7 @@ from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
 from uk_election_timetables.election_ids import from_election_id
+from uk_election_timetables.elections import Referendum
 from utils import (
     ballot_cancellation_suffix,
     date_format,
@@ -119,6 +120,11 @@ class BallotSection(BaseSection):
 
     @property
     def weight(self):
+        if isinstance(self.timetable, Referendum):
+            # given the question and answers for a referendum are already known
+            # treat this as "nominations closed"
+            return -1000
+
         if self.timetable.is_before(TimetableEvent.SOPN_PUBLISH_DATE):
             return 1000
 
@@ -130,10 +136,16 @@ class BallotSection(BaseSection):
     @cached_property
     def context(self):
         context = super().context
-        context["show_candidates"] = self.timetable.is_after(
-            TimetableEvent.SOPN_PUBLISH_DATE
-        )
-        context["sopn_publish_date"] = self.timetable.sopn_publish_date
+
+        if isinstance(self.timetable, Referendum):
+            context["show_candidates"] = False
+            context["sopn_publish_date"] = None
+        else:
+            context["show_candidates"] = self.timetable.is_after(
+                TimetableEvent.SOPN_PUBLISH_DATE
+            )
+            context["sopn_publish_date"] = self.timetable.sopn_publish_date
+
         context["parish_message"] = self.parish_message
         return context
 

@@ -156,17 +156,6 @@ sandbox_uprn_view = functools.partial(
 def results_context(api_response, request, postcode, backend):
     api_json = api_response
 
-    # TODO: delete me
-    for i, date in enumerate(api_json.get("dates", [])):
-        if date.get("ballots"):
-            date["ballots"] = [
-                b
-                for b in date["ballots"]
-                if not b["ballot_paper_id"].startswith("ref")
-            ]
-            if len(date["ballots"]) == 0:
-                api_json["dates"].pop(i)
-
     context = {}
     context["api_response"] = RootModel.from_api_response(api_json)
     context["postcode"] = postcode
