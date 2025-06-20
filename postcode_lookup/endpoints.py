@@ -1,5 +1,6 @@
 import datetime
 import functools
+import json
 import os
 
 from dateutil.parser import parse
@@ -20,13 +21,25 @@ from response_builder.v1.models.base import CancellationReason, RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 from starlette.requests import Request
 from starlette.responses import RedirectResponse, Response
+from starlette_babel.translator import gettext as _
 from template_sorter import TemplateSorter
 from utils import get_loader
 
 
 async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
     return get_loader(request).TemplateResponse(
-        request, "index.html", context={"url_prefix": backend.URL_PREFIX}
+        request,
+        "index.html",
+        context={
+            "url_prefix": backend.URL_PREFIX,
+            "js_strings": json.dumps(
+                {
+                    "postcode_input_error_message": _(
+                        "Please enter a valid UK postcode, e.g., SW1A 1AA."
+                    )
+                }
+            ),
+        },
     )
 
 

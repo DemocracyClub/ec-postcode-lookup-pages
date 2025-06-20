@@ -40,10 +40,10 @@
                         </div>
                     </form>
                     <script>
+                        const js_strings = {{ js_strings|safe }};
                         // Get the postcode input element
                         const postcodeInput = document.getElementById('postcode-search');
-                        const error_message = 'Please enter a valid UK postcode, e.g., SW1A 1AA.'
-
+                        const error_message = js_strings.postcode_input_error_message;
                         // Function to set custom validity message
                         postcodeInput.addEventListener('invalid', function (event) {
                             if (postcodeInput.validity.patternMismatch) {
