@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-04 15:30+0100\n"
+"POT-Creation-Date: 2025-06-20 07:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -168,7 +168,11 @@ msgstr ""
 msgid "Enter your postcode"
 msgstr "Nodwch god post dilys"
 
-#: postcode_lookup/templates/index.html:106
+#: postcode_lookup/templates/index.html:45
+msgid "'Please enter a valid UK postcode, e.g., SW1A 1AA.'"
+msgstr ""
+
+#: postcode_lookup/templates/index.html:109
 msgid "What this tool can tell you"
 msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
