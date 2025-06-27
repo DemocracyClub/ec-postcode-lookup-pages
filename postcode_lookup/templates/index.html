@@ -21,7 +21,6 @@
                     <form id="dc-postcode-search-form">
                         <label for="postcode-search">
                             {% trans %}Enter your postcode{% endtrans %}</label>
-                        <p class="dc-form-hint">eg. SW1A 2AA</p>
                         <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
                         <div class="dc-inline-form">
                             <input
@@ -36,8 +35,8 @@
                                 Search
                             </button>
 
-
                         </div>
+                    <p class="dc-form-hint">eg. SW1A 2AA</p>
                     </form>
                     <script>
                         const js_strings = {{ js_strings|safe }};
