@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "browser-sync": "^3.0.2",
+    "lighthouse": "^12.6.1"
+  }
+}
