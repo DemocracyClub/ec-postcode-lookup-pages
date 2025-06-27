@@ -25,6 +25,15 @@ wheels = [
 ]
 
 [[package]]
+name = "attrs"
+version = "25.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/b0/1367933a8532ee6ff8d63537de4f1177af4bff9f3e829baf7331f595bb24/attrs-25.3.0.tar.gz", hash = "sha256:75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b", size = 812032 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/77/06/bb80f5f86020c4551da315d78b3ab75e8228f89f0162f2c3a819e407941a/attrs-25.3.0-py3-none-any.whl", hash = "sha256:427318ce031701fea540783410126f03899a97ffc6f61596ad581ac2e40e3bc3", size = 63815 },
+]
+
+[[package]]
 name = "babel"
 version = "2.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -207,6 +216,7 @@ dev = [
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
     { name = "pytest-playwright" },
+    { name = "pytest-subtests" },
     { name = "respx" },
     { name = "rnet" },
     { name = "ruff" },
@@ -241,6 +251,7 @@ dev = [
     { name = "pytest-asyncio", specifier = "==0.25.3" },
     { name = "pytest-cov", specifier = "==6.0.0" },
     { name = "pytest-playwright", specifier = "==0.7.0" },
+    { name = "pytest-subtests", specifier = "==0.14.2" },
     { name = "respx", specifier = "==0.22.0" },
     { name = "rnet", specifier = ">=2.2.15" },
     { name = "ruff", specifier = "==0.4.10" },
@@ -729,6 +740,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e3/47/38e292ad92134a00ea05e6fc4fc44577baaa38b0922ab7ea56312b7a6663/pytest_playwright-0.7.0.tar.gz", hash = "sha256:b3f2ea514bbead96d26376fac182f68dcd6571e7cb41680a89ff1673c05d60b6", size = 16666 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d8/96/5f8a4545d783674f3de33f0ebc4db16cc76ce77a4c404d284f43f09125e3/pytest_playwright-0.7.0-py3-none-any.whl", hash = "sha256:2516d0871fa606634bfe32afbcc0342d68da2dbff97fe3459849e9c428486da2", size = 16618 },
+]
+
+[[package]]
+name = "pytest-subtests"
+version = "0.14.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/59/30/6ec8dfc678ddfd1c294212bbd7088c52d3f7fbf3f05e6d8a440c13b9741a/pytest_subtests-0.14.2.tar.gz", hash = "sha256:7154a8665fd528ee70a76d00216a44d139dc3c9c83521a0f779f7b0ad4f800de", size = 18083 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/47/d4/9bf12e59fb882b0cf4f993871e1adbee094802224c429b00861acee1a169/pytest_subtests-0.14.2-py3-none-any.whl", hash = "sha256:8da0787c994ab372a13a0ad7d390533ad2e4385cac167b3ac501258c885d0b66", size = 9115 },
 ]
 
 [[package]]
