@@ -35,6 +35,8 @@ dev = [
     "freezegun==1.5.1",
     "playwright==1.50.0",
     "beautifulsoup4==4.12.3",
+    "rnet>=2.2.15",
+    "pytest-subtests==0.14.2",
 ]
 
 [tool.uv]

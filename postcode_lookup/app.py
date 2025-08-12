@@ -151,7 +151,7 @@ def current_language_selector(conn: HTTPConnection) -> str | None:
 
 
 app = Starlette(
-    debug=(environment == "local"),
+    debug=(environment != "production"),
     routes=routes,
     middleware=[
         Middleware(i18nMiddleware),
