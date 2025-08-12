@@ -22,7 +22,7 @@ jobs:
       - install_uv
       - run: uv sync --dev --no-python-downloads
       - run: uv lock --locked
-      - run: npm install
+      - run: npm ci
       - run: uv export --no-hashes --no-dev > postcode_lookup/requirements.txt
       - persist_to_workspace:
           root: ~/repo/
