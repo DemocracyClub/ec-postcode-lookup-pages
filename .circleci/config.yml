@@ -55,7 +55,7 @@ jobs:
       - run:
           name: Install Playwright-deps
           command: |
-            sudo uv run playwright install-deps
+            sudo /home/circleci/.local/bin/uv run playwright install-deps
       - run: uv run playwright install
       - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
