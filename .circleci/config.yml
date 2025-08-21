@@ -34,7 +34,6 @@ jobs:
       - save_cache:
           when: on_success
           paths:
-            - ./.venv
             - $HOME/.cache/uv
           key: v5-dependencies-{{ checksum "uv.lock" }}
 
@@ -56,7 +55,7 @@ jobs:
       - run:
           name: Install Playwright-deps
           command: |
-            sudo .venv/bin/playwright install-deps
+            sudo uv run playwright install-deps
       - run: uv run playwright install
       - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
