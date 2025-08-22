@@ -55,8 +55,8 @@ jobs:
       - run:
           name: Install Playwright-deps
           command: |
-            sudo /home/circleci/.local/bin/uv run playwright install-deps
-      - run: uv run playwright install
+            sudo /home/circleci/.local/bin/uv run playwright install-deps chromium-headless-shell
+      - run: uv run playwright install chromium-headless-shell
       - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
           file: /home/circleci/repo/test-reports/junit.xml
@@ -65,6 +65,11 @@ jobs:
           destination: test-reports
       - store_test_results:
           path: test-reports/junit.xml
+      - save_cache:
+          when: on_success
+          paths:
+            - ~/.cache/ms-playwright
+          key: v6-dependencies-{{ checksum "uv.lock" }}
 
   sam_build:
     docker:
