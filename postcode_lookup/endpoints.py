@@ -190,6 +190,7 @@ def results_context(api_response, request, postcode, backend):
                 context["parl_recall_petition"]["signing_end"]
             )
     context["current_date"] = str(datetime.date.today())
+    context["noindex"] = True
 
     return context
 

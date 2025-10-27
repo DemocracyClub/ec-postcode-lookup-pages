@@ -7,6 +7,9 @@
   <meta content="width" name="MobileOptimized"/>
   <meta content="true" name="HandheldFriendly"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  {% if noindex %}
+    <meta content="noindex" name="robots"/>
+  {% endif %}
   <link href="https://www.electoralcommission.org.uk/core/misc/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
   <title>
    {% block html_title %}

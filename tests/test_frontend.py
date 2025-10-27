@@ -89,6 +89,18 @@ def test_query_params_in_translate_url(page, uvicorn_server):
     )
 
 
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/sandbox/polling-stations?postcode-search=AA11AA",
+        "/cy/sandbox/polling-stations?postcode-search=AA11AA",
+    ],
+)
+def test_noindex_in_response_html_header(path, page, uvicorn_server):
+    page.goto(url=str(f"{uvicorn_server}{path}"))
+    assert '<meta content="noindex" name="robots">' in page.content()
+
+
 def test_query_params_missing(page, uvicorn_server):
     response = page.goto(url=str(f"{uvicorn_server}/sandbox/polling-stations"))
     assert response.status == 200
