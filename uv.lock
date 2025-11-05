@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = "==3.12.*"
+requires-python = "==3.12.12"
 
 [[package]]
 name = "anyio"
@@ -254,7 +254,7 @@ dev = [
     { name = "pytest-playwright", specifier = "==0.7.1" },
     { name = "pytest-subtests", specifier = "==0.14.2" },
     { name = "respx", specifier = "==0.22.0" },
-    { name = "rnet", specifier = ">=2.2.15" },
+    { name = "rnet", specifier = "==2.4.2" },
     { name = "ruff", specifier = "==0.4.10" },
     { name = "uvicorn", specifier = "==0.34.0" },
 ]
