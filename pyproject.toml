@@ -44,7 +44,7 @@ package = false
 required-version = "==0.8.*"
 
 [tool.uv.sources]
-dc-response-builder = { git = "https://github.com/DemocracyClub/dc_response_builder.git", tag = "1.1.4" }
+dc-response-builder = { git = "https://github.com/DemocracyClub/dc_response_builder.git", tag = "1.2.0" }
 
 [tool.ruff]
 line-length = 80
