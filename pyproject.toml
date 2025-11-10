@@ -36,7 +36,7 @@ dev = [
     "playwright==1.55.0",
     "beautifulsoup4==4.12.3",
     "rnet>=2.2.15",
-    "pytest-subtests==0.14.2",
+    "pytest-subtests==0.15.0",
 ]
 
 [tool.uv]
