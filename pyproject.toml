@@ -19,7 +19,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "beautifulsoup4==4.12.3",
+    "beautifulsoup4==4.14.2",
     "ipdb==0.13.13",
     "pydantic-factories==1.17.3",
     "pydantic[email]==1.10.21",
@@ -34,7 +34,7 @@ dev = [
     "pre-commit==4.3.0",
     "freezegun==1.5.5",
     "playwright==1.55.0",
-    "beautifulsoup4==4.12.3",
+    "beautifulsoup4==4.14.2",
     "rnet>=2.2.15",
     "pytest-subtests==0.14.2",
 ]
