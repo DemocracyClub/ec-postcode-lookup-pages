@@ -2,7 +2,7 @@
 
 Requires:
 - Python >= 3.12
-- [`uv==0.8.*`](https://github.com/astral-sh/uv) installed globally.
+- [`uv==0.9.*`](https://github.com/astral-sh/uv) installed globally.
 
 ```shell
 $ uv sync --dev
