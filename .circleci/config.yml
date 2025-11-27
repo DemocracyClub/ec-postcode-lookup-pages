@@ -6,7 +6,7 @@ orbs:
 commands:
   install_uv:
     steps:
-      - run: pipx install --force "uv==0.8.*"
+      - run: pipx install --force "uv==0.9.*"
 
 
 jobs:
