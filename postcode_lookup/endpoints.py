@@ -20,7 +20,7 @@ from response_builder.v1.generated_responses.candidates import all_candidates
 from response_builder.v1.models.base import CancellationReason, RootModel
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 from starlette.requests import Request
-from starlette.responses import RedirectResponse, Response
+from starlette.responses import JSONResponse, RedirectResponse, Response
 from starlette_babel.translator import gettext as _
 from template_sorter import TemplateSorter
 from utils import get_loader
@@ -277,3 +277,79 @@ async def design_system_view(request: Request):
         request,
         "design_system.html",
     )
+
+
+# Contact details pages
+
+
+async def base_contact_details_form(
+    request: Request, backend: BaseAPIClient = None
+):
+    return get_loader(request).TemplateResponse(
+        request,
+        "contact_details_index.html",
+        context={
+            "url_prefix": backend.URL_PREFIX,
+            "js_strings": json.dumps(
+                {
+                    "postcode_input_error_message": _(
+                        "Please enter a valid UK postcode, e.g., SW1A 1AA."
+                    )
+                }
+            ),
+        },
+    )
+
+
+async def base_contact_details_results(
+    request: Request, backend: BaseAPIClient = None
+):
+    if not backend:
+        raise ValueError("Must specify a backend")
+
+    postcode = request.query_params.get("postcode-search", None)
+    if not postcode:
+        return RedirectResponse(
+            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
+        )
+
+    if postcode == "FA1LL":
+        return Response(status_code=400)
+    if postcode == "FA2LL":
+        assert False
+
+    try:
+        api_response = backend(
+            api_key=os.environ.get("API_KEY", "ec-postcode-testing"),
+            request=request,
+        ).get_postcode(postcode)
+    except (InvalidPostcodeException, ApiError) as e:
+        query_param = (
+            "api-error" if isinstance(e, ApiError) else "invalid-postcode"
+        )
+        return RedirectResponse(
+            request.url_for(
+                backend.URL_PREFIX + "_postcode_form_en"
+            ).include_query_params(**{query_param: 1})
+        )
+
+    context = results_context(api_response, request, postcode, backend)
+
+    accept = request.headers.get("accept", "")
+    if "application/json" in accept:
+        return JSONResponse(context["api_response"].dict())
+
+    return get_loader(request).TemplateResponse(
+        request,
+        "contact_details_results.html",
+        context=context,
+    )
+
+
+mock_contact_details_form = functools.partial(
+    base_contact_details_form, backend=MockAPIBackend
+)
+
+mock_contact_details_results = functools.partial(
+    base_contact_details_results, backend=MockAPIBackend
+)
