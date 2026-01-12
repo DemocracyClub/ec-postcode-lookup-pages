@@ -23,6 +23,11 @@ from starlette.staticfiles import StaticFiles
 from starlette_babel import LocaleMiddleware, get_translator
 from utils import ForwardedForMiddleware, i18nMiddleware
 
+from postcode_lookup.endpoints import (
+    mock_contact_details_form,
+    mock_contact_details_results,
+)
+
 environment = os.environ.get("DC_ENVIRONMENT", "local")
 
 if sentry_dsn := os.environ.get("SENTRY_DSN"):
@@ -114,6 +119,17 @@ routes = [
         "/cy/mock/polling-stations",
         endpoint=mock_postcode_view,
         name="mock_postcode_cy",
+    ),
+    # Contact details
+    Route(
+        "/mock/i-am-a/voter/find-contact-details",
+        endpoint=mock_contact_details_form,
+        name="mock_contact_details_view",
+    ),
+    Route(
+        "/mock/i-am-a/voter/contact-details",
+        endpoint=mock_contact_details_results,
+        name="mock_contact_details_en",
     ),
     Route(
         "/design-system",
