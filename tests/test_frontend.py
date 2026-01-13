@@ -5,7 +5,7 @@ import re
 import subprocess
 
 import pytest
-from endpoints import get_ballot_stages
+from endpoints.utils import get_ballot_stages
 from mock_responses import example_responses
 from playwright.sync_api import Page
 
