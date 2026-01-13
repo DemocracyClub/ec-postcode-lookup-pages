@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import endpoints.election_information
+import endpoints.electoral_services_team
 import endpoints.utils
 from mangum import Mangum
 from starlette.applications import Starlette
@@ -127,7 +128,34 @@ election_information_routes = [
     ),
 ]
 
-routes = util_routes + election_information_routes
+electoral_services_team_routes = [
+    # Live, EN
+    Route(
+        "/electoral-services/address/{postcode}/{uprn}",
+        endpoint=endpoints.electoral_services_team.live_uprn_view,
+        name="electoral_services_live_uprn_en",
+    ),
+    Route(
+        "/electoral-services",
+        endpoint=endpoints.electoral_services_team.live_postcode_view,
+        name="electoral_services_live_postcode_en",
+    ),
+    # Live, CY
+    Route(
+        "/cy/electoral-services/address/{postcode}/{uprn}",
+        endpoint=endpoints.electoral_services_team.live_uprn_view,
+        name="electoral_services_live_uprn_cy",
+    ),
+    Route(
+        "/cy/electoral-services",
+        endpoint=endpoints.electoral_services_team.live_postcode_view,
+        name="electoral_services_live_postcode_cy",
+    ),
+]
+
+routes = (
+    util_routes + election_information_routes + electoral_services_team_routes
+)
 
 shared_translator = get_translator()  # process global instance
 shared_translator.load_from_directories([Path(__file__).parent / "locale"])

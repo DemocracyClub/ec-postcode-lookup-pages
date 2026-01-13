@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-12 16:39+0100\n"
+"POT-Creation-Date: 2026-01-13 15:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -14,10 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-
-#: postcode_lookup/endpoints.py:37
-msgid "Please enter a valid UK postcode, e.g., SW1A 1AA."
-msgstr ""
 
 #: postcode_lookup/template_sorter.py:111
 msgid "Where to vote"
@@ -98,6 +94,7 @@ msgstr "Mae gennych etholiadau sydd ar y gweill"
 
 #: postcode_lookup/template_sorter.py:625
 #: postcode_lookup/template_sorter.py:638
+#: postcode_lookup/templates/electoral_services_team_results.html:4
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
@@ -150,6 +147,18 @@ msgstr " (wedi'i ohirio)"
 #, fuzzy
 msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
+
+#: postcode_lookup/endpoints/election_information.py:30
+msgid "Please enter a valid UK postcode, e.g., SW1A 1AA."
+msgstr ""
+
+#: postcode_lookup/templates/address_picker.html:4
+msgid "Pick your address"
+msgstr ""
+
+#: postcode_lookup/templates/address_picker.html:18
+msgid "To make sure we get you the correct information, please pick your address:"
+msgstr ""
 
 #: postcode_lookup/templates/index.html:12
 #, fuzzy
@@ -586,3 +595,4 @@ msgstr ""
 
 #~ msgid "'Please enter a valid UK postcode, e.g., SW1A 1AA.'"
 #~ msgstr ""
+
