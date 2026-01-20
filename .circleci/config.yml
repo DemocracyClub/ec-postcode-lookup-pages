@@ -198,21 +198,21 @@ workflows:
           requires:
             - sam_build
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ development, mock-api-backend ] } }
+          filters: { branches: { only: [ '20260113-council-only' ] } }
       - static_deploy:
           name: static_deploy_development
           dc-environment: development
           requires:
             - sam_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master, mock-api-backend ] } }
+          filters: { branches: { only: [ '20260113-council-only' ] } }
       - smoke_test:
           name: smoke_test_development
           dc-environment: development
           requires:
             - static_deploy_development
           context: [ deployment-development-ec-postcode-lookup ]
-          filters: { branches: { only: [ main, master ] } }
+          filters: { branches: { only: [ '20260113-council-only' ] } }
 
 
       - sam_deploy:
