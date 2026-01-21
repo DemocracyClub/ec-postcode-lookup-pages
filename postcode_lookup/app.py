@@ -73,7 +73,7 @@ election_information_routes = [
         name="live_postcode_form_cy",
     ),
     Route(
-        "/cy/polling-stations/{postcode}/{uprn}",
+        "/cy/polling-stations/address/{postcode}/{uprn}",
         endpoint=endpoints.election_information.live_uprn_view,
         name="live_uprn_cy",
     ),
@@ -89,7 +89,7 @@ election_information_routes = [
         name="sandbox_postcode_form_en",
     ),
     Route(
-        "/sandbox/polling-stations/{postcode}/{uprn}",
+        "/sandbox/polling-stations/address/{postcode}/{uprn}",
         endpoint=endpoints.election_information.sandbox_uprn_view,
         name="sandbox_uprn_en",
     ),
@@ -100,12 +100,12 @@ election_information_routes = [
     ),
     # Sandbox, CY
     Route(
-        "/sandbox/cy/i-am-a/voter/your-election-information",
+        "/cy/sandbox/i-am-a/voter/your-election-information",
         endpoint=endpoints.election_information.sandbox_postcode_form,
         name="sandbox_postcode_form_cy",
     ),
     Route(
-        "/cy/sandbox/polling-stations/{postcode}/{uprn}",
+        "/cy/sandbox/polling-stations/address/{postcode}/{uprn}",
         endpoint=endpoints.election_information.sandbox_uprn_view,
         name="sandbox_uprn_cy",
     ),
