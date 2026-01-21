@@ -54,12 +54,24 @@
         <h2>Application pages</h2>
         <h3>Live API</h3>
         <p>Uses the list API, meaning results will vary depending on actual elections taking place</p>
+
+        <h4>Election Information</h4>
         <ul>
             <li><a href="{{ request.url_for("live_postcode_form_en") }}">Postcode form (en)</a></li>
             <li><a href="{{ request.url_for("live_postcode_form_cy") }}">Postcode form (cy)</a></li>
             <li><a href="{{ request.url_for("live_postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a>
             </li>
             <li><a href="{{ request.url_for("live_postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a>
+            </li>
+        </ul>
+
+        <h4>Electoral Services Only</h4>
+        <ul>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_form_en") }}">Postcode form (en)</a></li>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_form_cy") }}">Postcode form (cy)</a></li>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a>
+            </li>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a>
             </li>
         </ul>
 
