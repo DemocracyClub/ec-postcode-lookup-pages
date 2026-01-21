@@ -1,19 +1,8 @@
 import os
 from pathlib import Path
 
-from endpoints import (
-    design_system_view,
-    failover,
-    live_postcode_form,
-    live_postcode_view,
-    live_uprn_view,
-    mock_postcode_view,
-    redirect_root_to_postcode_form,
-    sandbox_postcode_form,
-    sandbox_postcode_view,
-    sandbox_uprn_view,
-    section_tester,
-)
+import endpoints.election_information
+import endpoints.utils
 from mangum import Mangum
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
@@ -40,84 +29,84 @@ if sentry_dsn := os.environ.get("SENTRY_DSN"):
     )
 
 routes = [
-    Route("/", endpoint=redirect_root_to_postcode_form),
-    Route("/sections/{section}/", endpoint=section_tester),
-    Route("/failover", endpoint=failover, name="failover"),
+    Route("/", endpoint=endpoints.utils.redirect_root_to_postcode_form),
+    Route("/sections/{section}/", endpoint=endpoints.utils.section_tester),
+    Route("/failover", endpoint=endpoints.utils.failover, name="failover"),
     Route(
         "/i-am-a/voter/your-election-information",
-        endpoint=live_postcode_form,
+        endpoint=endpoints.election_information.live_postcode_form,
         name="live_postcode_form_en",
     ),
     Route(
         "/polling-stations/address/{postcode}/{uprn}",
-        endpoint=live_uprn_view,
+        endpoint=endpoints.election_information.live_uprn_view,
         name="live_uprn_en",
     ),
     Route(
         "/polling-stations",
-        endpoint=live_postcode_view,
+        endpoint=endpoints.election_information.live_postcode_view,
         name="live_postcode_en",
     ),
     Route(
         "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
-        endpoint=live_postcode_form,
+        endpoint=endpoints.election_information.live_postcode_form,
         name="live_postcode_form_cy",
     ),
     Route(
         "/cy/polling-stations/{postcode}/{uprn}",
-        endpoint=live_uprn_view,
+        endpoint=endpoints.election_information.live_uprn_view,
         name="live_uprn_cy",
     ),
     Route(
         "/cy/polling-stations",
-        endpoint=live_postcode_view,
+        endpoint=endpoints.election_information.live_postcode_view,
         name="live_postcode_cy",
     ),
     # Sandbox
     Route(
         "/sandbox/polling-stations",
-        endpoint=sandbox_postcode_view,
+        endpoint=endpoints.election_information.sandbox_postcode_view,
         name="sandbox_postcode_en",
     ),
     Route(
         "/sandbox/i-am-a/voter/your-election-information",
-        endpoint=sandbox_postcode_form,
+        endpoint=endpoints.election_information.sandbox_postcode_form,
         name="sandbox_postcode_form_en",
     ),
     Route(
         "/sandbox/cy/i-am-a/voter/your-election-information",
-        endpoint=sandbox_postcode_form,
+        endpoint=endpoints.election_information.sandbox_postcode_form,
         name="sandbox_postcode_form_cy",
     ),
     Route(
         "/cy/sandbox/polling-stations",
-        endpoint=sandbox_postcode_view,
+        endpoint=endpoints.election_information.sandbox_postcode_view,
         name="sandbox_postcode_cy",
     ),
     Route(
         "/sandbox/polling-stations/{postcode}/{uprn}",
-        endpoint=sandbox_uprn_view,
+        endpoint=endpoints.election_information.sandbox_uprn_view,
         name="sandbox_uprn_en",
     ),
     Route(
         "/cy/sandbox/polling-stations/{postcode}/{uprn}",
-        endpoint=sandbox_uprn_view,
+        endpoint=endpoints.election_information.sandbox_uprn_view,
         name="sandbox_uprn_cy",
     ),
     # Mock
     Route(
         "/mock/polling-stations",
-        endpoint=mock_postcode_view,
+        endpoint=endpoints.election_information.mock_postcode_view,
         name="mock_postcode_en",
     ),
     Route(
         "/cy/mock/polling-stations",
-        endpoint=mock_postcode_view,
+        endpoint=endpoints.election_information.mock_postcode_view,
         name="mock_postcode_cy",
     ),
     Route(
         "/design-system",
-        endpoint=design_system_view,
+        endpoint=endpoints.utils.design_system_view,
         name="design_system_view",
     ),
     # Route(
