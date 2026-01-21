@@ -28,10 +28,29 @@ if sentry_dsn := os.environ.get("SENTRY_DSN"):
         ],
     )
 
-routes = [
+util_routes = [
     Route("/", endpoint=endpoints.utils.redirect_root_to_postcode_form),
     Route("/sections/{section}/", endpoint=endpoints.utils.section_tester),
     Route("/failover", endpoint=endpoints.utils.failover, name="failover"),
+    Route(
+        "/design-system",
+        endpoint=endpoints.utils.design_system_view,
+        name="design_system_view",
+    ),
+    Mount(
+        "/themes/",
+        app=StaticFiles(directory=Path(__file__).parent / "themes"),
+        name="themes",
+    ),
+    Mount(
+        "/static/",
+        app=StaticFiles(directory=Path(__file__).parent / "static"),
+        name="static",
+    ),
+]
+
+election_information_routes = [
+    # Live, EN
     Route(
         "/i-am-a/voter/your-election-information",
         endpoint=endpoints.election_information.live_postcode_form,
@@ -47,6 +66,7 @@ routes = [
         endpoint=endpoints.election_information.live_postcode_view,
         name="live_postcode_en",
     ),
+    # Live, CY
     Route(
         "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
         endpoint=endpoints.election_information.live_postcode_form,
@@ -62,26 +82,11 @@ routes = [
         endpoint=endpoints.election_information.live_postcode_view,
         name="live_postcode_cy",
     ),
-    # Sandbox
-    Route(
-        "/sandbox/polling-stations",
-        endpoint=endpoints.election_information.sandbox_postcode_view,
-        name="sandbox_postcode_en",
-    ),
+    # Sandbox, EN
     Route(
         "/sandbox/i-am-a/voter/your-election-information",
         endpoint=endpoints.election_information.sandbox_postcode_form,
         name="sandbox_postcode_form_en",
-    ),
-    Route(
-        "/sandbox/cy/i-am-a/voter/your-election-information",
-        endpoint=endpoints.election_information.sandbox_postcode_form,
-        name="sandbox_postcode_form_cy",
-    ),
-    Route(
-        "/cy/sandbox/polling-stations",
-        endpoint=endpoints.election_information.sandbox_postcode_view,
-        name="sandbox_postcode_cy",
     ),
     Route(
         "/sandbox/polling-stations/{postcode}/{uprn}",
@@ -89,9 +94,25 @@ routes = [
         name="sandbox_uprn_en",
     ),
     Route(
+        "/sandbox/polling-stations",
+        endpoint=endpoints.election_information.sandbox_postcode_view,
+        name="sandbox_postcode_en",
+    ),
+    # Sandbox, CY
+    Route(
+        "/sandbox/cy/i-am-a/voter/your-election-information",
+        endpoint=endpoints.election_information.sandbox_postcode_form,
+        name="sandbox_postcode_form_cy",
+    ),
+    Route(
         "/cy/sandbox/polling-stations/{postcode}/{uprn}",
         endpoint=endpoints.election_information.sandbox_uprn_view,
         name="sandbox_uprn_cy",
+    ),
+    Route(
+        "/cy/sandbox/polling-stations",
+        endpoint=endpoints.election_information.sandbox_postcode_view,
+        name="sandbox_postcode_cy",
     ),
     # Mock
     Route(
@@ -104,32 +125,9 @@ routes = [
         endpoint=endpoints.election_information.mock_postcode_view,
         name="mock_postcode_cy",
     ),
-    Route(
-        "/design-system",
-        endpoint=endpoints.utils.design_system_view,
-        name="design_system_view",
-    ),
-    # Route(
-    #     "/mock/polling-stations/{postcode}/{uprn}",
-    #     endpoint=sandbox_uprn_view,
-    #     name="sandbox_uprn_en",
-    # ),
-    # Route(
-    #     "/cy/sandbox/polling-stations/{postcode}/{uprn}",
-    #     endpoint=sandbox_uprn_view,
-    #     name="sandbox_uprn_cy",
-    # ),
-    Mount(
-        "/themes/",
-        app=StaticFiles(directory=Path(__file__).parent / "themes"),
-        name="themes",
-    ),
-    Mount(
-        "/static/",
-        app=StaticFiles(directory=Path(__file__).parent / "static"),
-        name="static",
-    ),
 ]
+
+routes = util_routes + election_information_routes
 
 shared_translator = get_translator()  # process global instance
 shared_translator.load_from_directories([Path(__file__).parent / "locale"])
