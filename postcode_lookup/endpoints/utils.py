@@ -4,19 +4,13 @@ from markupsafe import Markup
 from mock_responses import example_responses
 from response_builder.v1.builders.ballots import StockLocalBallotBuilder
 from response_builder.v1.generated_responses.candidates import all_candidates
-from response_builder.v1.models.base import CancellationReason
+from response_builder.v1.models.base import (
+    CancellationReason,
+)
 from response_builder.v1.sandbox import SANDBOX_POSTCODES
 from starlette.requests import Request
 from starlette.responses import Response
-from utils import get_loader
-
-
-def get_ballot_stages(poll_open_date):
-    return {
-        "Polling day": poll_open_date,
-        "After SOPNs": poll_open_date + datetime.timedelta(days=20),
-        "Before SOPNs": poll_open_date + datetime.timedelta(days=35),
-    }
+from utils import get_ballot_stages, get_loader
 
 
 async def redirect_root_to_postcode_form(request: Request):
