@@ -1,9 +1,7 @@
-import datetime
 import functools
 import json
 import os
 
-from dateutil.parser import parse
 from dc_api_client import (
     ApiError,
     BaseAPIClient,
@@ -13,12 +11,11 @@ from dc_api_client import (
     MockAPIBackend,
     SandboxAPIBackend,
 )
-from response_builder.v1.models.base import RootModel
 from starlette.requests import Request
 from starlette.responses import RedirectResponse, Response
 from starlette_babel.translator import gettext as _
 from template_sorter import TemplateSorter
-from utils import get_loader
+from utils import get_loader, results_context
 
 
 async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
@@ -94,7 +91,9 @@ async def base_postcode_endpoint(
             ).include_query_params(**{query_param: 1})
         )
 
-    context = results_context(api_response, request, postcode, backend)
+    context = results_context(
+        api_response, request, postcode, backend.URL_PREFIX
+    )
 
     template_sorter = TemplateSorter(context["api_response"])
     context["template_sorter"] = template_sorter
@@ -143,7 +142,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
                 backend.URL_PREFIX + "_postcode_form_en"
             ).include_query_params(**{query_param: 1})
         )
-    context = results_context(api_response, request, postcode, backend)
+    context = results_context(
+        api_response, request, postcode, backend.URL_PREFIX
+    )
 
     template_sorter = TemplateSorter(context["api_response"])
     context["template_sorter"] = template_sorter
@@ -159,32 +160,3 @@ live_uprn_view = functools.partial(base_uprn_endpoint, backend=LiveAPIBackend)
 sandbox_uprn_view = functools.partial(
     base_uprn_endpoint, backend=SandboxAPIBackend
 )
-
-
-def results_context(api_response, request, postcode, backend):
-    api_json = api_response
-
-    context = {}
-    context["api_response"] = RootModel.from_api_response(api_json)
-    context["postcode"] = postcode
-    context["uprn"] = request.path_params.get("uprn", None)
-    context["url_prefix"] = backend.URL_PREFIX
-    if context["uprn"]:
-        context["route_name"] = "uprn"
-    else:
-        context["route_name"] = "postcode"
-
-    if api_response.get("parl_recall_petition"):
-        context["parl_recall_petition"] = api_response["parl_recall_petition"]
-        if "signing_start" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_start"] = parse(
-                context["parl_recall_petition"]["signing_start"]
-            )
-        if "signing_end" in context["parl_recall_petition"]:
-            context["parl_recall_petition"]["signing_end"] = parse(
-                context["parl_recall_petition"]["signing_end"]
-            )
-    context["current_date"] = str(datetime.date.today())
-    context["noindex"] = True
-
-    return context

@@ -11,16 +11,26 @@ from response_builder.v1.sandbox import SANDBOX_BASE_URL, SANDBOX_POSTCODES
 from starlette.requests import Request
 
 
-class InvalidPostcodeException(Exception): ...
+class InvalidPostcodeException(Exception):
+    def __init__(self, message="invalid postcode", status_code=400):
+        super().__init__(message)
+        self.status_code = status_code
 
 
-class InvalidUPRNException(Exception): ...
+class InvalidUPRNException(Exception):
+    def __init__(self, message="uprn not found", status_code=404):
+        super().__init__(message)
+        self.status_code = status_code
 
 
 class ApiError(Exception):
     """
     Custom exception class to represent errors encountered while interacting with the API.
     """
+
+    def __init__(self, message="internal server error", status_code=500):
+        super().__init__(message)
+        self.status_code = status_code
 
 
 def valid_postcode(postcode: str):
@@ -76,9 +86,9 @@ class BaseAPIClient(ABC):
         url = urljoin(self.get_base_url, endpoint)
         req = httpx.get(url, params=params)
         if endpoint.startswith("postcode/") and req.status_code == 400:
-            raise InvalidPostcodeException
+            raise InvalidPostcodeException()
         if endpoint.startswith("address/") and req.status_code == 404:
-            raise InvalidUPRNException
+            raise InvalidUPRNException()
         req.raise_for_status()
         return req
 
@@ -100,7 +110,7 @@ class LiveAPIBackend(BaseAPIClient):
                 return self._get(endpoint=f"postcode/{postcode}/").json()
             except httpx.HTTPError:
                 raise ApiError
-        raise InvalidPostcodeException
+        raise InvalidPostcodeException()
 
     def get_uprn(self, uprn: str) -> dict:
         try:
@@ -116,7 +126,7 @@ class SandboxAPIBackend(BaseAPIClient):
 
     def get_postcode(self, postcode: str) -> dict:
         if postcode not in self.POSTCODES:
-            raise InvalidPostcodeException
+            raise InvalidPostcodeException()
 
         response_dict = self._get(endpoint=f"sandbox/postcode/{postcode}/")
         return RootModel.parse_obj(response_dict.json()).dict()
