@@ -161,6 +161,39 @@ electoral_services_team_routes = [
         endpoint=endpoints.electoral_services_team.live_postcode_view,
         name="electoral_services_live_postcode_cy",
     ),
+    # Sandbox, EN
+    Route(
+        "/sandbox/electoral-services/address/{postcode}/{uprn}",
+        endpoint=endpoints.electoral_services_team.sandbox_uprn_view,
+        name="electoral_services_sandbox_uprn_en",
+    ),
+    Route(
+        "/sandbox/electoral-services",
+        endpoint=endpoints.electoral_services_team.sandbox_postcode_view,
+        name="electoral_services_sandbox_postcode_en",
+    ),
+    # Sandbox, CY
+    Route(
+        "/cy/sandbox/electoral-services/address/{postcode}/{uprn}",
+        endpoint=endpoints.electoral_services_team.sandbox_uprn_view,
+        name="electoral_services_sandbox_uprn_cy",
+    ),
+    Route(
+        "/cy/sandbox/electoral-services",
+        endpoint=endpoints.electoral_services_team.sandbox_postcode_view,
+        name="electoral_services_sandbox_postcode_cy",
+    ),
+    # Mock
+    Route(
+        "/mock/electoral-services",
+        endpoint=endpoints.electoral_services_team.mock_postcode_view,
+        name="electoral_services_mock_postcode_en",
+    ),
+    Route(
+        "/cy/mock/electoral-services",
+        endpoint=endpoints.electoral_services_team.mock_postcode_view,
+        name="electoral_services_mock_postcode_cy",
+    ),
 ]
 
 routes = (
