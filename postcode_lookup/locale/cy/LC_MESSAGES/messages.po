@@ -154,7 +154,7 @@ msgstr " (heb gystadleuaeth)"
 #: postcode_lookup/templates/index.html:12
 #, fuzzy
 msgid "My next election"
-msgstr "Etholiad wedi'i ohirio"
+msgstr "Fy etholiad nesaf"
 
 #: postcode_lookup/templates/index.html:15
 #, fuzzy
