@@ -1,7 +1,7 @@
 {% extends request.base_template %}
 
 {% block page_title %}
-    Pick your address
+    {% trans %}Pick your address{% endtrans %}
 {% endblock %}
 
 {% block language_picker %}
@@ -15,7 +15,7 @@
     <section class="container" aria-labelledby="polling-station-results">
         <div class="polling-station">
             <div class="polling-station__list">
-                <h2>To make sure we get you the correct information, please pick your address:</h2>
+                <h2>{% trans %}To make sure we get you the correct information, please pick your address:{% endtrans %}</h2>
 
                 <ul class="links">
                     {% for address in api_response.addresses %}

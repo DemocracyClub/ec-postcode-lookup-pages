@@ -5,15 +5,17 @@ import re
 import subprocess
 
 import pytest
-from endpoints import get_ballot_stages
 from mock_responses import example_responses
 from playwright.sync_api import Page
+from utils import get_ballot_stages
 
 URLS_TO_CHECK = [
     "/i-am-a/voter/your-election-information",
     "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/gwybodaeth-etholiad",
     "/sandbox/polling-stations?postcode-search=AA11AA",
     "/cy/sandbox/polling-stations?postcode-search=AA11AA",
+    "/sandbox/electoral-services?postcode-search=AA11AA",
+    "/cy/sandbox/electoral-services?postcode-search=AA11AA",
 ]
 for postcode, details in example_responses.items():
     if details["response"].build().dates:

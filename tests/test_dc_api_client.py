@@ -6,7 +6,7 @@ from dc_api_client import (
     LiveAPIBackend,
     valid_postcode,
 )
-from endpoints import base_postcode_endpoint
+from endpoints.election_information import base_postcode_endpoint
 from response_builder.v1.models.base import PostcodeLocation, RootModel
 from response_builder.v1.models.common import Point
 from utils import date_format

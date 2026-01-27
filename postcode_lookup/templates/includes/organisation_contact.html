@@ -32,7 +32,7 @@
                     your council.</p>
             {% endtrans %}
 
-            {% if template_sorter.has_and_parl_ballots() %}
+            {% if template_sorter and template_sorter.has_and_parl_ballots() %}
                 {% trans %}
                     <p>
                         Here are contact details for your usual election team. However, for some elections, electoral
