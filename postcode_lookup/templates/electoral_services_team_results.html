@@ -1,0 +1,13 @@
+{% extends request.base_template %}
+
+{% block page_title %}
+    {% trans %}Your local council{% endtrans %}
+{% endblock %}
+
+{% block language_picker %}
+    {% include "includes/language_picker.html" %}
+{% endblock %}
+
+{% block content %}
+{% include 'includes/contact_details.html' %}
+{% endblock %}
