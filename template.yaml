@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 
+Transform:
   - AWS::LanguageExtensions
   - AWS::Serverless-2016-10-31
 Description: "EC Postcode Lookup app: Lambda, API Gateway"
@@ -40,6 +40,11 @@ Parameters:
   DCEnvironment:
     Default: DC_ENVIRONMENT
     Description: "The DC_ENVIRONMENT environment variable passed to the app."
+    Type: AWS::SSM::Parameter::Value<String>
+
+  IPAllowlist:
+    Default: IP_ALLOWLIST
+    Description: "Comma-separated list of IPs allowed without basic auth"
     Type: AWS::SSM::Parameter::Value<String>
 
 Conditions:
@@ -117,8 +122,8 @@ Resources:
             FunctionPayloadType: REQUEST
             Identity:
               Headers:
-                - Authorization
-              ReauthorizeEvery: 3600
+                - X-Forwarded-For
+              ReauthorizeEvery: 0
 
   BasicAuthGatewayResponse:
     Condition: UseBasicAuth
@@ -130,6 +135,16 @@ Resources:
       RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
       StatusCode: '401'
 
+
+  AccessDeniedGatewayResponse:
+    Condition: UseBasicAuth
+    Type: AWS::ApiGateway::GatewayResponse
+    Properties:
+      ResponseParameters:
+        gatewayresponse.header.www-authenticate: "'Basic realm=\"Restricted\"'"
+      ResponseType: ACCESS_DENIED
+      RestApiId: !Ref ECPostcodeLookupFunctionApiGateway
+      StatusCode: '401'
   BasicAuthFunction:
     Type: AWS::Serverless::Function
     Metadata:
@@ -138,6 +153,9 @@ Resources:
       CodeUri: ./postcode_lookup/
       Handler: lambda_basic_auth.lambda_handler
       Runtime: python3.12
+      Environment:
+        Variables:
+          IP_ALLOWLIST: !Ref IPAllowlist
 
   FailOver:
     Type: AWS::S3::Bucket
