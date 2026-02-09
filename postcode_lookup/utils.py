@@ -14,8 +14,10 @@ from response_builder.v1.models.base import Ballot, CancellationReason
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-from starlette_babel import get_locale
+from starlette_babel import get_locale, get_translator
 from starlette_babel import gettext_lazy as _
+
+translator = get_translator()
 
 
 def is_welsh(path: str) -> bool:
@@ -94,10 +96,12 @@ def candidates_groupby_party_list(candidates):
                 )
         else:
             num = len(candidates)
-            if num == 1:
-                num_candidates = _("1 candidate")
-            else:
-                num_candidates = _("%(num)d candidates") % {"num": num}
+            num_candidates = translator.ngettext(
+                "{count} candidate",
+                "{count} candidates",
+                num,
+                locale=get_locale().language,
+            )
             html += f"<li>{escape(party_name)} ({num_candidates})</li>"
     html += independents
     html += "</ol>"

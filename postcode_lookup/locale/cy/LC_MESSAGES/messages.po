@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-02 16:00+0000\n"
+"POT-Creation-Date: 2026-02-09 15:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -106,56 +106,57 @@ msgstr "Eich cyngor lleol"
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/utils.py:98
-msgid "1 candidate"
-msgstr ""
+#: postcode_lookup/utils.py:103
+#, fuzzy
+msgid "{count} candidate"
+msgid_plural "{count} candidates"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
-#: postcode_lookup/utils.py:100
-#, python-format
-msgid "%(num)d candidates"
-msgstr ""
-
-#: postcode_lookup/utils.py:120
+#: postcode_lookup/utils.py:124
 msgid "one"
 msgstr "un"
 
-#: postcode_lookup/utils.py:121
+#: postcode_lookup/utils.py:125
 msgid "two"
 msgstr "dau"
 
-#: postcode_lookup/utils.py:122
+#: postcode_lookup/utils.py:126
 msgid "three"
 msgstr "tri"
 
-#: postcode_lookup/utils.py:123
+#: postcode_lookup/utils.py:127
 msgid "four"
 msgstr "pedwar"
 
-#: postcode_lookup/utils.py:124
+#: postcode_lookup/utils.py:128
 msgid "five"
 msgstr "pump"
 
-#: postcode_lookup/utils.py:125
+#: postcode_lookup/utils.py:129
 msgid "six"
 msgstr "chwech"
 
-#: postcode_lookup/utils.py:126
+#: postcode_lookup/utils.py:130
 msgid "seven"
 msgstr "saith"
 
-#: postcode_lookup/utils.py:127
+#: postcode_lookup/utils.py:131
 msgid "eight"
 msgstr "wyth"
 
-#: postcode_lookup/utils.py:128
+#: postcode_lookup/utils.py:132
 msgid "nine"
 msgstr "naw"
 
-#: postcode_lookup/utils.py:182 postcode_lookup/utils.py:185
+#: postcode_lookup/utils.py:186 postcode_lookup/utils.py:189
 msgid " (postponed)"
 msgstr " (wedi'i ohirio)"
 
-#: postcode_lookup/utils.py:188
+#: postcode_lookup/utils.py:192
 #, fuzzy
 msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
