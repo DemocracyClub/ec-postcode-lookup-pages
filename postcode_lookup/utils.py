@@ -14,8 +14,10 @@ from response_builder.v1.models.base import Ballot, CancellationReason
 from starlette.datastructures import URL, Headers
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-from starlette_babel import get_locale
+from starlette_babel import get_locale, get_translator
 from starlette_babel import gettext_lazy as _
+
+translator = get_translator()
 
 
 def is_welsh(path: str) -> bool:
@@ -68,6 +70,43 @@ def additional_ballot_link(request, ballot) -> str:
     return do_mark_safe(
         f"""<p><a href="{url}" class="o-external-link">Find out more about this election at {label}</a></p>"""
     )
+
+
+def candidates_groupby_party_list(candidates):
+    grouped_candidates = {}
+    for candidate in candidates:
+        party_name = candidate.party.party_name
+        if party_name not in grouped_candidates:
+            grouped_candidates[party_name] = []
+        grouped_candidates[party_name].append(candidate)
+
+    grouped_candidates = dict(
+        sorted(grouped_candidates.items(), key=lambda item: item[0])
+    )
+
+    html = '<ol class="candidate-list">'
+    independents = ""
+    for party_name, candidates in grouped_candidates.items():
+        if party_name == "Independent":
+            for candidate in sorted(
+                candidates, key=lambda candidate: candidate.person.name
+            ):
+                independents += (
+                    f"<li>Independent: {escape(candidate.person.name)}</li>"
+                )
+        else:
+            num = len(candidates)
+            num_candidates = translator.ngettext(
+                "{count} candidate",
+                "{count} candidates",
+                num,
+                locale=get_locale().language,
+            )
+            html += f"<li>{escape(party_name)} ({num_candidates})</li>"
+    html += independents
+    html += "</ol>"
+
+    return do_mark_safe(html)
 
 
 def apnumber(value):
@@ -187,6 +226,9 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
         env.globals["additional_ballot_link"] = additional_ballot_link
+        env.globals["candidates_groupby_party_list"] = (
+            candidates_groupby_party_list
+        )
         env.filters["ballot_cancellation_suffix"] = ballot_cancellation_suffix
 
         locale_dir = Path(__file__).parent / "locale"

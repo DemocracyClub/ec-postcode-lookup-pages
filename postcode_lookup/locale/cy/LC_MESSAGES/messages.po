@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-12 16:39+0100\n"
+"POT-Creation-Date: 2026-02-09 15:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -106,47 +106,57 @@ msgstr "Eich cyngor lleol"
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/utils.py:85
+#: postcode_lookup/utils.py:103
+#, fuzzy
+msgid "{count} candidate"
+msgid_plural "{count} candidates"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+#: postcode_lookup/utils.py:124
 msgid "one"
 msgstr "un"
 
-#: postcode_lookup/utils.py:86
+#: postcode_lookup/utils.py:125
 msgid "two"
 msgstr "dau"
 
-#: postcode_lookup/utils.py:87
+#: postcode_lookup/utils.py:126
 msgid "three"
 msgstr "tri"
 
-#: postcode_lookup/utils.py:88
+#: postcode_lookup/utils.py:127
 msgid "four"
 msgstr "pedwar"
 
-#: postcode_lookup/utils.py:89
+#: postcode_lookup/utils.py:128
 msgid "five"
 msgstr "pump"
 
-#: postcode_lookup/utils.py:90
+#: postcode_lookup/utils.py:129
 msgid "six"
 msgstr "chwech"
 
-#: postcode_lookup/utils.py:91
+#: postcode_lookup/utils.py:130
 msgid "seven"
 msgstr "saith"
 
-#: postcode_lookup/utils.py:92
+#: postcode_lookup/utils.py:131
 msgid "eight"
 msgstr "wyth"
 
-#: postcode_lookup/utils.py:93
+#: postcode_lookup/utils.py:132
 msgid "nine"
 msgstr "naw"
 
-#: postcode_lookup/utils.py:147 postcode_lookup/utils.py:150
+#: postcode_lookup/utils.py:186 postcode_lookup/utils.py:189
 msgid " (postponed)"
 msgstr " (wedi'i ohirio)"
 
-#: postcode_lookup/utils.py:153
+#: postcode_lookup/utils.py:192
 #, fuzzy
 msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
@@ -181,7 +191,7 @@ msgstr "Beth all yr offeryn hwn ddweud wrthych"
 msgid "There is a recall petition in your area"
 msgstr "Mae deiseb adalw yn eich ardal"
 
-#: postcode_lookup/templates/includes/ballots.html:34
+#: postcode_lookup/templates/includes/ballots.html:37
 #, fuzzy, python-format
 msgid ""
 "<h3>%(election_name)s candidates</h3> <p>The list of candidates for this "
@@ -586,3 +596,4 @@ msgstr ""
 
 #~ msgid "'Please enter a valid UK postcode, e.g., SW1A 1AA.'"
 #~ msgstr ""
+
