@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-09 15:08+0000\n"
+"POT-Creation-Date: 2026-02-11 15:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -194,11 +194,11 @@ msgstr "Mae deiseb adalw yn eich ardal"
 #: postcode_lookup/templates/includes/ballots.html:37
 #, fuzzy, python-format
 msgid ""
-"<h3>%(election_name)s candidates</h3> <p>The list of candidates for this "
+"<h3>%(ballot_title)s candidates</h3> <p>The list of candidates for this "
 "election will be published after %(sopn_date)s.</p>"
 msgstr ""
-"<h3>Ymgeiswyr</h3> <p>Bydd rhestr o ymgeiswyr yr etholiad hwn yn cael ei "
-"chyhoeddi ar ôl %(sopn_date)s.</p>"
+"<h3>%(ballot_title)s Ymgeiswyr</h3> <p>Bydd rhestr o ymgeiswyr yr "
+"etholiad hwn yn cael ei chyhoeddi ar ôl %(sopn_date)s.</p>"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:3
 #, fuzzy

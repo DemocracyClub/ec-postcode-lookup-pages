@@ -7,9 +7,9 @@
               {% if ballot.candidates_verified and section.context.show_candidates %}
                   <details>
                       {% if ballot.voting_system.uses_party_lists %}
-                          <summary>{{ ballot.election_name }} parties and independent candidates</summary>
+                          <summary>{{ ballot.ballot_title }} parties and independent candidates</summary>
                       {% else %}
-                          <summary>{{ ballot.election_name }} candidates</summary>
+                          <summary>{{ ballot.ballot_title }} candidates</summary>
                       {% endif %}
                       {{ additional_ballot_link(request, ballot) }}
 
@@ -34,8 +34,8 @@
                   {% if ballot.ballot_paper_id.startswith('ref.') %}
                     {% include 'includes/referendum.html' %}
                   {% else %}
-                    {% trans sopn_date=section.context.sopn_publish_date|date_filter, election_name=ballot.election_name %}
-                        <h3>{{ election_name }} candidates</h3>
+                    {% trans sopn_date=section.context.sopn_publish_date|date_filter, ballot_title=ballot.ballot_title %}
+                        <h3>{{ ballot_title }} candidates</h3>
                         <p>The list of candidates for this election will be published after {{ sopn_date }}.</p>
                     {% endtrans %}
                   {% endif %}
