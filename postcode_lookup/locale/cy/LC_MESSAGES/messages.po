@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-11 15:48+0000\n"
+"POT-Creation-Date: 2026-03-02 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -486,6 +486,7 @@ msgstr ""
 "ar y gofrestr.</p> <p>Gallwch <a href=\"https://gov.uk/register-to-"
 "vote/\">gofrestru i bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:24
 msgid ""
@@ -493,6 +494,7 @@ msgid ""
 "as other elections."
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:10
 msgid ""
 "Both residents and city workers are eligible to vote. There is one "
@@ -501,16 +503,19 @@ msgid ""
 "and cannot be modified after that date."
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:19
 msgid "Register to vote in the City of London"
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:23
 msgid "Registration in the City of London"
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:26
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<p>The deadline to register to vote in City of London local elections on "
 "%(date)s was %(registration_deadline)s.</p> <p>If you registered to vote "
@@ -529,71 +534,4 @@ msgstr "Bydd gennych %(count)s papurau pleidleisio i'w llenwi:"
 #: postcode_lookup/templates/includes/single_date.html:19
 msgid "You will have one ballot paper to fill out."
 msgstr ""
-
-#~ msgid "Enter your postcode"
-#~ msgstr "Rhowch eich cod post"
-
-#~ msgid ""
-#~ "Enter your postcode to find contact "
-#~ "details for the electoral services team"
-#~ " at your local council and polling"
-#~ " station details"
-#~ msgstr ""
-#~ "Dewch o hyd i'ch gwybodaeth am "
-#~ "eich swyddfa gofrestru etholiadol a'ch "
-#~ "gorsaf bleidleisio leol"
-
-#~ msgid "Enter a postcode"
-#~ msgstr "Rhowch god post"
-
-#~ msgid "%(title)s"
-#~ msgstr ""
-
-#~ msgid "There are no upcoming elections in your areas"
-#~ msgstr "Nid oes etholiadau ar y gweill yn eich ardal chi"
-
-#~ msgid "%(ballot_date)s - 7am to 10pm"
-#~ msgstr "%(ballot_date)s - 7am i 10pm"
-
-#~ msgid "Cancelled and Rescheduled Election"
-#~ msgstr "Etholiad wedi'i ganslo ac wedi'i aildrefnu"
-
-#~ msgid ""
-#~ "This election was cancelled because the"
-#~ " number of candidates who stood was"
-#~ " fewer than the number of available"
-#~ " seats."
-#~ msgstr ""
-#~ "Canslwyd yr etholiad hwn gan fod "
-#~ "nifer yr ymgeiswyr a safodd yn "
-#~ "gyfartal â nifer y seddau sydd ar"
-#~ " gael. Bydd yr ymgeiswyr canlynol yn"
-#~ " cymryd y safle hwn:"
-
-#~ msgid "Upcoming election information"
-#~ msgstr "Gwybodaeth etholiad sydd i ddod"
-
-#~ msgid "Submit Postcode"
-#~ msgstr "Cyflwyno Cod Post"
-
-#~ msgid "England and Wales elections, 2 May 2024"
-#~ msgstr "Etholiadau Lloegr a Chymru, 2 Mai 2024"
-
-#~ msgid "Polling stations will be open from 7am to 10pm."
-#~ msgstr "Bydd gorsafoedd pleidleisio ar agor o 7am i 10pm."
-
-#~ msgid ""
-#~ "If you're voting at the polling "
-#~ "station, you'll need to take photo "
-#~ "ID with you."
-#~ msgstr ""
-#~ "Os ydych chi'n pleidleisio yn y "
-#~ "gorsaf bleidleisio, bydd angen i chi "
-#~ "gymryd adnabod llun gyda chi."
-
-#~ msgid "Check the list of accepted forms of photo ID"
-#~ msgstr "Gwiriwch y rhestr o ffurfiau adnabod llun a dderbynnir"
-
-#~ msgid "'Please enter a valid UK postcode, e.g., SW1A 1AA.'"
-#~ msgstr ""
 
