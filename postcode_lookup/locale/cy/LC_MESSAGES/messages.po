@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-02-11 15:48+0000\n"
+"POT-Creation-Date: 2026-03-02 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -486,6 +486,7 @@ msgstr ""
 "ar y gofrestr.</p> <p>Gallwch <a href=\"https://gov.uk/register-to-"
 "vote/\">gofrestru i bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:24
 msgid ""
@@ -493,6 +494,7 @@ msgid ""
 "as other elections."
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:10
 msgid ""
 "Both residents and city workers are eligible to vote. There is one "
@@ -501,16 +503,19 @@ msgid ""
 "and cannot be modified after that date."
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:19
 msgid "Register to vote in the City of London"
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:23
 msgid "Registration in the City of London"
 msgstr ""
 
+# Only relevant to City of London elections - we don't need to translate this
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:26
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<p>The deadline to register to vote in City of London local elections on "
 "%(date)s was %(registration_deadline)s.</p> <p>If you registered to vote "
