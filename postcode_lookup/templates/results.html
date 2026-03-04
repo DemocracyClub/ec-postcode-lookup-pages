@@ -8,6 +8,11 @@
     {{ template_sorter.page_title }}
 {% endblock %}
 
+{% block html_meta %}
+    {{ super() }}
+    <meta content="noindex" name="robots">
+{% endblock %}
+
 {% block language_picker %}
     {% include "includes/language_picker.html" %}
 {% endblock %}
