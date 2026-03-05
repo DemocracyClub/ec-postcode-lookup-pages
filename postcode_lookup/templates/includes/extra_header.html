@@ -1,9 +1,12 @@
 <style>
     :root {
+
+        --ec-light-blue-bg: #E5F4F8;
         --ec-light-blue: #25B2D3;
         --ec-dark-blue: #002C57;
         --ec-purple: #6B528D;
         --ec-light-purple: #F2F0F3;
+        --ec-teale: #077988;
     }
 
     .dc-container {
@@ -138,7 +141,7 @@
     }
 
     body#dc .c-hero, body#dc .c-breadcrumb {
-        background-color: var(--ec-purple);
+        background-color: var(--ec-teale);
 
     }
 
@@ -184,6 +187,7 @@
     body#dc form#dc-postcode-search-form .dc-inline-form {
         min-width: fit-content;
         display: flex;
+        margin-top:0.5em;
 
     }
 
@@ -201,9 +205,9 @@
 
     body#dc form#dc-postcode-search-form .dc-inline-form input {
         padding: 1em;
-        background-color: white;
+        background-color: var(--ec-light-blue-bg);
         color: var(--ec-dark-blue);
-        border: none;
+        border: 2px solid #007292;;
         max-width: 50ch;
         min-width: 15ch;
         width: 100%;

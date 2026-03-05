@@ -104,11 +104,6 @@ def remove_unwanted_content(soup: BeautifulSoup):
         "{% block page_hero %}",
         "{% endblock page_hero %}",
     )
-    _wrap_content(
-        soup.select_one("#block-electoralcommission-breadcrumbs"),
-        "{% block breadcrumbs %}",
-        "{% endblock breadcrumbs %}",
-    )
 
     _replace_content(
         soup.select_one(".c-language-switcher"),
