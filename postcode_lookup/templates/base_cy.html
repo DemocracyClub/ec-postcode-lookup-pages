@@ -13,8 +13,8 @@
   <link href="https://www.electoralcommission.org.uk/core/misc/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
   <title>
    {% block html_title %}
-        Elections in your area
-        {% endblock html_title %} | Electoral Commission
+        {% trans %}Elections in your area{% endtrans %}
+        {% endblock html_title %} | {% trans %}Electoral Commission{% endtrans %}
   </title>
   <!-- Google Tag Manager -->
   <script>
@@ -467,7 +467,7 @@
      <div class="c-info-bar__content">
       <p>
        <strong>
-        Please enable JavaScript in your web browser to get the best experience.
+        {% trans %}Please enable JavaScript in your web browser to get the best experience.{% endtrans %}
        </strong>
       </p>
      </div>
@@ -592,7 +592,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 We’re the independent body which oversees elections and regulates political finance in the UK. We work to promote public confidence in the democratic process and ensure its integrity.
+                    "Y Comisiwn Etholiadol yw’r corff annibynnol sy’n goruchwylio etholiadau a rheoleiddio cyllid gwleidyddol yn y DU. Rydym yn gweithio i hyrwyddo hyder y cyhoedd yn y system etholiadol a sicrhau ei huniondeb."
                 </p>
                </div>
               </div>
@@ -677,7 +677,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 We provide guidance about the process of running elections, standing as a candidate, and campaigning at an election.
+                 {% trans %}We provide guidance about the process of running elections, standing as a candidate, and campaigning at an election.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -748,7 +748,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 Find out everything you need to know about voting and elections, including information about upcoming elections in your area.
+                 {% trans %}Find out everything you need to know about voting and elections, including information about upcoming elections in your area.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -785,7 +785,7 @@
               <li class="c-main-navigation__item c-main-navigation__item--level-1" data-js-menu-item="" data-js-menu-item-level="1">
                <a aria-expanded="false" class="c-main-navigation__item-link c-main-navigation__item-link--level-1" data-js-menu-item-link="" data-js-menu-item-link-level="1" href="/cy/pleidleisio-ac-etholiadau/ymgyrchu-am-eich-pleidlais" role="link">
                 <span>
-                 Campaigning for your vote
+                 {% trans %}Campaigning for your vote{% endtrans %}
                 </span>
                </a>
               </li>
@@ -833,7 +833,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 Part of our role includes conducting research and gathering data, and publishing reports and making recommendations about elections that take place across the UK.
+                 {% trans %}Part of our role includes conducting research and gathering data, and publishing reports and making recommendations about elections that take place across the UK.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -849,7 +849,7 @@
               <li class="c-main-navigation__item c-main-navigation__item--level-1" data-js-menu-item="" data-js-menu-item-level="1">
                <a aria-expanded="false" class="c-main-navigation__item-link c-main-navigation__item-link--level-1" data-js-menu-item-link="" data-js-menu-item-link-level="1" href="/cy/ymchwil-adroddiadau-a-data/ymchwil-cofrestru-etholiadol" role="link">
                 <span>
-                 Electoral registration research
+                 {% trans %}Electoral registration research{% endtrans %}
                 </span>
                </a>
               </li>
@@ -911,7 +911,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 We are responsible for registering political parties, publishing political finance data, and taking action if we have reason to suspect political finance law has been broken.
+                 {% trans %}We are responsible for registering political parties, publishing political finance data, and taking action if we have reason to suspect political finance law has been broken.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -968,7 +968,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 Get the latest news from us, and read media handbooks for elections. We also hold consultations, and publish our responses to consultations from others.
+                 {% trans %}Get the latest news from us, and read media handbooks for elections. We also hold consultations, and publish our responses to consultations from others.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -1039,7 +1039,7 @@
                </a>
                <div class="c-main-navigation__item-description-summary">
                 <p>
-                 Use our resources to share information about voting and democracy. Take a look at our resources for young people. Download lesson plans and activities for use in the classroom or youth groups. Share our assets and get the message out.
+                 {% trans %}Use our resources to share information about voting and democracy. Take a look at our resources for young people. Download lesson plans and activities for use in the classroom or youth groups. Share our assets and get the message out.{% endtrans %}
                 </p>
                </div>
               </div>
@@ -1073,7 +1073,7 @@
          </div>
          <button class="c-main-navigation__back-button | o-button o-button--primary o-button--dark" data-js-main-navigation-back="" type="button">
           <span>
-           Back
+           {% trans %}Back{% endtrans %}
           </span>
          </button>
         </div>
@@ -1106,7 +1106,7 @@
                  <li>
                   <a class="c-social__link" href="https://twitter.com/intent/tweet?text=Pwy%20all%20bleidleisio%20yn%20etholiadau%27r%20DU&amp;url=https://www.electoralcommission.org.uk/cy/pleidleisio-ac-etholiadau/pwy-all-bleidleisio-yn-etholiadaur-du" rel="noopener" target="_blank">
                    <span class="visually-hidden">
-                    Share on X
+                    {% trans %}Share on X{% endtrans %}
                    </span>
                    <svg class="o-icon o-icon--x" focusable="false" role="presentation">
                     <use xlink:href="#social-media--icon-x">
@@ -1117,7 +1117,7 @@
                  <li>
                   <a class="c-social__link" href="http://www.facebook.com/share.php?u=https://www.electoralcommission.org.uk/cy/pleidleisio-ac-etholiadau/pwy-all-bleidleisio-yn-etholiadaur-du" rel="noopener" target="_blank">
                    <span class="visually-hidden">
-                    Share on Facebook (opens in new window)
+                    {% trans %}Share on Facebook (opens in new window){% endtrans %}
                    </span>
                    <svg class="o-icon o-icon--facebook" focusable="false" role="presentation">
                     <use xlink:href="#social-media--icon-facebook">
@@ -1128,7 +1128,7 @@
                  <li>
                   <a class="c-social__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.electoralcommission.org.uk/cy/pleidleisio-ac-etholiadau/pwy-all-bleidleisio-yn-etholiadaur-du" rel="noopener" target="_blank">
                    <span class="visually-hidden">
-                    Share on LinkedIn (opens in new window)
+                    {% trans %}Share on LinkedIn (opens in new window){% endtrans %}
                    </span>
                    <svg class="o-icon o-icon--linkedin" focusable="false" role="presentation">
                     <use xlink:href="#social-media--icon-linkedin">
@@ -1163,13 +1163,13 @@
           <nav aria-labelledby="system-breadcrumb" class="c-breadcrumb" role="navigation">
            <div class="o-container">
             <h2 class="c-breadcrumb__title" id="system-breadcrumb">
-             You are in the
+             {% trans %}You are in the {% endtrans %}
              <a href="/cy/pleidleisio-ac-etholiadau">
               <span>
                Pleidleisio ac etholiadau
               </span>
              </a>
-             section
+             {% trans %} section{% endtrans %}
             </h2>
             <ul class="u-list-reset c-breadcrumb__menu">
              <li class="c-breadcrumb__item">
@@ -1243,14 +1243,14 @@
              <li class="c-footer-menu__item">
               <a data-drupal-link-system-path="node/24539" href="/cy/amdanom-ni/gweithio-i-ni">
                <span>
-                Working for us
+                {% trans %}Working for us{% endtrans %}
                </span>
               </a>
              </li>
              <li class="c-footer-menu__item">
               <a data-drupal-link-system-path="node/22975" href="/cy/adnoddau/croeso-i-dy-bleidlais">
                <span>
-                Learning resources
+                {% trans %}Learning resources{% endtrans %}
                </span>
               </a>
              </li>

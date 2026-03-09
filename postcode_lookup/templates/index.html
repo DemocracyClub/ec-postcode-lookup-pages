@@ -32,11 +32,11 @@
 
                             <button type="submit" name="Submit Postcode"
                                     formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
-                                Search
+                                {% trans %}Search{% endtrans %}
                             </button>
 
                         </div>
-                    <p class="dc-form-hint">For example SW1A 2AA</p>
+                    <p class="dc-form-hint">{% trans %}For example{% endtrans %} SW1A 2AA</p>
                     </form>
                     <script>
                         const js_strings = {{ js_strings|safe }};
@@ -109,26 +109,26 @@
 
         <ul class="grid" style="--gridCellMin: 40ch;--gridCellBG: var(--ec-light-purple)">
             <li>
-                <h3>Which elections are happening in my area?</h3>
-                <p>When you enter your postcode, you’ll find out which elections are coming up in your area. This
+                <h3>{% trans %}Which elections are happening in my area?{% endtrans %}</h3>
+                <p>{% trans %}When you enter your postcode, you’ll find out which elections are coming up in your area. This
                     includes UK Parliamentary general elections, Scottish Parliament elections, Senedd elections, local
                     elections, mayoral elections,
-                    Police and Crime Commissioner elections and by-elections.</p>
+                    Police and Crime Commissioner elections and by-elections{% endtrans %}.</p>
             </li>
             <li>
-                <h3>Where is my polling station?</h3>
-                <p>Your polling station might not be the same for every election. Check which polling station you need
-                    to go to for the next election in your area.</p>
+                <h3>{%trans %}Where is my polling station?{% endtrans %}</h3>
+                <p>{% trans %}Your polling station might not be the same for every election. Check which polling station you need
+                    to go to for the next election in your area.{% endtrans %}</p>
             </li>
             <li>
-                <h3>What do I need to take with me when I vote?</h3>
-                <p>Some elections might require you to take photo ID and some might not. When you enter your postcode,
+                <h3>{% trans %}What do I need to take with me when I vote?{% endtrans %}</h3>
+                <p>{% trans %}Some elections might require you to take photo ID and some might not. When you enter your postcode,
                     you will find out if you need photo ID to vote in the elections coming up in your area.
-                    You do not need to take your poll card to vote.</p>
+                    You do not need to take your poll card to vote.{% endtrans %}</p>
             </li>
             <li>
-                <h3>Who can I vote for?</h3>
-                <p>Enter your postcode to find out who the candidates in your area are.</p>
+                <h3>{% trans %}Who can I vote for?{% endtrans %}</h3>
+                <p>{% trans %}Enter your postcode to find out who the candidates in your area are.{% endtrans %}</p>
             </li>
 
         </ul>

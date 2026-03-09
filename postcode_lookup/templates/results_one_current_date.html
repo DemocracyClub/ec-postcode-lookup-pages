@@ -4,7 +4,7 @@
 {##}
 {#{% block html_title %}#}
 {#    {% if current_date == template_sorter.dates[0].date_data.date %}#}
-{#        You have elections today#}
+{#        {% trans %}You have elections today{% endtrans %}#}
 {#    {% else %}#}
 {#        {% trans %}You have an upcoming election{% endtrans %}#}
 {#    {% endif %}#}
@@ -12,7 +12,7 @@
 {##}
 {#{% block page_title %}#}
 {#    {% if current_date == template_sorter.dates[0].date_data.date %}#}
-{#        You have elections today#}
+{#        {% trans %}You have elections today{% endtrans %}#}
 {#    {% else %}#}
 {#        {% trans %}You have an upcoming election{% endtrans %}#}
 {#    {% endif %}#}
@@ -80,7 +80,7 @@
 {##}
 {#        <div class="c-wysiwyg">#}
 {#            <div class="c-summary-box c-summary-box--grey">#}
-{#                <p>Did you find what you were looking for? If not, <a href="/node/24756">let us know</a></p>#}
+{#                <p>{% trans %}Did you find what you were looking for? If not,{% endtrans %} <a href="/node/24756">{% trans %}let us know{% endtrans %}</a></p>#}
 {##}
 {#            </div>#}
 {#        </div>#}
