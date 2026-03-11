@@ -435,18 +435,18 @@ class TemplateSorter:
             if (
                 self.electoral_services
                 # we only hold postal votes dispatch data data for one
-                # election. TODO: remove/review after 2025-05-01
-                and date.date == "2025-05-01"
+                # election. TODO: remove/review after 2026-05-07
+                and date.date == "2026-05-07"
             ):
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
                 )
-                # hard-coded for May 2025
+                # hard-coded for May 2026
                 # this is the date when replacement packs can be issued from
                 # for ALL councils
                 # TODO: add this to the timetable library
                 replacement_pack_start_date = datetime.datetime.strptime(
-                    "25/04/2025", "%d/%m/%Y"
+                    "30/04/2026", "%d/%m/%Y"
                 ).date()
 
             if parse(date.date).date() < datetime.datetime.today().date():
