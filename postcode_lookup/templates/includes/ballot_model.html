@@ -41,11 +41,12 @@
                 {% endfor %}
             </ul>
         {% endif %}
-
+        {% trans %}
         <p>Visit <a href=&quot;https://whocanivotefor.co.uk/elections/{{ postcode }}&quot; target=&quot;_blank&quot;
                     class=&quot;o-external-link&quot;>Who Can I Vote For <span
                 class=&quot;visually-hidden&quot;>(Opens in new window)</span></a> to find out more about your
             candidates</p>
+        {% endtrans %}
     {% endif %}
 
 
