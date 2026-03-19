@@ -7,14 +7,14 @@
         {% endif %}
     {% else %}
 
-        <p><strong>This ballot has been cancelled</strong></p>
+        <p><strong>{% trans %}This ballot has been cancelled{% endtrans %}</strong></p>
         {% if ballot.cancelled_reason %}
             {{ ballot.cancelled_reason }}
         {% endif %}
     {% endif %}
 {% else %}
-    <p>This election takes place on <time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>.
-        <a href=&quot;/i-am-a/voter/types-elections&quot;>Find out more about voting in this election</a>.</p>
+    <p>{% trans %}This election takes place on {% endtrans %}<time datetime=&quot;{{ ballot.poll_open_date }}&quot;>{{ ballot.poll_open_date.strftime('%-d %B %Y') }}</time>.
+        <a href=&quot;/i-am-a/voter/types-elections&quot;>{% trans %}Find out more about voting in this election{% endtrans %}</a>.</p>
     	{{ additional_ballot_link(request, ballot) }}
 {% endif %}
 

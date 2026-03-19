@@ -7,9 +7,9 @@
               {% if ballot.candidates_verified and section.context.show_candidates %}
                   <details>
                       {% if ballot.voting_system.uses_party_lists %}
-                          <summary>{{ ballot.ballot_title }} parties and independent candidates</summary>
+                          <summary>{{ ballot.ballot_title }} {% trans %}parties and independent candidates{% endtrans %}</summary>
                       {% else %}
-                          <summary>{{ ballot.ballot_title }} candidates</summary>
+                          <summary>{{ ballot.ballot_title }} {% trans %}candidates{% endtrans %}</summary>
                       {% endif %}
                       {{ additional_ballot_link(request, ballot) }}
 
@@ -27,7 +27,9 @@
                       {% endif %}
 
                       <p><a href="{{ ballot.wcivf_url }}">
+                          {% trans %} 
                           Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
+                          {% endtrans %}
                       </a></p>
                   </details>
               {% else %}

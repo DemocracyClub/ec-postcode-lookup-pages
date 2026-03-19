@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-16 13:53+0000\n"
+"POT-Creation-Date: 2026-03-19 16:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -247,8 +247,26 @@ msgstr ""
 msgid "There is a recall petition in your area"
 msgstr "Mae deiseb adalw yn eich ardal"
 
+#: postcode_lookup/templates/results.html:25
+msgid "On this page"
+msgstr "Ar y dudalen hon"
+
+#: postcode_lookup/templates/includes/ballot_model.html:10
+msgid "This ballot has been cancelled"
+msgstr "Mae'r bleidlais hon wedi'i chanslo"
+
+#: postcode_lookup/templates/includes/ballot_model.html:16
+#, fix2
+msgid "This election takes place on"
+msgstr ""
+
+#: postcode_lookup/templates/includes/ballot_model.html:17
+#, fix2
+msgid "Find out more about voting in this election"
+msgstr ""
+
 #: postcode_lookup/templates/includes/ballot_model.html:44
-#, python-format
+#, fix2, python-format
 msgid ""
 "<p>Visit <a "
 "href=&quot;https://whocanivotefor.co.uk/elections/%(postcode)s&quot; "
@@ -257,7 +275,19 @@ msgid ""
 "window)</span></a> to find out more about your candidates</p>"
 msgstr ""
 
-#: postcode_lookup/templates/includes/ballots.html:37
+#: postcode_lookup/templates/includes/ballots.html:10
+msgid "parties and independent candidates"
+msgstr ""
+
+#: postcode_lookup/templates/includes/ballots.html:12
+msgid "candidates"
+msgstr "ymgeiswyr"
+
+#: postcode_lookup/templates/includes/ballots.html:30
+msgid "Find out more about the candidates in your area on WhoCanIVoteFor.co.uk"
+msgstr "Dysgwch fwy am yr ymgeiswyr yn eich ardal ar WhoCanIVoteFor.co.uk"
+
+#: postcode_lookup/templates/includes/ballots.html:39
 #, python-format
 msgid ""
 "<h3>%(ballot_title)s candidates</h3> <p>The list of candidates for this "
@@ -295,7 +325,7 @@ msgstr ""
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:24
 msgid "Uncontested Election"
-msgstr "Etholiad wedi ei herio"
+msgstr "Etholiad heb gystadleuaeth"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:27
 msgid ""
@@ -396,6 +426,7 @@ msgstr ""
 " am ddychwelyd eich papur pleidleisio post, cysylltwch â'ch cyngor.</p>"
 
 #: postcode_lookup/templates/includes/organisation_contact.html:36
+#, fix2
 msgid ""
 "<p> Here are contact details for your usual election team. However, for "
 "some elections, electoral boundaries mean that your neighbouring election"
@@ -464,16 +495,10 @@ msgid "You have until %(date)s."
 msgstr "Mae gennych hyd nes %(date)s"
 
 #: postcode_lookup/templates/includes/postal_votes.html:18
-msgid ""
-"<a href=\"https://www.electoralcommission.org.uk/voting-and-elections"
-"/ways-vote/apply-vote-post\">Read more about applying for a postal "
-"vote</a>."
-msgstr ""
-"<a href=\"https://www.electoralcommission.org.uk/cy/pleidleisio-ac-"
-"etholiadau/ffyrdd-i-bleidleisio/sut-i-bleidleisio-trwyr-post>Rhagor o "
-"wybodaeth am sut i bleidleisio drwy'r post.</a>"
+msgid "Read more about applying for a postal vote"
+msgstr "Darllenwch fwy am wneud cais am bleidlais bost"
 
-#: postcode_lookup/templates/includes/postal_votes.html:25
+#: postcode_lookup/templates/includes/postal_votes.html:23
 #, fix, python-format
 msgid ""
 "The deadline to apply for a postal vote for the elections taking place on"
@@ -482,11 +507,11 @@ msgid ""
 " in future elections."
 msgstr ""
 
-#: postcode_lookup/templates/includes/postal_votes.html:34
+#: postcode_lookup/templates/includes/postal_votes.html:32
 msgid "If you have a postal vote"
 msgstr "Os oes gennych bleidlais bost"
 
-#: postcode_lookup/templates/includes/postal_votes.html:38
+#: postcode_lookup/templates/includes/postal_votes.html:36
 #, fix, python-format
 msgid ""
 "<ul> <li>If you already have a postal vote or successfully apply by "
@@ -495,7 +520,7 @@ msgid ""
 "sent from %(date2)s.</li> </ul>"
 msgstr ""
 
-#: postcode_lookup/templates/includes/postal_votes.html:51
+#: postcode_lookup/templates/includes/postal_votes.html:49
 msgid ""
 "Your local council will send your postal voting pack after the deadline "
 "to become a candidate has passed. This is around three weeks before "
@@ -505,7 +530,7 @@ msgstr ""
 "i’r dyddiad cau ar gyfer dod yn ymgeisydd fynd heibio. Mae hyn tua thair "
 "wythnos cyn y diwrnod pleidleisio."
 
-#: postcode_lookup/templates/includes/postal_votes.html:61
+#: postcode_lookup/templates/includes/postal_votes.html:59
 #, fix, python-format
 msgid ""
 "You can <a href=\"#electoral-services\">contact your local council</a> if"
@@ -519,6 +544,7 @@ msgid "The question you will be asked on the ballot paper is:"
 msgstr "Y cwestiwn a ofynnir i chi ar y papur pleidleisio yw:"
 
 #: postcode_lookup/templates/includes/referendum.html:20
+#, fix2
 msgid "Read more about this referendum"
 msgstr ""
 
@@ -591,6 +617,10 @@ msgid ""
 "href=\"https://www.speakforthecity.com/\">register to vote in the City of"
 " London</a> in future elections.</p>"
 msgstr ""
+
+#: postcode_lookup/templates/includes/related_content.html:4
+msgid "Related content"
+msgstr "Cynnwys cysylltiedig"
 
 #: postcode_lookup/templates/includes/related_content.html:12
 msgid "/i-am-a/voter/register-vote-and-update-your-details"
@@ -700,4 +730,18 @@ msgstr "Bydd gennych un papur pleidleisio i'w lenwi."
 #~ "postcode to find out who the "
 #~ "candidates in your area are.</p> </li>"
 #~ msgstr ""
+
+#~ msgid "Find out more about the candidates in your area on WhoCanIVoteFor.co.uk"
+#~ msgstr "Dysgwch fwy am yr ymgeiswyr yn eich ardal ar WhoCanIVoteFor.co.uk"
+
+#~ msgid ""
+#~ "<a href=\"https://www.electoralcommission.org.uk/voting-"
+#~ "and-elections/ways-vote/apply-vote-post\">Read"
+#~ " more about applying for a postal "
+#~ "vote</a>."
+#~ msgstr ""
+#~ "<a href=\"https://www.electoralcommission.org.uk/cy"
+#~ "/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/sut-i"
+#~ "-bleidleisio-trwyr-post>Rhagor o wybodaeth "
+#~ "am sut i bleidleisio drwy'r post.</a>"
 
