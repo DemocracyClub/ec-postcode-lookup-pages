@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-19 16:10+0000\n"
+"POT-Creation-Date: 2026-03-24 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -200,47 +200,60 @@ msgid "Which elections are happening in my area?"
 msgstr "Pa etholiadau sy'n digwydd yn fy ardal?"
 
 #: postcode_lookup/templates/index.html:105
-#, fix
+#, 
 msgid ""
 "When you enter your postcode, you’ll find out which elections are coming "
 "up in your area. This includes UK Parliamentary general elections, "
 "Scottish Parliament elections, Senedd elections, local elections, mayoral"
 " elections, Police and Crime Commissioner elections and by-elections."
 msgstr ""
+"Pan fyddwch chi’n mewnbynnu eich cod post, byddwch chi’n darganfod pa "
+"etholiadau a fydd yn digwydd yn eich ardal. Mae hyn yn cynnwys etholiadau"
+" cyffredinol Senedd y DU, etholiadau Senedd Cymru, etholiadau Senedd yr "
+"Alban, etholiadau lleol, etholiadau maerol, etholiadau ac is-etholiadau "
+"Comisiynwyr yr Heddlu a Throseddu."
 
 #: postcode_lookup/templates/index.html:111
 msgid "Where is my polling station?"
 msgstr "Ble fy ngorsaf bleidleisio?"
 
 #: postcode_lookup/templates/index.html:112
-#, fix
+#, 
 msgid ""
 "Your polling station might not be the same for every election. Check "
 "which polling station you need to go to for the next election in your "
 "area."
 msgstr ""
+"Efallai na fydd eich gorsaf bleidleisio’r un peth ar gyfer pob etholiad. "
+"Gwiriwch pa orsaf bleidleisio bydd angen i chi fynd iddi ar gyfer yr "
+"etholiad nesaf yn eich ardal."
 
 #: postcode_lookup/templates/index.html:116
 msgid "What do I need to take with me when I vote?"
 msgstr "Beth sydd angen i mi ei gymryd gyda mi pan fyddaf yn pleidleisio?"
 
 #: postcode_lookup/templates/index.html:117
-#, fix
+#, 
 msgid ""
 "Some elections might require you to take photo ID and some might not. "
 "When you enter your postcode, you will find out if you need photo ID to "
 "vote in the elections coming up in your area. You do not need to take "
 "your poll card to vote."
 msgstr ""
+"Mae’n bosibl y bydd rhai etholiadau’n gofyn am ID ffotograffig, ac mae’n "
+"bosibl na fydd eraill yn gofyn amdano. Pan fyddwch chi’n mewnbynnu eich "
+"cod post, byddwch yn canfod a oes angen ID ffotograffig arnoch i "
+"bleidleisio yn yr etholiadau a fydd yn digwydd yn eich ardal. Nid oes "
+"angen i chi fynd â’ch cerdyn pleidleisio gyda chi i bleidleisio."
 
 #: postcode_lookup/templates/index.html:122
 msgid "Who can I vote for?"
 msgstr "Pwy alla i bleidleisio ar gyfer?"
 
 #: postcode_lookup/templates/index.html:123
-#, fix
+#, 
 msgid "Enter your postcode to find out who the candidates in your area are."
-msgstr ""
+msgstr "Mewnbynnwch eich cod post i ganfod pwy yw’r ymgeiswyr yn eich ardal."
 
 #: postcode_lookup/templates/old_result.html:21
 #: postcode_lookup/templates/old_result.html:45
@@ -285,7 +298,7 @@ msgstr "ymgeiswyr"
 
 #: postcode_lookup/templates/includes/ballots.html:30
 msgid "Find out more about the candidates in your area on WhoCanIVoteFor.co.uk"
-msgstr "Dysgwch fwy am yr ymgeiswyr yn eich ardal ar WhoCanIVoteFor.co.uk"
+msgstr "Dysgwch ragor am yr ymgeiswyr yn eich ardal ar WhoCanIVoteFor.co.uk"
 
 #: postcode_lookup/templates/includes/ballots.html:39
 #, python-format
@@ -499,26 +512,34 @@ msgid "Read more about applying for a postal vote"
 msgstr "Darllenwch fwy am wneud cais am bleidlais bost"
 
 #: postcode_lookup/templates/includes/postal_votes.html:23
-#, fix, python-format
+#, python-format
 msgid ""
 "The deadline to apply for a postal vote for the elections taking place on"
 " %(date)s was %(application_deadline)s. You can <a "
 "href=\"https://www.gov.uk/apply-postal-vote\">apply for a postal vote</a>"
 " in future elections."
 msgstr ""
+"%(application_deadline)s oedd y dyddiad cau i gofrestru am bleidlais bost"
+" ar gyfer yr etholiadau ar %(date)s. Gallwch wneud cais am bleidlais bost"
+" mewn etholiadau yn y dyfodol."
 
 #: postcode_lookup/templates/includes/postal_votes.html:32
 msgid "If you have a postal vote"
 msgstr "Os oes gennych bleidlais bost"
 
 #: postcode_lookup/templates/includes/postal_votes.html:36
-#, fix, python-format
+#, python-format
 msgid ""
 "<ul> <li>If you already have a postal vote or successfully apply by "
 "%(date0)s, your pack will be sent from %(date1)s.</li> <li>If you apply "
 "after %(date0)s up to 5pm on %(application_deadline)s, your pack will be "
 "sent from %(date2)s.</li> </ul>"
 msgstr ""
+"<ul> <li>Os oes pleidlais bost gennych eisoes neu os ydych wedi gwneud "
+"cais llwyddiannus erbyn %(date0)s, bydd eich pecyn yn cael ei anfon o "
+"%(date1)s.</li> <li>Os byddwch yn gwneud cais ar ôl %(date0)s hyd at 5pm "
+"ar %(application_deadline)s, bydd eich pecyn yn cael ei anfon o "
+"%(date2)s.</li> </ul>"
 
 #: postcode_lookup/templates/includes/postal_votes.html:49
 msgid ""
@@ -531,13 +552,17 @@ msgstr ""
 "wythnos cyn y diwrnod pleidleisio."
 
 #: postcode_lookup/templates/includes/postal_votes.html:59
-#, fix, python-format
+#, python-format
 msgid ""
 "You can <a href=\"#electoral-services\">contact your local council</a> if"
 " you have not received your postal voting pack. Replacement packs can "
 "only be issued from %(replacement_pack_start_date)s until 5pm on "
 "%(polling_day)s."
 msgstr ""
+"<a href=\"#electoral-services\">Gallwch gysylltu â’ch cyngor lleol</a> os"
+" nad ydych wedi derbyn eich pecyn pleidleisio drwy’r post. Gellir dim ond"
+" anfon pecynnau newydd o %(replacement_pack_start_date)s hyd nes 5pm ar "
+"%(polling_day)s."
 
 #: postcode_lookup/templates/includes/referendum.html:8
 msgid "The question you will be asked on the ballot paper is:"
