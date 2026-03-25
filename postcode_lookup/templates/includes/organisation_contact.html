@@ -5,13 +5,13 @@
 
         <p>
             {% trans %}
-
                 Send your postal and proxy vote applications to your local electoral registration team.
                 You can also contact them to find out if you’re on the electoral register,
                 and if you already have a postal or proxy vote.
             {% endtrans %}
         </p>
     {% endif %}
+
     {% if org_type == "electoral_services" %}
         {% if org.nation == "Northern Ireland" %}
             <h2 id="electoral-services">{% trans %}Electoral Office for Northern Ireland{% endtrans %}</h2>
@@ -21,15 +21,25 @@
                     postal voting ballot, contact the Electoral Office for Northern Ireland.
                 {% endtrans %}
             </p>
+        {% elif org.nation == "Scotland" %}
+            <h2 id="electoral-services">{% trans %}Your returning officer{% endtrans %}</h2>
+
+            {% trans %}
+                <p>
+                  For questions about your poll card, polling station, or about returning
+                  your postal voting ballot, contact your returning officer.
+                </p>
+            {% endtrans %}
+
         {% else %}
+            {# England & Wales #}
             <h2 id="electoral-services">{% trans %}Your local council{% endtrans %}</h2>
 
             {% trans %}
-
-
-                <p>For questions about your poll card, polling station, or about returning your postal voting ballot,
-                    contact
-                    your council.</p>
+                <p>
+                  For questions about your poll card, polling station, or about returning
+                  your postal voting ballot, contact your council.
+                </p>
             {% endtrans %}
 
             {% if template_sorter.has_and_parl_ballots() %}
@@ -42,6 +52,7 @@
                     </p>
                 {% endtrans %}
             {% endif %}
+
         {% endif %}
 
     {% endif %}

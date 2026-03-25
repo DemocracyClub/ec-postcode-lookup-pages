@@ -635,7 +635,7 @@ class TemplateSorter:
                 )
                 contact_details_toc.append(
                     {
-                        "label": _("Your local council"),
+                        "label": _("Your returning officer"),
                         "anchor": "electoral-services",
                     }
                 )

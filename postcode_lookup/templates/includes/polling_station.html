@@ -10,8 +10,14 @@
         </p>
     {% else %}
         <p>
-            {% trans %}You'll get a poll card in the post before the election. This will tell you where to vote. If you
-                haven’t received your polling card, contact your local council.{% endtrans %}
+            {% trans %}
+                You'll get a poll card in the post before the election. This will tell you where to vote.
+            {% endtrans %}
+            {% if api_response.electoral_services.nation == "Scotland" %}
+                {% trans %}If you haven’t received your polling card, contact your returning officer.{% endtrans %}
+            {% else %}
+                {% trans %}If you haven’t received your polling card, contact your local council.{% endtrans %}
+            {% endif %}
         </p>
     {% endif %}
     <h4>{% trans %}Opening times{% endtrans %}</h4>
