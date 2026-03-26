@@ -48,14 +48,21 @@
     {% endtrans %}
   {% else %}
     <p>
-      {% trans %}
-        Your local council will send your postal voting pack after the deadline to become a candidate has passed.
-        This is around three weeks before polling day.
-      {% endtrans %}
+      {% if api_response.electoral_services.nation == "Scotland" %}
+        {% trans %}
+          Your local council will send your postal voting pack after the deadline to become a candidate has passed.
+        {% endtrans %}
+      {% else %}
+        {% trans %}
+          Your returning officer will send your postal voting pack after the deadline to become a candidate has passed.
+        {% endtrans %}
+      {% endif %}
+      {% trans %}This is around three weeks before polling day.{% endtrans %}
     </p>
   {% endif %}
 
   {% if section.context.replacement_pack_start_date %}
+  {# England & Wales only, so we can say "council" here #}
     <p>
       {%
         trans
