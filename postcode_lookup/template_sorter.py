@@ -438,6 +438,8 @@ class TemplateSorter:
                 # election. TODO: remove/review after 2026-05-07
                 and date.date == "2026-05-07"
             ):
+                country = country_map[self.electoral_services.nation]
+
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
                 )
@@ -445,9 +447,12 @@ class TemplateSorter:
                 # this is the date when replacement packs can be issued from
                 # for ALL councils
                 # TODO: add this to the timetable library
-                replacement_pack_start_date = datetime.datetime.strptime(
-                    "30/04/2026", "%d/%m/%Y"
-                ).date()
+                if country == Country.SCOTLAND:
+                    replacement_pack_start_date = None
+                else:
+                    replacement_pack_start_date = datetime.datetime.strptime(
+                        "30/04/2026", "%d/%m/%Y"
+                    ).date()
 
             if parse(date.date).date() < datetime.datetime.today().date():
                 continue
