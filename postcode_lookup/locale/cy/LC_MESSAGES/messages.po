@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-30 14:54+0100\n"
+"POT-Creation-Date: 2026-03-30 15:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -31,7 +31,7 @@ msgstr "Pleidleisio drwy'r post"
 #: postcode_lookup/template_sorter.py:235
 #: postcode_lookup/template_sorter.py:262
 #: postcode_lookup/templates/includes/registration_timetable.html:1
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:2
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
@@ -615,7 +615,7 @@ msgstr "Darllenwch ragor o wybodaeth am y refferendwm hwn"
 
 #: postcode_lookup/templates/includes/registration_timetable.html:3
 #: postcode_lookup/templates/includes/registration_timetable.html:11
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:6
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:12
 #: postcode_lookup/templates/includes/related_content.html:11
 msgid "Register to vote"
 msgstr "Cofrestra i bleidleisio"
@@ -642,46 +642,6 @@ msgstr ""
 "ar y gofrestr.</p> <p>Gallwch <a "
 "href=\"https://www.gov.uk/cofrestru-i-bleidleisio/\">gofrestru i "
 "bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
-
-# Only relevant to City of London elections - we don't need to translate this
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:24
-msgid ""
-"City of London council elections do not use the same electoral register "
-"as other elections."
-msgstr ""
-
-# Only relevant to City of London elections - we don't need to translate this
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:10
-msgid ""
-"Both residents and city workers are eligible to vote. There is one "
-"register published annually, and the deadline to apply is 30 November "
-"each year. The new register comes into force on 16 February each year, "
-"and cannot be modified after that date."
-msgstr ""
-
-# Only relevant to City of London elections - we don't need to translate this
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:19
-msgid "Register to vote in the City of London"
-msgstr ""
-
-# Only relevant to City of London elections - we don't need to translate this
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:23
-msgid "Registration in the City of London"
-msgstr ""
-
-# Only relevant to City of London elections - we don't need to translate this
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:26
-#, python-format
-msgid ""
-"<p>The deadline to register to vote in City of London local elections on "
-"%(date)s was %(registration_deadline)s.</p> <p>If you registered to vote "
-"before the deadline, then you will be able to vote in this election. <a "
-"href=\"#electoral_services\">Contact City of London</a> to check if you "
-"are on the register.</p> <p>You can <a "
-"href=\"https://www.speakforthecity.com/\">register to vote in the City of"
-" London</a> in future elections.</p>"
-msgstr ""
 
 #: postcode_lookup/templates/includes/related_content.html:4
 msgid "Related content"
