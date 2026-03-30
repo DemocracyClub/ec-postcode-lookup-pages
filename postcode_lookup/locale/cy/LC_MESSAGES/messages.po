@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-30 14:20+0100\n"
+"POT-Creation-Date: 2026-03-30 14:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -269,17 +269,15 @@ msgid "This ballot has been cancelled"
 msgstr "Mae'r bleidlais hon wedi'i chanslo"
 
 #: postcode_lookup/templates/includes/ballot_model.html:16
-#, fix2
 msgid "This election takes place on"
 msgstr "Bydd yr etholiad hwn yn cael ei gynnal ar"
 
 #: postcode_lookup/templates/includes/ballot_model.html:17
-#, fix2
 msgid "Find out more about voting in this election"
 msgstr "Dysgwch ragor am bleidleisio yn yr etholiad hwn"
 
 #: postcode_lookup/templates/includes/ballot_model.html:44
-#, fix2, python-format
+#, python-format
 msgid ""
 "<p>Visit <a "
 "href=&quot;https://whocanivotefor.co.uk/elections/%(postcode)s&quot; "
@@ -444,7 +442,6 @@ msgstr ""
 " am ddychwelyd eich papur pleidleisio post, cysylltwch â'ch cyngor.</p>"
 
 #: postcode_lookup/templates/includes/organisation_contact.html:36
-#, fix2
 msgid ""
 "<p> Here are contact details for your usual election team. However, for "
 "some elections, electoral boundaries mean that your neighbouring election"
@@ -579,7 +576,6 @@ msgid "The question you will be asked on the ballot paper is:"
 msgstr "Y cwestiwn a ofynnir i chi ar y papur pleidleisio yw:"
 
 #: postcode_lookup/templates/includes/referendum.html:20
-#, fix2
 msgid "Read more about this referendum"
 msgstr "Darllenwch ragor o wybodaeth am y refferendwm hwn"
 
