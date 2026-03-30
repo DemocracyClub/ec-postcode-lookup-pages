@@ -11,7 +11,9 @@ failover_templates_dir = Path(__file__).parent.absolute()
 env = Environment(
     loader=FileSystemLoader([failover_templates_dir, templates_root]),
     undefined=ChainableUndefined,
+    extensions=["jinja2.ext.i18n"],
 )
+env.install_null_translations()
 
 out_file = Path("failover/dist/index.html")
 out_file.parent.mkdir(exist_ok=True)
