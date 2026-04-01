@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-30 15:09+0100\n"
+"POT-Creation-Date: 2026-04-01 12:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -104,11 +104,10 @@ msgstr "Eich cyngor lleol"
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-# TODO
 #: postcode_lookup/template_sorter.py:643
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
-msgstr ""
+msgstr "Eich swyddog canlyniadau"
 
 #: postcode_lookup/utils.py:103
 #, fuzzy
@@ -438,12 +437,14 @@ msgstr ""
 "ddychwelyd eich papur pleidleisio post, cysylltwch â Swyddfa Etholiadol "
 "Gogledd Iwerddon."
 
-# TODO
 #: postcode_lookup/templates/includes/organisation_contact.html:27
 msgid ""
 "<p> For questions about your poll card, polling station, or about "
 "returning your postal voting ballot, contact your returning officer. </p>"
 msgstr ""
+"<p> Os oes gennych gwestiynau am eich cerdyn pleidleisio, eich gorsaf "
+"bleidleisio neu ynghylch eich pleidlais drwy’r post, cysylltwch â’ch "
+"swyddog canlyniadau. </p>"
 
 #: postcode_lookup/templates/includes/organisation_contact.html:38
 msgid ""
@@ -503,19 +504,21 @@ msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
 "dweud wrthych ble i bleidleisio."
 
-# TODO
 #: postcode_lookup/templates/includes/polling_station.html:17
 msgid ""
 "If you haven’t received your polling card, <a href=\"#electoral-"
 "services\">contact your returning officer</a>."
 msgstr ""
+"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
+"services\">cysylltwch â’ch swyddog canlyniadau</a>."
 
-# TODO
 #: postcode_lookup/templates/includes/polling_station.html:19
 msgid ""
 "If you haven’t received your polling card, <a href=\"#electoral-"
 "services\">contact your local council</a>."
 msgstr ""
+"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
+"services\">cysylltwch â’ch cyngor lleol</a>."
 
 #: postcode_lookup/templates/includes/polling_station.html:23
 msgid "Opening times"
@@ -573,12 +576,13 @@ msgstr ""
 "ar %(application_deadline)s, bydd eich pecyn yn cael ei anfon o "
 "%(date2)s.</li> </ul>"
 
-# TODO
 #: postcode_lookup/templates/includes/postal_votes.html:50
 msgid ""
 "Your returning officer will send your postal voting pack after the "
 "deadline to become a candidate has passed."
 msgstr ""
+"Bydd eich swyddog canlyniadau yn anfon eich pecyn pleidleisio drwy’r post"
+" ar ôl i’r dyddiad cau ar gyfer dod yn ymgeisydd fynd heibio."
 
 #: postcode_lookup/templates/includes/postal_votes.html:54
 msgid ""
@@ -670,17 +674,13 @@ msgstr ""
 "/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/sut-i-bleidleisio-"
 "trwyr-post"
 
-# TODO
-# Not an exact translation, text taken from EC pages
-# 'Can't get to your polling station on polling day? Apply to vote by post.'
 #: postcode_lookup/templates/includes/related_content.html:21
-#, fuzzy
 msgid ""
 "Can't get to the polling station on polling day? Apply to vote by post by"
 " downloading and completing the application form."
 msgstr ""
-"Methu mynd i dy orsaf bleidleisio ar y diwrnod pleidleisio? Gwna gais i "
-"bleidleisio drwy'r post."
+"Methu mynd i’r orsaf bleidleisio ar y diwrnod pleidleisio? Gwnewch gais i"
+" bleidleisio drwy’r post trwy lawrlwytho a chwblhau’r ffurflen gais."
 
 #: postcode_lookup/templates/includes/related_content.html:27
 msgid "Apply to vote by proxy"
