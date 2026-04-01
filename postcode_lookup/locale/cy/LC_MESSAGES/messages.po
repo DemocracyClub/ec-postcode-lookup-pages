@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-01 12:58+0100\n"
+"POT-Creation-Date: 2026-04-01 13:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -190,6 +190,10 @@ msgstr ""
 #: postcode_lookup/templates/index.html:25
 msgid "Enter your postcode"
 msgstr "Nodwch god post dilys"
+
+#: postcode_lookup/templates/index.html:37
+msgid "Search"
+msgstr "Chwilio"
 
 #: postcode_lookup/templates/index.html:41
 msgid "For example SW1A 2AA"
