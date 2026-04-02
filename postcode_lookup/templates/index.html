@@ -34,7 +34,7 @@
 
                 <button type="submit" name="Submit Postcode"
                         formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
-                    Search
+                    {% trans %}Search{% endtrans %}
                 </button>
 
             </div>
