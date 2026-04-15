@@ -131,7 +131,7 @@ election_information_routes = [
 electoral_services_team_routes = [
     # Live, EN
     Route(
-        "/i-am-a/voter/electoral-services",
+        "/voting-and-elections/get-help-with-my-vote",
         endpoint=endpoints.electoral_services_team.live_postcode_form,
         name="electoral_services_live_postcode_form_en",
     ),
@@ -147,7 +147,7 @@ electoral_services_team_routes = [
     ),
     # Live, CY
     Route(
-        "/cy/rwyf-yneg-pleidleisiwr/pleidleisiwr/electoral-services",
+        "/cy/pleidleisio-ac-etholiadau/cael-help-gyda-fy-mhleidlais",
         endpoint=endpoints.electoral_services_team.live_postcode_form,
         name="electoral_services_live_postcode_form_cy",
     ),
