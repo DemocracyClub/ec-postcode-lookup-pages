@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-01 13:23+0100\n"
+"POT-Creation-Date: 2026-04-15 14:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -14,10 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-
-#: postcode_lookup/endpoints.py:37
-msgid "Please enter a valid UK postcode, e.g., SW1A 1AA."
-msgstr "Rhowch god post dilys yn y DU, e.g., SW1A 1AA."
 
 #: postcode_lookup/template_sorter.py:111
 msgid "Where to vote"
@@ -96,6 +92,7 @@ msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
 #: postcode_lookup/template_sorter.py:630
+#: postcode_lookup/templates/electoral_services_team_results.html:4
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
@@ -109,7 +106,7 @@ msgstr "Cofrestru etholiadol"
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
 
-#: postcode_lookup/utils.py:103
+#: postcode_lookup/utils.py:146
 #, fuzzy
 msgid "{count} candidate"
 msgid_plural "{count} candidates"
@@ -119,49 +116,54 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: postcode_lookup/utils.py:124
+#: postcode_lookup/utils.py:167
 msgid "one"
 msgstr "un"
 
-#: postcode_lookup/utils.py:125
+#: postcode_lookup/utils.py:168
 msgid "two"
 msgstr "dau"
 
-#: postcode_lookup/utils.py:126
+#: postcode_lookup/utils.py:169
 msgid "three"
 msgstr "tri"
 
-#: postcode_lookup/utils.py:127
+#: postcode_lookup/utils.py:170
 msgid "four"
 msgstr "pedwar"
 
-#: postcode_lookup/utils.py:128
+#: postcode_lookup/utils.py:171
 msgid "five"
 msgstr "pump"
 
-#: postcode_lookup/utils.py:129
+#: postcode_lookup/utils.py:172
 msgid "six"
 msgstr "chwech"
 
-#: postcode_lookup/utils.py:130
+#: postcode_lookup/utils.py:173
 msgid "seven"
 msgstr "saith"
 
-#: postcode_lookup/utils.py:131
+#: postcode_lookup/utils.py:174
 msgid "eight"
 msgstr "wyth"
 
-#: postcode_lookup/utils.py:132
+#: postcode_lookup/utils.py:175
 msgid "nine"
 msgstr "naw"
 
-#: postcode_lookup/utils.py:186 postcode_lookup/utils.py:189
+#: postcode_lookup/utils.py:229 postcode_lookup/utils.py:232
 msgid " (postponed)"
 msgstr " (wedi'i ohirio)"
 
-#: postcode_lookup/utils.py:192
+#: postcode_lookup/utils.py:235
 msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
+
+#: postcode_lookup/endpoints/election_information.py:29
+#: postcode_lookup/endpoints/electoral_services_team.py:57
+msgid "Please enter a valid UK postcode, e.g., SW1A 1AA."
+msgstr "Rhowch god post dilys yn y DU, e.g., SW1A 1AA."
 
 #: postcode_lookup/templates/address_picker.html:4
 msgid "Pick your address"
@@ -172,6 +174,11 @@ msgid "To make sure we get you the correct information, please pick your address
 msgstr ""
 "Er mwyn sicrhau ein bod yn rhoi'r wybodaeth gywir i chi, dewiswch eich "
 "cyfeiriad:"
+
+#: postcode_lookup/templates/electoral_services_team_search.html:17
+#: postcode_lookup/templates/index.html:25
+msgid "Enter your postcode"
+msgstr "Nodwch god post dilys"
 
 #: postcode_lookup/templates/index.html:5
 msgid "My next election"
@@ -187,10 +194,6 @@ msgstr ""
 "nesaf. Fe wnawn ni ddweud wrthych pwy sy'n sefyll, lle mae eich gorsaf "
 "bleidleisio, a phwy i cyswllt os oes angen help arnoch."
 
-#: postcode_lookup/templates/index.html:25
-msgid "Enter your postcode"
-msgstr "Nodwch god post dilys"
-
 #: postcode_lookup/templates/index.html:37
 msgid "Search"
 msgstr "Chwilio"
@@ -199,15 +202,15 @@ msgstr "Chwilio"
 msgid "For example SW1A 2AA"
 msgstr "Er enghraifft SW1A 2AA"
 
-#: postcode_lookup/templates/index.html:99
+#: postcode_lookup/templates/index.html:52
 msgid "What this tool can tell you"
 msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
-#: postcode_lookup/templates/index.html:104
+#: postcode_lookup/templates/index.html:57
 msgid "Which elections are happening in my area?"
 msgstr "Pa etholiadau sy'n digwydd yn fy ardal?"
 
-#: postcode_lookup/templates/index.html:105
+#: postcode_lookup/templates/index.html:58
 #, 
 msgid ""
 "When you enter your postcode, you’ll find out which elections are coming "
@@ -221,11 +224,11 @@ msgstr ""
 "Alban, etholiadau lleol, etholiadau maerol, etholiadau ac is-etholiadau "
 "Comisiynwyr yr Heddlu a Throseddu."
 
-#: postcode_lookup/templates/index.html:111
+#: postcode_lookup/templates/index.html:64
 msgid "Where is my polling station?"
 msgstr "Ble fy ngorsaf bleidleisio?"
 
-#: postcode_lookup/templates/index.html:112
+#: postcode_lookup/templates/index.html:65
 #, 
 msgid ""
 "Your polling station might not be the same for every election. Check "
@@ -236,11 +239,11 @@ msgstr ""
 "Gwiriwch pa orsaf bleidleisio bydd angen i chi fynd iddi ar gyfer yr "
 "etholiad nesaf yn eich ardal."
 
-#: postcode_lookup/templates/index.html:116
+#: postcode_lookup/templates/index.html:69
 msgid "What do I need to take with me when I vote?"
 msgstr "Beth sydd angen i mi ei gymryd gyda mi pan fyddaf yn pleidleisio?"
 
-#: postcode_lookup/templates/index.html:117
+#: postcode_lookup/templates/index.html:70
 #, 
 msgid ""
 "Some elections might require you to take photo ID and some might not. "
@@ -254,11 +257,11 @@ msgstr ""
 "bleidleisio yn yr etholiadau a fydd yn digwydd yn eich ardal. Nid oes "
 "angen i chi fynd â’ch cerdyn pleidleisio gyda chi i bleidleisio."
 
-#: postcode_lookup/templates/index.html:122
+#: postcode_lookup/templates/index.html:75
 msgid "Who can I vote for?"
 msgstr "Pwy alla i bleidleisio ar gyfer?"
 
-#: postcode_lookup/templates/index.html:123
+#: postcode_lookup/templates/index.html:76
 #, 
 msgid "Enter your postcode to find out who the candidates in your area are."
 msgstr "Mewnbynnwch eich cod post i ganfod pwy yw’r ymgeiswyr yn eich ardal."
