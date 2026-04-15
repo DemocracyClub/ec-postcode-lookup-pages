@@ -23,7 +23,9 @@
         <form id="dc-postcode-search-form">
             <label for="postcode-search">
                 {% trans %}Enter your postcode{% endtrans %}</label>
-            <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
+            <p id="postcode-search-error-message" class="error_message">
+              {% trans %}Please enter a valid UK postcode{% endtrans %}
+            </p>
             <div class="dc-inline-form">
                 <input
                         id="postcode-search"

@@ -2,7 +2,7 @@
 
 {% block page_title %}
     {{ super() }}
-    {% trans %}My electoral services team{% endtrans %}
+    {% trans %}Get help with my vote{% endtrans %}
 {% endblock %}
 
 {% block language_picker %}
@@ -15,14 +15,14 @@
 {% block content %}
     <div class="dc-container">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          {% trans %}Enter your postcode to find out who to contact for help with your vote.{% endtrans %}
         </p>
         <form id="dc-postcode-search-form">
             <label for="postcode-search">
                 {% trans %}Enter your postcode{% endtrans %}</label>
-            <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
+            <p id="postcode-search-error-message" class="error_message">
+              {% trans %}Please enter a valid UK postcode{% endtrans %}
+            </p>
             <div class="dc-inline-form">
                 <input
                         id="postcode-search"
@@ -48,29 +48,40 @@
     </div>
 
     <div class="dc-main-content">
-        <h2>Heading</h2>
+        <h2>{% trans %}What this tool can tell you{% endtrans %}</h2>
+
+        <p>{% trans %}This service helps you find out where to send your postal vote application form and who to contact if you are interested in working at your local polling station.{% endtrans %}</p>
+
+        <p>{% trans %}The service also tells you who to contact to find out:{% endtrans %}</p>
 
         <ul class="grid" style="--gridCellMin: 40ch;--gridCellBG: var(--ec-light-purple)">
             <li>
-                <h3>Heading</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>{% trans %}Am I registered to vote?{% endtrans %}</p>
             </li>
             <li>
-                <h3>Heading</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>{% trans %}How can I apply for an emergency proxy vote?{% endtrans %}</p>
             </li>
             <li>
-                <h3>Heading</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>{% trans %}My postal vote hasn't come. What do I do?{% endtrans %}</p>
             </li>
             <li>
-                <h3>Heading</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>{% trans %}Do I have a postal or proxy vote?{% endtrans %}</p>
             </li>
-
+            <li>
+              <p>{% trans %}Can I work at my local polling station?{% endtrans %}</p>
+            </li>
         </ul>
 
+        <p>
+          {% trans %}
+            Want to find out when your next election is? Use our tool.
+          {% endtrans %}
 
+          {% set postcode_url = request.url_for("live_postcode_form_cy") if request.scope.current_language == "cy" else request.url_for("live_postcode_form_en") %}
+          <a href="{{ postcode_url }}">
+            {% trans %}Elections in my area{% endtrans %}
+          </a>
+        </p>
     </div>
 
 
