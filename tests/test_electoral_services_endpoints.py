@@ -33,7 +33,7 @@ def test_vjb_html():
     assert "Get help with electoral registration" in response.text
     assert "Lothian Valuation Joint Board" in response.text
     # council
-    assert "Your local council" in response.text
+    assert "Your returning officer" in response.text
     assert "City of Edinburgh Council" in response.text
 
 
