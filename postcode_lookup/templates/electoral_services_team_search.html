@@ -1,46 +1,8 @@
 {% extends request.base_template %}
 
-{% block page_hero %}
-{% endblock %}
-{% block breadcrumbs %}
+{% block page_title %}
     {{ super() }}
-    <div class="c-hero--landing-page c-hero" style="border-top:1px solid white;">
-        <div class="o-container">
-            <div class="c-hero__wrapper dc-background-image">
-                <div class="c-hero__content">
-                    <h1 class="c-hero__title">
-                        My electoral services team
-                    </h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <form id="dc-postcode-search-form">
-                        <label for="postcode-search">
-                            {% trans %}Enter your postcode{% endtrans %}</label>
-                        <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
-                        <div class="dc-inline-form">
-                            <input
-                                    id="postcode-search"
-                                    type="text"
-                                    name="postcode-search"
-                                    pattern="^([A-Za-z]{1,2}[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|GIR ?0AA) ?$"
-                                    required>
-
-                            <button type="submit" name="Submit Postcode"
-                                    formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
-                                Search
-                            </button>
-
-                        </div>
-                    <p class="dc-form-hint">For example SW1A 2AA</p>
-                    </form>
-                    <script src="/static/js/postcode-validation.js"></script>
-                    <script>
-                        const js_strings = {{ js_strings|safe }};
-                        validate(js_strings);
-                    </script>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% trans %}My electoral services team{% endtrans %}
 {% endblock %}
 
 {% block language_picker %}
@@ -51,6 +13,40 @@
 
 
 {% block content %}
+    <div class="dc-container">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+        <form id="dc-postcode-search-form">
+            <label for="postcode-search">
+                {% trans %}Enter your postcode{% endtrans %}</label>
+            <p id="postcode-search-error-message" class="error_message">Please enter a valid UK postcode</p>
+            <div class="dc-inline-form">
+                <input
+                        id="postcode-search"
+                        type="text"
+                        name="postcode-search"
+                        pattern="^([A-Za-z]{1,2}[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|GIR ?0AA) ?$"
+                        required>
+
+                <button type="submit" name="Submit Postcode"
+                        formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
+                    {% trans %}Search{% endtrans %}
+                </button>
+
+            </div>
+            <p class="dc-form-hint">{% trans %}For example SW1A 2AA{% endtrans %}</p>
+        </form>
+        <script src="/static/js/postcode-validation.js"></script>
+        <script>
+            const js_strings = {{ js_strings|safe }};
+            validate(js_strings);
+        </script>
+
+    </div>
+
     <div class="dc-main-content">
         <h2>Heading</h2>
 
