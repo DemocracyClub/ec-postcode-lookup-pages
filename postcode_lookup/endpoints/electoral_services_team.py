@@ -18,7 +18,7 @@ from starlette_babel.translator import gettext as _
 from utils import get_loader, results_context
 
 
-def preprocess_api_response(data, request, postcode, url_prefix):
+def preprocess_api_response(data, request, url_prefix):
     # only show address picker if the postcode is split between more than one council
     if data["electoral_services"]:
         data["addresses"] = []
@@ -29,7 +29,6 @@ def preprocess_api_response(data, request, postcode, url_prefix):
         address["url"] = str(
             request.url_for(
                 url_prefix + "_uprn_" + request.scope["current_language"],
-                postcode=quote(postcode, safe=""),
                 uprn=quote(address["slug"], safe=""),
             )
         )
@@ -108,9 +107,7 @@ def base_postcode_json(
     except (InvalidPostcodeException, ApiError) as e:
         return JSONResponse({"error": str(e)}, status_code=e.status_code)
 
-    api_response = preprocess_api_response(
-        api_response, request, postcode, url_prefix
-    )
+    api_response = preprocess_api_response(api_response, request, url_prefix)
     return JSONResponse(api_response)
 
 
@@ -143,15 +140,13 @@ def base_postcode_html(
             ).include_query_params(**{query_param: 1})
         )
 
-    api_response = preprocess_api_response(
-        api_response, request, postcode, url_prefix
-    )
+    api_response = preprocess_api_response(api_response, request, url_prefix)
 
     context = results_context(api_response, request, postcode, url_prefix)
 
     template_name = "electoral_services_team_results.html"
     if context["api_response"].address_picker:
-        template_name = "address_picker.html"
+        template_name = "address_picker_nopostcode.html"
 
     return get_loader(request).TemplateResponse(
         request, template_name, context=context
@@ -193,7 +188,6 @@ mock_postcode_view = functools.partial(
 def base_uprn_json(
     request: Request,
     backend: BaseAPIClient,
-    postcode: str,
     uprn: str,
     url_prefix: str,
 ):
@@ -205,16 +199,13 @@ def base_uprn_json(
     except (InvalidUPRNException, ApiError) as e:
         return JSONResponse({"error": str(e)}, status_code=e.status_code)
 
-    api_response = preprocess_api_response(
-        api_response, request, postcode, url_prefix
-    )
+    api_response = preprocess_api_response(api_response, request, url_prefix)
     return JSONResponse(api_response)
 
 
 def base_uprn_html(
     request: Request,
     backend: BaseAPIClient,
-    postcode: str,
     uprn: str,
     url_prefix: str,
 ):
@@ -233,15 +224,13 @@ def base_uprn_html(
             ).include_query_params(**{query_param: 1})
         )
 
-    api_response = preprocess_api_response(
-        api_response, request, postcode, url_prefix
-    )
+    api_response = preprocess_api_response(api_response, request, url_prefix)
 
-    context = results_context(api_response, request, postcode, url_prefix)
+    context = results_context(api_response, request, "", url_prefix)
 
     template_name = "electoral_services_team_results.html"
     if context["api_response"].address_picker:
-        template_name = "address_picker.html"
+        template_name = "address_picker_nopostcode.html"
 
     return get_loader(request).TemplateResponse(
         request, template_name, context=context
@@ -254,12 +243,11 @@ async def base_uprn_endpoint(request: Request, backend: BaseAPIClient = None):
 
     url_prefix = f"electoral_services_{backend.URL_PREFIX}"
     uprn = request.path_params["uprn"]
-    postcode = request.path_params["postcode"]
     format_ = request.query_params.get("format", "html")
 
     if format_ == "json":
-        return base_uprn_json(request, backend, postcode, uprn, url_prefix)
-    return base_uprn_html(request, backend, postcode, uprn, url_prefix)
+        return base_uprn_json(request, backend, uprn, url_prefix)
+    return base_uprn_html(request, backend, uprn, url_prefix)
 
 
 live_uprn_view = functools.partial(base_uprn_endpoint, backend=LiveAPIBackend)

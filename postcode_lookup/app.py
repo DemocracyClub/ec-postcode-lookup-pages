@@ -161,7 +161,7 @@ electoral_services_team_routes = [
         endpoint=redirect("electoral_services_live_postcode_form_en"),
     ),
     Route(
-        "/voting-and-elections/get-help-with-my-vote/address/{postcode}/{uprn}",
+        "/voting-and-elections/get-help-with-my-vote/address/{uprn}",
         endpoint=endpoints.electoral_services_team.live_uprn_view,
         name="electoral_services_live_uprn_en",
     ),
@@ -185,7 +185,7 @@ electoral_services_team_routes = [
         endpoint=redirect("electoral_services_live_postcode_form_cy"),
     ),
     Route(
-        "/cy/pleidleisio-ac-etholiadau/cael-help-gyda-fy-mhleidlais/address/{postcode}/{uprn}",
+        "/cy/pleidleisio-ac-etholiadau/cael-help-gyda-fy-mhleidlais/address/{uprn}",
         endpoint=endpoints.electoral_services_team.live_uprn_view,
         name="electoral_services_live_uprn_cy",
     ),
@@ -196,7 +196,7 @@ electoral_services_team_routes = [
         name="electoral_services_sandbox_postcode_en",
     ),
     Route(
-        "/sandbox/voting-and-elections/get-help-with-my-vote/address/{postcode}/{uprn}",
+        "/sandbox/voting-and-elections/get-help-with-my-vote/address/{uprn}",
         endpoint=endpoints.electoral_services_team.sandbox_uprn_view,
         name="electoral_services_sandbox_uprn_en",
     ),
@@ -207,7 +207,7 @@ electoral_services_team_routes = [
         name="electoral_services_sandbox_postcode_cy",
     ),
     Route(
-        "/cy/sandbox/pleidleisio-ac-etholiadau/cael-help-gyda-fy-mhleidlais/address/{postcode}/{uprn}",
+        "/cy/sandbox/pleidleisio-ac-etholiadau/cael-help-gyda-fy-mhleidlais/address/{uprn}",
         endpoint=endpoints.electoral_services_team.sandbox_uprn_view,
         name="electoral_services_sandbox_uprn_cy",
     ),
