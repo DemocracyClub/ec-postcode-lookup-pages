@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-15 16:11+0100\n"
+"POT-Creation-Date: 2026-04-16 16:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -160,15 +160,17 @@ msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
 
 #: postcode_lookup/endpoints/election_information.py:29
-#: postcode_lookup/endpoints/electoral_services_team.py:57
+#: postcode_lookup/endpoints/electoral_services_team.py:76
 msgid "Please enter a valid UK postcode, e.g., SW1A 1AA."
 msgstr "Rhowch god post dilys yn y DU, e.g., SW1A 1AA."
 
 #: postcode_lookup/templates/address_picker.html:4
+#: postcode_lookup/templates/address_picker_nopostcode.html:4
 msgid "Pick your address"
 msgstr "Dewiswch eich cyfeiriad"
 
 #: postcode_lookup/templates/address_picker.html:18
+#: postcode_lookup/templates/address_picker_nopostcode.html:18
 msgid "To make sure we get you the correct information, please pick your address:"
 msgstr ""
 "Er mwyn sicrhau ein bod yn rhoi'r wybodaeth gywir i chi, dewiswch eich "
@@ -193,57 +195,57 @@ msgstr "Nodwch god post dilys"
 msgid "Please enter a valid UK postcode"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:36
+#: postcode_lookup/templates/electoral_services_team_search.html:35
 #: postcode_lookup/templates/index.html:39
 msgid "Search"
 msgstr "Chwilio"
 
-#: postcode_lookup/templates/electoral_services_team_search.html:40
+#: postcode_lookup/templates/electoral_services_team_search.html:39
 #: postcode_lookup/templates/index.html:43
 msgid "For example SW1A 2AA"
 msgstr "Er enghraifft SW1A 2AA"
 
-#: postcode_lookup/templates/electoral_services_team_search.html:51
+#: postcode_lookup/templates/electoral_services_team_search.html:50
 #: postcode_lookup/templates/index.html:54
 msgid "What this tool can tell you"
 msgstr "Beth all yr offeryn hwn ddweud wrthych"
 
-#: postcode_lookup/templates/electoral_services_team_search.html:53
+#: postcode_lookup/templates/electoral_services_team_search.html:52
 msgid ""
 "This service helps you find out where to send your postal vote "
 "application form and who to contact if you are interested in working at "
 "your local polling station."
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:55
+#: postcode_lookup/templates/electoral_services_team_search.html:54
 msgid "The service also tells you who to contact to find out:"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:59
+#: postcode_lookup/templates/electoral_services_team_search.html:58
 msgid "Am I registered to vote?"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:62
+#: postcode_lookup/templates/electoral_services_team_search.html:61
 msgid "How can I apply for an emergency proxy vote?"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:65
+#: postcode_lookup/templates/electoral_services_team_search.html:64
 msgid "My postal vote hasn't come. What do I do?"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:68
+#: postcode_lookup/templates/electoral_services_team_search.html:67
 msgid "Do I have a postal or proxy vote?"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:71
+#: postcode_lookup/templates/electoral_services_team_search.html:70
 msgid "Can I work at my local polling station?"
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:76
+#: postcode_lookup/templates/electoral_services_team_search.html:75
 msgid "Want to find out when your next election is? Use our tool."
 msgstr ""
 
-#: postcode_lookup/templates/electoral_services_team_search.html:82
+#: postcode_lookup/templates/electoral_services_team_search.html:81
 msgid "Elections in my area"
 msgstr ""
 
