@@ -31,8 +31,7 @@
                         pattern="^([A-Za-z]{1,2}[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|GIR ?0AA) ?$"
                         required>
 
-                <button type="submit" name="Submit Postcode"
-                        formaction="{{ request.url_for(url_prefix + "_postcode_" + request.current_language) }}">
+                <button type="submit" name="Submit Postcode" formaction="">
                     {% trans %}Search{% endtrans %}
                 </button>
 

@@ -69,9 +69,9 @@
         <ul>
             <li><a href="{{ request.url_for("electoral_services_live_postcode_form_en") }}">Postcode form (en)</a></li>
             <li><a href="{{ request.url_for("electoral_services_live_postcode_form_cy") }}">Postcode form (cy)</a></li>
-            <li><a href="{{ request.url_for("electoral_services_live_postcode_en") }}?postcode-search=WV14 8TU">Address picker (en)</a>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_en", postcode="WV14 8TU") }}">Address picker (en)</a>
             </li>
-            <li><a href="{{ request.url_for("electoral_services_live_postcode_cy") }}?postcode-search=WV14 8TU">Address picker (cy)</a>
+            <li><a href="{{ request.url_for("electoral_services_live_postcode_cy", postcode="WV14 8TU") }}">Address picker (cy)</a>
             </li>
         </ul>
 

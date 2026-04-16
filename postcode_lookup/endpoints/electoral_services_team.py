@@ -47,6 +47,26 @@ def preprocess_api_response(data, request, postcode, url_prefix):
 
 async def base_postcode_form(request: Request, backend: BaseAPIClient = None):
     url_prefix = f"electoral_services_{backend.URL_PREFIX}"
+
+    postcode = request.query_params.get("postcode-search", None)
+    format_ = request.query_params.get("format", "html")
+    if postcode:
+        if format_ != "html":
+            return RedirectResponse(
+                request.url_for(
+                    url_prefix
+                    + "_postcode_"
+                    + request.scope["current_language"],
+                    postcode=postcode,
+                ).include_query_params(format=format_)
+            )
+        return RedirectResponse(
+            request.url_for(
+                url_prefix + "_postcode_" + request.scope["current_language"],
+                postcode=postcode,
+            )
+        )
+
     return get_loader(request).TemplateResponse(
         request,
         "electoral_services_team_search.html",
@@ -139,7 +159,7 @@ async def base_postcode_endpoint(
         raise ValueError("Must specify a backend")
 
     url_prefix = f"electoral_services_{backend.URL_PREFIX}"
-    postcode = request.query_params.get("postcode-search", None)
+    postcode = request.path_params.get("postcode", None)
     format_ = request.query_params.get("format", "html")
 
     if postcode == "FA1LL":

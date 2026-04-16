@@ -4,7 +4,9 @@ from starlette.testclient import TestClient
 
 def test_council_html():
     client = TestClient(app)
-    response = client.get("/mock/electoral-services?postcode-search=AA1%201AA")
+    response = client.get(
+        "/mock/voting-and-elections/get-help-with-my-vote/postcode/AA1%201AA"
+    )
 
     assert response.status_code == 200
     assert "Your local council" in response.text
@@ -14,7 +16,7 @@ def test_council_html():
 def test_council_json():
     client = TestClient(app)
     response = client.get(
-        "/mock/electoral-services?postcode-search=AA1%201AA&format=json"
+        "/mock/voting-and-elections/get-help-with-my-vote/postcode/AA1%201AA?format=json"
     )
     data = response.json()
 
@@ -26,7 +28,9 @@ def test_council_json():
 
 def test_vjb_html():
     client = TestClient(app)
-    response = client.get("/mock/electoral-services?postcode-search=AA1%201AP")
+    response = client.get(
+        "/mock/voting-and-elections/get-help-with-my-vote/postcode/AA1%201AP"
+    )
 
     assert response.status_code == 200
     # vjb
@@ -40,7 +44,7 @@ def test_vjb_html():
 def test_vjb_json():
     client = TestClient(app)
     response = client.get(
-        "/mock/electoral-services?postcode-search=AA1%201AP&format=json"
+        "/mock/voting-and-elections/get-help-with-my-vote/postcode/AA1%201AP?format=json"
     )
     data = response.json()
 
