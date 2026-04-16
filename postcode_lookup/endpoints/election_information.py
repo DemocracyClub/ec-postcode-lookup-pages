@@ -68,7 +68,11 @@ async def base_postcode_endpoint(
     postcode = request.query_params.get("postcode-search", None)
     if not postcode:
         return RedirectResponse(
-            request.url_for(backend.URL_PREFIX + "_postcode_form_en")
+            request.url_for(
+                backend.URL_PREFIX
+                + "_postcode_form_"
+                + request.scope["current_language"]
+            )
         )
 
     if postcode == "FA1LL":
@@ -87,7 +91,9 @@ async def base_postcode_endpoint(
         )
         return RedirectResponse(
             request.url_for(
-                backend.URL_PREFIX + "_postcode_form_en"
+                backend.URL_PREFIX
+                + "_postcode_form_"
+                + request.scope["current_language"]
             ).include_query_params(**{query_param: 1})
         )
 
@@ -139,7 +145,9 @@ async def base_uprn_endpoint(request: Request, backend=None):
         query_param = "api-error" if isinstance(e, ApiError) else "invalid-uprn"
         return RedirectResponse(
             request.url_for(
-                backend.URL_PREFIX + "_postcode_form_en"
+                backend.URL_PREFIX
+                + "_postcode_form_"
+                + request.scope["current_language"]
             ).include_query_params(**{query_param: 1})
         )
     context = results_context(

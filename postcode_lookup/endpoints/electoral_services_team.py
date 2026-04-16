@@ -119,7 +119,11 @@ def base_postcode_html(
 ):
     if not postcode:
         return RedirectResponse(
-            request.url_for(url_prefix + "_postcode_form_en")
+            request.url_for(
+                url_prefix
+                + "_postcode_form_"
+                + request.scope["current_language"]
+            )
         )
 
     try:
@@ -133,7 +137,9 @@ def base_postcode_html(
         )
         return RedirectResponse(
             request.url_for(
-                url_prefix + "_postcode_form_en"
+                url_prefix
+                + "_postcode_form_"
+                + request.scope["current_language"]
             ).include_query_params(**{query_param: 1})
         )
 
@@ -221,7 +227,9 @@ def base_uprn_html(
         query_param = "api-error" if isinstance(e, ApiError) else "invalid-uprn"
         return RedirectResponse(
             request.url_for(
-                url_prefix + "_postcode_form_en"
+                url_prefix
+                + "_postcode_form_"
+                + request.scope["current_language"]
             ).include_query_params(**{query_param: 1})
         )
 
