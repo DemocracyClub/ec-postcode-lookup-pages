@@ -74,7 +74,9 @@ election_information_routes = [
         name="live_postcode_form_cy",
     ),
     Route(
-        "/cy/polling-stations/address/{postcode}/{uprn}",
+        # TODO: this should be
+        # "/cy/polling-stations/address/{postcode}/{uprn}",
+        "/cy/polling-stations/{postcode}/{uprn}",
         endpoint=endpoints.election_information.live_uprn_view,
         name="live_uprn_cy",
     ),
