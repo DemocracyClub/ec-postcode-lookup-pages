@@ -1,0 +1,87 @@
+{% extends request.base_template %}
+
+{% block page_title %}
+    {{ super() }}
+    {% trans %}Get help with my vote{% endtrans %}
+{% endblock %}
+
+{% block language_picker %}
+    {% with route_name = "postcode_form" %}
+        {% include "includes/language_picker.html" %}
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="dc-container">
+        <p>
+          {% trans %}Enter your postcode to find out who to contact for help with your vote.{% endtrans %}
+        </p>
+        <form id="dc-postcode-search-form">
+            <label for="postcode-search">
+                {% trans %}Enter your postcode{% endtrans %}</label>
+            <p id="postcode-search-error-message" class="error_message">
+              {% trans %}Please enter a valid UK postcode{% endtrans %}
+            </p>
+            <div class="dc-inline-form">
+                <input
+                        id="postcode-search"
+                        type="text"
+                        name="postcode-search"
+                        pattern="^([A-Za-z]{1,2}[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|GIR ?0AA) ?$"
+                        required>
+
+                <button type="submit" name="Submit Postcode" formaction="">
+                    {% trans %}Search{% endtrans %}
+                </button>
+
+            </div>
+            <p class="dc-form-hint">{% trans %}For example SW1A 2AA{% endtrans %}</p>
+        </form>
+        <script src="/static/js/postcode-validation.js"></script>
+        <script>
+            const js_strings = {{ js_strings|safe }};
+            validate(js_strings);
+        </script>
+
+    </div>
+
+    <div class="dc-main-content">
+        <h2>{% trans %}What this tool can tell you{% endtrans %}</h2>
+
+        <p>{% trans %}This service helps you find out where to send your postal vote application form and who to contact if you are interested in working at your local polling station.{% endtrans %}</p>
+
+        <p>{% trans %}The service also tells you who to contact to find out:{% endtrans %}</p>
+
+        <ul class="grid" style="--gridCellMin: 40ch;--gridCellBG: var(--ec-light-purple)">
+            <li>
+              <h3>{% trans %}Am I registered to vote?{% endtrans %}</h3></p>
+            </li>
+            <li>
+              <h3>{% trans %}How can I apply for an emergency proxy vote?{% endtrans %}</h3>
+            </li>
+            <li>
+              <h3>{% trans %}My postal vote hasn't come. What do I do?{% endtrans %}</h3>
+            </li>
+            <li>
+              <h3>{% trans %}Do I have a postal or proxy vote?{% endtrans %}</h3>
+            </li>
+            <li>
+              <h3>{% trans %}Can I work at my local polling station?{% endtrans %}</h3>
+            </li>
+        </ul>
+
+        <p>
+          {% trans %}
+            Want to find out when your next election is? Use our tool.
+          {% endtrans %}
+
+          {% set postcode_url = request.url_for("live_postcode_form_cy") if request.scope.current_language == "cy" else request.url_for("live_postcode_form_en") %}
+          <a href="{{ postcode_url }}">
+            {% trans %}Elections in my area{% endtrans %}
+          </a>
+        </p>
+    </div>
+
+
+{% endblock %}
