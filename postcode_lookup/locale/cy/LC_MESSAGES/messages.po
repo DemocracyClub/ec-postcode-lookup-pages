@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-16 16:23+0100\n"
+"POT-Creation-Date: 2026-04-20 08:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -179,11 +179,13 @@ msgstr ""
 #: postcode_lookup/templates/electoral_services_team_results.html:4
 #: postcode_lookup/templates/electoral_services_team_search.html:5
 msgid "Get help with my vote"
-msgstr ""
+msgstr "Cael help gyda fy mhleidlais"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:18
 msgid "Enter your postcode to find out who to contact for help with your vote."
 msgstr ""
+"Rhowch eich cod post i ddarganfod pwy i gysylltu ag ef i gael help "
+"gyda'ch pleidlais."
 
 #: postcode_lookup/templates/electoral_services_team_search.html:22
 #: postcode_lookup/templates/index.html:25
@@ -193,7 +195,7 @@ msgstr "Nodwch god post dilys"
 #: postcode_lookup/templates/electoral_services_team_search.html:24
 #: postcode_lookup/templates/index.html:27
 msgid "Please enter a valid UK postcode"
-msgstr ""
+msgstr "Rhowch god post dilys yn y DU"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:35
 #: postcode_lookup/templates/index.html:39
@@ -216,38 +218,41 @@ msgid ""
 "application form and who to contact if you are interested in working at "
 "your local polling station."
 msgstr ""
+"Mae'r gwasanaeth hwn yn eich helpu i ddarganfod ble i anfon eich ffurflen"
+" gais am bleidlais bost a phwy i gysylltu ag ef os oes gennych ddiddordeb"
+" gweithio yn eich gorsaf bleidleisio leol."
 
 #: postcode_lookup/templates/electoral_services_team_search.html:54
 msgid "The service also tells you who to contact to find out:"
-msgstr ""
+msgstr "Mae'r gwasanaeth hefyd yn dweud wrthych pwy i gysylltu ag ef i ddarganfod:"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:58
 msgid "Am I registered to vote?"
-msgstr ""
+msgstr "Ydw i wedi cofrestru i bleidleisio?"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:61
 msgid "How can I apply for an emergency proxy vote?"
-msgstr ""
+msgstr "Alla i wneud cais am bleidlais ddirprwy mewn argyfwng?"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:64
 msgid "My postal vote hasn't come. What do I do?"
-msgstr ""
+msgstr "Dyw fy mhleidlais bost heb gyrraedd. Beth ddylwn i wneud?"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:67
 msgid "Do I have a postal or proxy vote?"
-msgstr ""
+msgstr "A oes gen i bleidlais bost neu bleidlais drwy ddirprwy?"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:70
 msgid "Can I work at my local polling station?"
-msgstr ""
+msgstr "A alla i weithio yn fy ngorsaf bleidleisio leol?"
 
 #: postcode_lookup/templates/electoral_services_team_search.html:75
 msgid "Want to find out when your next election is? Use our tool."
-msgstr ""
+msgstr "Eisiau darganfod pryd mae’ch etholiad nesaf? Defnyddiwch ein teclyn."
 
 #: postcode_lookup/templates/electoral_services_team_search.html:81
 msgid "Elections in my area"
-msgstr ""
+msgstr "Etholiadau yn fy ardal"
 
 #: postcode_lookup/templates/index.html:5
 msgid "My next election"
