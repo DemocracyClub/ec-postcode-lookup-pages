@@ -111,6 +111,72 @@ class PollingStationSection(BaseSection):
         return _("Where to vote")
 
 
+class FlexVoting2026PilotSection(BaseSection):
+    template_name = "includes/flex_voting_2026_pilot.html"
+
+    @property
+    def weight(self):
+        poll_date = parse(self.data.date).date()
+
+        # Bring "where to vote" section to the top
+        # earlier for areas with pilots
+        days_before_poll = 8
+        if (
+            poll_date - datetime.timedelta(days=days_before_poll)
+        ) < self.current_date:
+            return -6000
+        return 1003
+
+    @property
+    def toc_label(self):
+        return _("Where to vote")
+
+    def split_advance_stations_by_date(
+        self, alternative_voting_stations, election_date
+    ):
+        polling_day_hubs = []
+        advance_hubs = []
+
+        if election_date and alternative_voting_stations:
+            for station in alternative_voting_stations:
+                opening_times_table = station["opening_times"]
+                polling_day_times = [
+                    row
+                    for row in opening_times_table
+                    if row[0] == election_date
+                ]
+                advance_times = [
+                    row for row in opening_times_table if row[0] < election_date
+                ]
+                if polling_day_times:
+                    polling_day_hubs.append(
+                        {**station, "filtered_opening_times": polling_day_times}
+                    )
+                if advance_times:
+                    advance_hubs.append(
+                        {**station, "filtered_opening_times": advance_times}
+                    )
+        else:
+            advance_hubs = [
+                {**station, "filtered_opening_times": station["opening_times"]}
+                for station in alternative_voting_stations
+            ]
+        return polling_day_hubs, advance_hubs
+
+    @cached_property
+    def context(self):
+        context = super().context
+
+        polling_day_hubs, advance_hubs = self.split_advance_stations_by_date(
+            self.data.alternative_voting_stations, self.data.date
+        )
+
+        context["polling_day_hubs"] = polling_day_hubs
+        context["advance_hubs"] = advance_hubs
+
+        return context
+
+
 class BallotSection(BaseSection):
     template_name = "includes/ballots.html"
 
@@ -398,7 +464,15 @@ class ElectionDateTemplateSorter:
             enabled_sections.append(PostalVotesSection(**merged_kwargs))
 
         if not self.all_cancelled and self.first_upcoming_date:
-            enabled_sections.append(PollingStationSection(**section_kwargs))
+            if (
+                self.date_data.alternative_voting_stations
+                and self.date_data.polling_station.polling_station_known
+            ):
+                enabled_sections.append(
+                    FlexVoting2026PilotSection(**section_kwargs)
+                )
+            else:
+                enabled_sections.append(PollingStationSection(**section_kwargs))
 
         self.sections = sorted(enabled_sections, key=lambda sec: sec.weight)
 

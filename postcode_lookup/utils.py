@@ -1,6 +1,5 @@
-import datetime
+import datetime as dt
 import typing
-from datetime import date
 from os import PathLike
 from pathlib import Path
 from typing import Any, List
@@ -59,7 +58,7 @@ def results_context(api_response, request, postcode, url_prefix):
             context["parl_recall_petition"]["signing_end"] = parse(
                 context["parl_recall_petition"]["signing_end"]
             )
-    context["current_date"] = str(datetime.date.today())
+    context["current_date"] = str(dt.date.today())
     context["noindex"] = True
 
     return context
@@ -68,8 +67,8 @@ def results_context(api_response, request, postcode, url_prefix):
 def get_ballot_stages(poll_open_date):
     return {
         "Polling day": poll_open_date,
-        "After SOPNs": poll_open_date + datetime.timedelta(days=20),
-        "Before SOPNs": poll_open_date + datetime.timedelta(days=35),
+        "After SOPNs": poll_open_date + dt.timedelta(days=20),
+        "Before SOPNs": poll_open_date + dt.timedelta(days=35),
     }
 
 
@@ -89,9 +88,22 @@ def get_loader(request: Request) -> Jinja2Templates:
 def date_format(value):
     if not value:
         return ""
-    date_obj = value if isinstance(value, date) else dateparser.parse(value)
+    date_obj = value if isinstance(value, dt.date) else dateparser.parse(value)
     format = "EEEE dd MMMM y"
     return babel.dates.format_datetime(date_obj, format, locale=get_locale())
+
+
+def time_format(value):
+    if not value:
+        return ""
+    time_obj = (
+        value
+        if isinstance(value, dt.time)
+        else dt.datetime.strptime(value, "%H:%M:%S").time()
+    )
+    return babel.dates.format_time(
+        time_obj, format="h:mma", locale=get_locale()
+    )
 
 
 def nl2br(value):
@@ -276,6 +288,7 @@ class _i18nJinja2Templates(Jinja2Templates):
         env.filters["apnumber"] = apnumber
         env.filters["pluralize"] = pluralize
         env.filters["nl2br"] = nl2br
+        env.filters["time_filter"] = time_format
         env.policies["ext.i18n.trimmed"] = True
         env.globals["translated_url"] = translated_url
         env.globals["additional_ballot_link"] = additional_ballot_link

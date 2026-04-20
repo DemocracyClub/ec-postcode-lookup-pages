@@ -1,0 +1,84 @@
+{# Note: Most of the text in this template is not translated because #}
+{# 2026 pilots are England only. Review if we do this again #}
+
+{% if section.context.advance_hubs %}
+
+  <h3>Vote before polling day</h3>
+  <p>
+    Your council is trialling a system that allows you to vote in person before
+    polling day. You can vote in advance at one of these locations, or vote at
+    your assigned polling station as normal on polling day.
+  </p>
+  {% for station in section.context.advance_hubs %}
+    <details>
+      <summary>{{ station.name }}</summary>
+      <p>
+        <address>
+          {{ station.name }}<br>
+          {{ station.address.replace("\n", "<br>")|safe }}<br>
+          {{ station.postcode }}
+        </address>
+      </p>
+      <h5>Opening Times</h5>
+      <table class="c-wysiwyg-table">
+        <tr>
+          <th>Date</th>
+          <th>Open</th>
+        </tr>
+      {% for row in station.filtered_opening_times %}
+        <tr>
+          <td>{{ row.0|date_filter }}</td>
+          <td>{{ row.1|time_filter }} - {{ row.2|time_filter }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    </details>
+  {% endfor %}
+
+  <h3>Vote on polling day</h3>
+  <p>Vote at your assigned station on polling day</p>
+  <p>
+    <address>
+      {{ date.date_data.polling_station.station.properties.address.replace("\n", "<br>")|safe }}<br>
+      {{ date.date_data.polling_station.station.properties.postcode }}
+    </address>
+  </p>
+  <h4>{% trans %}Opening times{% endtrans %}</h4>
+  {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
+
+{% elif section.context.polling_day_hubs %}
+
+  <h3>Vote on polling day</h3>
+  <p>
+    Your council is trialling a system that allows you to vote in person at either your assigned
+    station or a central voting hub.
+  </p>
+    <details open>
+      <summary>Your assigned station</summary>
+      <p>
+        <address>
+          {{ date.date_data.polling_station.station.properties.address.replace("\n", "<br>")|safe }}<br>
+          {{ date.date_data.polling_station.station.properties.postcode }}
+        </address>
+      </p>
+      <h4>{% trans %}Opening times{% endtrans %}</h4>
+      {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
+    </details>
+  <p>You can also vote at</p>
+
+  {% for station in section.context.polling_day_hubs %}
+    <details>
+      <summary>{{ station.name }}</summary>
+      <p>
+        <address>
+          {{ station.name }}<br>
+          {{ station.address.replace("\n", "<br>")|safe }}<br>
+          {{ station.postcode }}
+        </address>
+      </p>
+      <h4>Opening Times</h4>
+      {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
+    </details>
+  {% endfor %}
+
+{% endif %}
