@@ -3,6 +3,7 @@ import typing
 from datetime import date
 from os import PathLike
 from pathlib import Path
+from typing import Any, List
 
 import babel
 import dateparser
@@ -15,6 +16,7 @@ from markupsafe import Markup, escape
 from response_builder.v1.models.base import (
     Ballot,
     CancellationReason,
+    Date,
     RootModel,
 )
 from starlette.datastructures import URL, Headers
@@ -26,11 +28,19 @@ from starlette_babel import gettext_lazy as _
 translator = get_translator()
 
 
+class DatePilots(Date):
+    alternative_voting_stations: Any
+
+
+class RootModelPilots(RootModel):
+    dates: List[DatePilots] = []
+
+
 def results_context(api_response, request, postcode, url_prefix):
     api_json = api_response
 
     context = {}
-    context["api_response"] = RootModel.from_api_response(api_json)
+    context["api_response"] = RootModelPilots.from_api_response(api_json)
     context["postcode"] = postcode
     context["uprn"] = request.path_params.get("uprn", None)
     context["url_prefix"] = url_prefix

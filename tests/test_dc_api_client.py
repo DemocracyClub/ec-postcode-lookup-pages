@@ -33,7 +33,7 @@ async def test_postcode_endpoint_without_backend_raises(app_client):
 
 def test_get_url(respx_mock):
     respx_mock.get(
-        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1"
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1&include_2026_pilots=1"
     ).mock(return_value=httpx.Response(200, json={}))
     client = LiveAPIBackend(api_key="test", request=None)
     client.get_postcode("SE22 8DJ")
@@ -41,7 +41,7 @@ def test_get_url(respx_mock):
 
 def test_get_postcode_endpoint(respx_mock, app_client):
     respx_mock.get(
-        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1"
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1&include_2026_pilots=1"
     ).mock(
         return_value=httpx.Response(
             200,
@@ -70,7 +70,7 @@ def test_get_invalid_postcode_api_client(respx_mock):
 def test_api_error_api_client(respx_mock):
     client = LiveAPIBackend(api_key="test", request=None)
     respx_mock.get(
-        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1"
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=test&utm_source=ec_postcode_lookup&recall_petition=1&include_2026_pilots=1"
     ).mock(return_value=httpx.Response(500))
     with pytest.raises(ApiError):
         client.get_postcode("SE228DJ")
@@ -88,7 +88,7 @@ def test_get_invalid_postcode_frontend(respx_mock, app_client):
 
 def test_api_error_frontend(respx_mock, app_client):
     respx_mock.get(
-        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1"
+        "https://developers.democracyclub.org.uk/api/v1/postcode/SE228DJ/?auth_token=ec-postcode-testing&utm_source=ec_postcode_lookup&recall_petition=1&include_2026_pilots=1"
     ).mock(return_value=httpx.Response(500))
 
     resp = app_client.get(

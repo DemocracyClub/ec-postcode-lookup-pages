@@ -12,6 +12,7 @@ from template_sorter import (
 )
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election_ids import from_election_id
+from utils import RootModelPilots
 
 
 @pytest.fixture(scope="function")
@@ -50,14 +51,17 @@ def template_sorter():
         # in the format that matches the RootBuilder:
         # dates = api_response._values["dates"] vs
         # dates = api_response.dates so I've set it here.
-        api_response.dates = api_response._values["dates"]
+        parsed_response = RootModelPilots.parse_obj(
+            mock_response.build().dict()
+        )
+        api_response.dates = parsed_response.dates
         mode = ApiModes.UPCOMING_ELECTIONS
 
         sorter = TemplateSorter(
             api_response=api_response, mode=mode, current_date=date
         )
         sorter.country = Country.ENGLAND
-        sorter.dates = api_response.dates
+        sorter.dates = parsed_response.dates
 
         return sorter
 
