@@ -20,7 +20,7 @@
           {{ station.postcode }}
         </address>
       </p>
-      <h5>Opening Times</h5>
+      <h4>{% trans %}Opening times{% endtrans %}</h4>
       <table class="c-wysiwyg-table">
         <tr>
           <th>Date</th>
@@ -78,7 +78,7 @@
           {{ station.postcode }}
         </address>
       </p>
-      <h4>Opening Times</h4>
+      <h4>{% trans %}Opening times{% endtrans %}</h4>
       {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
     </details>
   {% endfor %}
