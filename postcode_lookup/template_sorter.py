@@ -120,7 +120,7 @@ class FlexVoting2026PilotSection(BaseSection):
 
         # Bring "where to vote" section to the top
         # earlier for areas with pilots
-        days_before_poll = 8
+        days_before_poll = 10
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
         ) < self.current_date:
