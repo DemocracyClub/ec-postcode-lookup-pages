@@ -73,6 +73,7 @@ class BaseAPIClient(ABC):
             "auth_token": self.api_key,
             "utm_source": "ec_postcode_lookup",
             "recall_petition": "1",
+            "include_2026_pilots": "1",
         }
 
     def _get(self, endpoint, params=None):
