@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  codecov: codecov/codecov@4.1.0
+  codecov: codecov/codecov@5.4.3
   aws-cli: circleci/aws-cli@4.2.3
 
 commands:
@@ -59,7 +59,7 @@ jobs:
       - run: uv run playwright install chromium-headless-shell
       - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
       - codecov/upload:
-          file: /home/circleci/repo/test-reports/junit.xml
+          files: /home/circleci/repo/test-reports/junit.xml
       - store_artifacts:
           path: test-reports
           destination: test-reports
