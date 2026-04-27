@@ -6,7 +6,6 @@ import uvicorn
 from app import app
 from starlette.testclient import TestClient
 from template_sorter import (
-    ApiModes,
     ElectionDateTemplateSorter,
     TemplateSorter,
 )
@@ -55,11 +54,8 @@ def template_sorter():
             mock_response.build().dict()
         )
         api_response.dates = parsed_response.dates
-        mode = ApiModes.UPCOMING_ELECTIONS
 
-        sorter = TemplateSorter(
-            api_response=api_response, mode=mode, current_date=date
-        )
+        sorter = TemplateSorter(api_response=api_response, current_date=date)
         sorter.country = Country.ENGLAND
         sorter.dates = parsed_response.dates
 

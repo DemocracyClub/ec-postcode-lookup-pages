@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-21 14:18+0100\n"
+"POT-Creation-Date: 2026-04-27 14:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -15,93 +15,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: postcode_lookup/template_sorter.py:111
-#: postcode_lookup/template_sorter.py:132
+#: postcode_lookup/template_sorter.py:106
+#: postcode_lookup/template_sorter.py:127
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:266
+#: postcode_lookup/template_sorter.py:261
 #: postcode_lookup/templates/includes/postal_votes.html:1
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:301
-#: postcode_lookup/template_sorter.py:328
+#: postcode_lookup/template_sorter.py:296
+#: postcode_lookup/template_sorter.py:323
 #: postcode_lookup/templates/includes/registration_timetable.html:1
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:374
+#: postcode_lookup/template_sorter.py:369
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:379
+#: postcode_lookup/template_sorter.py:374
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:397
+#: postcode_lookup/template_sorter.py:392
 msgid "There may also be parish or town council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor plwyf neu dref mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:401
+#: postcode_lookup/template_sorter.py:396
 msgid "There may also be community council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor cymuned mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:405
+#: postcode_lookup/template_sorter.py:400
 msgid "There may also be town or community council elections in some areas."
 msgstr ""
 "Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
 "ardaloedd."
 
-#: postcode_lookup/template_sorter.py:598
-msgid "Contact details"
-msgstr "Manylion cyswllt"
-
-#: postcode_lookup/template_sorter.py:601
-#: postcode_lookup/templates/old_result.html:23
-#: postcode_lookup/templates/old_result.html:47
+#: postcode_lookup/template_sorter.py:587
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:607
+#: postcode_lookup/template_sorter.py:593
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:610
-#: postcode_lookup/template_sorter.py:615
+#: postcode_lookup/template_sorter.py:596
+#: postcode_lookup/template_sorter.py:601
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:625
+#: postcode_lookup/template_sorter.py:611
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:628
-#: postcode_lookup/templates/old_result.html:14
-#: postcode_lookup/templates/old_result.html:39
+#: postcode_lookup/template_sorter.py:614
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:631
-#: postcode_lookup/template_sorter.py:634
-#: postcode_lookup/templates/old_result.html:6
-#: postcode_lookup/templates/old_result.html:12
-#: postcode_lookup/templates/old_result.html:31
-#: postcode_lookup/templates/old_result.html:37
+#: postcode_lookup/template_sorter.py:617
+#: postcode_lookup/template_sorter.py:620
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:704
+#: postcode_lookup/template_sorter.py:690
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:711
+#: postcode_lookup/template_sorter.py:697
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/template_sorter.py:717
+#: postcode_lookup/template_sorter.py:703
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
@@ -329,41 +317,9 @@ msgstr "Pwy alla i bleidleisio ar gyfer?"
 msgid "Enter your postcode to find out who the candidates in your area are."
 msgstr "Mewnbynnwch eich cod post i ganfod pwy yw’r ymgeiswyr yn eich ardal."
 
-#: postcode_lookup/templates/old_result.html:21
-#: postcode_lookup/templates/old_result.html:45
-msgid "There is a recall petition in your area"
-msgstr "Mae deiseb adalw yn eich ardal"
-
 #: postcode_lookup/templates/results.html:25
 msgid "On this page"
 msgstr "Ar y dudalen hon"
-
-#: postcode_lookup/templates/includes/ballot_model.html:10
-msgid "This ballot has been cancelled"
-msgstr "Mae'r bleidlais hon wedi'i chanslo"
-
-#: postcode_lookup/templates/includes/ballot_model.html:16
-msgid "This election takes place on"
-msgstr "Bydd yr etholiad hwn yn cael ei gynnal ar"
-
-#: postcode_lookup/templates/includes/ballot_model.html:17
-msgid "Find out more about voting in this election"
-msgstr "Dysgwch ragor am bleidleisio yn yr etholiad hwn"
-
-#: postcode_lookup/templates/includes/ballot_model.html:44
-#, python-format
-msgid ""
-"<p>Visit <a "
-"href=&quot;https://whocanivotefor.co.uk/elections/%(postcode)s&quot; "
-"target=&quot;_blank&quot; class=&quot;o-external-link&quot;>Who Can I "
-"Vote For <span class=&quot;visually-hidden&quot;>(Opens in new "
-"window)</span></a> to find out more about your candidates</p>"
-msgstr ""
-"<p>Ewch <a "
-"href=&quot;https://whocanivotefor.co.uk/elections/%(postcode)s&quot; "
-"target=&quot;_blank&quot; class=&quot;o-external-link&quot;>Who Can I "
-"Vote For <span class=&quot;visually-hidden&quot;>(Opens in new "
-"window)</span></a> i ddysgu rhagor am eich ymgeiswyr</p>"
 
 #: postcode_lookup/templates/includes/ballots.html:10
 msgid "parties and independent candidates"
