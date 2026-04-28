@@ -33,12 +33,6 @@ class ResponseTypes(Enum):
     ONE_CURRENT_BALLOT = "A single upcoming ballot"
     ONE_CURRENT_DATE = "Elections one date"
     MULTIPLE_DATES = "Elections more than one date"
-    CONTACT_DETAILS = "Just show contact details"
-
-
-class ApiModes(Enum):
-    UPCOMING_ELECTIONS = "Upcoming elections"
-    CONTACT_DETAILS = "Contact details"
 
 
 country_map = {
@@ -486,13 +480,11 @@ class TemplateSorter:
     def __init__(
         self,
         api_response: RootModel,
-        mode=ApiModes.UPCOMING_ELECTIONS,
         current_date: datetime.date = None,
     ) -> None:
         self.current_date = current_date
         if not self.current_date:
             self.current_date = datetime.date.today()
-        self.mode = mode
         self.api_response = api_response
 
         self.total_ballot_count = 0
@@ -564,8 +556,6 @@ class TemplateSorter:
 
     @property
     def response_type(self):
-        if self.mode == ApiModes.CONTACT_DETAILS:
-            return ResponseTypes.CONTACT_DETAILS
         if not self.api_response.dates:
             return ResponseTypes.NO_UPCOMING
         if len(self.api_response.dates) == 1:
@@ -576,8 +566,6 @@ class TemplateSorter:
 
     @property
     def main_template_name(self):
-        # if self.response_type == ResponseTypes.CONTACT_DETAILS:
-        #     return "results_contact_details.html"
         if self.response_type == ResponseTypes.NO_UPCOMING:
             return "results_no_upcoming.html"
         if self.response_type == ResponseTypes.ONE_CURRENT_BALLOT:
@@ -594,9 +582,6 @@ class TemplateSorter:
         Used in the HTML <title> tag and the page's H1 element
         :return:
         """
-        if self.mode == ApiModes.CONTACT_DETAILS:
-            return _("Contact details")
-
         if not self.dates:
             return _("There are no upcoming elections in your area")
 
