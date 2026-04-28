@@ -52,3 +52,30 @@
     {{ section.context.parish_message }}
   </div>
 {% endif %}
+
+<div class="ec-ds-section">
+  <p>{% trans %}What to do before you vote{% endtrans %}</p>
+  <ol>
+    <li>
+      {% trans %}
+        Make sure you have
+        <a href="#TODO">registered to vote</a>
+      {% endtrans %}
+    </li>
+    <li>
+      {% trans %}
+        If you need one, make sure you have applied for a
+        <a href="#TODO">postal or proxy vote</a>
+      {% endtrans %}
+    </li>
+    {% if section.context.id_required %}
+      <li>
+        {% trans %}
+          Make sure you have an
+          <a href="/voting-and-elections/voter-id">accepted form of ID</a>
+          to vote in a polling station
+        {% endtrans %}
+      </li>
+    {% endif %}
+  </ol>
+</div>

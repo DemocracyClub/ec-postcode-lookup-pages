@@ -2,7 +2,7 @@ import abc
 import datetime
 from enum import Enum
 from functools import cached_property
-from typing import Dict, List, Optional
+from typing import Dict, List, Literal, Optional
 
 from dateparser import parse
 from postal_votes import get_postal_vote_dispatch_dates
@@ -174,9 +174,15 @@ class FlexVoting2026PilotSection(BaseSection):
 class BallotSection(BaseSection):
     template_name = "includes/ballots.html"
 
-    def __init__(self, parish_message: str, **kwargs) -> None:
+    def __init__(
+        self,
+        parish_message: str,
+        id_required: Optional[Literal["EA-2022", "EFA-2002"]],
+        **kwargs,
+    ) -> None:
         super().__init__(**kwargs)
         self.parish_message = parish_message
+        self.id_required = id_required
 
     @property
     def weight(self):
@@ -207,6 +213,9 @@ class BallotSection(BaseSection):
             context["sopn_publish_date"] = self.timetable.sopn_publish_date
 
         context["parish_message"] = self.parish_message
+
+        context["id_required"] = self.id_required
+
         return context
 
 
@@ -400,11 +409,20 @@ class ElectionDateTemplateSorter:
                 "There may also be town or community council elections in some areas."
             )
 
+        id_required = None
+        for b in self.date_data.ballots:
+            if not b.cancelled and b.requires_voter_id is not None:
+                id_required = b.requires_voter_id
+                break
+
         enabled_sections = [
             BallotSection(
                 **{
                     **section_kwargs,
-                    **{"parish_message": self.parish_message},
+                    **{
+                        "parish_message": self.parish_message,
+                        "id_required": id_required,
+                    },
                 }
             )
         ]
