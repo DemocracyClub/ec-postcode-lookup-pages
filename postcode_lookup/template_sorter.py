@@ -93,7 +93,7 @@ class PollingStationSection(BaseSection):
     def weight(self):
         poll_date = parse(self.data.date).date()
 
-        days_before_poll = 3
+        days_before_poll = 1
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
         ) < self.current_date:
