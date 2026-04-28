@@ -5,33 +5,31 @@
               {% include 'includes/cancellation_reasons.html' %}
           {% else %}
               {% if ballot.candidates_verified and section.context.show_candidates %}
-                  <details>
-                      {% if ballot.voting_system.uses_party_lists %}
-                          <summary>{{ ballot.ballot_title }} {% trans %}parties and independent candidates{% endtrans %}</summary>
-                      {% else %}
-                          <summary>{{ ballot.ballot_title }} {% trans %}candidates{% endtrans %}</summary>
-                      {% endif %}
-                      {{ additional_ballot_link(request, ballot) }}
+                  {% if ballot.voting_system.uses_party_lists %}
+                      <h3>{{ ballot.ballot_title }} {% trans %}parties and independent candidates{% endtrans %}</h3>
+                  {% else %}
+                      <h3>{{ ballot.ballot_title }} {% trans %}candidates{% endtrans %}</h3>
+                  {% endif %}
+                  {{ additional_ballot_link(request, ballot) }}
 
-                      {% if ballot.voting_system.uses_party_lists %}
-                          {{ candidates_groupby_party_list(ballot.candidates) }}
-                      {% else %}
-                          <ol class="candidate-list">
-                              {% for candidate in ballot.candidates %}
-                                  <li>
-                                      {{ candidate.person.name }}<br>
-                                      {{ candidate.party.party_name }}
-                                  </li>
-                              {% endfor %}
-                          </ol>
-                      {% endif %}
+                  {% if ballot.voting_system.uses_party_lists %}
+                      {{ candidates_groupby_party_list(ballot.candidates) }}
+                  {% else %}
+                      <ol class="candidate-list">
+                          {% for candidate in ballot.candidates %}
+                              <li>
+                                  {{ candidate.person.name }}<br>
+                                  {{ candidate.party.party_name }}
+                              </li>
+                          {% endfor %}
+                      </ol>
+                  {% endif %}
 
-                      <p><a href="{{ ballot.wcivf_url }}">
-                          {% trans %} 
-                          Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
-                          {% endtrans %}
-                      </a></p>
-                  </details>
+                  <p><a href="{{ ballot.wcivf_url }}">
+                      {% trans %}
+                      Find out more about the candidates in your area on WhoCanIVoteFor.co.uk
+                      {% endtrans %}
+                  </a></p>
               {% else %}
                   {% if ballot.ballot_paper_id.startswith('ref.') %}
                     {% include 'includes/referendum.html' %}
