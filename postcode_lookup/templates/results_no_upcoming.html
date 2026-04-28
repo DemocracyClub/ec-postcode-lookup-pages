@@ -1,1 +1,29 @@
 {% extends 'results.html' %}
+
+{% block content %}
+    <div class="dc-container">
+        <p>
+          {% trans %}
+            There are no scheduled elections in your area over the next 2 months.
+          {% endtrans %}
+        </p>
+        <p>
+          {% trans %}
+            Elections typically happen on the first Thursday in May. Please check back closer to the time.
+          {% endtrans %}
+        <p>
+          {% with url=_("/voting-and-elections/how-elections-work/types-elections") %}
+            <a href="{{ url }}">
+          {% endwith %}
+            {% trans %}
+              Find out about when different elections typically take place where you live.
+            {% endtrans %}
+          </a>
+        </p>
+
+        {% include 'includes/contact_details.html' %}
+
+        {% include 'includes/feedback_section.html' %}
+
+    </div>
+{% endblock %}
