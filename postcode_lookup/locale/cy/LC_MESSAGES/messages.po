@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-27 14:31+0100\n"
+"POT-Creation-Date: 2026-04-29 13:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -15,81 +15,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: postcode_lookup/template_sorter.py:106
-#: postcode_lookup/template_sorter.py:127
+#: postcode_lookup/template_sorter.py:107
+#: postcode_lookup/template_sorter.py:128
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:261
+#: postcode_lookup/template_sorter.py:262
 #: postcode_lookup/templates/includes/postal_votes.html:1
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:296
-#: postcode_lookup/template_sorter.py:323
+#: postcode_lookup/template_sorter.py:297
+#: postcode_lookup/template_sorter.py:324
 #: postcode_lookup/templates/includes/registration_timetable.html:1
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:369
+#: postcode_lookup/template_sorter.py:370
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:374
+#: postcode_lookup/template_sorter.py:375
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:392
+#: postcode_lookup/template_sorter.py:393
 msgid "There may also be parish or town council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor plwyf neu dref mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:396
+#: postcode_lookup/template_sorter.py:397
 msgid "There may also be community council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor cymuned mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:400
+#: postcode_lookup/template_sorter.py:401
 msgid "There may also be town or community council elections in some areas."
 msgstr ""
 "Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
 "ardaloedd."
 
-#: postcode_lookup/template_sorter.py:587
+#: postcode_lookup/template_sorter.py:595
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:593
+#: postcode_lookup/template_sorter.py:601
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:596
-#: postcode_lookup/template_sorter.py:601
+#: postcode_lookup/template_sorter.py:604
+#: postcode_lookup/template_sorter.py:609
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:611
+#: postcode_lookup/template_sorter.py:619
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:614
+#: postcode_lookup/template_sorter.py:622
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:617
-#: postcode_lookup/template_sorter.py:620
+#: postcode_lookup/template_sorter.py:625
+#: postcode_lookup/template_sorter.py:628
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:690
+#: postcode_lookup/template_sorter.py:698
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:697
+#: postcode_lookup/template_sorter.py:705
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/template_sorter.py:703
+#: postcode_lookup/template_sorter.py:711
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
@@ -321,19 +321,19 @@ msgstr "Mewnbynnwch eich cod post i ganfod pwy yw’r ymgeiswyr yn eich ardal."
 msgid "On this page"
 msgstr "Ar y dudalen hon"
 
-#: postcode_lookup/templates/includes/ballots.html:10
+#: postcode_lookup/templates/includes/ballots.html:9
 msgid "parties and independent candidates"
 msgstr "pleidiau ac ymgeiswyr annibynnol"
 
-#: postcode_lookup/templates/includes/ballots.html:12
+#: postcode_lookup/templates/includes/ballots.html:11
 msgid "candidates"
 msgstr "ymgeiswyr"
 
-#: postcode_lookup/templates/includes/ballots.html:30
+#: postcode_lookup/templates/includes/ballots.html:29
 msgid "Find out more about the candidates in your area on WhoCanIVoteFor.co.uk"
 msgstr "Dysgwch ragor am yr ymgeiswyr yn eich ardal ar WhoCanIVoteFor.co.uk"
 
-#: postcode_lookup/templates/includes/ballots.html:39
+#: postcode_lookup/templates/includes/ballots.html:37
 #, python-format
 msgid ""
 "<h3>%(ballot_title)s candidates</h3> <p>The list of candidates for this "
@@ -395,6 +395,84 @@ msgstr ""
 "na nifer y seddau sydd ar gael. Bydd yr etholiad yn cael ei aildrefnu a'i"
 " gynnal o fewn 35 diwrnod o'r diwrnod pleidleisio gwreiddiol "
 "(%(initial_poll_date)s)."
+
+#: postcode_lookup/templates/includes/default_related_content.html:4
+#: postcode_lookup/templates/includes/related_content.html:4
+msgid "Related content"
+msgstr "Cynnwys cysylltiedig"
+
+#: postcode_lookup/templates/includes/default_related_content.html:11
+#: postcode_lookup/templates/includes/registration_timetable.html:3
+#: postcode_lookup/templates/includes/registration_timetable.html:11
+#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:12
+msgid "Register to vote"
+msgstr "Cofrestra i bleidleisio"
+
+#: postcode_lookup/templates/includes/default_related_content.html:12
+msgid "/i-am-a/voter/register-vote-and-update-your-details"
+msgstr "/cy/pleidleisio-ac-etholiadau/cofrestru-i-bleidleisio"
+
+#: postcode_lookup/templates/includes/default_related_content.html:13
+msgid ""
+"All you need to register to vote is 5 minutes and your National Insurance"
+" number. Make sure you register to vote before the deadline for the "
+"elections in May."
+msgstr ""
+"Y cwbl sydd ei angen arnoch i gofrestru i bleidleisio yw 5 munud a’ch "
+"rhif Yswiriant Gwladol."
+
+#: postcode_lookup/templates/includes/default_related_content.html:19
+msgid "Apply to vote by post"
+msgstr "Gwneud cais i bleidleisio drwy'r post"
+
+#: postcode_lookup/templates/includes/default_related_content.html:20
+msgid "/i-am-a/voter/apply-vote-post"
+msgstr ""
+"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/sut-i-bleidleisio-"
+"trwyr-post"
+
+#: postcode_lookup/templates/includes/default_related_content.html:21
+msgid ""
+"Can't get to the polling station on polling day? Apply to vote by post by"
+" downloading and completing the application form."
+msgstr ""
+"Methu mynd i’r orsaf bleidleisio ar y diwrnod pleidleisio? Gwnewch gais i"
+" bleidleisio drwy’r post trwy lawrlwytho a chwblhau’r ffurflen gais."
+
+#: postcode_lookup/templates/includes/default_related_content.html:27
+msgid "Apply to vote by proxy"
+msgstr "Gwneud cais i bleidleisio drwy ddirprwy"
+
+#: postcode_lookup/templates/includes/default_related_content.html:28
+msgid "/i-am-a/voter/apply-vote-proxy"
+msgstr ""
+"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/gwneud-cais-i"
+"-bleidleisio-drwy-ddirprwy"
+
+#: postcode_lookup/templates/includes/default_related_content.html:29
+msgid ""
+"Can't get to the polling station on polling day? Ask a trusted person to "
+"vote on your behalf and apply for a proxy vote."
+msgstr ""
+"Os na allu di gyrraedd yr orsaf bleidleisio ar y diwrnod pleidleisio, "
+"gallu di ofyn i rywun rwyt ti’n ymddiried ynddo i fwrw dy bleidlais ar dy"
+" ran. Gelwir hyn yn bleidlais trwy ddirprwy."
+
+#: postcode_lookup/templates/includes/default_related_content.html:35
+msgid "Voter ID requirement"
+msgstr "Gofyniad ID Pleidleisiwr"
+
+#: postcode_lookup/templates/includes/default_related_content.html:36
+msgid "/i-am-a/voter/voter-id"
+msgstr "/cy/pleidleisio-ac-etholiadau/id-pleidleisiwr"
+
+#: postcode_lookup/templates/includes/default_related_content.html:37
+msgid ""
+"From 4 May 2023, voters in England will need to show photo ID to vote at "
+"polling stations in some elections."
+msgstr ""
+"Mae angen i bleidleiswyr yng Nghymru ddangos ID ffotograffig i "
+"bleidleisio mewn gorsafoedd pleidleisio mewn rhai etholiadau."
 
 #: postcode_lookup/templates/includes/feedback_section.html:2
 msgid "Feedback"
@@ -647,13 +725,6 @@ msgstr "Y cwestiwn a ofynnir i chi ar y papur pleidleisio yw:"
 msgid "Read more about this referendum"
 msgstr "Darllenwch ragor o wybodaeth am y refferendwm hwn"
 
-#: postcode_lookup/templates/includes/registration_timetable.html:3
-#: postcode_lookup/templates/includes/registration_timetable.html:11
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:12
-#: postcode_lookup/templates/includes/related_content.html:11
-msgid "Register to vote"
-msgstr "Cofrestra i bleidleisio"
-
 #: postcode_lookup/templates/includes/registration_timetable.html:5
 #, python-format
 msgid "You have until %(date)s"
@@ -676,76 +747,6 @@ msgstr ""
 "ar y gofrestr.</p> <p>Gallwch <a "
 "href=\"https://www.gov.uk/cofrestru-i-bleidleisio/\">gofrestru i "
 "bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
-
-#: postcode_lookup/templates/includes/related_content.html:4
-msgid "Related content"
-msgstr "Cynnwys cysylltiedig"
-
-#: postcode_lookup/templates/includes/related_content.html:12
-msgid "/i-am-a/voter/register-vote-and-update-your-details"
-msgstr "/cy/pleidleisio-ac-etholiadau/cofrestru-i-bleidleisio"
-
-#: postcode_lookup/templates/includes/related_content.html:13
-msgid ""
-"All you need to register to vote is 5 minutes and your National Insurance"
-" number. Make sure you register to vote before the deadline for the "
-"elections in May."
-msgstr ""
-"Y cwbl sydd ei angen arnoch i gofrestru i bleidleisio yw 5 munud a’ch "
-"rhif Yswiriant Gwladol."
-
-#: postcode_lookup/templates/includes/related_content.html:19
-msgid "Apply to vote by post"
-msgstr "Gwneud cais i bleidleisio drwy'r post"
-
-#: postcode_lookup/templates/includes/related_content.html:20
-msgid "/i-am-a/voter/apply-vote-post"
-msgstr ""
-"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/sut-i-bleidleisio-"
-"trwyr-post"
-
-#: postcode_lookup/templates/includes/related_content.html:21
-msgid ""
-"Can't get to the polling station on polling day? Apply to vote by post by"
-" downloading and completing the application form."
-msgstr ""
-"Methu mynd i’r orsaf bleidleisio ar y diwrnod pleidleisio? Gwnewch gais i"
-" bleidleisio drwy’r post trwy lawrlwytho a chwblhau’r ffurflen gais."
-
-#: postcode_lookup/templates/includes/related_content.html:27
-msgid "Apply to vote by proxy"
-msgstr "Gwneud cais i bleidleisio drwy ddirprwy"
-
-#: postcode_lookup/templates/includes/related_content.html:28
-msgid "/i-am-a/voter/apply-vote-proxy"
-msgstr ""
-"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/gwneud-cais-i"
-"-bleidleisio-drwy-ddirprwy"
-
-#: postcode_lookup/templates/includes/related_content.html:29
-msgid ""
-"Can't get to the polling station on polling day? Ask a trusted person to "
-"vote on your behalf and apply for a proxy vote."
-msgstr ""
-"Os na allu di gyrraedd yr orsaf bleidleisio ar y diwrnod pleidleisio, "
-"gallu di ofyn i rywun rwyt ti’n ymddiried ynddo i fwrw dy bleidlais ar dy"
-" ran. Gelwir hyn yn bleidlais trwy ddirprwy."
-
-#: postcode_lookup/templates/includes/related_content.html:35
-msgid "Voter ID requirement"
-msgstr "Gofyniad ID Pleidleisiwr"
-
-#: postcode_lookup/templates/includes/related_content.html:36
-msgid "/i-am-a/voter/voter-id"
-msgstr "/cy/pleidleisio-ac-etholiadau/id-pleidleisiwr"
-
-#: postcode_lookup/templates/includes/related_content.html:37
-msgid ""
-"From 4 May 2023, voters in England will need to show photo ID to vote at "
-"polling stations in some elections."
-msgstr ""
-"Mae angen i bleidleiswyr yng Nghymru ddangos ID ffotograffig i "
-"bleidleisio mewn gorsafoedd pleidleisio mewn rhai etholiadau."
 
 #: postcode_lookup/templates/includes/single_date.html:9
 #, python-format

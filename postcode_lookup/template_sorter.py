@@ -6,7 +6,9 @@ from typing import Dict, List, Optional
 
 from dateparser import parse
 from postal_votes import get_postal_vote_dispatch_dates
+from related_content import get_related_content
 from response_builder.v1.models.base import Date, RootModel
+from starlette_babel import get_locale
 from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
 from uk_election_timetables.election import TimetableEvent
@@ -553,6 +555,13 @@ class TemplateSorter:
         self.all_cancelled_reasons = set()
         for date in self.dates:
             self.all_cancelled_reasons.update(date.cancellation_reasons)
+
+    @property
+    def related_content(self):
+        locale = get_locale()
+        if locale.language not in ["en", "cy"]:
+            return []
+        return get_related_content(self.api_response.dates, locale.language)
 
     @property
     def response_type(self):
