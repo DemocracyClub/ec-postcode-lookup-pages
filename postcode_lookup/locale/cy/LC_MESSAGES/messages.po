@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-28 14:55+0100\n"
+"POT-Creation-Date: 2026-04-30 12:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -13,7 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: postcode_lookup/template_sorter.py:105
 #: postcode_lookup/template_sorter.py:141
@@ -551,12 +551,16 @@ msgid ""
 "Please check back closer to the time of the election to find out the "
 "address of your polling station."
 msgstr ""
+"Gwiriwch yn agosach at amser yr etholiad i gael gwybod cyfeiriad eich "
+"gorsaf bleidleisio."
 
 #: postcode_lookup/templates/includes/polling_station.html:19
 msgid ""
 "You'll also get a poll card in the post before the election. This will "
 "tell you where to vote."
 msgstr ""
+"Byddwch hefyd yn cael cerdyn pleidleisio yn y post cyn yr etholiad. Bydd "
+"hwn yn dweud wrthych ble i bleidleisio."
 
 #: postcode_lookup/templates/includes/polling_station.html:26
 msgid ""
