@@ -98,11 +98,11 @@ msgstr "Eich swyddog canlyniadau"
 #, fuzzy
 msgid "{count} candidate"
 msgid_plural "{count} candidates"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "{count} ymgeiswyr"
+msgstr[1] "{count} ymgeisydd"
+msgstr[2] "{count} ymgeiswyr"
+msgstr[3] "{count} ymgeiswyr"
+msgstr[4] "{count} ymgeiswyr"
 
 #: postcode_lookup/utils.py:189
 msgid "one"
