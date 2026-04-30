@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-04-27 14:31+0100\n"
+"POT-Creation-Date: 2026-04-30 12:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -13,83 +13,83 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.10.3\n"
 
-#: postcode_lookup/template_sorter.py:106
-#: postcode_lookup/template_sorter.py:127
+#: postcode_lookup/template_sorter.py:105
+#: postcode_lookup/template_sorter.py:141
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:261
+#: postcode_lookup/template_sorter.py:275
 #: postcode_lookup/templates/includes/postal_votes.html:1
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:296
-#: postcode_lookup/template_sorter.py:323
+#: postcode_lookup/template_sorter.py:310
+#: postcode_lookup/template_sorter.py:337
 #: postcode_lookup/templates/includes/registration_timetable.html:1
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:369
+#: postcode_lookup/template_sorter.py:383
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:374
+#: postcode_lookup/template_sorter.py:388
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:392
+#: postcode_lookup/template_sorter.py:406
 msgid "There may also be parish or town council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor plwyf neu dref mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:396
+#: postcode_lookup/template_sorter.py:410
 msgid "There may also be community council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor cymuned mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:400
+#: postcode_lookup/template_sorter.py:414
 msgid "There may also be town or community council elections in some areas."
 msgstr ""
 "Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
 "ardaloedd."
 
-#: postcode_lookup/template_sorter.py:587
+#: postcode_lookup/template_sorter.py:601
 msgid "There are no upcoming elections in your area"
 msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
 
-#: postcode_lookup/template_sorter.py:593
+#: postcode_lookup/template_sorter.py:607
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:596
-#: postcode_lookup/template_sorter.py:601
+#: postcode_lookup/template_sorter.py:610
+#: postcode_lookup/template_sorter.py:615
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:611
+#: postcode_lookup/template_sorter.py:625
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:614
+#: postcode_lookup/template_sorter.py:628
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:617
-#: postcode_lookup/template_sorter.py:620
+#: postcode_lookup/template_sorter.py:631
+#: postcode_lookup/template_sorter.py:634
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:690
+#: postcode_lookup/template_sorter.py:704
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:697
+#: postcode_lookup/template_sorter.py:711
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/template_sorter.py:703
+#: postcode_lookup/template_sorter.py:717
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
@@ -396,6 +396,22 @@ msgstr ""
 " gynnal o fewn 35 diwrnod o'r diwrnod pleidleisio gwreiddiol "
 "(%(initial_poll_date)s)."
 
+#: postcode_lookup/templates/includes/contact_your_electoral_services.html:2
+msgid ""
+"If you haven’t received your polling card, <a href=\"#electoral-"
+"services\">contact your returning officer</a>."
+msgstr ""
+"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
+"services\">cysylltwch â’ch swyddog canlyniadau</a>."
+
+#: postcode_lookup/templates/includes/contact_your_electoral_services.html:4
+msgid ""
+"If you haven’t received your polling card, <a href=\"#electoral-"
+"services\">contact your local council</a>."
+msgstr ""
+"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
+"services\">cysylltwch â’ch cyngor lleol</a>."
+
 #: postcode_lookup/templates/includes/feedback_section.html:2
 msgid "Feedback"
 msgstr "Adborth"
@@ -412,7 +428,7 @@ msgstr ""
 #: postcode_lookup/templates/includes/flex_voting_2026_pilot.html:47
 #: postcode_lookup/templates/includes/flex_voting_2026_pilot.html:66
 #: postcode_lookup/templates/includes/flex_voting_2026_pilot.html:81
-#: postcode_lookup/templates/includes/polling_station.html:23
+#: postcode_lookup/templates/includes/polling_station.html:33
 msgid "Opening times"
 msgstr "Oriau agor"
 
@@ -530,29 +546,29 @@ msgstr "(Yn agor mewn ffenestr newydd)"
 msgid "Your polling station"
 msgstr "Eich gorsaf bleidleisio"
 
-#: postcode_lookup/templates/includes/polling_station.html:13
+#: postcode_lookup/templates/includes/polling_station.html:14
+msgid ""
+"Please check back closer to the time of the election to find out the "
+"address of your polling station."
+msgstr ""
+"Gwiriwch yn agosach at amser yr etholiad i gael gwybod cyfeiriad eich "
+"gorsaf bleidleisio."
+
+#: postcode_lookup/templates/includes/polling_station.html:19
+msgid ""
+"You'll also get a poll card in the post before the election. This will "
+"tell you where to vote."
+msgstr ""
+"Byddwch hefyd yn cael cerdyn pleidleisio yn y post cyn yr etholiad. Bydd "
+"hwn yn dweud wrthych ble i bleidleisio."
+
+#: postcode_lookup/templates/includes/polling_station.html:26
 msgid ""
 "You'll get a poll card in the post before the election. This will tell "
 "you where to vote."
 msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
 "dweud wrthych ble i bleidleisio."
-
-#: postcode_lookup/templates/includes/polling_station.html:17
-msgid ""
-"If you haven’t received your polling card, <a href=\"#electoral-"
-"services\">contact your returning officer</a>."
-msgstr ""
-"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
-"services\">cysylltwch â’ch swyddog canlyniadau</a>."
-
-#: postcode_lookup/templates/includes/polling_station.html:19
-msgid ""
-"If you haven’t received your polling card, <a href=\"#electoral-"
-"services\">contact your local council</a>."
-msgstr ""
-"Os nad ydych wedi derbyn eich cerdyn pleidleisio, <a href=\"#electoral-"
-"services\">cysylltwch â’ch cyngor lleol</a>."
 
 #: postcode_lookup/templates/includes/postal_votes.html:3
 #: postcode_lookup/templates/includes/postal_votes.html:14

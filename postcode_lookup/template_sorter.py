@@ -104,6 +104,21 @@ class PollingStationSection(BaseSection):
     def toc_label(self):
         return _("Where to vote")
 
+    @cached_property
+    def context(self):
+        context = super().context
+
+        poll_date = parse(self.data.date).date()
+        days_before_poll = 7
+        if (
+            poll_date - datetime.timedelta(days=days_before_poll)
+        ) > self.current_date:
+            context["check_back_soon"] = True
+        else:
+            context["check_back_soon"] = False
+
+        return context
+
 
 class FlexVoting2026PilotSection(BaseSection):
     template_name = "includes/flex_voting_2026_pilot.html"

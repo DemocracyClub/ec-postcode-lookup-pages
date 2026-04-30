@@ -9,16 +9,26 @@
         </address>
         </p>
     {% else %}
+      {% if section.context.check_back_soon %}
         <p>
-            {% trans %}
-                You'll get a poll card in the post before the election. This will tell you where to vote.
-            {% endtrans %}
-            {% if api_response.electoral_services.nation == "Scotland" %}
-                {% trans %}If you haven’t received your polling card, <a href="#electoral-services">contact your returning officer</a>.{% endtrans %}
-            {% else %}
-                {% trans %}If you haven’t received your polling card, <a href="#electoral-services">contact your local council</a>.{% endtrans %}
-            {% endif %}
+          {% trans %}
+            Please check back closer to the time of the election to find out the address of your polling station.
+          {% endtrans %}
         </p>
+        <p>
+          {% trans %}
+            You'll also get a poll card in the post before the election. This will tell you where to vote.
+          {% endtrans %}
+          {% include "includes/contact_your_electoral_services.html" %}
+        </p>
+      {% else %}
+        <p>
+          {% trans %}
+            You'll get a poll card in the post before the election. This will tell you where to vote.
+          {% endtrans %}
+          {% include "includes/contact_your_electoral_services.html" %}
+        </p>
+      {% endif %}
     {% endif %}
     <h4>{% trans %}Opening times{% endtrans %}</h4>
     {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
