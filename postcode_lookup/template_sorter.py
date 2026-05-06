@@ -96,7 +96,7 @@ class PollingStationSection(BaseSection):
         days_before_poll = 1
         if (
             poll_date - datetime.timedelta(days=days_before_poll)
-        ) < self.current_date:
+        ) <= self.current_date:
             return -6000
         return 1003
 
