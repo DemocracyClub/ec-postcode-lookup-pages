@@ -274,7 +274,8 @@ def add_head_meta_blocks(soup: BeautifulSoup):
 
 project_path = Path() / "postcode_lookup"
 static_path = project_path / "static"
-shutil.rmtree(static_path.absolute(), ignore_errors=True)
+shutil.rmtree(static_path.absolute() / "css", ignore_errors=True)
+shutil.rmtree(static_path.absolute() / "js", ignore_errors=True)
 
 for template, config in TEMPLATES.items():
     template_path = project_path / "templates" / template
