@@ -43,6 +43,17 @@
           {% endif %}
         </div>
     </div>
+
+    {% if ballot.requires_voter_id %}
+      <div class="ec-ds-section">
+        <h3 id="{{ ballot.ballot_paper_id }}-id">
+          {% trans %}Voter ID requirement{% endtrans %}
+        </h3>
+        <p>{% trans %}You will need to take photo ID to vote at a polling station in this election{% endtrans %}</p>
+        <p>{% trans %}Read more about <a href="/voting-and-elections/voter-id">Voter ID</a>{% endtrans %}</p>
+      </div>
+    {% endif %}
+
 {% endfor %}
 
 {% if section.context.parish_message %}
