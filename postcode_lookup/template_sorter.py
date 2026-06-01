@@ -232,11 +232,13 @@ class PostalVotesSection(BaseSection):
         self,
         postal_vote_dispatch_dates: List[datetime.date],
         replacement_pack_start_date: datetime.date,
+        show_dispatch_date_fallback: bool,
         **kwargs,
     ) -> None:
         super().__init__(**kwargs)
         self.dispatch_dates = postal_vote_dispatch_dates
         self.replacement_pack_start_date = replacement_pack_start_date
+        self.show_dispatch_date_fallback = show_dispatch_date_fallback
 
     @property
     def weight(self):
@@ -260,6 +262,9 @@ class PostalVotesSection(BaseSection):
         context["dispatch_dates"] = self.dispatch_dates
         context["replacement_pack_start_date"] = (
             self.replacement_pack_start_date
+        )
+        context["show_dispatch_date_fallback"] = (
+            self.show_dispatch_date_fallback
         )
 
         context["htag_primary"] = "h2"
@@ -352,6 +357,7 @@ class ElectionDateTemplateSorter:
         first_upcoming_date=True,
         postal_vote_dispatch_dates=None,
         replacement_pack_start_date=None,
+        show_dispatch_date_fallback=False,
         in_london: bool = False,
     ) -> None:
         if not current_date:
@@ -468,6 +474,7 @@ class ElectionDateTemplateSorter:
                 **{
                     "postal_vote_dispatch_dates": postal_vote_dispatch_dates,
                     "replacement_pack_start_date": replacement_pack_start_date,
+                    "show_dispatch_date_fallback": show_dispatch_date_fallback,
                 },
             }
             enabled_sections.append(PostalVotesSection(**merged_kwargs))
@@ -513,12 +520,14 @@ class TemplateSorter:
         for i, date in enumerate(self.api_response.dates):
             postal_vote_dispatch_dates = None
             replacement_pack_start_date = None
+            show_dispatch_date_fallback = False
             if (
                 self.electoral_services
                 # we only hold postal votes dispatch data data for one
                 # election. TODO: remove/review after 2026-05-07
                 and date.date == "2026-05-07"
             ):
+                show_dispatch_date_fallback = True
                 country = country_map[self.electoral_services.nation]
 
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
@@ -558,6 +567,7 @@ class TemplateSorter:
                     first_upcoming_date=not i > 0,
                     postal_vote_dispatch_dates=postal_vote_dispatch_dates,
                     replacement_pack_start_date=replacement_pack_start_date,
+                    show_dispatch_date_fallback=show_dispatch_date_fallback,
                     in_london=in_london,
                 )
             )

@@ -55,7 +55,9 @@
           Your local council will send your postal voting pack after the deadline to become a candidate has passed.
         {% endtrans %}
       {% endif %}
-      {% trans %}This is around three weeks before polling day.{% endtrans %}
+      {% if section.context.show_dispatch_date_fallback %}
+        {% trans %}This is around three weeks before polling day.{% endtrans %}
+      {% endif %}
     </p>
   {% endif %}
 
