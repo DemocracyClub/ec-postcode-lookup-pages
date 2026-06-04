@@ -1,6 +1,4 @@
 import datetime as dt
-import typing
-from os import PathLike
 from pathlib import Path
 from typing import Any, List
 
@@ -273,51 +271,38 @@ def is_uncontested(cancellation_reason: CancellationReason) -> bool:
     return cancellation_reason == CancellationReason.EQUAL_CANDIDATES
 
 
-class _i18nJinja2Templates(Jinja2Templates):
-    locale = None
+def create_templates(locale: str) -> Jinja2Templates:
+    root = Path(__file__).parent
 
-    def _create_env(
-        self, directory: typing.Union[str, PathLike], **env_options: typing.Any
-    ) -> jinja2.Environment:
-        env_options["extensions"] = [
-            "jinja2.ext.i18n",
-        ]
-        env_options["undefined"] = ChainableUndefined
-        env = super()._create_env(directory, **env_options)
-        env.filters["date_filter"] = date_format
-        env.filters["apnumber"] = apnumber
-        env.filters["pluralize"] = pluralize
-        env.filters["nl2br"] = nl2br
-        env.filters["time_filter"] = time_format
-        env.policies["ext.i18n.trimmed"] = True
-        env.globals["translated_url"] = translated_url
-        env.globals["additional_ballot_link"] = additional_ballot_link
-        env.globals["candidates_groupby_party_list"] = (
-            candidates_groupby_party_list
-        )
-        env.filters["ballot_cancellation_suffix"] = ballot_cancellation_suffix
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(root / "templates"),
+        extensions=["jinja2.ext.i18n"],
+        undefined=ChainableUndefined,
+    )
 
-        locale_dir = Path(__file__).parent / "locale"
-        list_of_desired_locales = [self.locale]
+    env.filters["date_filter"] = date_format
+    env.filters["apnumber"] = apnumber
+    env.filters["pluralize"] = pluralize
+    env.filters["nl2br"] = nl2br
+    env.filters["time_filter"] = time_format
+    env.filters["ballot_cancellation_suffix"] = ballot_cancellation_suffix
 
-        translations = Translations.load(locale_dir, list_of_desired_locales)
+    env.globals["translated_url"] = translated_url
+    env.globals["additional_ballot_link"] = additional_ballot_link
+    env.globals["candidates_groupby_party_list"] = candidates_groupby_party_list
 
-        env.install_gettext_translations(translations)
+    env.policies["ext.i18n.trimmed"] = True
 
-        return env
+    locale_dir = root / "locale"
+    translations = Translations.load(locale_dir, [locale])
+
+    env.install_gettext_translations(translations)
+
+    return Jinja2Templates(env=env)
 
 
-class en_i18nJinja2Templates(_i18nJinja2Templates):
-    locale = "en"
-
-
-class cy_i18nJinja2Templates(_i18nJinja2Templates):
-    locale = "cy"
-
-
-root = Path(__file__).parent
-en_templates = en_i18nJinja2Templates(directory=root / "templates")
-cy_templates = cy_i18nJinja2Templates(directory=root / "templates")
+en_templates = create_templates("en")
+cy_templates = create_templates("cy")
 
 
 class i18nMiddleware:
