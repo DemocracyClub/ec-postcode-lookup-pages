@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-01 11:22+0100\n"
+"POT-Creation-Date: 2026-06-09 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -345,6 +345,26 @@ msgstr ""
 "<h3>%(ballot_title)s Ymgeiswyr</h3> <p>Cyhoeddir rhestr yr ymgeiswyr ar "
 "gyfer yr etholiad hwn ar ôl %(sopn_date)s.</p>"
 
+#: postcode_lookup/templates/includes/ballots.html:50
+#: postcode_lookup/templates/includes/related_content.html:35
+msgid "Voter ID requirement"
+msgstr "Gofyniad ID Pleidleisiwr"
+
+#: postcode_lookup/templates/includes/ballots.html:52
+msgid ""
+"You will need to take photo ID to vote at a polling station in this "
+"election"
+msgstr ""
+"Bydd angen i chi dynnu llun ID i bleidleisio mewn gorsaf bleidleisio yn "
+"yr etholiad hwn."
+
+# TODO: probably
+# Darllenwch fwy am sut <a
+# href=\"/cy/pleidleisio-ac-etholiadau/id-pleidleisiwr\">ID Pleidleisiwr</a>
+#: postcode_lookup/templates/includes/ballots.html:53
+msgid "Read more about <a href=\"/voting-and-elections/voter-id\">Voter ID</a>"
+msgstr ""
+
 #: postcode_lookup/templates/includes/cancellation_reasons.html:3
 msgid "Postponed Election"
 msgstr "Etholiad wedi'i ohirio"
@@ -573,6 +593,26 @@ msgstr ""
 "Fe gewch chi gerdyn pleidleisio yn y post cyn yr etholiad. Bydd hyn yn "
 "dweud wrthych ble i bleidleisio."
 
+#: postcode_lookup/templates/includes/polling_station.html:35
+msgid "Accessibility at polling stations"
+msgstr "Hygyrchedd mewn gorsafoedd pleidleisio"
+
+#: postcode_lookup/templates/includes/polling_station.html:37
+msgid ""
+"Polling stations have a range of accessibility support to help you cast "
+"your vote."
+msgstr ""
+
+# TODO: probably
+# Darllenwch fwy am sut <a
+# href=\"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/hygyrchedd-mewn-gorsafoedd-pleidleisio\">Hygyrchedd
+# mewn gorsafoedd pleidleisio</a>.
+#: postcode_lookup/templates/includes/polling_station.html:42
+msgid ""
+"Read more about <a href=\"/voting-and-elections/ways-vote/accessibility-"
+"polling-stations\"> Accessibility at polling stations</a>."
+msgstr ""
+
 #: postcode_lookup/templates/includes/postal_votes.html:3
 #: postcode_lookup/templates/includes/postal_votes.html:14
 msgid "Apply for a postal vote"
@@ -749,10 +789,6 @@ msgstr ""
 "Os na allu di gyrraedd yr orsaf bleidleisio ar y diwrnod pleidleisio, "
 "gallu di ofyn i rywun rwyt ti’n ymddiried ynddo i fwrw dy bleidlais ar dy"
 " ran. Gelwir hyn yn bleidlais trwy ddirprwy."
-
-#: postcode_lookup/templates/includes/related_content.html:35
-msgid "Voter ID requirement"
-msgstr "Gofyniad ID Pleidleisiwr"
 
 #: postcode_lookup/templates/includes/related_content.html:36
 msgid "/i-am-a/voter/voter-id"

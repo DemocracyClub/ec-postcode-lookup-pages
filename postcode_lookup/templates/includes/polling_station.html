@@ -31,5 +31,18 @@
       {% endif %}
     {% endif %}
     <h4>{% trans %}Opening times{% endtrans %}</h4>
-    {{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}
+    <p>{{ date.date_data.date|date_filter }} — {{ date.polling_station_opening_times_str }}</p>
+    <h4>{% trans %}Accessibility at polling stations{% endtrans %}</h4>
+    <p>
+      {% trans %}
+        Polling stations have a range of accessibility support to help you cast your vote.
+      {% endtrans %}
+    </p>
+    <p>
+      {% trans %}
+        Read more about
+        <a href="/voting-and-elections/ways-vote/accessibility-polling-stations">
+          Accessibility at polling stations</a>.
+      {% endtrans %}
+    </p>
 {% endif %}
