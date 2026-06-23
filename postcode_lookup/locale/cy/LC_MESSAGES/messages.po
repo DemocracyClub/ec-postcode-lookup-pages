@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-06-09 16:12+0100\n"
+"POT-Creation-Date: 2026-06-23 13:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -94,7 +94,7 @@ msgstr "Cofrestru etholiadol"
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
 
-#: postcode_lookup/utils.py:168
+#: postcode_lookup/utils.py:166
 #, fuzzy
 msgid "{count} candidate"
 msgid_plural "{count} candidates"
@@ -104,47 +104,47 @@ msgstr[2] "{count} ymgeiswyr"
 msgstr[3] "{count} ymgeiswyr"
 msgstr[4] "{count} ymgeiswyr"
 
-#: postcode_lookup/utils.py:189
+#: postcode_lookup/utils.py:187
 msgid "one"
 msgstr "un"
 
-#: postcode_lookup/utils.py:190
+#: postcode_lookup/utils.py:188
 msgid "two"
 msgstr "dau"
 
-#: postcode_lookup/utils.py:191
+#: postcode_lookup/utils.py:189
 msgid "three"
 msgstr "tri"
 
-#: postcode_lookup/utils.py:192
+#: postcode_lookup/utils.py:190
 msgid "four"
 msgstr "pedwar"
 
-#: postcode_lookup/utils.py:193
+#: postcode_lookup/utils.py:191
 msgid "five"
 msgstr "pump"
 
-#: postcode_lookup/utils.py:194
+#: postcode_lookup/utils.py:192
 msgid "six"
 msgstr "chwech"
 
-#: postcode_lookup/utils.py:195
+#: postcode_lookup/utils.py:193
 msgid "seven"
 msgstr "saith"
 
-#: postcode_lookup/utils.py:196
+#: postcode_lookup/utils.py:194
 msgid "eight"
 msgstr "wyth"
 
-#: postcode_lookup/utils.py:197
+#: postcode_lookup/utils.py:195
 msgid "nine"
 msgstr "naw"
 
-#: postcode_lookup/utils.py:251 postcode_lookup/utils.py:254
+#: postcode_lookup/utils.py:249 postcode_lookup/utils.py:252
 msgid " (postponed)"
 msgstr " (wedi'i ohirio)"
 
-#: postcode_lookup/utils.py:257
+#: postcode_lookup/utils.py:255
 msgid " (uncontested)"
 msgstr " (heb gystadleuaeth)"
 
@@ -358,12 +358,11 @@ msgstr ""
 "Bydd angen i chi dynnu llun ID i bleidleisio mewn gorsaf bleidleisio yn "
 "yr etholiad hwn."
 
-# TODO: probably
-# Darllenwch fwy am sut <a
-# href=\"/cy/pleidleisio-ac-etholiadau/id-pleidleisiwr\">ID Pleidleisiwr</a>
 #: postcode_lookup/templates/includes/ballots.html:53
 msgid "Read more about <a href=\"/voting-and-elections/voter-id\">Voter ID</a>"
 msgstr ""
+"Darllenwch ragor am <a href=\"/cy/pleidleisio-ac-etholiadau/id-"
+"pleidleisiwr\">ID Pleidleisiwr</a>"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:3
 msgid "Postponed Election"
@@ -602,16 +601,17 @@ msgid ""
 "Polling stations have a range of accessibility support to help you cast "
 "your vote."
 msgstr ""
+"Mae gan orsafoedd pleidleisio amrywiaeth o gyfarpar hygyrchedd i'ch helpu"
+" i fwrw eich pleidlais."
 
-# TODO: probably
-# Darllenwch fwy am sut <a
-# href=\"/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/hygyrchedd-mewn-gorsafoedd-pleidleisio\">Hygyrchedd
-# mewn gorsafoedd pleidleisio</a>.
 #: postcode_lookup/templates/includes/polling_station.html:42
 msgid ""
 "Read more about <a href=\"/voting-and-elections/ways-vote/accessibility-"
 "polling-stations\"> Accessibility at polling stations</a>."
 msgstr ""
+"Darllenwch ragor am <a href=\"/cy/pleidleisio-ac-"
+"etholiadau/ffyrdd-i-bleidleisio/hygyrchedd-mewn-gorsafoedd-"
+"pleidleisio\">Hygyrchedd mewn gorsafoedd pleidleisio</a>"
 
 #: postcode_lookup/templates/includes/postal_votes.html:3
 #: postcode_lookup/templates/includes/postal_votes.html:14
