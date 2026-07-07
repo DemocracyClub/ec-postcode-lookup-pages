@@ -51,6 +51,13 @@
         {% include 'includes/contact_details.html' %}
 
         {% include 'includes/feedback_section.html' %}
-
     </div>
 {% endblock %}
+
+
+{% block related_content %}
+  {% with links=template_sorter.related_content %}
+    {% include "includes/related_content.html" %}
+  {% endwith %}
+{% endblock related_content %}
+
