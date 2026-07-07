@@ -8,6 +8,10 @@ from dateparser import parse
 from postal_votes import get_postal_vote_dispatch_dates
 from related_content import get_related_content
 from response_builder.v1.models.base import Date, RootModel
+from scheduled_elections import (
+    get_next_general_election_block,
+    get_next_scheduled_election_block,
+)
 from starlette_babel import get_locale
 from starlette_babel import gettext_lazy as _
 from uk_election_timetables.calendars import Country
@@ -519,6 +523,24 @@ class TemplateSorter:
         self.electoral_registration = getattr(
             self.api_response, "registration", None
         )
+
+        if self.electoral_services:
+            self.country = country_map[self.electoral_services.nation]
+        else:
+            self.country = Country.ENGLAND
+
+        in_london = False
+        if self.electoral_services:
+            in_london = any(
+                id_.startswith("E09")
+                for id_ in self.electoral_services.identifiers
+            )
+
+        self.next_scheduled_election_block = get_next_scheduled_election_block(
+            self.country
+        )
+        self.next_general_election_block = get_next_general_election_block()
+
         for i, date in enumerate(self.api_response.dates):
             postal_vote_dispatch_dates = None
             replacement_pack_start_date = None
@@ -530,7 +552,6 @@ class TemplateSorter:
                 and date.date == "2026-05-07"
             ):
                 show_dispatch_date_fallback = True
-                country = country_map[self.electoral_services.nation]
 
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
@@ -539,7 +560,7 @@ class TemplateSorter:
                 # this is the date when replacement packs can be issued from
                 # for ALL councils
                 # TODO: add this to the timetable library
-                if country == Country.SCOTLAND:
+                if self.country == Country.SCOTLAND:
                     replacement_pack_start_date = None
                 else:
                     replacement_pack_start_date = datetime.datetime.strptime(
@@ -548,22 +569,11 @@ class TemplateSorter:
 
             if parse(date.date).date() < datetime.datetime.today().date():
                 continue
-            if self.electoral_services:
-                country = country_map[self.electoral_services.nation]
-            else:
-                country = Country.ENGLAND
-
-            in_london = False
-            if self.electoral_services:
-                in_london = any(
-                    id_.startswith("E09")
-                    for id_ in self.electoral_services.identifiers
-                )
 
             self.dates.append(
                 ElectionDateTemplateSorter(
                     date_data=date,
-                    country=country,
+                    country=self.country,
                     current_date=self.current_date,
                     response_type=self.response_type,
                     first_upcoming_date=not i > 0,
@@ -617,7 +627,7 @@ class TemplateSorter:
         :return:
         """
         if not self.dates:
-            return _("There are no upcoming elections in your area")
+            return _("My next election")
 
         if self.all_cancelled:
             cancellation_reasons = self.all_cancelled_reasons
@@ -652,7 +662,7 @@ class TemplateSorter:
         if self.response_type == ResponseTypes.MULTIPLE_DATES:
             return _("You have upcoming elections")
 
-        return "Elections in your areas"
+        return _("My next election")
 
     @cached_property
     def toc_items(self) -> Optional[List[Dict[str, str]]]:
