@@ -1,0 +1,194 @@
+{
+  "/i-am-a/voter/register-vote-and-update-your-details": {
+    "en": {
+      "url": "/i-am-a/voter/register-vote-and-update-your-details",
+      "title": "Register to vote",
+      "description": "All you need to register to vote is 5 minutes and your National Insurance number."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/cofrestru-i-bleidleisio",
+      "title": "Cofrestru i bleidleisio",
+      "description": "Y cwbl sydd ei angen arnoch i gofrestru i bleidleisio yw 5 munud a’ch rhif Yswiriant Gwladol."
+    }
+  },
+  "/i-am-a/voter/apply-vote-post": {
+    "en": {
+      "url": "/i-am-a/voter/apply-vote-post",
+      "title": "Voting by post",
+      "description": "Find out about voting by post in UK elections"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/pleidleisio-drwyr-post",
+      "title": "Pleidleisio drwy’r post",
+      "description": "Methu mynd i dy orsaf bleidleisio ar y diwrnod pleidleisio? Gwna gais i bleidleisio drwy'r post ac fe gei di becyn pleidleisio drwy’r post cyn yr etholiad."
+    }
+  },
+  "/i-am-a/voter/apply-vote-proxy": {
+    "en": {
+      "url": "/i-am-a/voter/apply-vote-proxy",
+      "title": "Apply to vote by proxy",
+      "description": "If you can't get to the polling station on polling day, you can ask someone you trust to cast your vote on your behalf."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/gwneud-cais-i-bleidleisio-drwy-ddirprwy",
+      "title": "Gwneud cais i bleidleisio drwy ddirprwy",
+      "description": "Os na allu di gyrraedd yr orsaf bleidleisio ar y diwrnod pleidleisio, gallu di ofyn i rywun rwyt ti’n ymddiried ynddo i fwrw dy bleidlais ar dy ran. Gelwir hyn yn bleidlais trwy ddirprwy."
+    }
+  },
+  "/i-am-a/voter/voter-id": {
+    "en": {
+      "url": "/i-am-a/voter/voter-id",
+      "title": "Voter ID",
+      "description": "You need to show photo ID to vote at polling stations in some elections."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/id-pleidleisiwr",
+      "title": "ID Pleidleisiwr",
+      "description": "Mae angen i chi ddangos ID ffotograffig i bleidleisio mewn gorsafoedd pleidleisio mewn rhai etholiadau."
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/northern-ireland-assembly": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/northern-ireland-assembly",
+      "title": "Northern Ireland Assembly",
+      "description": "The Northern Ireland Assembly represents the people of Northern Ireland. Northern Ireland Assembly elections usually take place every five years"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/cynulliad-gogledd-iwerddon",
+      "title": "Cynulliad Gogledd Iwerddon",
+      "description": "Mae Cynulliad Gogledd Iwerddon yn cynrychioli pobl Gogledd Iwerddon. Fel arfer cynhelir etholiadau Cynulliad Gogledd Iwerddon bob pum mlynedd"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/voting-senedd-elections": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/voting-senedd-elections",
+      "title": "Voting in Senedd elections",
+      "description": "The Senedd represents the people of Wales. Senedd elections take place every five years."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/pleidleisio-yn-etholiadaur-senedd",
+      "title": "Pleidleisio yn Etholiadau'r Senedd",
+      "description": "Mae’r Senedd yn cynrychioli pobl Cymru. Mae etholiadau’r Senedd yn cael eu cynnal bob pum mlynedd"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/scottish-parliament": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/scottish-parliament",
+      "title": "Scottish Parliament",
+      "description": "The Scottish Parliament represents the people of Scotland. It has the power to make decisions and pass laws in certain areas"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/senedd-yr-alban",
+      "title": "Senedd yr Alban",
+      "description": "Yma mae mwy o wybodaeth am Senedd yr Alban, gan gynnwys ei gyfansoddiad ac am beth mae'n gyfrifol"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/police-and-crime-commissioners": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/police-and-crime-commissioners",
+      "title": "Police and Crime Commissioners",
+      "description": "Police and Crime Commissioners make sure that the local police in their area are meeting the needs of the community"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/comisiynwyr-yr-heddlu-a-throseddu",
+      "title": "Comisiynwyr yr Heddlu a Throseddu",
+      "description": "Mae Comisiynwyr yr Heddlu a Throseddu yn sicrhau bod yr heddlu lleol yn eu hardal yn diwallu anghenion y gymuned"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/mayoral-elections": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/mayoral-elections",
+      "title": "Voting in mayoral elections",
+      "description": "Find out about mayoral elections in England and how the voting system works"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/pleidleisio-mewn-etholiadau-maerol",
+      "title": "Pleidleisio mewn etholiadau maerol",
+      "description": "Mae pedwar math o faer yn Lloegr. Mae'r math o faer neu feiri sydd gennych yn dibynnu ar ble rydych chi'n byw"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/mayor-london-and-london-assembly": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/mayor-london-and-london-assembly",
+      "title": "Mayor of London and London Assembly",
+      "description": "The Mayor of London and London Assembly represent the people living in London."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/maer-llundain-a-chynulliad-llundain",
+      "title": "Maer Llundain a Chynulliad Llundain",
+      "description": "Mae Maer Llundain a Chynulliad Llundain yn cynrychioli'r bobl sy'n byw yn Llundain"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/uk-parliamentary-elections": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/uk-parliamentary-elections",
+      "title": "UK parliamentary by-elections",
+      "description": "UK parliamentary by-elections happen when a seat in the House of Commons becomes vacant between general elections."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/etholiadau-senedd-y-du",
+      "title": "Is-etholiadau Senedd y DU",
+      "description": "UK parliamentary by-elections happen when a seat in the House of Commons becomes vacant between general elections."
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/uk-parliament": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/uk-parliament",
+      "title": "UK Parliament",
+      "description": "The UK Parliament represents the people of the United Kingdom. It makes decisions and passes laws on a wide range of issues that affect you. Find out more"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/senedd-y-du",
+      "title": "Senedd y DU",
+      "description": "Senedd y DU"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/local-council-elections": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/local-council-elections",
+      "title": "Local council by-elections",
+      "description": "Local council by-elections happen when a councillor leaves their seat during their term"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/etholiadau-cynghorau-lleol",
+      "title": "Is-etholiadau cynghorau lleol",
+      "description": "Mae is-etholiadau cynghorau lleol yn digwydd pan fydd cynghorydd yn gadael ei sedd yn ystod ei dymor"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections/local-councils": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections/local-councils",
+      "title": "Local councils",
+      "description": "Find out about local councils and how to vote in local council elections."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/cynghorau-lleol",
+      "title": "Cynghorau lleol",
+      "description": "Cynghorau lleol"
+    }
+  },
+  "/voting-and-elections/how-elections-work/types-elections": {
+    "en": {
+      "url": "/voting-and-elections/how-elections-work/types-elections",
+      "title": "Types of elections",
+      "description": "Find out more about the types of elections in the UK."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/mathau-o-etholiadau",
+      "title": "Mathau o etholiadau",
+      "description": "Darganfyddwch ragor am y mathau o etholiadau a gynhelir yn y DU."
+    }
+  },
+  "/voting-and-elections": {
+    "en": {
+      "url": "/voting-and-elections",
+      "title": "Voter information",
+      "description": "Everything you need to know about voting in UK elections"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau",
+      "title": "Pleidleisio ac etholiadau",
+      "description": "Dysgwch bopeth sydd angen ei chi wybod am bleidleisio ac etholiadau, gan gynnwys gwybodaeth am etholiadau sydd i ddod yn eich ardal."
+    }
+  }
+}
