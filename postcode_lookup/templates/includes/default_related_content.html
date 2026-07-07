@@ -7,14 +7,17 @@
             <div class="js-view-dom-id-acc178f2bd619faed56de3856cb485835e35b28a3820021585d2a1a943ef8141">
                 <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
 
-                    {% for link in links %}
-                      {% with
-                          related_title=link.title,
-                          related_url=link.url,
-                          related_description=link.description
-                      %}
-                          {% include "includes/single_related_content.html" %}
-                      {% endwith %}
+                    {% for url in [
+                        "/i-am-a/voter/register-vote-and-update-your-details",
+                        "/i-am-a/voter/apply-vote-post",
+                        "/i-am-a/voter/apply-vote-proxy",
+                        "/i-am-a/voter/voter-id",
+                    ] %}
+                        {% with page = get_page_metadata(url, request.current_language) %}
+                            {% with related_title = page.title, related_url = page.url, related_description = page.description %}
+                                {% include "includes/single_related_content.html" %}
+                            {% endwith %}
+                        {% endwith %}
                     {% endfor %}
                 </div>
             </div>

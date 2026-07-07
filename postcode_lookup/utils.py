@@ -10,6 +10,7 @@ from dateutil.parser import parse
 from jinja2 import ChainableUndefined
 from jinja2.filters import do_mark_safe
 from markupsafe import Markup, escape
+from related_content import get_page_metadata
 from response_builder.v1.models.base import (
     Ballot,
     CancellationReason,
@@ -288,6 +289,7 @@ def create_templates(locale: str) -> Jinja2Templates:
     env.filters["ballot_cancellation_suffix"] = ballot_cancellation_suffix
 
     env.globals["translated_url"] = translated_url
+    env.globals["get_page_metadata"] = get_page_metadata
     env.globals["additional_ballot_link"] = additional_ballot_link
     env.globals["candidates_groupby_party_list"] = candidates_groupby_party_list
 
