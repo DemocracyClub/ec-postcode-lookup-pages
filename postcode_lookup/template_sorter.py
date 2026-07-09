@@ -225,6 +225,72 @@ class BallotSection(BaseSection):
         return context
 
 
+class BeforeYouVoteSection(BaseSection):
+    template_name = "includes/before_you_vote.html"
+
+    @property
+    def weight(self):
+        return 1001
+
+    @property
+    def toc_label(self):
+        return _("Before you vote")
+
+    @property
+    def toc_id(self):
+        return f"before-you-vote-{self.timetable.poll_date}"
+
+    @cached_property
+    def context(self):
+        context = super().context
+
+        id_required = None
+        for b in self.data.ballots:
+            if not b.cancelled and b.requires_voter_id is not None:
+                id_required = b.requires_voter_id
+                break
+
+        context["id_required"] = id_required
+
+        """
+        There's an edge case here:
+        If there is a date with a mix of local.city-of-london and other
+        ballots on the same day, we will show only the "normal" registration
+        info, and not the City of London info.
+
+        Really, we should show both but because we only store a single
+        "registration deadline" for a date and all possible other election
+        types have higher charisma than City of London local, we would end up
+        rendering it wrong anyway. To properly solve this we need to move this
+        from date level to ballot level.
+
+        For both of the most comon cases:
+        - All ballots on this date are City of London Local
+        - All ballots on this date are something else
+        this will show the user the right thing.
+
+        In general, the City of London Corportation try to avoid scheduling
+        their local elections on the same date as other elections anyway
+        due to the different polling station opening rules.
+        """
+        context["city_of_london_registration"] = False
+        if all(
+            b.ballot_paper_id.startswith("local.city-of-london")
+            for b in self.data.ballots
+        ):
+            context["city_of_london_registration"] = True
+
+        context["can_register_to_vote"] = self.timetable.is_before(
+            TimetableEvent.REGISTRATION_DEADLINE
+        )
+
+        context["can_apply_for_postal_vote"] = self.timetable.is_before(
+            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        )
+
+        return context
+
+
 class PostalVotesSection(BaseSection):
     template_name = "includes/postal_votes.html"
 
@@ -242,23 +308,12 @@ class PostalVotesSection(BaseSection):
 
     @property
     def weight(self):
-        if self.timetable.is_before(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        ):
-            return -5000
-
-        if self.timetable.is_after(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        ):
-            return 1001
-        return 0
+        return 1004
 
     @cached_property
     def context(self):
         context = super().context
-        context["can_register"] = self.timetable.is_before(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        )
+
         context["dispatch_dates"] = self.dispatch_dates
         context["replacement_pack_start_date"] = (
             self.replacement_pack_start_date
@@ -266,13 +321,6 @@ class PostalVotesSection(BaseSection):
         context["show_dispatch_date_fallback"] = (
             self.show_dispatch_date_fallback
         )
-
-        context["htag_primary"] = "h2"
-        context["htag_secondary"] = "h3"
-        if self.response_type == ResponseTypes.MULTIPLE_DATES:
-            context["htag_primary"] = "h3"
-            context["htag_secondary"] = "h4"
-        context["toc_id"] = self.toc_id
         return context
 
     @property
@@ -282,68 +330,6 @@ class PostalVotesSection(BaseSection):
     @property
     def toc_id(self):
         return f"postal-votes-{self.timetable.poll_date}-{self.timetable.postal_vote_application_deadline}"
-
-
-class RegistrationDateSection(BaseSection):
-    template_name = "includes/registration_timetable.html"
-
-    @property
-    def weight(self):
-        if self.timetable.is_before(TimetableEvent.REGISTRATION_DEADLINE):
-            return -6000
-
-        if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
-            return 1002
-        return 0
-
-    @cached_property
-    def context(self):
-        context = super().context
-        context["can_register"] = self.timetable.is_before(
-            TimetableEvent.REGISTRATION_DEADLINE
-        )
-        context["htag_primary"] = "h2"
-        context["htag_secondary"] = "h3"
-        if self.response_type == ResponseTypes.MULTIPLE_DATES:
-            context["htag_primary"] = "h3"
-            context["htag_secondary"] = "h4"
-        context["toc_id"] = self.toc_id
-        return context
-
-    @property
-    def toc_label(self):
-        return _("Voter registration")
-
-    @property
-    def toc_id(self):
-        return f"voter-registration-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
-
-
-class CityOfLondonRegistrationDateSection(RegistrationDateSection):
-    template_name = "includes/registration_timetable_city_of_london.html"
-
-    def __init__(self, *args, **kwargs) -> None:
-        self.with_headers = kwargs.pop("with_headers")
-        super().__init__(*args, **kwargs)
-
-    @property
-    def weight(self):
-        parent_weight = super().weight
-        return 0 if parent_weight == 0 else parent_weight + 1
-
-    @cached_property
-    def context(self):
-        context = super().context
-        context["with_headers"] = self.with_headers
-        return context
-
-    @property
-    def toc_label(self):
-        return _("Voter registration")
-
-    @property
-    def toc_id(self):
-        return f"voter-registration-col-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
 
 
 class ElectionDateTemplateSorter:
@@ -430,44 +416,6 @@ class ElectionDateTemplateSorter:
             )
         ]
 
-        city_of_london_ballots = [
-            b
-            for b in self.date_data.ballots
-            if not b.cancelled
-            and b.ballot_paper_id.startswith("local.city-of-london")
-        ]
-        other_ballots = [
-            b
-            for b in self.date_data.ballots
-            if not b.cancelled
-            and not b.ballot_paper_id.startswith("local.city-of-london")
-        ]
-        if len(other_ballots) > 0:
-            enabled_sections.append(
-                RegistrationDateSection(
-                    data=self.date_data,
-                    mode=self.current_mode,
-                    response_type=self.response_type,
-                    current_date=self.current_date,
-                    timetable=from_election_id(
-                        other_ballots[0].election_id, country=country
-                    ),
-                )
-            )
-        if len(city_of_london_ballots) > 0:
-            enabled_sections.append(
-                CityOfLondonRegistrationDateSection(
-                    data=self.date_data,
-                    mode=self.current_mode,
-                    response_type=self.response_type,
-                    current_date=self.current_date,
-                    timetable=from_election_id(
-                        city_of_london_ballots[0].election_id, country=country
-                    ),
-                    with_headers=len(other_ballots) == 0,
-                )
-            )
-
         if not self.all_cancelled:
             merged_kwargs = {
                 **section_kwargs,
@@ -489,6 +437,9 @@ class ElectionDateTemplateSorter:
                 )
             else:
                 enabled_sections.append(PollingStationSection(**section_kwargs))
+
+        if not self.all_cancelled:
+            enabled_sections.append(BeforeYouVoteSection(**section_kwargs))
 
         self.sections = sorted(enabled_sections, key=lambda sec: sec.weight)
 

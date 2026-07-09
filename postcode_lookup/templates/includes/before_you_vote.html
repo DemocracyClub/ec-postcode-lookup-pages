@@ -1,0 +1,71 @@
+<details>
+  <summary>{% trans %}What to do before you vote{% endtrans %}</summary>
+
+  <div style="margin-top: 1em;">
+    <ol>
+
+      <li>
+        {% if section.context.city_of_london_registration %}
+          {% include 'includes/registration_timetable_city_of_london.html' %}
+        {% else %}
+          {% trans %}
+            Make sure you have
+            <a href="/voting-and-elections/register-vote">registered to vote</a>.
+          {% endtrans %}
+
+          {% if section.context.can_register_to_vote %}
+
+            {% trans date=section.timetable.registration_deadline|date_filter %}
+              You have until {{ date }}.
+            {% endtrans %}
+
+          {% else %}
+
+            {%
+              trans
+              date=section.data.date|date_filter,
+              registration_deadline=section.timetable.registration_deadline|date_filter
+            %}
+              The deadline to register to vote in elections on {{ date }} was {{ registration_deadline }}.
+            {% endtrans %}
+            {% trans %}
+              If you registered to vote before the deadline, then you will be able to vote in this election.
+            {% endtrans %}
+
+          {% endif %}
+        {% endif %}
+      </li>
+
+      <li>
+        {% trans %}
+          If you need one, make sure you have applied for a
+          <a href="/voting-and-elections/ways-vote/postal-voting">postal</a> or
+          <a href="/voting-and-elections/ways-vote/apply-vote-proxy">proxy vote</a>.
+        {% endtrans %}
+
+        {% if section.context.can_apply_for_postal_vote %}
+          {# TODO #}
+        {% else %}
+          {%
+            trans
+            date=section.data.date|date_filter,
+            application_deadline=section.timetable.postal_vote_application_deadline|date_filter
+          %}
+            The deadline to apply for a postal vote for the elections taking place on {{ date }} was {{ application_deadline }}.
+          {% endtrans %}
+        {% endif %}
+      </li>
+
+      {% if section.context.id_required %}
+        <li>
+          {% trans %}
+            Make sure you have an
+            <a href="/voting-and-elections/voter-id">accepted form of ID</a>
+            to vote in a polling station
+          {% endtrans %}
+        </li>
+      {% endif %}
+
+    </ol>
+  </div>
+</details>
