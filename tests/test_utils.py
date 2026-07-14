@@ -1,7 +1,9 @@
+import datetime as dt
 from types import SimpleNamespace
 
 import pytest
-from utils import candidates_groupby_party_list, nl2br
+from freezegun import freeze_time
+from utils import candidates_groupby_party_list, is_after, is_before, nl2br
 
 nl2br_testcases = [
     ["abc", "abc"],
@@ -65,3 +67,33 @@ def test_candidates_groupby_party_list_xss():
     )
 
     assert str(result) == expected
+
+
+@freeze_time("2024-04-16")
+def test_is_after_with_past_date():
+    assert is_after(dt.date(2024, 4, 15)) is True
+
+
+@freeze_time("2024-04-16")
+def test_is_after_with_future_date():
+    assert is_after(dt.date(2024, 4, 17)) is False
+
+
+@freeze_time("2024-04-16")
+def test_is_after_with_today():
+    assert is_after(dt.date(2024, 4, 16)) is False
+
+
+@freeze_time("2024-04-16")
+def test_is_before_with_past_date():
+    assert is_before(dt.date(2024, 4, 15)) is False
+
+
+@freeze_time("2024-04-16")
+def test_is_before_with_future_date():
+    assert is_before(dt.date(2024, 4, 17)) is True
+
+
+@freeze_time("2024-04-16")
+def test_is_before_with_today():
+    assert is_before(dt.date(2024, 4, 16)) is True

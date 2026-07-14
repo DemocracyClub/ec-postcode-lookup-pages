@@ -1,8 +1,7 @@
 import datetime as dt
 
 from starlette_babel import gettext_lazy as _
-from uk_election_timetables.calendars import Country
-from utils import date_format
+from utils import Country, date_format
 
 """
 Rough calendar of known upcoming scheduled election dates
