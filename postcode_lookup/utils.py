@@ -1,4 +1,5 @@
 import datetime as dt
+from enum import Enum
 from pathlib import Path
 from typing import Any, List
 
@@ -23,6 +24,23 @@ from starlette_babel import get_locale, get_translator
 from starlette_babel import gettext_lazy as _
 
 translator = get_translator()
+
+
+class Country(Enum):
+    ENGLAND = "ENG"
+    NORTHERN_IRELAND = "NIR"
+    SCOTLAND = "SCT"
+    WALES = "WLS"
+
+
+def is_after(date: dt.date):
+    now = dt.datetime.now(dt.timezone.utc).date()
+    return date >= now
+
+
+def is_before(date: dt.date):
+    now = dt.datetime.now(dt.timezone.utc).date()
+    return date < now
 
 
 class DatePilots(Date):

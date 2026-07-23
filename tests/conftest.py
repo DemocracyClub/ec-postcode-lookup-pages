@@ -9,9 +9,7 @@ from template_sorter import (
     ElectionDateTemplateSorter,
     TemplateSorter,
 )
-from uk_election_timetables.calendars import Country
-from uk_election_timetables.election_ids import from_election_id
-from utils import RootModelPilots
+from utils import Country, RootModelPilots
 
 
 @pytest.fixture(scope="function")
@@ -74,11 +72,6 @@ def election_date_template_sorter():
             response_type=template_sorter.response_type,
         )
         election_date_sorter.current_date = template_sorter.current_date
-
-        election_date_sorter.timetable = from_election_id(
-            template_sorter.dates[0].ballots[0].election_id,
-            country=template_sorter.country,
-        )
 
         return election_date_sorter
 
