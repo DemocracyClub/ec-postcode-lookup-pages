@@ -35,7 +35,7 @@ dev = [
     "freezegun==1.5.5",
     "playwright==1.55.0",
     "beautifulsoup4==4.12.3",
-    "rnet>=2.2.15",
+    "wreq==0.12.0",
     "pytest-subtests==0.14.2",
 ]
 
