@@ -1,1 +1,45 @@
 {% extends 'results.html' %}
+
+{% block content %}
+    <div class="dc-container">
+
+        {% if template_sorter.next_scheduled_election_block %}
+          <p>
+            {{ template_sorter.next_scheduled_election_block }}
+          </p>
+        {% else %}
+          <p>
+            {% trans %}
+              Scheduled elections typically happen on the first Thursday in May.
+            {% endtrans %}
+          </p>
+        {% endif %}
+
+        {% if template_sorter.next_general_election_block %}
+          <p>
+            {{ template_sorter.next_general_election_block }}
+          </p>
+        {% endif %}
+
+        <p>
+          {% trans %}
+            By-elections can be called at any time.
+          {% endtrans %}
+        </p>
+
+        <p>
+          {% with url=_("/voting-and-elections/how-elections-work/types-elections") %}
+            <a href="{{ url }}">
+          {% endwith %}
+            {% trans %}
+              Find out about when different elections typically take place where you live.
+            {% endtrans %}
+          </a>
+        </p>
+
+        {% include 'includes/contact_details.html' %}
+
+        {% include 'includes/feedback_section.html' %}
+
+    </div>
+{% endblock %}
