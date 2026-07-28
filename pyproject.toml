@@ -26,7 +26,7 @@ dev = [
     "pytest==9.0.3",
     "respx==0.22.0",
     "uvicorn==0.34.0",
-    "ruff==0.4.10",
+    "ruff==0.15.22",
     "pytest-cov==6.0.0",
     "coverage[toml]==7.6.11",
     "pytest-asyncio==1.4.0",
