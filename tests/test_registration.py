@@ -13,7 +13,7 @@ from template_sorter import (
 
 
 def _sections_of_type(sections, type_):
-    return [s for s in sections if type(s) == type_]
+    return [s for s in sections if type(s) is type_]
 
 
 @freeze_time("2024-04-16")
