@@ -47,9 +47,8 @@ def valid_postcode(postcode: str):
     postcode = postcode.upper().strip()
 
     postcode = space_regex.sub(r" \1", postcode)
-    if not postcode_regex.search(postcode):
-        return False
-    return True
+
+    return bool(postcode_regex.search(postcode))
 
 
 class BaseAPIClient(ABC):
