@@ -287,6 +287,8 @@ class BeforeYouVoteSection(BaseSection):
         context["can_apply_for_postal_vote"] = self.timetable.is_before(
             TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
         )
+        # TODO: need timetable event for this
+        context["can_apply_for_proxy_vote"] = True
 
         return context
 
