@@ -288,7 +288,6 @@ class BeforeYouVoteSection(BaseSection):
         # TODO: need timetable event for this
         context["can_apply_for_proxy_vote"] = True
 
-
         # items that should be rendered in a <ol>
         # if there is more than one of them
         list_items = []
