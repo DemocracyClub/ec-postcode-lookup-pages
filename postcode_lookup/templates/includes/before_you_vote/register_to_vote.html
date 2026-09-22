@@ -1,0 +1,8 @@
+{% trans %}
+  Make sure you have
+  <a href="/voting-and-elections/register-vote">registered to vote</a>.
+{% endtrans %}
+
+{% trans date=section.timetable.registration_deadline|date_filter %}
+  You have until {{ date }}.
+{% endtrans %}

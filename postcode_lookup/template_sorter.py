@@ -250,8 +250,6 @@ class BeforeYouVoteSection(BaseSection):
                 id_required = b.requires_voter_id
                 break
 
-        context["id_required"] = id_required
-
         """
         There's an edge case here:
         If there is a date with a mix of local.city-of-london and other
@@ -273,12 +271,12 @@ class BeforeYouVoteSection(BaseSection):
         their local elections on the same date as other elections anyway
         due to the different polling station opening rules.
         """
-        context["city_of_london_registration"] = False
+        city_of_london_registration = False
         if all(
             b.ballot_paper_id.startswith("local.city-of-london")
             for b in self.data.ballots
         ):
-            context["city_of_london_registration"] = True
+            city_of_london_registration = True
 
         context["can_register_to_vote"] = self.timetable.is_before(
             TimetableEvent.REGISTRATION_DEADLINE
@@ -289,6 +287,57 @@ class BeforeYouVoteSection(BaseSection):
         )
         # TODO: need timetable event for this
         context["can_apply_for_proxy_vote"] = True
+
+
+        # items that should be rendered in a <ol>
+        # if there is more than one of them
+        list_items = []
+        # items that should be rendered after the <ol>
+        after_list_items = []
+
+        if city_of_london_registration:
+            # City of London registration info never goes inline in the list
+            after_list_items.append(
+                "includes/before_you_vote/city_of_london_registration.html"
+            )
+        else:
+            if context["can_register_to_vote"]:
+                list_items.append(
+                    "includes/before_you_vote/register_to_vote.html"
+                )
+            else:
+                after_list_items.append(
+                    "includes/before_you_vote/registration_deadline_passed.html"
+                )
+
+        if (
+            context["can_apply_for_postal_vote"]
+            or context["can_apply_for_proxy_vote"]
+        ):
+            if city_of_london_registration and context["can_register_to_vote"]:
+                after_list_items.append(
+                    "includes/before_you_vote/apply_for_postal_or_proxy_vote.html"
+                )
+            else:
+                list_items.append(
+                    "includes/before_you_vote/apply_for_postal_or_proxy_vote.html"
+                )
+
+        if not (
+            context["can_apply_for_postal_vote"]
+            and context["can_apply_for_proxy_vote"]
+        ):
+            after_list_items.append(
+                "includes/before_you_vote/postal_or_proxy_vote_deadline_passed.html"
+            )
+
+        if id_required:
+            list_items.append(
+                "includes/before_you_vote/make_sure_you_have_id.html"
+            )
+
+        context["list_items"] = list_items
+        context["after_list_items"] = after_list_items
 
         return context
 

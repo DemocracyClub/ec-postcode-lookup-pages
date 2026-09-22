@@ -1,0 +1,15 @@
+{% if not section.context.can_apply_for_postal_vote and not section.context.can_apply_for_proxy_vote %}
+  {% trans %}
+    The deadlines to apply for a postal vote or a proxy vote have now passed.
+    In certain circumstances you may still be able to apply for an
+    <a href="/voting-and-elections/ways-vote/emergency-proxy-vote">emergency proxy vote</a>.
+  {% endtrans %}
+{% elif not section.context.can_apply_for_postal_vote %}
+  {% trans %}
+    The deadline to apply to vote by post has now passed.
+  {% endtrans %}
+{% elif not section.context.can_apply_for_proxy_vote %}
+  {% trans %}
+    The deadline to apply to vote by proxy has now passed.
+  {% endtrans %}
+{% endif %}

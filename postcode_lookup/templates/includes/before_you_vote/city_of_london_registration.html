@@ -6,21 +6,21 @@
 
 
 {% if section.context.can_register_to_vote %}
-  Make sure you have <a href="https://www.speakforthecity.com/">registered to vote</a>.
+  Make sure you have <a href="https://www.speakforthecity.com/">registered to vote</a>.<br />
 
-  City of London council elections do not use the same electoral register as other elections.
+  City of London council elections do not use the same electoral register as other elections.<br />
 
   Both residents and city workers are eligible to vote. There is one register
   published annually, and the deadline to apply is 30 November each year.
   The new register comes into force on 16 February each year,
   and cannot be modified after that date.
 {% else %}
-  Make sure you have <a href="https://www.speakforthecity.com/">registered to vote</a>.
+  Make sure you have <a href="https://www.speakforthecity.com/">registered to vote</a>.<br />
 
-  City of London council elections do not use the same electoral register as other elections.
+  City of London council elections do not use the same electoral register as other elections.<br />
 
   The deadline to register to vote in City of London local elections on {{ section.data.date|date_filter }}
-  was {{ section.timetable.registration_deadline|date_filter }}.
+  was {{ section.timetable.registration_deadline|date_filter }}.<br />
 
   If you registered to vote before the deadline, then you will be able to vote in this election.
 {% endif %}

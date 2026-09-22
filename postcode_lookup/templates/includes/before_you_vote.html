@@ -2,94 +2,21 @@
   <summary>{% trans %}What to do before you vote{% endtrans %}</summary>
 
   <div style="margin-top: 1em;">
-    <ol>
-
-      <li>
-        {% if section.context.city_of_london_registration %}
-          {% include 'includes/registration_timetable_city_of_london.html' %}
-        {% else %}
-          {% trans %}
-            Make sure you have
-            <a href="/voting-and-elections/register-vote">registered to vote</a>.
-          {% endtrans %}
-
-          {% if section.context.can_register_to_vote %}
-
-            {% trans date=section.timetable.registration_deadline|date_filter %}
-              You have until {{ date }}.
-            {% endtrans %}
-
-          {% else %}
-
-            {%
-              trans
-              date=section.data.date|date_filter,
-              registration_deadline=section.timetable.registration_deadline|date_filter
-            %}
-              The deadline to register to vote in elections on {{ date }} was {{ registration_deadline }}.
-            {% endtrans %}
-            {% trans %}
-              If you registered to vote before the deadline, then you will be able to vote in this election.
-            {% endtrans %}
-
-          {% endif %}
-        {% endif %}
-      </li>
-
-      {% if section.context.can_apply_for_postal_vote and section.context.can_apply_for_proxy_vote %}
-        <li>
-          {% trans %}
-            If you need one, make sure you have applied for a
-            <a href="/voting-and-elections/ways-vote/postal-voting">
-              postal or proxy vote
-            </a>.
-          {% endtrans %}
-        </li>
-      {% elif section.context.can_apply_for_postal_vote %}
-        <li>
-          {% trans %}
-            If you need one, make sure you have applied for a
-            <a href="/voting-and-elections/ways-vote/postal-voting">
-              postal vote</a>.
-          {% endtrans %}
-        </li>
-      {% elif section.context.can_apply_for_proxy_vote %}
-        <li>
-          {% trans %}
-            If you need one, make sure you have applied for a
-            <a href="/voting-and-elections/ways-vote/postal-voting">
-              proxy vote</a>.
-          {% endtrans %}
-        </li>
-      {% endif %}
-
-      {% if section.context.id_required %}
-        <li>
-          {% trans %}
-            Make sure you have an
-            <a href="/voting-and-elections/voter-id">accepted form of ID</a>
-            to vote in a polling station
-          {% endtrans %}
-        </li>
-      {% endif %}
-
-    </ol>
-
-    {% if not section.context.can_apply_for_postal_vote and not section.context.can_apply_for_proxy_vote %}
-      {% trans %}
-        The deadlines to apply for a postal vote or a proxy vote have now passed.
-        In certain circumstances you may still be able to apply for an
-        <a href="/voting-and-elections/ways-vote/emergency-proxy-vote">emergency proxy vote</a>.
-      {% endtrans %}
-    {% elif not section.context.can_apply_for_postal_vote %}
-      {% trans %}
-        The deadline to apply to vote by post has now passed.
-      {% endtrans %}
-    {% elif not section.context.can_apply_for_proxy_vote %}
-      {% trans %}
-        The deadline to apply to vote by proxy has now passed.
-      {% endtrans %}
+    {% if section.context.list_items|length > 1 %}
+      <ol>
+        {% for item in section.context.list_items %}
+          <li>{% include item %}</li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      {% for item in section.context.list_items %}
+        <p>{% include item %}</p>
+      {% endfor %}
     {% endif %}
 
+    {% for item in section.context.after_list_items %}
+      <p>{% include item %}</p>
+    {% endfor %}
   </div>
+
 </details>
