@@ -540,7 +540,17 @@ class TemplateSorter:
 
         for i, date in enumerate(self.api_response.dates):
             postal_vote_dispatch_dates = None
-            replacement_pack_start_date = None
+
+            replacement_pack_start_dates = {
+                b.timetable.replacement_pack_start_date
+                for b in date.ballots
+                if b.timetable.replacement_pack_start_date
+            }
+            if len(replacement_pack_start_dates) == 1:
+                replacement_pack_start_date = replacement_pack_start_dates.pop()
+            else:
+                replacement_pack_start_date = None
+
             show_dispatch_date_fallback = False
             if (
                 self.electoral_services
@@ -553,16 +563,6 @@ class TemplateSorter:
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
                 )
-                # hard-coded for May 2026
-                # this is the date when replacement packs can be issued from
-                # for ALL councils
-                # TODO: add this to the timetable library/API
-                if self.country == Country.SCOTLAND:
-                    replacement_pack_start_date = None
-                else:
-                    replacement_pack_start_date = dt.datetime.strptime(
-                        "30/04/2026", "%d/%m/%Y"
-                    ).date()
 
             if parse(date.date).date() < dt.datetime.today().date():
                 continue
