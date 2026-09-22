@@ -152,8 +152,8 @@ wheels = [
 
 [[package]]
 name = "dc-response-builder"
-version = "1.4.1"
-source = { git = "https://github.com/DemocracyClub/dc_response_builder.git?tag=1.4.1#ec1b99ecd7d606624382387935e7d66a2f97484d" }
+version = "1.5.1"
+source = { git = "https://github.com/DemocracyClub/dc_response_builder.git?tag=1.5.1#704eacb26965ba20901aa31b67fe902984add8d7" }
 dependencies = [
     { name = "pydantic", extra = ["email"] },
     { name = "uk-election-ids" },
@@ -227,7 +227,7 @@ dev = [
 requires-dist = [
     { name = "babel", specifier = "==2.16.0" },
     { name = "dateparser", specifier = "==1.2.2" },
-    { name = "dc-response-builder", git = "https://github.com/DemocracyClub/dc_response_builder.git?tag=1.4.1" },
+    { name = "dc-response-builder", git = "https://github.com/DemocracyClub/dc_response_builder.git?tag=1.5.1" },
     { name = "httpx", specifier = "==0.28.1" },
     { name = "jinja2", specifier = "==3.1.6" },
     { name = "mangum", specifier = "==0.19.0" },
