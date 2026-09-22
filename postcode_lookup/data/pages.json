@@ -135,12 +135,12 @@
     "en": {
       "url": "/voting-and-elections/how-elections-work/types-elections/uk-parliament",
       "title": "UK Parliament",
-      "description": "The UK Parliament represents the people of the United Kingdom. It makes decisions and passes laws on a wide range of issues that affect you. Find out more"
+      "description": "The UK Parliament represents the people of the United Kingdom. It makes decisions and passes laws on a wide range of issues that affect you."
     },
     "cy": {
       "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/senedd-y-du",
       "title": "Senedd y DU",
-      "description": "Senedd y DU"
+      "description": "Mae Senedd y DU yn cynrychioli pobl y Deyrnas Unedig. Mae'n gwneud penderfyniadau ac yn pasio deddfau ar ystod eang o faterion sy'n effeithio arnoch chi."
     }
   },
   "/voting-and-elections/how-elections-work/types-elections/local-council-elections": {
@@ -164,7 +164,7 @@
     "cy": {
       "url": "/cy/pleidleisio-ac-etholiadau/sut-mae-etholiadaun-gweithio/am-beth-alla-i-bleidleisio/cynghorau-lleol",
       "title": "Cynghorau lleol",
-      "description": "Cynghorau lleol"
+      "description": "Rhagor o wybodaeth am gynghorau lleol a sut i bleidleisio mewn etholiadau cyngor lleol."
     }
   },
   "/voting-and-elections/how-elections-work/types-elections": {
