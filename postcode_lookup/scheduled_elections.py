@@ -18,7 +18,7 @@ Note: It might be tempting to add "London" in here but
     - Newham
     - Tower Hamlets
 ..which is enough edge cases that it is
-not sensible to try and generalse about London here.
+not sensible to try and generalise about London here.
 """
 KNOWN_SCHEDULED_ELECTIONS = {
     Country.SCOTLAND: [
