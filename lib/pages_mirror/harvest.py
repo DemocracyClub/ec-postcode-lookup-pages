@@ -29,6 +29,7 @@ URLS = [
     "https://www.electoralcommission.org.uk/voting-and-elections/how-elections-work/types-elections/local-councils",
     "https://www.electoralcommission.org.uk/voting-and-elections/how-elections-work/types-elections",
     "https://www.electoralcommission.org.uk/voting-and-elections",
+    "https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/accessibility-polling-stations",
 ]
 
 

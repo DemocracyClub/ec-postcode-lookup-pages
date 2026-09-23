@@ -190,5 +190,17 @@
       "title": "Pleidleisio ac etholiadau",
       "description": "Dysgwch bopeth sydd angen ei chi wybod am bleidleisio ac etholiadau, gan gynnwys gwybodaeth am etholiadau sydd i ddod yn eich ardal."
     }
+  },
+  "/voting-and-elections/ways-vote/accessibility-polling-stations": {
+    "en": {
+      "url": "/voting-and-elections/ways-vote/accessibility-polling-stations",
+      "title": "Accessibility at polling stations",
+      "description": "Find out what accessibility support is available to help you to cast your vote at a polling station"
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/hygyrchedd-mewn-gorsafoedd-pleidleisio",
+      "title": "Hygyrchedd mewn gorsafoedd pleidleisio",
+      "description": "Dysgwch pa gymorth hygyrchedd sydd ar gael i'ch helpu i fwrw eich pleidlais mewn gorsaf bleidleisio"
+    }
   }
 }
