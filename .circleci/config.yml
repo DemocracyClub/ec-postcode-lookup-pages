@@ -144,7 +144,7 @@ jobs:
       - run:
           name: "Update failover page"
           command: |
-            uv run python failover/build.py
+            uv run python -m failover.build
             aws s3 cp failover/dist/index.html "s3://${FQDN}-failover/index.html" \
               --cache-control max-age=0 \
               --content-type text/html

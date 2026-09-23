@@ -15,4 +15,4 @@ i18n_compile:
 
 .PHONY: failover
 failover:
-	python failover/build.py
+	uv run python -m failover.build
