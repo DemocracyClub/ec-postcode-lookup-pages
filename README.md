@@ -37,3 +37,17 @@ This will update various front end assets in `postcode_lookup/static`.
 
 See [lib/template_generator/README.md](lib/template_generator/README.md) for
 more information about this script.
+
+# Updating pages mirror
+
+We mirror the page titles and descriptions (in English and Welsh)
+for a bunch of pages on the EC site to make it easy to link out to
+content elsewhere on the site.
+
+If we need to update this, run
+
+```shell
+uv run lib/pages_mirror/harvest.py
+```
+
+This will output `postcode_lookup/data/pages.json`.
