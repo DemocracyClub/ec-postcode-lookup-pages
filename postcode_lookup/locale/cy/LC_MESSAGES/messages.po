@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-07 09:17+0100\n"
+"POT-Creation-Date: 2026-09-23 10:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -15,81 +15,113 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: postcode_lookup/template_sorter.py:107
-#: postcode_lookup/template_sorter.py:143
+#: postcode_lookup/scheduled_elections.py:74
+msgid "The next scheduled elections in Scotland will take place on {date}"
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:78
+msgid "The next scheduled elections in Wales will take place on {date}"
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:82
+msgid "The next scheduled elections in Northern Ireland will take place on {date}"
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:92
+msgid ""
+"The next UK General Election must be held no later than {date}. However, "
+"the prime minister can choose to hold it at any point before this."
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:101
+msgid "We don't provide information about town or parish council elections."
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:105
+msgid "We don't provide information about community council elections."
+msgstr ""
+
+#: postcode_lookup/scheduled_elections.py:109
+msgid "We don't provide information about town or community council elections."
+msgstr ""
+
+#: postcode_lookup/template_sorter.py:112
+#: postcode_lookup/template_sorter.py:148
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:282
+#: postcode_lookup/template_sorter.py:287
 #: postcode_lookup/templates/includes/postal_votes.html:1
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:317
-#: postcode_lookup/template_sorter.py:344
+#: postcode_lookup/template_sorter.py:322
+#: postcode_lookup/template_sorter.py:349
 #: postcode_lookup/templates/includes/registration_timetable.html:1
 #: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
 msgid "Voter registration"
 msgstr "Cofrestru pleidleiswyr"
 
-#: postcode_lookup/template_sorter.py:391
+#: postcode_lookup/template_sorter.py:396
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:396
+#: postcode_lookup/template_sorter.py:401
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:414
+#: postcode_lookup/template_sorter.py:419
 msgid "There may also be parish or town council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor plwyf neu dref mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:418
+#: postcode_lookup/template_sorter.py:423
 msgid "There may also be community council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor cymuned mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:422
+#: postcode_lookup/template_sorter.py:427
 msgid "There may also be town or community council elections in some areas."
 msgstr ""
 "Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
 "ardaloedd."
 
-#: postcode_lookup/template_sorter.py:620
-msgid "There are no upcoming elections in your area"
-msgstr "Nid oes etholiadau ar y gweill yn eich ardal"
+#: postcode_lookup/template_sorter.py:635
+#: postcode_lookup/template_sorter.py:670
+#: postcode_lookup/templates/index.html:5
+msgid "My next election"
+msgstr "Fy etholiad nesaf"
 
-#: postcode_lookup/template_sorter.py:626
+#: postcode_lookup/template_sorter.py:641
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:629
-#: postcode_lookup/template_sorter.py:634
+#: postcode_lookup/template_sorter.py:644
+#: postcode_lookup/template_sorter.py:649
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:644
+#: postcode_lookup/template_sorter.py:659
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:647
+#: postcode_lookup/template_sorter.py:662
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:650
-#: postcode_lookup/template_sorter.py:653
+#: postcode_lookup/template_sorter.py:665
+#: postcode_lookup/template_sorter.py:668
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:723
+#: postcode_lookup/template_sorter.py:738
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:730
+#: postcode_lookup/template_sorter.py:745
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/template_sorter.py:736
+#: postcode_lookup/template_sorter.py:751
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
@@ -246,10 +278,6 @@ msgstr "Eisiau darganfod pryd mae’ch etholiad nesaf? Defnyddiwch ein teclyn."
 msgid "Elections in my area"
 msgstr "Etholiadau yn fy ardal"
 
-#: postcode_lookup/templates/index.html:5
-msgid "My next election"
-msgstr "Fy etholiad nesaf"
-
 #: postcode_lookup/templates/index.html:17
 msgid ""
 "Enter your postcode to find out about voting in your next election. We'll"
@@ -323,6 +351,20 @@ msgstr "Mewnbynnwch eich cod post i ganfod pwy yw’r ymgeiswyr yn eich ardal."
 #: postcode_lookup/templates/results.html:25
 msgid "On this page"
 msgstr "Ar y dudalen hon"
+
+#: postcode_lookup/templates/results_no_upcoming.html:12
+msgid "Scheduled elections typically happen on the first Thursday in May."
+msgstr ""
+
+#: postcode_lookup/templates/results_no_upcoming.html:25
+msgid "By-elections can be called at any time."
+msgstr ""
+
+#: postcode_lookup/templates/results_no_upcoming.html:43
+msgid ""
+"Find out about when different elections typically take place where you "
+"live."
+msgstr ""
 
 #: postcode_lookup/templates/includes/ballots.html:9
 msgid "parties and independent candidates"

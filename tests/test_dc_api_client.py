@@ -58,7 +58,7 @@ def test_get_postcode_endpoint(respx_mock, app_client):
         follow_redirects=False,
     )
     assert resp.status_code == 200
-    assert "There are no upcoming elections in your area" in resp.text
+    assert "Your local council" in resp.text
 
 
 def test_get_invalid_postcode_api_client(respx_mock):
