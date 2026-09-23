@@ -1,7 +1,7 @@
 {
-  "/i-am-a/voter/register-vote-and-update-your-details": {
+  "/voting-and-elections/register-vote": {
     "en": {
-      "url": "/i-am-a/voter/register-vote-and-update-your-details",
+      "url": "/voting-and-elections/register-vote",
       "title": "Register to vote",
       "description": "All you need to register to vote is 5 minutes and your National Insurance number."
     },
@@ -11,9 +11,9 @@
       "description": "Y cwbl sydd ei angen arnoch i gofrestru i bleidleisio yw 5 munud a’ch rhif Yswiriant Gwladol."
     }
   },
-  "/i-am-a/voter/apply-vote-post": {
+  "/voting-and-elections/ways-vote/postal-voting": {
     "en": {
-      "url": "/i-am-a/voter/apply-vote-post",
+      "url": "/voting-and-elections/ways-vote/postal-voting",
       "title": "Voting by post",
       "description": "Find out about voting by post in UK elections"
     },
@@ -23,9 +23,9 @@
       "description": "Methu mynd i dy orsaf bleidleisio ar y diwrnod pleidleisio? Gwna gais i bleidleisio drwy'r post ac fe gei di becyn pleidleisio drwy’r post cyn yr etholiad."
     }
   },
-  "/i-am-a/voter/apply-vote-proxy": {
+  "/voting-and-elections/ways-vote/apply-vote-proxy": {
     "en": {
-      "url": "/i-am-a/voter/apply-vote-proxy",
+      "url": "/voting-and-elections/ways-vote/apply-vote-proxy",
       "title": "Apply to vote by proxy",
       "description": "If you can't get to the polling station on polling day, you can ask someone you trust to cast your vote on your behalf."
     },
@@ -35,9 +35,9 @@
       "description": "Os na allu di gyrraedd yr orsaf bleidleisio ar y diwrnod pleidleisio, gallu di ofyn i rywun rwyt ti’n ymddiried ynddo i fwrw dy bleidlais ar dy ran. Gelwir hyn yn bleidlais trwy ddirprwy."
     }
   },
-  "/i-am-a/voter/voter-id": {
+  "/voting-and-elections/voter-id": {
     "en": {
-      "url": "/i-am-a/voter/voter-id",
+      "url": "/voting-and-elections/voter-id",
       "title": "Voter ID",
       "description": "You need to show photo ID to vote at polling stations in some elections."
     },

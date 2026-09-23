@@ -13,10 +13,10 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 URLS = [
-    "https://www.electoralcommission.org.uk/i-am-a/voter/register-vote-and-update-your-details",
-    "https://www.electoralcommission.org.uk/i-am-a/voter/apply-vote-post",
-    "https://www.electoralcommission.org.uk/i-am-a/voter/apply-vote-proxy",
-    "https://www.electoralcommission.org.uk/i-am-a/voter/voter-id",
+    "https://www.electoralcommission.org.uk/voting-and-elections/register-vote",
+    "https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/postal-voting",
+    "https://www.electoralcommission.org.uk/voting-and-elections/ways-vote/apply-vote-proxy",
+    "https://www.electoralcommission.org.uk/voting-and-elections/voter-id",
     "https://www.electoralcommission.org.uk/voting-and-elections/how-elections-work/types-elections/northern-ireland-assembly",
     "https://www.electoralcommission.org.uk/voting-and-elections/how-elections-work/types-elections/voting-senedd-elections",
     "https://www.electoralcommission.org.uk/voting-and-elections/how-elections-work/types-elections/scottish-parliament",
