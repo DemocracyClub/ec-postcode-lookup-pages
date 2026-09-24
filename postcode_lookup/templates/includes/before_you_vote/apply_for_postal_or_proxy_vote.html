@@ -1,0 +1,20 @@
+{% if section.context.can_apply_for_postal_vote and section.context.can_apply_for_proxy_vote %}
+  {% trans %}
+    If you need one, make sure you have applied for a
+    <a href="/voting-and-elections/ways-vote/postal-voting">
+      postal or proxy vote
+    </a>.
+  {% endtrans %}
+{% elif section.context.can_apply_for_postal_vote %}
+  {% trans %}
+    If you need one, make sure you have applied for a
+    <a href="/voting-and-elections/ways-vote/postal-voting">
+      postal vote</a>.
+  {% endtrans %}
+{% elif section.context.can_apply_for_proxy_vote %}
+  {% trans %}
+    If you need one, make sure you have applied for a
+    <a href="/voting-and-elections/ways-vote/postal-voting">
+      proxy vote</a>.
+  {% endtrans %}
+{% endif %}

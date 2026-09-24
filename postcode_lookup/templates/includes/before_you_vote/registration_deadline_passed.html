@@ -1,0 +1,15 @@
+{% trans %}
+  Make sure you have
+  <a href="/voting-and-elections/register-vote">registered to vote</a>.
+{% endtrans %}
+
+{%
+  trans
+  date=section.data.date|date_filter,
+  registration_deadline=section.timetable.registration_deadline|date_filter
+%}
+  The deadline to register to vote in elections on {{ date }} was {{ registration_deadline }}.
+{% endtrans %}
+{% trans %}
+  If you registered to vote before the deadline, then you will be able to vote in this election.
+{% endtrans %}
