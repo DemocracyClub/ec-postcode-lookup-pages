@@ -36,14 +36,15 @@
         <p>
           {% with page = get_page_metadata(
               "/voting-and-elections/how-elections-work/types-elections",
-              request.scope.current_language)
+              request.scope.current_language,
+              template_sorter.country)
           %}
-            <a href="{{ page.url }}">
+            <a href="{{ url }}">
+              {% trans %}
+                Find out about when different elections typically take place where you live.
+              {% endtrans %}
+            </a>
           {% endwith %}
-            {% trans %}
-              Find out about when different elections typically take place where you live.
-            {% endtrans %}
-          </a>
         </p>
 
         {% include 'includes/contact_details.html' %}

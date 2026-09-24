@@ -8,10 +8,10 @@
                 <div class="l-grid horizontal l-grid--4-col l-grid--w-v-gutter">
 
                     {% for url in [
-                        "/i-am-a/voter/register-vote-and-update-your-details",
-                        "/i-am-a/voter/apply-vote-post",
-                        "/i-am-a/voter/apply-vote-proxy",
-                        "/i-am-a/voter/voter-id",
+                        "/voting-and-elections/register-vote",
+                        "/voting-and-elections/ways-vote/postal-voting",
+                        "/voting-and-elections/ways-vote/apply-vote-proxy",
+                        "/voting-and-elections/voter-id",
                     ] %}
                         {% with page = get_page_metadata(url, request.current_language) %}
                             {% with related_title = page.title, related_url = page.url, related_description = page.description %}

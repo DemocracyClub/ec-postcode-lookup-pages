@@ -593,7 +593,9 @@ class TemplateSorter:
         locale = get_locale()
         if locale.language not in ["en", "cy"]:
             return []
-        return get_related_content(self.api_response.dates, locale.language)
+        return get_related_content(
+            self.api_response.dates, locale.language, self.country
+        )
 
     @property
     def response_type(self):

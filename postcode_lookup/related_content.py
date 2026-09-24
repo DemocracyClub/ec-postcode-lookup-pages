@@ -1,12 +1,18 @@
 import json
 from pathlib import Path
+from urllib.parse import urlparse, urlunparse
 
 with open(Path(__file__).parent / "data" / "pages.json") as f:
     PAGES = json.load(f)
 
 
-def get_page_metadata(url, language="en"):
-    return PAGES[url][language]
+def get_page_metadata(url, language="en", country=None):
+    page = PAGES[url][language]
+    if country:
+        parsed_url = urlparse(page["url"])
+        parsed_url = parsed_url._replace(fragment=country.value)
+        page["url"] = urlunparse(parsed_url)
+    return page
 
 
 RELATED_CONTENT = {
@@ -40,7 +46,7 @@ def get_content_key(ballot_id):
     return election_type
 
 
-def get_related_content(dates, language):
+def get_related_content(dates, language, country):
     related_content = []
     seen_keys = set()
 
@@ -55,7 +61,7 @@ def get_related_content(dates, language):
             key = get_content_key(ballot.ballot_paper_id)
             if key in RELATED_CONTENT and key not in seen_keys:
                 related_content.append(
-                    get_page_metadata(RELATED_CONTENT[key], language)
+                    get_page_metadata(RELATED_CONTENT[key], language, country)
                 )
                 seen_keys.add(key)
 
