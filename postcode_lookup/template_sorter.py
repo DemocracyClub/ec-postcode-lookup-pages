@@ -1,5 +1,5 @@
 import abc
-import datetime
+import datetime as dt
 from enum import Enum
 from functools import cached_property
 from typing import Dict, List, Optional
@@ -15,13 +15,12 @@ from scheduled_elections import (
 )
 from starlette_babel import get_locale
 from starlette_babel import gettext_lazy as _
-from uk_election_timetables.calendars import Country
-from uk_election_timetables.election import TimetableEvent
-from uk_election_timetables.election_ids import from_election_id
-from uk_election_timetables.elections import Referendum
 from utils import (
+    Country,
     ballot_cancellation_suffix,
     date_format,
+    is_after,
+    is_before,
     is_postponed,
     is_uncontested,
 )
@@ -57,7 +56,7 @@ class BaseSection(abc.ABC):
         self,
         data: Date,
         mode: str,
-        current_date: datetime.date,
+        current_date: dt.date,
         timetable,
         response_type: ResponseTypes,
     ) -> None:
@@ -102,7 +101,7 @@ class PollingStationSection(BaseSection):
 
         days_before_poll = 1
         if (
-            poll_date - datetime.timedelta(days=days_before_poll)
+            poll_date - dt.timedelta(days=days_before_poll)
         ) <= self.current_date:
             return -6000
         return 1003
@@ -118,7 +117,7 @@ class PollingStationSection(BaseSection):
         poll_date = parse(self.data.date).date()
         days_before_poll = 7
         if (
-            poll_date - datetime.timedelta(days=days_before_poll)
+            poll_date - dt.timedelta(days=days_before_poll)
         ) > self.current_date:
             context["check_back_soon"] = True
         else:
@@ -138,7 +137,7 @@ class FlexVoting2026PilotSection(BaseSection):
         # earlier for areas with pilots
         days_before_poll = 10
         if (
-            poll_date - datetime.timedelta(days=days_before_poll)
+            poll_date - dt.timedelta(days=days_before_poll)
         ) < self.current_date:
             return -6000
         return 1003
@@ -199,18 +198,21 @@ class BallotSection(BaseSection):
     def __init__(self, parish_message: str, **kwargs) -> None:
         super().__init__(**kwargs)
         self.parish_message = parish_message
+        self.referendum = self.data.ballots[0].ballot_paper_id.startswith(
+            "ref."
+        )
 
     @property
     def weight(self):
-        if isinstance(self.timetable, Referendum):
+        if self.referendum:
             # given the question and answers for a referendum are already known
             # treat this as "nominations closed"
             return -1000
 
-        if self.timetable.is_before(TimetableEvent.SOPN_PUBLISH_DATE):
+        if is_before(self.timetable.close_of_nominations):
             return 1000
 
-        if self.timetable.is_after(TimetableEvent.SOPN_PUBLISH_DATE):
+        if is_after(self.timetable.close_of_nominations):
             return -1000
 
         return 0
@@ -219,14 +221,14 @@ class BallotSection(BaseSection):
     def context(self):
         context = super().context
 
-        if isinstance(self.timetable, Referendum):
+        if self.referendum:
             context["show_candidates"] = False
             context["sopn_publish_date"] = None
         else:
-            context["show_candidates"] = self.timetable.is_after(
-                TimetableEvent.SOPN_PUBLISH_DATE
+            context["show_candidates"] = is_after(
+                self.timetable.close_of_nominations
             )
-            context["sopn_publish_date"] = self.timetable.sopn_publish_date
+            context["sopn_publish_date"] = self.timetable.close_of_nominations
 
         context["parish_message"] = self.parish_message
         return context
@@ -237,8 +239,8 @@ class PostalVotesSection(BaseSection):
 
     def __init__(
         self,
-        postal_vote_dispatch_dates: List[datetime.date],
-        replacement_pack_start_date: datetime.date,
+        postal_vote_dispatch_dates: List[dt.date],
+        replacement_pack_start_date: dt.date,
         show_dispatch_date_fallback: bool,
         **kwargs,
     ) -> None:
@@ -249,22 +251,18 @@ class PostalVotesSection(BaseSection):
 
     @property
     def weight(self):
-        if self.timetable.is_before(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        ):
+        if is_before(self.timetable.postal_vote_application_deadline):
             return -5000
 
-        if self.timetable.is_after(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
-        ):
+        if is_after(self.timetable.postal_vote_application_deadline):
             return 1001
         return 0
 
     @cached_property
     def context(self):
         context = super().context
-        context["can_register"] = self.timetable.is_before(
-            TimetableEvent.POSTAL_VOTE_APPLICATION_DEADLINE
+        context["can_register"] = is_before(
+            self.timetable.postal_vote_application_deadline
         )
         context["dispatch_dates"] = self.dispatch_dates
         context["replacement_pack_start_date"] = (
@@ -288,7 +286,7 @@ class PostalVotesSection(BaseSection):
 
     @property
     def toc_id(self):
-        return f"postal-votes-{self.timetable.poll_date}-{self.timetable.postal_vote_application_deadline}"
+        return f"postal-votes-{self.data.date}-{self.timetable.postal_vote_application_deadline}"
 
 
 class RegistrationDateSection(BaseSection):
@@ -296,18 +294,18 @@ class RegistrationDateSection(BaseSection):
 
     @property
     def weight(self):
-        if self.timetable.is_before(TimetableEvent.REGISTRATION_DEADLINE):
+        if is_before(self.timetable.registration_deadline):
             return -6000
 
-        if self.timetable.is_after(TimetableEvent.REGISTRATION_DEADLINE):
+        if is_after(self.timetable.registration_deadline):
             return 1002
         return 0
 
     @cached_property
     def context(self):
         context = super().context
-        context["can_register"] = self.timetable.is_before(
-            TimetableEvent.REGISTRATION_DEADLINE
+        context["can_register"] = is_before(
+            self.timetable.registration_deadline
         )
         context["htag_primary"] = "h2"
         context["htag_secondary"] = "h3"
@@ -323,7 +321,7 @@ class RegistrationDateSection(BaseSection):
 
     @property
     def toc_id(self):
-        return f"voter-registration-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
+        return f"voter-registration-{self.data.date}-{self.timetable.registration_deadline}"
 
 
 class CityOfLondonRegistrationDateSection(RegistrationDateSection):
@@ -350,7 +348,7 @@ class CityOfLondonRegistrationDateSection(RegistrationDateSection):
 
     @property
     def toc_id(self):
-        return f"voter-registration-col-{self.timetable.poll_date}-{self.timetable.registration_deadline}"
+        return f"voter-registration-col-{self.data.date}-{self.timetable.registration_deadline}"
 
 
 class ElectionDateTemplateSorter:
@@ -360,7 +358,7 @@ class ElectionDateTemplateSorter:
         date_data: Date,
         country: Country,
         response_type: ResponseTypes,
-        current_date: datetime.date = None,
+        current_date: dt.date = None,
         first_upcoming_date=True,
         postal_vote_dispatch_dates=None,
         replacement_pack_start_date=None,
@@ -368,7 +366,7 @@ class ElectionDateTemplateSorter:
         in_london: bool = False,
     ) -> None:
         if not current_date:
-            current_date = str(datetime.date.today())
+            current_date = str(dt.date.today())
         self.current_date = current_date
         self.response_type = response_type
 
@@ -389,9 +387,7 @@ class ElectionDateTemplateSorter:
         }
 
         # TODO: move to per ballot time tables
-        self.timetable = from_election_id(
-            self.date_data.ballots[0].election_id, country=country
-        )
+        self.timetable = self.date_data.ballots[0].timetable
 
         self.polling_station_opening_times_str = _("7am – 10pm")
         if any(
@@ -401,9 +397,9 @@ class ElectionDateTemplateSorter:
             self.polling_station_opening_times_str = _("8am – 8pm")
 
         self.current_mode = None
-        for event in self.timetable.timetable:
-            if event["date"] <= current_date:
-                self.current_mode = event["label"]
+        for event, date in dict(self.timetable).items():
+            if date and date <= current_date:
+                self.current_mode = event
 
         section_kwargs = {
             "data": self.date_data,
@@ -456,9 +452,7 @@ class ElectionDateTemplateSorter:
                     mode=self.current_mode,
                     response_type=self.response_type,
                     current_date=self.current_date,
-                    timetable=from_election_id(
-                        other_ballots[0].election_id, country=country
-                    ),
+                    timetable=other_ballots[0].timetable,
                 )
             )
         if len(city_of_london_ballots) > 0:
@@ -468,9 +462,7 @@ class ElectionDateTemplateSorter:
                     mode=self.current_mode,
                     response_type=self.response_type,
                     current_date=self.current_date,
-                    timetable=from_election_id(
-                        city_of_london_ballots[0].election_id, country=country
-                    ),
+                    timetable=city_of_london_ballots[0].timetable,
                     with_headers=len(other_ballots) == 0,
                 )
             )
@@ -509,11 +501,11 @@ class TemplateSorter:
     def __init__(
         self,
         api_response: RootModel,
-        current_date: datetime.date = None,
+        current_date: dt.date = None,
     ) -> None:
         self.current_date = current_date
         if not self.current_date:
-            self.current_date = datetime.date.today()
+            self.current_date = dt.date.today()
         self.api_response = api_response
 
         self.total_ballot_count = 0
@@ -548,7 +540,17 @@ class TemplateSorter:
 
         for i, date in enumerate(self.api_response.dates):
             postal_vote_dispatch_dates = None
-            replacement_pack_start_date = None
+
+            replacement_pack_start_dates = {
+                b.timetable.replacement_pack_start_date
+                for b in date.ballots
+                if b.timetable.replacement_pack_start_date
+            }
+            if len(replacement_pack_start_dates) == 1:
+                replacement_pack_start_date = replacement_pack_start_dates.pop()
+            else:
+                replacement_pack_start_date = None
+
             show_dispatch_date_fallback = False
             if (
                 self.electoral_services
@@ -561,18 +563,8 @@ class TemplateSorter:
                 postal_vote_dispatch_dates = get_postal_vote_dispatch_dates(
                     self.electoral_services.council_id
                 )
-                # hard-coded for May 2026
-                # this is the date when replacement packs can be issued from
-                # for ALL councils
-                # TODO: add this to the timetable library
-                if self.country == Country.SCOTLAND:
-                    replacement_pack_start_date = None
-                else:
-                    replacement_pack_start_date = datetime.datetime.strptime(
-                        "30/04/2026", "%d/%m/%Y"
-                    ).date()
 
-            if parse(date.date).date() < datetime.datetime.today().date():
+            if parse(date.date).date() < dt.datetime.today().date():
                 continue
 
             self.dates.append(
