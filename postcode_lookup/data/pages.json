@@ -202,5 +202,17 @@
       "title": "Hygyrchedd mewn gorsafoedd pleidleisio",
       "description": "Dysgwch pa gymorth hygyrchedd sydd ar gael i'ch helpu i fwrw eich pleidlais mewn gorsaf bleidleisio"
     }
+  },
+  "/voting-and-elections/ways-vote/emergency-proxy-vote": {
+    "en": {
+      "url": "/voting-and-elections/ways-vote/emergency-proxy-vote",
+      "title": "Emergency proxy vote",
+      "description": "In certain circumstances, where you have an emergency that means you can't vote in person, you can apply for an emergency proxy."
+    },
+    "cy": {
+      "url": "/cy/pleidleisio-ac-etholiadau/ffyrdd-i-bleidleisio/pleidlais-drwy-ddirprwy-mewn-argyfwng",
+      "title": "Pleidlais drwy ddirprwy mewn argyfwng",
+      "description": "Yn ôl y gyfraith, o dan amgylchiadau penodol, pan fydd argyfwng sy'n golygu na allwch bleidleisio'n bersonol, gallwch wneud cais am bleidlais drwy ddirprwy mewn argyfwng."
+    }
   }
 }
