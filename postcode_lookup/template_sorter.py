@@ -247,7 +247,7 @@ class BeforeYouVoteSection(BaseSection):
 
     @property
     def toc_id(self):
-        return f"before-you-vote-{self.timetable.poll_date}"
+        return f"before-you-vote-{self.data.date}"
 
     @cached_property
     def context(self):
