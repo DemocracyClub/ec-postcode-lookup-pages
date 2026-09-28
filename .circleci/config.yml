@@ -58,6 +58,12 @@ jobs:
             sudo /home/circleci/.local/bin/uv run playwright install-deps chromium-headless-shell
       - run: uv run playwright install chromium-headless-shell
       - run: uv run pytest --cov-report= --cov=postcode_lookup --junitxml=test-reports/junit.xml
+      - run:
+          name: "Build failover page"
+          command: uv run python -m failover.build
+      - run:
+          name: "Build static pages"
+          command: uv run python lib/static_pages/generate.py
       - codecov/upload:
           files: /home/circleci/repo/test-reports/junit.xml
       - store_artifacts:
