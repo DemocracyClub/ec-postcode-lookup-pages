@@ -1,5 +1,11 @@
-{% trans %}
-  Make sure you have an
-  <a href="/voting-and-elections/voter-id">accepted form of ID</a>
-  to vote in a polling station
-{% endtrans %}
+{% with page = get_page_metadata(
+    "/voting-and-elections/voter-id",
+    request.scope.current_language,
+    template_sorter.country)
+%}
+  {% trans url=page.url %}
+    Make sure you have an
+    <a href="{{ url }}">accepted form of ID</a>
+    to vote in a polling station.
+  {% endtrans %}
+{% endwith %}

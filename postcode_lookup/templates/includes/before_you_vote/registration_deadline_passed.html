@@ -1,7 +1,13 @@
-{% trans %}
-  Make sure you have
-  <a href="/voting-and-elections/register-vote">registered to vote</a>.
-{% endtrans %}
+{% with page = get_page_metadata(
+    "/voting-and-elections/register-vote",
+    request.scope.current_language,
+    template_sorter.country)
+%}
+  {% trans url=page.url %}
+    Make sure you have
+    <a href="{{ url }}">registered to vote</a>.
+  {% endtrans %}
+{% endwith %}
 
 {%
   trans
