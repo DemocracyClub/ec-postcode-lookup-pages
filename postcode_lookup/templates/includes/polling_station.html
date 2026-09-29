@@ -39,10 +39,15 @@
       {% endtrans %}
     </p>
     <p>
-      {% trans %}
-        Read more about
-        <a href="/voting-and-elections/ways-vote/accessibility-polling-stations">
-          Accessibility at polling stations</a>.
-      {% endtrans %}
+      {% with page = get_page_metadata(
+          "/voting-and-elections/ways-vote/accessibility-polling-stations",
+          request.scope.current_language,
+          template_sorter.country)
+      %}
+        {% trans url=page.url %}
+          Read more about
+          <a href="{{ url }}">Accessibility at polling stations</a>.
+        {% endtrans %}
+      {% endwith %}
     </p>
 {% endif %}
