@@ -163,9 +163,9 @@ async def base_postcode_endpoint(
     postcode = request.path_params.get("postcode", None)
     format_ = request.query_params.get("format", "html")
 
-    if postcode == "FA1LL":
+    if postcode == "FA11LL":
         return Response(status_code=400)
-    if postcode == "FA2LL":
+    if postcode == "FA12LL":
         assert False
 
     if format_ == "json":
