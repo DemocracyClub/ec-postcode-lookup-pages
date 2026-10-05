@@ -41,7 +41,7 @@ def test_sandbox_responses(fqdn, postcode):
 
 
 def test_failover_page(fqdn):
-    url = f"https://{fqdn}/polling-stations?postcode-search=FA1LL&Submit+Postcode="
+    url = f"https://{fqdn}/polling-stations?postcode-search=FA11LL&Submit+Postcode="
     req = make_request(url)
     assert FAILOVER_COMMENT in req.text
 
