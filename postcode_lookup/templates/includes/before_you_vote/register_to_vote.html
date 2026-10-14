@@ -1,0 +1,14 @@
+{% with page = get_page_metadata(
+    "/voting-and-elections/register-vote",
+    request.scope.current_language,
+    template_sorter.country)
+%}
+  {% trans url=page.url %}
+    Make sure you have
+    <a href="{{ url }}">registered to vote</a>.
+  {% endtrans %}
+{% endwith %}
+
+{% trans date=section.timetable.registration_deadline|date_filter %}
+  You have until {{ date }}.
+{% endtrans %}
