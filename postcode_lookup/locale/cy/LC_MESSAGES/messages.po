@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-09-23 17:00+0100\n"
+"POT-Creation-Date: 2026-10-14 09:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -18,32 +18,41 @@ msgstr ""
 #: postcode_lookup/scheduled_elections.py:73
 msgid "The next scheduled elections in Scotland will take place on {date}"
 msgstr ""
+"Bydd yr etholiadau nesaf a drefnwyd yn yr Alban yn cael eu cynnal ar "
+"{date}"
 
 #: postcode_lookup/scheduled_elections.py:77
 msgid "The next scheduled elections in Wales will take place on {date}"
 msgstr ""
+"Bydd yr etholiadau nesaf a drefnwyd yng Nghymru yn cael eu cynnal ar "
+"{date}"
 
 #: postcode_lookup/scheduled_elections.py:81
 msgid "The next scheduled elections in Northern Ireland will take place on {date}"
 msgstr ""
+"Bydd yr etholiadau nesaf a drefnwyd yng Ngogledd Iwerddon yn cael eu "
+"cynnal ar {date}"
 
 #: postcode_lookup/scheduled_elections.py:91
 msgid ""
 "The next UK General Election must be held no later than {date}. However, "
 "the prime minister can choose to hold it at any point before this."
 msgstr ""
+"Rhaid cynnal etholiad cyffredinol nesaf y DU erbyn {date} fan bellaf. "
+"Fodd bynnag, gall y Prif Weinidog ddewis ei gynnal ar unrhyw adeg cyn "
+"hynny."
 
 #: postcode_lookup/scheduled_elections.py:100
 msgid "We don't provide information about town or parish council elections."
-msgstr ""
+msgstr "Nid ydym yn darparu gwybodaeth am etholiadau cynghorau tref na phlwyf."
 
 #: postcode_lookup/scheduled_elections.py:104
 msgid "We don't provide information about community council elections."
-msgstr ""
+msgstr "Nid ydym yn darparu gwybodaeth am etholiadau cynghorau cymuned."
 
 #: postcode_lookup/scheduled_elections.py:108
 msgid "We don't provide information about town or community council elections."
-msgstr ""
+msgstr "Nid ydym yn darparu gwybodaeth am etholiadau cynghorau tref na chymuned."
 
 #: postcode_lookup/template_sorter.py:111
 #: postcode_lookup/template_sorter.py:147
@@ -354,17 +363,19 @@ msgstr "Ar y dudalen hon"
 
 #: postcode_lookup/templates/results_no_upcoming.html:12
 msgid "Scheduled elections typically happen on the first Thursday in May."
-msgstr ""
+msgstr "Fel arfer, cynhelir etholiadau a drefnir ar y dydd Iau cyntaf ym mis Mai."
 
 #: postcode_lookup/templates/results_no_upcoming.html:25
 msgid "By-elections can be called at any time."
-msgstr ""
+msgstr "Gellir cynnal is-etholiadau ar unrhyw adeg."
 
 #: postcode_lookup/templates/results_no_upcoming.html:43
 msgid ""
 "Find out about when different elections typically take place where you "
 "live."
 msgstr ""
+"Dysgwch pryd y caiff gwahanol etholiadau eu cynnal fel arfer yn eich "
+"ardal."
 
 #: postcode_lookup/templates/includes/ballots.html:9
 msgid "parties and independent candidates"
