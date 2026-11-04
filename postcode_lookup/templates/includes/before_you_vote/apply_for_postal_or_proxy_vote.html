@@ -9,26 +9,30 @@
 %}
 
   {% if section.context.can_apply_for_postal_vote and section.context.can_apply_for_proxy_vote %}
-    {% trans postal_url=postal.url, proxy_url=proxy.url %}
-      If you need one, make sure you have applied for a
-      <a href="{{ postal_url }}">
-        postal</a>
-      or
-      <a href="{{ proxy_url }}">
-      proxy</a>
-      vote.
+    {% trans
+        postal_url=postal.url,
+        proxy_url=proxy.url,
+        postal_deadline=section.timetable.postal_vote_application_deadline|date_filter,
+        proxy_deadline=section.timetable.proxy_vote_application_deadline|date_filter
+    %}
+      If you need one, make sure you apply for a
+      <a href="{{ postal_url }}">postal vote</a>
+      by {{ postal_deadline }}
+      or a
+      <a href="{{ proxy_url }}">proxy vote</a>
+      by {{ proxy_deadline }}.
     {% endtrans %}
   {% elif section.context.can_apply_for_postal_vote %}
-    {% trans url=postal.url %}
-      If you need one, make sure you have applied for a
-      <a href="{{ url }}">
-        postal vote</a>.
+    {% trans postal_url=postal.url, postal_deadline=section.timetable.postal_vote_application_deadline|date_filter %}
+      If you need one, make sure you apply for a
+      <a href="{{ postal_url }}">postal vote</a>
+      by {{ postal_deadline }}.
     {% endtrans %}
   {% elif section.context.can_apply_for_proxy_vote %}
-    {% trans url=proxy.url %}
-      If you need one, make sure you have applied for a
-      <a href="{{ url }}">
-        proxy vote</a>.
+    {% trans proxy_url=proxy.url, proxy_deadline=section.timetable.proxy_vote_application_deadline|date_filter %}
+      If you need one, make sure you apply for a
+      <a href="{{ proxy_url }}">proxy vote</a>
+      by {{ proxy_deadline }}.
     {% endtrans %}
   {% endif %}
 

@@ -3,12 +3,9 @@
     request.scope.current_language,
     template_sorter.country)
 %}
-  {% trans url=page.url %}
-    Make sure you have
-    <a href="{{ url }}">registered to vote</a>.
+  {% trans url=page.url, date=section.timetable.registration_deadline|date_filter %}
+    Make sure you
+    <a href="{{ url }}">register to vote</a>
+    by {{ date }}.
   {% endtrans %}
 {% endwith %}
-
-{% trans date=section.timetable.registration_deadline|date_filter %}
-  You have until {{ date }}.
-{% endtrans %}
