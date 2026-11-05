@@ -1,0 +1,39 @@
+{% with postal = get_page_metadata(
+    "/voting-and-elections/ways-vote/postal-voting",
+    request.scope.current_language,
+    template_sorter.country),
+    proxy = get_page_metadata(
+    "/voting-and-elections/ways-vote/apply-vote-proxy",
+    request.scope.current_language,
+    template_sorter.country)
+%}
+
+  {% if section.context.can_apply_for_postal_vote and section.context.can_apply_for_proxy_vote %}
+    {% trans
+        postal_url=postal.url,
+        proxy_url=proxy.url,
+        postal_deadline=section.timetable.postal_vote_application_deadline|date_filter,
+        proxy_deadline=section.timetable.proxy_vote_application_deadline|date_filter
+    %}
+      If you need one, make sure you apply for a
+      <a href="{{ postal_url }}">postal vote</a>
+      by {{ postal_deadline }}
+      or a
+      <a href="{{ proxy_url }}">proxy vote</a>
+      by {{ proxy_deadline }}.
+    {% endtrans %}
+  {% elif section.context.can_apply_for_postal_vote %}
+    {% trans postal_url=postal.url, postal_deadline=section.timetable.postal_vote_application_deadline|date_filter %}
+      If you need one, make sure you apply for a
+      <a href="{{ postal_url }}">postal vote</a>
+      by {{ postal_deadline }}.
+    {% endtrans %}
+  {% elif section.context.can_apply_for_proxy_vote %}
+    {% trans proxy_url=proxy.url, proxy_deadline=section.timetable.proxy_vote_application_deadline|date_filter %}
+      If you need one, make sure you apply for a
+      <a href="{{ proxy_url }}">proxy vote</a>
+      by {{ proxy_deadline }}.
+    {% endtrans %}
+  {% endif %}
+
+{% endwith %}
