@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: EC postcode pages\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-14 09:12+0100\n"
+"POT-Creation-Date: 2026-11-23 08:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: cy\n"
@@ -59,78 +59,75 @@ msgstr "Nid ydym yn darparu gwybodaeth am etholiadau cynghorau tref na chymuned.
 msgid "Where to vote"
 msgstr "Ble i bleidleisio"
 
-#: postcode_lookup/template_sorter.py:285
-#: postcode_lookup/templates/includes/postal_votes.html:1
+#: postcode_lookup/template_sorter.py:246
+msgid "Before you vote"
+msgstr ""
+
+#: postcode_lookup/template_sorter.py:388
+#: postcode_lookup/templates/includes/postal_votes.html:2
 msgid "Voting by post"
 msgstr "Pleidleisio drwy'r post"
 
-#: postcode_lookup/template_sorter.py:320
-#: postcode_lookup/template_sorter.py:347
-#: postcode_lookup/templates/includes/registration_timetable.html:1
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:8
-msgid "Voter registration"
-msgstr "Cofrestru pleidleiswyr"
-
-#: postcode_lookup/template_sorter.py:392
+#: postcode_lookup/template_sorter.py:433
 msgid "7am – 10pm"
 msgstr "7am – 10pm"
 
-#: postcode_lookup/template_sorter.py:397
+#: postcode_lookup/template_sorter.py:438
 msgid "8am – 8pm"
 msgstr "8am – 8pm"
 
-#: postcode_lookup/template_sorter.py:415
+#: postcode_lookup/template_sorter.py:456
 msgid "There may also be parish or town council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor plwyf neu dref mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:419
+#: postcode_lookup/template_sorter.py:460
 msgid "There may also be community council elections in some areas."
 msgstr "Efallai y bydd etholiadau cyngor cymuned mewn rhai ardaloedd hefyd."
 
-#: postcode_lookup/template_sorter.py:423
+#: postcode_lookup/template_sorter.py:464
 msgid "There may also be town or community council elections in some areas."
 msgstr ""
 "Mae'n bosib y bydd etholiadau cynghorau tref neu gymuned mewn rhai "
 "ardaloedd."
 
-#: postcode_lookup/template_sorter.py:629
-#: postcode_lookup/template_sorter.py:664
+#: postcode_lookup/template_sorter.py:639
+#: postcode_lookup/template_sorter.py:674
 #: postcode_lookup/templates/index.html:5
 msgid "My next election"
 msgstr "Fy etholiad nesaf"
 
-#: postcode_lookup/template_sorter.py:635
+#: postcode_lookup/template_sorter.py:645
 msgid "Uncontested"
 msgstr "Heb gystadleuaeth"
 
-#: postcode_lookup/template_sorter.py:638
-#: postcode_lookup/template_sorter.py:643
+#: postcode_lookup/template_sorter.py:648
+#: postcode_lookup/template_sorter.py:653
 msgid "Postponed"
 msgstr "Wedi'i ohirio"
 
-#: postcode_lookup/template_sorter.py:653
+#: postcode_lookup/template_sorter.py:663
 msgid "You have an election today"
 msgstr "Mae gennych etholiad heddiw"
 
-#: postcode_lookup/template_sorter.py:656
+#: postcode_lookup/template_sorter.py:666
 msgid "You have an upcoming election"
 msgstr "Mae gennych etholiad sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:659
-#: postcode_lookup/template_sorter.py:662
+#: postcode_lookup/template_sorter.py:669
+#: postcode_lookup/template_sorter.py:672
 msgid "You have upcoming elections"
 msgstr "Mae gennych etholiadau sydd ar y gweill"
 
-#: postcode_lookup/template_sorter.py:732
+#: postcode_lookup/template_sorter.py:742
 #: postcode_lookup/templates/includes/organisation_contact.html:36
 msgid "Your local council"
 msgstr "Eich cyngor lleol"
 
-#: postcode_lookup/template_sorter.py:739
+#: postcode_lookup/template_sorter.py:749
 msgid "Electoral registration"
 msgstr "Cofrestru etholiadol"
 
-#: postcode_lookup/template_sorter.py:745
+#: postcode_lookup/template_sorter.py:755
 #: postcode_lookup/templates/includes/organisation_contact.html:25
 msgid "Your returning officer"
 msgstr "Eich swyddog canlyniadau"
@@ -398,23 +395,9 @@ msgstr ""
 "<h3>%(ballot_title)s Ymgeiswyr</h3> <p>Cyhoeddir rhestr yr ymgeiswyr ar "
 "gyfer yr etholiad hwn ar ôl %(sopn_date)s.</p>"
 
-#: postcode_lookup/templates/includes/ballots.html:50
-msgid "Voter ID requirement"
-msgstr "Gofyniad ID Pleidleisiwr"
-
-#: postcode_lookup/templates/includes/ballots.html:52
-msgid ""
-"You will need to take photo ID to vote at a polling station in this "
-"election"
+#: postcode_lookup/templates/includes/before_you_vote.html:2
+msgid "What to do before you vote"
 msgstr ""
-"Bydd angen i chi dynnu llun ID i bleidleisio mewn gorsaf bleidleisio yn "
-"yr etholiad hwn."
-
-#: postcode_lookup/templates/includes/ballots.html:53
-msgid "Read more about <a href=\"/voting-and-elections/voter-id\">Voter ID</a>"
-msgstr ""
-"Darllenwch ragor am <a href=\"/cy/pleidleisio-ac-etholiadau/id-"
-"pleidleisiwr\">ID Pleidleisiwr</a>"
 
 #: postcode_lookup/templates/includes/cancellation_reasons.html:3
 msgid "Postponed Election"
@@ -668,45 +651,7 @@ msgstr ""
 "Darllenwch ragor am <a href=\"%(url)s\">Hygyrchedd mewn gorsafoedd "
 "pleidleisio</a>."
 
-#: postcode_lookup/templates/includes/postal_votes.html:3
-#: postcode_lookup/templates/includes/postal_votes.html:14
-msgid "Apply for a postal vote"
-msgstr "Gwneud cais i bleidleisio drwy'r post"
-
-#: postcode_lookup/templates/includes/postal_votes.html:5
-msgid ""
-"If you know that you won't be able to get to the polling station on "
-"polling day, you can vote by post."
-msgstr ""
-"Os byddwch yn gwybod na fydd modd i chi gyrraedd eich gorsaf bleidleisio "
-"ar y diwrnod pleidleisio, gallwch bleidleisio drwy'r post."
-
-#: postcode_lookup/templates/includes/postal_votes.html:8
-#, python-format
-msgid "You have until %(date)s."
-msgstr "Mae gennych hyd nes %(date)s"
-
-#: postcode_lookup/templates/includes/postal_votes.html:18
-msgid "Read more about applying for a postal vote"
-msgstr "Darllenwch fwy am wneud cais am bleidlais bost"
-
-#: postcode_lookup/templates/includes/postal_votes.html:23
-#, python-format
-msgid ""
-"The deadline to apply for a postal vote for the elections taking place on"
-" %(date)s was %(application_deadline)s. You can <a "
-"href=\"https://www.gov.uk/apply-postal-vote\">apply for a postal vote</a>"
-" in future elections."
-msgstr ""
-"%(application_deadline)s oedd y dyddiad cau i gofrestru am bleidlais bost"
-" ar gyfer yr etholiadau ar %(date)s. Gallwch wneud cais am bleidlais bost"
-" mewn etholiadau yn y dyfodol."
-
-#: postcode_lookup/templates/includes/postal_votes.html:32
-msgid "If you have a postal vote"
-msgstr "Os oes gennych bleidlais bost"
-
-#: postcode_lookup/templates/includes/postal_votes.html:36
+#: postcode_lookup/templates/includes/postal_votes.html:7
 #, python-format
 msgid ""
 "<ul> <li>If you already have a postal vote or successfully apply by "
@@ -720,27 +665,23 @@ msgstr ""
 "ar %(application_deadline)s, bydd eich pecyn yn cael ei anfon o "
 "%(date2)s.</li> </ul>"
 
-#: postcode_lookup/templates/includes/postal_votes.html:50
+#: postcode_lookup/templates/includes/postal_votes.html:21
 msgid ""
-"Your returning officer will send your postal voting pack after the "
-"deadline to become a candidate has passed."
+"If you have a postal vote, your returning officer will send your postal "
+"voting pack after the deadline to become a candidate has passed."
 msgstr ""
-"Bydd eich swyddog canlyniadau yn anfon eich pecyn pleidleisio drwy’r post"
-" ar ôl i’r dyddiad cau ar gyfer dod yn ymgeisydd fynd heibio."
 
-#: postcode_lookup/templates/includes/postal_votes.html:54
+#: postcode_lookup/templates/includes/postal_votes.html:25
 msgid ""
-"Your local council will send your postal voting pack after the deadline "
-"to become a candidate has passed."
+"If you have a postal vote, your local council will send your postal "
+"voting pack after the deadline to become a candidate has passed."
 msgstr ""
-"Bydd eich cyngor lleol yn anfon eich pecyn pleidleisio drwy’r post ar ôl "
-"i’r dyddiad cau ar gyfer dod yn ymgeisydd fynd heibio."
 
-#: postcode_lookup/templates/includes/postal_votes.html:59
+#: postcode_lookup/templates/includes/postal_votes.html:30
 msgid "This is around three weeks before polling day."
 msgstr "Mae hyn tua thair wythnos cyn y diwrnod pleidleisio."
 
-#: postcode_lookup/templates/includes/postal_votes.html:68
+#: postcode_lookup/templates/includes/postal_votes.html:39
 #, python-format
 msgid ""
 "You can <a href=\"#electoral-services\">contact your local council</a> if"
@@ -761,35 +702,6 @@ msgstr "Y cwestiwn a ofynnir i chi ar y papur pleidleisio yw:"
 msgid "Read more about this referendum"
 msgstr "Darllenwch ragor o wybodaeth am y refferendwm hwn"
 
-#: postcode_lookup/templates/includes/registration_timetable.html:3
-#: postcode_lookup/templates/includes/registration_timetable.html:11
-#: postcode_lookup/templates/includes/registration_timetable_city_of_london.html:12
-msgid "Register to vote"
-msgstr "Cofrestra i bleidleisio"
-
-#: postcode_lookup/templates/includes/registration_timetable.html:5
-#, python-format
-msgid "You have until %(date)s"
-msgstr "Mae gennych hyd nes %(date)s"
-
-#: postcode_lookup/templates/includes/registration_timetable.html:16
-#, python-format
-msgid ""
-"<p>The deadline to register to vote on %(date)s was "
-"%(registration_deadline)s.</p> <p>If you registered to vote before the "
-"deadline, then you will be able to vote in this election. <a "
-"href=\"#electoral_services\">Contact your council</a> to check if you are"
-" on the register.</p> <p>You can <a href=\"https://gov.uk/register-to-"
-"vote/\">register to vote</a> in future elections.</p>"
-msgstr ""
-"<p>Y dyddiad cau i gofrestru i bleidleisio ar %(date)s oedd "
-"%(registration_deadline)s.</p> <p>Os cofrestrwyd chi i bleidleisio cyn y "
-"dyddiad cau, yna byddwch yn gallu pleidleisio yn yr etholiad hwn. <a "
-"href=\"#electoral_services\">Cysylltwch â'ch cyngor</a> i wirio os ydych "
-"ar y gofrestr.</p> <p>Gallwch <a "
-"href=\"https://www.gov.uk/cofrestru-i-bleidleisio/\">gofrestru i "
-"bleidleisio</a> mewn etholiadau yn y dyfodol.</p>"
-
 #: postcode_lookup/templates/includes/single_date.html:9
 #, python-format
 msgid "You will have %(count)s ballot papers to fill out:"
@@ -798,4 +710,66 @@ msgstr "Bydd gennych %(count)s papurau pleidleisio i'w llenwi:"
 #: postcode_lookup/templates/includes/single_date.html:19
 msgid "You will have one ballot paper to fill out."
 msgstr "Bydd gennych un papur pleidleisio i'w lenwi."
+
+#: postcode_lookup/templates/includes/before_you_vote/apply_for_postal_or_proxy_vote.html:12
+#, python-format
+msgid ""
+"If you need one, make sure you apply for a <a "
+"href=\"%(postal_url)s\">postal vote</a> by %(postal_deadline)s or a <a "
+"href=\"%(proxy_url)s\">proxy vote</a> by %(proxy_deadline)s."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/apply_for_postal_or_proxy_vote.html:26
+#, python-format
+msgid ""
+"If you need one, make sure you apply for a <a "
+"href=\"%(postal_url)s\">postal vote</a> by %(postal_deadline)s."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/apply_for_postal_or_proxy_vote.html:32
+#, python-format
+msgid ""
+"If you need one, make sure you apply for a <a "
+"href=\"%(proxy_url)s\">proxy vote</a> by %(proxy_deadline)s."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/make_sure_you_have_id.html:6
+#, python-format
+msgid ""
+"Make sure you have an <a href=\"%(url)s\">accepted form of ID</a> to vote"
+" in a polling station."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/postal_or_proxy_vote_deadline_passed.html:7
+#, python-format
+msgid ""
+"The deadlines to apply for a postal vote or a proxy vote have now passed."
+" In certain circumstances you may still be able to apply for an <a "
+"href=\"%(url)s\">emergency proxy vote</a>."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/postal_or_proxy_vote_deadline_passed.html:14
+msgid "The deadline to apply to vote by post has now passed."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/postal_or_proxy_vote_deadline_passed.html:18
+msgid "The deadline to apply to vote by proxy has now passed."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/register_to_vote.html:6
+#, python-format
+msgid "Make sure you <a href=\"%(url)s\">register to vote</a> by %(date)s."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/registration_deadline_passed.html:6
+#, python-format
+msgid "The deadline to <a href=\"%(url)s\">register to vote</a> has now passed."
+msgstr ""
+
+#: postcode_lookup/templates/includes/before_you_vote/registration_deadline_passed.html:14
+#, python-format
+msgid ""
+"If you registered to vote before %(registration_deadline)s then you will "
+"be able to vote in the elections on %(date)s."
+msgstr ""
 
